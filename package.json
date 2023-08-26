@@ -1,0 +1,24 @@
+{
+  "workspaces": [
+    "packages/dashboard",
+    "packages/site",
+    "packages/api"
+  ],
+  "name": "fluxo-simples",
+  "description": "Fluxo Simples's packages",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev:all": "concurrently \"npm run dev:dashboard\" \"npm run dev:site\" \"npm run dev:api\"",
+    "dev:dashboard": "npm run dev -w @jujubices/dashboard",
+    "dev:site": "npm run dev -w @jujubices/site",
+    "dev:api": "npm run dev -w @jujubices/api",
+    "build:all": "concurrently \"npm run build:dashboard\" \"npm run build:site\" \"npm run build:api\"",
+    "build:dashboard": "npm run build -w @jujubices/dashboard",
+    "build:site": "npm run build -w @jujubices/site",
+    "build:api": "npm run build -w @jujubices/api"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

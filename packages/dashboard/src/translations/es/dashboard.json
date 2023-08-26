@@ -1,0 +1,14 @@
+{
+    "panels": {
+        "panelsList": {
+            "customize": "Personalizar",
+            "elements": "Elementos",
+            "images": "Imagenes",
+            "templates": "Templates",
+            "uploads": "Cargas",
+            "text": "Texto",
+            "graphics": "Graficos",
+            "layers": "Capas"
+        }
+    }
+}
