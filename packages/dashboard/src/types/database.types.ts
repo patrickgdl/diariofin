@@ -3,96 +3,60 @@ export type Json =
   | number
   | boolean
   | null
-  | { [key: string]: Json }
+  | { [key: string]: Json | undefined }
   | Json[]
 
 export interface Database {
   public: {
     Tables: {
-      enabled_fonts: {
+      users: {
         Row: {
-          createdAt: string
-          fontId: string | null
+          created_at: string | null
+          email: string | null
+          email_verified: string | null
           id: string
-          updatedAt: string | null
+          image: string | null
+          name: string | null
+          stripe_current_period_end: string | null
+          stripe_customer_id: string | null
+          stripe_price_id: string | null
+          stripe_subscription_id: string | null
+          updated_at: string | null
         }
         Insert: {
-          createdAt?: string
-          fontId?: string | null
+          created_at?: string | null
+          email?: string | null
+          email_verified?: string | null
           id: string
-          updatedAt?: string | null
+          image?: string | null
+          name?: string | null
+          stripe_current_period_end?: string | null
+          stripe_customer_id?: string | null
+          stripe_price_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string | null
         }
         Update: {
-          createdAt?: string
-          fontId?: string | null
+          created_at?: string | null
+          email?: string | null
+          email_verified?: string | null
           id?: string
-          updatedAt?: string | null
+          image?: string | null
+          name?: string | null
+          stripe_current_period_end?: string | null
+          stripe_customer_id?: string | null
+          stripe_price_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "enabled_fonts_fontid_foreign"
-            columns: ["fontId"]
-            referencedRelation: "fonts"
+            foreignKeyName: "users_id_fkey"
+            columns: ["id"]
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]
-      }
-      fonts: {
-        Row: {
-          category: string
-          createdAt: string
-          family: string
-          fullName: string
-          id: string
-          postScriptName: string
-          preview: string
-          style: string
-          updatedAt: string
-          url: string
-        }
-        Insert: {
-          category: string
-          createdAt?: string
-          family: string
-          fullName: string
-          id: string
-          postScriptName: string
-          preview: string
-          style: string
-          updatedAt?: string
-          url: string
-        }
-        Update: {
-          category?: string
-          createdAt?: string
-          family?: string
-          fullName?: string
-          id?: string
-          postScriptName?: string
-          preview?: string
-          style?: string
-          updatedAt?: string
-          url?: string
-        }
-        Relationships: []
-      }
-      templates: {
-        Row: {
-          created_at: string | null
-          id: number
-          template: Json | null
-        }
-        Insert: {
-          created_at?: string | null
-          id?: number
-          template?: Json | null
-        }
-        Update: {
-          created_at?: string | null
-          id?: number
-          template?: Json | null
-        }
-        Relationships: []
       }
     }
     Views: {
