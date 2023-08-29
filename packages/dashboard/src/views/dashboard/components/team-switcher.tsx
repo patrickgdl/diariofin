@@ -32,7 +32,7 @@ const groups = [
     label: "Conta pessoal",
     teams: [
       {
-        label: "Alicia Koch",
+        label: "Patrick Lima",
         value: "personal",
       },
     ],

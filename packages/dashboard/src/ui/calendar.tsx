@@ -1,6 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons"
 import * as React from "react"
 import { DayPicker } from "react-day-picker"
+import ptBR from "date-fns/locale/pt-BR"
 import { cn } from "~/utils/cn"
 
 import { buttonVariants } from "./button"
@@ -12,6 +13,7 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
     <DayPicker
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
+      locale={ptBR}
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
