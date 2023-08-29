@@ -1,7 +1,6 @@
 import { Fragment, useState } from "react"
-import { Button, Card, Text, Table, TableHead, TableRow, TableHeaderCell, TableBody, TableCell } from "@tremor/react"
+import { Button, Text, Table, TableHead, TableRow, TableHeaderCell, TableBody, TableCell } from "@tremor/react"
 import { Dialog, Transition } from "@headlessui/react"
-import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline"
 import formatDate from "~/utils/format-date"
 import formatCurrency from "~/utils/format-currency"
 
@@ -116,7 +115,6 @@ export function Consolidated() {
 
       <div className="inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-white pt-12 pb-8 absolute rounded-b-lg">
         <Button
-          icon={ArrowsPointingOutIcon}
           className="bg-white shadow-md border-gray-200 text-gray-500 hover:bg-gray-50 hover:border-gray-300"
           onClick={openModal}
         >
