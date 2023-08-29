@@ -2,7 +2,6 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
 import ProtectedRoute from "./components/protected-route"
 import Dashboard from "./views/dashboard"
-import Home from "./views/home"
 import Login from "./views/login"
 import NotFound from "./views/not-found"
 
@@ -10,8 +9,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route
           path="/dashboard"
           element={

@@ -9,19 +9,8 @@ export default function Login() {
   const [role, setRole] = React.useState<"user" | "admin" | null>(null)
   const { session, isLoading: isLoadingUser } = useSessionContext()
 
-  const getUserDetails = () => supabase.from("users").select("*").single()
-
-  useEffect(() => {
-    if (!isLoadingUser && session) {
-      getUserDetails().then(({ data: userDetails }) => {
-        const role = userDetails?.role || "user"
-        setRole(role)
-      })
-    }
-  }, [isLoadingUser, session])
-
-  if (!isLoadingUser && session && role) {
-    return <Navigate to={role === "admin" ? "/selector" : "/template"} />
+  if (!isLoadingUser && session) {
+    return <Navigate to={role === "admin" ? "/admin" : "/dashboard"} />
   }
 
   if (isLoadingUser) {
