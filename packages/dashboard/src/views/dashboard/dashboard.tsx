@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 import { CalendarDateRangePicker } from "./components/date-range-picker"
 import { MainNav } from "./components/main-nav"
 import { Overview } from "./components/overview"
-import { RecentSales } from "./components/recent-sales"
+import { Consolidated } from "./components/consolidated"
 import { Search } from "./components/search"
 import TeamSwitcher from "./components/team-switcher"
 import { UserNav } from "./components/user-nav"
@@ -25,7 +25,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <div className="flex-1 space-y-4 p-8 pt-6">
+      <div className="space-y-4 p-8 pt-6 h-[calc(100vh-80px)] overflow-y-auto">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
           <div className="flex items-center space-x-2">
@@ -156,7 +156,7 @@ export default function DashboardPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">R$ 1.231,20</div>
-                  <p className="text-xs text-muted-foreground">+201 no último mês</p>
+                  <p className="text-xs text-muted-foreground">+23 no último mês</p>
                 </CardContent>
               </Card>
             </div>
@@ -170,13 +170,13 @@ export default function DashboardPage() {
                   <Overview />
                 </CardContent>
               </Card>
+
               <Card className="col-span-3">
                 <CardHeader>
-                  <CardTitle>Vendas Recentes</CardTitle>
-                  <CardDescription>Você fez 265 vendas este mês.</CardDescription>
+                  <CardTitle>Consolidado mês a mês</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <RecentSales />
+                  <Consolidated />
                 </CardContent>
               </Card>
             </div>

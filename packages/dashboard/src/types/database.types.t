@@ -9,115 +9,45 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      enabled_fonts: {
-        Row: {
-          createdAt: string
-          fontId: string | null
-          id: string
-          updatedAt: string | null
-        }
-        Insert: {
-          createdAt?: string
-          fontId?: string | null
-          id: string
-          updatedAt?: string | null
-        }
-        Update: {
-          createdAt?: string
-          fontId?: string | null
-          id?: string
-          updatedAt?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "enabled_fonts_fontid_foreign"
-            columns: ["fontId"]
-            referencedRelation: "fonts"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      fonts: {
-        Row: {
-          category: string
-          createdAt: string
-          family: string
-          fullName: string
-          id: string
-          postScriptName: string
-          preview: string
-          style: string
-          updatedAt: string
-          url: string
-        }
-        Insert: {
-          category: string
-          createdAt?: string
-          family: string
-          fullName: string
-          id: string
-          postScriptName: string
-          preview: string
-          style: string
-          updatedAt?: string
-          url: string
-        }
-        Update: {
-          category?: string
-          createdAt?: string
-          family?: string
-          fullName?: string
-          id?: string
-          postScriptName?: string
-          preview?: string
-          style?: string
-          updatedAt?: string
-          url?: string
-        }
-        Relationships: []
-      }
-      templates: {
-        Row: {
-          created_at: string | null
-          template: Json | null
-          uuid: string
-        }
-        Insert: {
-          created_at?: string | null
-          template?: Json | null
-          uuid?: string
-        }
-        Update: {
-          created_at?: string | null
-          template?: Json | null
-          uuid?: string
-        }
-        Relationships: []
-      }
       users: {
         Row: {
-          avatar_url: string | null
-          billing_address: Json | null
-          full_name: string | null
+          created_at: string | null
+          email: string | null
+          email_verified: string | null
           id: string
-          payment_method: Json | null
-          role: string | null
+          image: string | null
+          name: string | null
+          stripe_current_period_end: string | null
+          stripe_customer_id: string | null
+          stripe_price_id: string | null
+          stripe_subscription_id: string | null
+          updated_at: string | null
         }
         Insert: {
-          avatar_url?: string | null
-          billing_address?: Json | null
-          full_name?: string | null
+          created_at?: string | null
+          email?: string | null
+          email_verified?: string | null
           id: string
-          payment_method?: Json | null
-          role?: string | null
+          image?: string | null
+          name?: string | null
+          stripe_current_period_end?: string | null
+          stripe_customer_id?: string | null
+          stripe_price_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string | null
         }
         Update: {
-          avatar_url?: string | null
-          billing_address?: Json | null
-          full_name?: string | null
+          created_at?: string | null
+          email?: string | null
+          email_verified?: string | null
           id?: string
-          payment_method?: Json | null
-          role?: string | null
+          image?: string | null
+          name?: string | null
+          stripe_current_period_end?: string | null
+          stripe_customer_id?: string | null
+          stripe_price_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string | null
         }
         Relationships: [
           {

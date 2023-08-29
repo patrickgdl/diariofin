@@ -1,5 +1,5 @@
 {
-  "name": "@jujubices/dashboard",
+  "name": "@fluxo-simples/dashboard",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -42,11 +42,12 @@
     "@supabase/auth-helpers-react": "0.4.0",
     "@supabase/auth-ui-react": "0.4.2",
     "@supabase/supabase-js": "^2.25.0",
+    "@tremor/react": "^3.6.6",
+    "are-passive-events-supported": "^1.1.1",
+    "axios": "0.27.2",
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
     "cmdk": "^0.2.0",
-    "are-passive-events-supported": "^1.1.1",
-    "axios": "0.27.2",
     "i18next": "^21.8.13",
     "lodash": "^4.17.21",
     "nanoid": "^3.3.4",
@@ -61,8 +62,8 @@
     "react-router-dom": "^6.3.0",
     "recharts": "^2.6.2",
     "resize-observer-polyfill": "^1.5.1",
-    "tailwindcss-animate": "^1.0.5",
     "tailwind-merge": "^1.12.0",
+    "tailwindcss-animate": "^1.0.5",
     "use-debounce": "^8.0.4",
     "use-latest": "^1.2.1"
   },
