@@ -1,5 +1,4 @@
-import { Button } from "~/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "~/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 
 import { CalendarDateRangePicker } from "./components/date-range-picker"
@@ -7,17 +6,18 @@ import { MainNav } from "./components/main-nav"
 import { Overview } from "./components/overview"
 import { Consolidated } from "./components/consolidated"
 import { Search } from "./components/search"
-import TeamSwitcher from "./components/team-switcher"
+import AccountSwitcher from "./components/account-switcher"
 import { UserNav } from "./components/user-nav"
-import BankSwitcher from "./components/bank-switcher"
 
 export default function DashboardPage() {
   return (
     <div className="flex flex-col">
       <div className="border-b">
         <div className="flex h-16 items-center px-4">
-          <TeamSwitcher />
+          <AccountSwitcher />
+
           <MainNav className="mx-6" />
+
           <div className="ml-auto flex items-center space-x-4">
             <Search />
             <UserNav />
@@ -30,7 +30,7 @@ export default function DashboardPage() {
           <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
           <div className="flex items-center space-x-2">
             <CalendarDateRangePicker />
-            <BankSwitcher />
+            <AccountSwitcher />
           </div>
         </div>
 
