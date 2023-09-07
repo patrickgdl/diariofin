@@ -96,10 +96,6 @@
   }
 }
 
-* {
-  user-select: none;
-}
-
 .react-colorful__saturation-pointer {
   width: 20px !important;
   height: 20px !important;
