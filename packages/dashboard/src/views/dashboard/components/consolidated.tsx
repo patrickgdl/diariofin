@@ -110,7 +110,7 @@ export function Consolidated() {
   const closeModal = (): any => setIsOpen(false)
 
   return (
-    <div className="relative max-w-xl mx-auto h-96 overflow-hidden">
+    <div className="relative mx-auto h-96 overflow-hidden">
       <ConsolidatedTable />
 
       <div className="inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-white pt-12 pb-8 absolute rounded-b-lg">
