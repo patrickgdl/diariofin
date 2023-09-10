@@ -15,33 +15,33 @@ export interface Database {
           agency: string | null
           balance: number | null
           id: string
-          name: string | null
+          name: string
           pix: string | null
           pix_type: string | null
-          status: boolean | null
-          user_id: string | null
+          status: boolean
+          user_id: string
         }
         Insert: {
           account_number?: string | null
           agency?: string | null
           balance?: number | null
           id?: string
-          name?: string | null
+          name: string
           pix?: string | null
           pix_type?: string | null
-          status?: boolean | null
-          user_id?: string | null
+          status?: boolean
+          user_id?: string
         }
         Update: {
           account_number?: string | null
           agency?: string | null
           balance?: number | null
           id?: string
-          name?: string | null
+          name?: string
           pix?: string | null
           pix_type?: string | null
-          status?: boolean | null
-          user_id?: string | null
+          status?: boolean
+          user_id?: string
         }
         Relationships: [
           {

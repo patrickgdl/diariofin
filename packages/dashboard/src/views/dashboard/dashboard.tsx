@@ -1,20 +1,93 @@
+import * as React from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { AccountFormType } from "~/components/account-form"
+import supabase from "~/services/supabase"
+import { Account } from "~/types/account"
 import { Card, CardContent, CardHeader, CardTitle } from "~/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 
+import AccountSwitcher from "./components/account-switcher"
+import { Consolidated } from "./components/consolidated"
 import { CalendarDateRangePicker } from "./components/date-range-picker"
 import { MainNav } from "./components/main-nav"
 import { Overview } from "./components/overview"
-import { Consolidated } from "./components/consolidated"
 import { Search } from "./components/search"
-import AccountSwitcher from "./components/account-switcher"
 import { UserNav } from "./components/user-nav"
 
+const defaultAccount: Account = {
+  id: "all",
+  name: "Todas as contas",
+  status: true,
+  user_id: "",
+  account_number: null,
+  agency: null,
+  balance: null,
+  pix: null,
+  pix_type: null,
+}
+
 export default function DashboardPage() {
+  const params = useParams()
+  const navigate = useNavigate()
+
+  const [accounts, setAccounts] = React.useState<Account[]>([])
+  const [selectedAccount, setSelectedAccount] = React.useState<Account>(defaultAccount)
+
+  const getAccountById = async () => {
+    if (params?.accountId) {
+      const { data, error } = await supabase.from("account").select("*").eq("id", params.accountId).single()
+
+      if (error) return alert(JSON.stringify(error))
+
+      setSelectedAccount(data)
+    }
+  }
+
+  const getAccounts = async () => {
+    const { data, error } = await supabase.from("account").select("*")
+
+    if (error) return alert(JSON.stringify(error))
+
+    setAccounts(data)
+  }
+
+  const handleNewAccount = async (values: AccountFormType) => {
+    const { data, error } = await supabase
+      .from("account")
+      .insert({ ...values })
+      .select()
+
+    if (error) return alert(JSON.stringify(error))
+
+    if (data) {
+      setAccounts([...accounts, ...data])
+      setSelectedAccount(data[0])
+      navigate(`/dashboard/${data[0].id}`)
+    }
+  }
+
+  const handleSelectNewAccount = (account: Account) => {
+    setSelectedAccount(account)
+    navigate(`/dashboard/${account.id}`)
+  }
+
+  React.useEffect(() => {
+    getAccountById()
+    getAccounts()
+  }, [])
+
   return (
     <div className="flex flex-col">
       <div className="border-b">
         <div className="flex h-16 items-center px-4">
-          <AccountSwitcher />
+          {accounts && accounts?.length > 0 && (
+            <AccountSwitcher
+              accounts={accounts}
+              selectedAccount={selectedAccount}
+              onNewAccount={handleNewAccount}
+              onSelectAccount={handleSelectNewAccount}
+            />
+          )}
 
           <MainNav className="mx-6" />
 
@@ -30,7 +103,15 @@ export default function DashboardPage() {
           <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
           <div className="flex items-center space-x-2">
             <CalendarDateRangePicker />
-            <AccountSwitcher />
+
+            {accounts && accounts?.length > 0 && (
+              <AccountSwitcher
+                accounts={accounts}
+                selectedAccount={selectedAccount}
+                onNewAccount={handleNewAccount}
+                onSelectAccount={handleSelectNewAccount}
+              />
+            )}
           </div>
         </div>
 

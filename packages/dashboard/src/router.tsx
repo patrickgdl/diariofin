@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
 import ProtectedRoute from "./components/protected-route"
+import Account from "./views/account"
 import Dashboard from "./views/dashboard"
 import Login from "./views/login"
 import NotFound from "./views/not-found"
@@ -11,6 +12,14 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
+          path="/account"
+          element={
+            <ProtectedRoute>
+              <Account />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/dashboard"
           element={
             <ProtectedRoute>
@@ -18,7 +27,14 @@ const Router = () => {
             </ProtectedRoute>
           }
         />
-
+        <Route
+          path="/dashboard/:accountId"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
