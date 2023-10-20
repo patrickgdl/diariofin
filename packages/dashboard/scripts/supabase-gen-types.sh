@@ -1,1 +1,0 @@
-npx supabase gen types typescript --project-id sncxxrrctpetsbyjmhlx > src/types/database.types.ts
