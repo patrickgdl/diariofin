@@ -47,6 +47,7 @@
     "@supabase/auth-helpers-react": "0.4.0",
     "@supabase/auth-ui-react": "0.4.2",
     "@supabase/supabase-js": "^2.25.0",
+    "@tanstack/react-table": "^8.10.7",
     "@tremor/react": "^3.6.6",
     "are-passive-events-supported": "^1.1.1",
     "axios": "0.27.2",
