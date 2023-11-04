@@ -2,16 +2,9 @@ import { AppContext } from "~/contexts/AppContext"
 import { useContext } from "react"
 
 const useAppContext = () => {
-  const { isMobile, setIsMobile, activePanel, setActivePanel, activeSubMenu, setActiveSubMenu } = useContext(AppContext)
+  const state = useContext(AppContext)
 
-  return {
-    isMobile,
-    setIsMobile,
-    activePanel,
-    setActivePanel,
-    activeSubMenu,
-    setActiveSubMenu,
-  }
+  return { ...state }
 }
 
 export default useAppContext

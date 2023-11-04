@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom"
 
 import { useSessionContext } from "@supabase/auth-helpers-react"
 
-const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { session, isLoading: isLoadingUser } = useSessionContext()
 
   if (!isLoadingUser && !session) {
