@@ -41,31 +41,36 @@ const data: Payment[] = [
   {
     id: "m5gr84i9",
     amount: 316,
-    status: "success",
+    name: "success",
+    phone: "(xx) xxxx-xxxx",
     email: "ken99@yahoo.com",
   },
   {
     id: "3u1reuv4",
     amount: 242,
-    status: "success",
+    name: "success",
+    phone: "(xx) xxxx-xxxx",
     email: "Abe45@gmail.com",
   },
   {
     id: "derv1ws0",
     amount: 837,
-    status: "processing",
+    name: "processing",
+    phone: "(xx) xxxx-xxxx",
     email: "Monserrat44@gmail.com",
   },
   {
     id: "5kma53ae",
     amount: 874,
-    status: "success",
+    name: "success",
+    phone: "(xx) xxxx-xxxx",
     email: "Silas22@gmail.com",
   },
   {
     id: "bhqecj4p",
     amount: 721,
-    status: "failed",
+    name: "failed",
+    phone: "(xx) xxxx-xxxx",
     email: "carmella@hotmail.com",
   },
 ]
@@ -73,8 +78,9 @@ const data: Payment[] = [
 export type Payment = {
   id: string
   amount: number
-  status: "pending" | "processing" | "success" | "failed"
+  name: "pending" | "processing" | "success" | "failed"
   email: string
+  phone: string
 }
 
 export const columns: ColumnDef<Payment>[] = [
@@ -98,9 +104,9 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => <div className="capitalize">{row.getValue("status")}</div>,
+    accessorKey: "name",
+    header: "Nome",
+    cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
   },
   {
     accessorKey: "email",
@@ -113,6 +119,11 @@ export const columns: ColumnDef<Payment>[] = [
       )
     },
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+  },
+  {
+    accessorKey: "phone",
+    header: "Telefone",
+    cell: ({ row }) => <div className="lowercase">{row.getValue("phone")}</div>,
   },
   {
     accessorKey: "amount",
@@ -230,8 +241,8 @@ export function ClientsTable() {
 
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Criar conta</DialogTitle>
-              <DialogDescription>Adicione uma conta para gerenciar.</DialogDescription>
+              <DialogTitle>Criar cliente</DialogTitle>
+              <DialogDescription>Adicione um cliente para gerenciar.</DialogDescription>
             </DialogHeader>
 
             <ClientForm onSubmit={handleSubmit} />
