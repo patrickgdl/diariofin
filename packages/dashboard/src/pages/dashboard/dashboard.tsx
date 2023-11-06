@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 
 import { Consolidated } from "./components/consolidated"
-import { CalendarDateRangePicker } from "./components/date-range-picker"
+import { CalendarDateRangePicker } from "~/components/date-range-picker"
 import { Overview } from "./components/overview"
 
 export default function DashboardPage() {
