@@ -1,11 +1,31 @@
-export default function ClientsPage() {
+import { columns } from "./components/columns"
+import { DataTable } from "./components/data-table"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
+import tasks from "./data/tasks"
+
+export default function TransactionsPage() {
   return (
-    <div className="flex flex-col">
-      <div className="space-y-4 p-8 pt-6 h-[calc(100vh-80px)] overflow-y-auto">
-        <div className="flex items-center justify-between space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">Entradas e Saídas (WIP)</h2>
-        </div>
-      </div>
+    <div className="h-full flex-1 flex-col space-y-8 px-8 py-4 md:flex">
+      <h2 className="text-2xl font-bold tracking-tight">Entradas e Saídas</h2>
+
+      <Tabs defaultValue="incoming" className="space-y-4">
+        <TabsList>
+          <TabsTrigger value="incoming">Contas a receber</TabsTrigger>
+          <TabsTrigger value="outgoing">Contas a pagar</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="incoming">
+          <div className="my-8">
+            <DataTable data={tasks} columns={columns} />
+          </div>
+        </TabsContent>
+
+        <TabsContent value="outgoing">
+          <div className="my-8">
+            <DataTable data={tasks} columns={columns} />
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
