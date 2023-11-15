@@ -1,5 +1,4 @@
-create table
-  public.account (
+create table public.account (
     id uuid default gen_random_uuid () not null,
     name text null,
     balance numeric null,

@@ -70,11 +70,11 @@ export default function AuthenticationPage() {
           <AccountForm onSubmit={handleSubmit} />
 
           <Button type="submit" form="account-form">
-            Continuar
+            Criar
           </Button>
 
           <p className="px-8 text-center text-sm text-muted-foreground">
-            Ao clicar em continuar, você concorda com nossos{" "}
+            Ao clicar em criar, você concorda com nossos{" "}
             <a href="/terms" className="underline underline-offset-4 hover:text-primary">
               Termos de Serviço
             </a>{" "}

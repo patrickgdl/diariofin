@@ -141,7 +141,7 @@ export default function AccountSwitcher({
           </Button>
 
           <Button type="submit" form="account-form">
-            Continuar
+            Criar
           </Button>
         </DialogFooter>
       </DialogContent>

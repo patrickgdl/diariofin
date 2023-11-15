@@ -10,9 +10,11 @@ import { MainNav } from "./main-nav"
 import ProtectedRoute from "./protected-route"
 import { Search } from "./search"
 import { UserNav } from "./user-nav"
+import { useToast } from "~/ui/use-toast"
 
 const Layout = () => {
   const params = useParams()
+  const { toast } = useToast()
   const navigate = useNavigate()
 
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -23,7 +25,7 @@ const Layout = () => {
     if (params?.accountId) {
       const { data, error } = await supabase.from("account").select("*").eq("id", params.accountId).single()
 
-      if (error) return alert(JSON.stringify(error))
+      if (error) return toast({ variant: "destructive", description: "Ocorreu um erro." })
 
       setSelectedAccount(data)
     }
@@ -32,7 +34,7 @@ const Layout = () => {
   const getAccounts = async () => {
     const { data, error } = await supabase.from("account").select("*")
 
-    if (error) return alert(JSON.stringify(error))
+    if (error) return toast({ variant: "destructive", description: "Ocorreu um erro ao requisitar." })
 
     setAccounts(data)
   }
@@ -43,7 +45,7 @@ const Layout = () => {
       .insert({ ...values })
       .select()
 
-    if (error) return alert(JSON.stringify(error))
+    if (error) return toast({ variant: "destructive", description: "Ocorreu um erro ao criar." })
 
     if (data) {
       setAccounts([...accounts, ...data])

@@ -3,9 +3,9 @@ export interface Account {
   agency: string | null
   balance: number | null
   id: string
-  name: string
+  name: string | null
   pix: string | null
   pix_type: string | null
-  status: boolean
-  user_id: string
+  status: boolean | null
+  user_id: string | null
 }

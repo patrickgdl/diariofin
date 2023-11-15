@@ -14,7 +14,6 @@ INSERT INTO auth.identities (id, user_id, identity_data, provider, last_sign_in_
 
 -- Create public.account values
 --
---
 -- Data for public.account; Schema: public
 --
 INSERT INTO public.account (id, name, balance, status, account_number, agency, pix, pix_type, user_id) VALUES ('589f4b55-4c84-46bd-a31d-5fd8417eebaf', 'C6 Bank', 1000, true, '234527', '0001', '09440091908', 'cpf-cnpj', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
@@ -22,4 +21,15 @@ INSERT INTO public.account (id, name, balance, status, account_number, agency, p
 INSERT INTO public.account (id, name, balance, status, account_number, agency, pix, pix_type, user_id) VALUES ('ee92d24a-0aa8-4195-9e19-e367c2a8aede', 'Itaú', 700, true, '808080', '0001', 'patrickgdlima@gmail.com', 'email', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
 
 
+-- Create public.clients values
+--
+-- Data for public.clients; Schema: public
+--
+INSERT INTO public.clients (id, name, person_type, email, cpf_cnpj, phone, description, is_client, is_supplier) VALUES ('e28e3adc-ccfd-48ae-9f66-83759b29f540', 'Vs Informática', 'legal', 'juliana@solucoesvs.com.br', '08.302.412/0001-98', '(41) 3642-1190', '', true, true);
 
+
+-- Create public.address values
+--
+-- Data for public.address; Schema: public
+--
+INSERT INTO public.address (cep, address, number, complement, neighborhood, city, uf, client_id) VALUES ('83.701-300', 'Rua Alagoas', '416', NULL, 'Iguaçu', 'Araucária', 'PR', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');

@@ -6,5 +6,8 @@ create table public.clients (
   cpf_cnpj VARCHAR(20) NULL,
   phone VARCHAR(20) NULL,
   description TEXT,
+  is_client BOOLEAN NOT NULL DEFAULT TRUE,
   is_supplier BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+alter table clients add constraint unique_id unique (id);
