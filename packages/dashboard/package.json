@@ -9,10 +9,11 @@
     "supa:migrate": "supabase db diff --use-migra",
     "supa:stop": "supabase stop",
     "supa:start": "supabase start",
-    "supa:reset": "supabase db reset --debug",
-    "supa:types": "supabase gen types typescript --local > ./src/types/database.types.ts"
+    "supa:types": "supabase gen types typescript --local > ./src/types/database.types.ts",
+    "supa:reset": "supabase db reset --debug && supa:types"
   },
   "dependencies": {
+    "@brazilian-utils/brazilian-utils": "^1.0.0-rc.12",
     "@hookform/resolvers": "^3.3.0",
     "@radix-ui/react-accessible-icon": "^1.0.3",
     "@radix-ui/react-accordion": "^1.1.2",
@@ -63,8 +64,8 @@
     "react-day-picker": "^8.7.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.46.1",
-    "react-hot-toast": "^2.4.1",
     "react-i18next": "^11.18.0",
+    "react-input-mask": "^2.0.4",
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
     "recharts": "^2.6.2",
@@ -82,6 +83,7 @@
     "@types/node": "^20.8.7",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@types/react-input-mask": "^3.0.4",
     "@vitejs/plugin-react": "^2.0.0",
     "autoprefixer": "^10.4.14",
     "detect-port": "^1.5.1",

@@ -1,19 +1,22 @@
-import * as React from "react"
+import { CaretSortIcon, ChevronDownIcon, DotsHorizontalIcon } from "@radix-ui/react-icons"
 import {
-  ColumnDef,
   ColumnFiltersState,
-  SortingState,
-  VisibilityState,
+  createColumnHelper,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  SortingState,
   useReactTable,
+  VisibilityState,
 } from "@tanstack/react-table"
-import { CaretSortIcon, ChevronDownIcon, DotsHorizontalIcon } from "@radix-ui/react-icons"
-
+import * as React from "react"
+import ClientForm from "~/components/client-form"
+import { ClientFormType } from "~/components/client-form-schema"
+import { Clients } from "~/types/clients"
 import { Button } from "~/ui/button"
+import { Checkbox } from "~/ui/checkbox"
 import {
   Dialog,
   DialogContent,
@@ -23,7 +26,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~/ui/dialog"
-import { Checkbox } from "~/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -35,81 +37,33 @@ import {
 } from "~/ui/dropdown-menu"
 import { Input } from "~/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/ui/table"
-import ClientForm, { ClientFormType } from "~/components/client-form"
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    name: "success",
-    phone: "(xx) xxxx-xxxx",
-    email: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    name: "success",
-    phone: "(xx) xxxx-xxxx",
-    email: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    name: "processing",
-    phone: "(xx) xxxx-xxxx",
-    email: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    name: "success",
-    phone: "(xx) xxxx-xxxx",
-    email: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    name: "failed",
-    phone: "(xx) xxxx-xxxx",
-    email: "carmella@hotmail.com",
-  },
-]
-
-export type Payment = {
-  id: string
-  amount: number
-  name: "pending" | "processing" | "success" | "failed"
-  email: string
-  phone: string
-}
-
-export const columns: ColumnDef<Payment>[] = [
-  {
+const columnHelper = createColumnHelper<Clients>()
+const columns = [
+  columnHelper.display({
     id: "select",
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
+        aria-label="Selecionar tudo"
       />
     ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
+        aria-label="Selecionar linha"
       />
     ),
     enableSorting: false,
     enableHiding: false,
-  },
-  {
-    accessorKey: "name",
+  }),
+  columnHelper.accessor("name", {
     header: "Nome",
     cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
-  },
-  {
-    accessorKey: "email",
+  }),
+  columnHelper.accessor("email", {
     header: ({ column }) => {
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
@@ -119,57 +73,47 @@ export const columns: ColumnDef<Payment>[] = [
       )
     },
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
-  },
-  {
-    accessorKey: "phone",
+  }),
+  columnHelper.accessor("phone", {
     header: "Telefone",
-    cell: ({ row }) => <div className="lowercase">{row.getValue("phone")}</div>,
-  },
-  {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return <div className="text-right font-medium">{formatted}</div>
-    },
-  },
-  {
+    cell: ({ row }) => row.getValue("phone"),
+  }),
+  columnHelper.accessor("cpf_cnpj", {
+    header: "CPF/CNPJ",
+    cell: ({ row }) => row.getValue("cpf_cnpj"),
+  }),
+  columnHelper.display({
     id: "actions",
-    enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
+      const client = row.original
 
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">Abrir opções</span>
               <DotsHorizontalIcon className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(payment.id)}>
-              Copy payment ID
-            </DropdownMenuItem>
+            <DropdownMenuLabel>Editar</DropdownMenuLabel>
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(client.name)}>Copiar nome</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>Excluir</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
     },
-  },
+    enableHiding: false,
+  }),
 ]
 
-export function SuppliersTable() {
+type SuppliersTableProps = {
+  suppliers: Clients[]
+  onSubmit: (values: ClientFormType) => void
+}
+
+export function SuppliersTable({ suppliers, onSubmit }: SuppliersTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -178,10 +122,11 @@ export function SuppliersTable() {
 
   function handleSubmit(values: ClientFormType) {
     setShowNewClientDialog(false)
+    onSubmit(values)
   }
 
   const table = useReactTable({
-    data,
+    data: suppliers,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -245,7 +190,7 @@ export function SuppliersTable() {
               <DialogDescription>Adicione um fornecedor para gerenciar.</DialogDescription>
             </DialogHeader>
 
-            <ClientForm onSubmit={handleSubmit} />
+            {showNewClientDialog && <ClientForm isSupplier onSubmit={handleSubmit} />}
 
             <DialogFooter>
               <Button variant="outline" onClick={() => setShowNewClientDialog(false)}>
@@ -253,7 +198,7 @@ export function SuppliersTable() {
               </Button>
 
               <Button type="submit" form="account-form">
-                Continuar
+                Criar
               </Button>
             </DialogFooter>
           </DialogContent>

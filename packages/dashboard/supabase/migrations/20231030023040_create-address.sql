@@ -6,6 +6,6 @@ CREATE TABLE public.address (
   neighborhood TEXT NOT NULL,
   city TEXT NOT NULL,
   uf TEXT NOT NULL,
-  user_id uuid not null,
-  constraint address_user_id_fkey foreign key (user_id) references public.users (id)
+  client_id uuid not null,
+  constraint address_client_id_fkey foreign key (client_id) references public.clients (id)
 );
