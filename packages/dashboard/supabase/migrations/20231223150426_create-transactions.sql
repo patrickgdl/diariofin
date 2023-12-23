@@ -2,6 +2,7 @@ CREATE TABLE public.transactions (
   id uuid NOT NULL PRIMARY KEY,
   amount DECIMAL(10, 2) NOT NULL,
   description VARCHAR(255),
+  done BOOLEAN DEFAULT false,
   type_id uuid NOT NULL,
   account_id uuid NOT NULL,
   category_id uuid NULL,

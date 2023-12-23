@@ -63,5 +63,5 @@ INSERT INTO public.transaction_types (id, name) VALUES ('e18bb7e2-9eac-4fd1-9830
 --
 -- Data for public.transaction_types; Schema: public
 --
-INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, client_id) VALUES ('b7d5044e-e98b-4c1d-b594-1f437b7d2282', 1000, 'Salário', 'ee9b7660-332f-4ae3-a6d6-4c630bad2b13', '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
-INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, client_id) VALUES ('cfc6efe7-772e-4cc5-bb7d-3c0666a4dd04', -500, 'Pagamento de Fatura', 'e18bb7e2-9eac-4fd1-9830-98b3a99173a9', '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
+INSERT INTO transactions (id, amount, description, done, type_id, account_id, category_id, client_id) VALUES ('b7d5044e-e98b-4c1d-b594-1f437b7d2282', 1000, 'Salário', true, 'ee9b7660-332f-4ae3-a6d6-4c630bad2b13', '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
+INSERT INTO transactions (id, amount, description, done, type_id, account_id, category_id, client_id) VALUES ('cfc6efe7-772e-4cc5-bb7d-3c0666a4dd04', -500, 'Pagamento de Fatura', true, 'e18bb7e2-9eac-4fd1-9830-98b3a99173a9', '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
