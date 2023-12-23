@@ -1,4 +1,5 @@
 CREATE TABLE public.address (
+  id uuid default gen_random_uuid () not null,
   cep TEXT NOT NULL,
   address TEXT NOT NULL,
   number TEXT NOT NULL,

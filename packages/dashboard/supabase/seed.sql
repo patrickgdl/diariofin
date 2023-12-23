@@ -32,4 +32,36 @@ INSERT INTO public.clients (id, name, person_type, email, cpf_cnpj, phone, descr
 --
 -- Data for public.address; Schema: public
 --
-INSERT INTO public.address (cep, address, number, complement, neighborhood, city, uf, client_id) VALUES ('83.701-300', 'Rua Alagoas', '416', NULL, 'Iguaçu', 'Araucária', 'PR', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
+INSERT INTO public.address (id, cep, address, number, complement, neighborhood, city, uf, client_id) VALUES ('09e1734d-9356-4cbb-a308-865358fe9c93', '83.701-300', 'Rua Alagoas', '416', NULL, 'Iguaçu', 'Araucária', 'PR', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
+
+
+-- Create public.category_groups values
+--
+-- Data for public.category_groups; Schema: public
+--
+INSERT INTO public.category_groups (id, name) VALUES ('1151ff10-0a2b-498c-b55f-ae4f554d41a4', 'Receita Operacional');
+INSERT INTO public.category_groups (id, name) VALUES ('5011e7e0-9097-4171-a306-5d1d25dee5de', 'Financiamentos');
+
+
+-- Create public.transaction_categories values
+--
+-- Data for public.transaction_categories; Schema: public
+--
+INSERT INTO public.transaction_categories (id, name, group_id) VALUES ('3dc3ba14-2243-4003-a03e-fa18331041c0', 'Receitas com Serviços', '1151ff10-0a2b-498c-b55f-ae4f554d41a4');
+INSERT INTO public.transaction_categories (id, name, group_id) VALUES ('83e8b0b5-3d43-4618-9aef-7980022f5603', 'Aporte de Capital', '5011e7e0-9097-4171-a306-5d1d25dee5de');
+
+
+-- Create public.transaction_types values
+--
+-- Data for public.transaction_types; Schema: public
+--
+INSERT INTO public.transaction_types (id, name) VALUES ('ee9b7660-332f-4ae3-a6d6-4c630bad2b13', 'INCOME');
+INSERT INTO public.transaction_types (id, name) VALUES ('e18bb7e2-9eac-4fd1-9830-98b3a99173a9', 'EXPENSE');
+
+
+-- Create public.transaction_types values
+--
+-- Data for public.transaction_types; Schema: public
+--
+INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, client_id) VALUES ('b7d5044e-e98b-4c1d-b594-1f437b7d2282', 1000, 'Salário', 'ee9b7660-332f-4ae3-a6d6-4c630bad2b13', '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
+INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, client_id) VALUES ('cfc6efe7-772e-4cc5-bb7d-3c0666a4dd04', -500, 'Pagamento de Fatura', 'e18bb7e2-9eac-4fd1-9830-98b3a99173a9', '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
