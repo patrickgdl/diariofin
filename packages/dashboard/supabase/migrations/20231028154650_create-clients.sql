@@ -10,4 +10,7 @@ create table public.clients (
   is_supplier BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-alter table clients add constraint unique_id unique (id);
+alter table
+  clients
+add
+  constraint unique_id unique (id);

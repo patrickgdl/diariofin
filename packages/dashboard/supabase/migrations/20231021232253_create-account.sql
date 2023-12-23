@@ -1,5 +1,5 @@
 create table public.account (
-    id uuid default gen_random_uuid () not null,
+    id uuid default gen_random_uuid () not null PRIMARY KEY,
     name text null,
     balance numeric null,
     status boolean null,
