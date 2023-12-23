@@ -1,6 +1,7 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
+
 import { columns } from "./components/columns"
 import { DataTable } from "./components/data-table"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 import tasks from "./data/tasks"
 
 export default function TransactionsPage() {

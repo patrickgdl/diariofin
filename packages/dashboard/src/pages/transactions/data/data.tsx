@@ -24,6 +24,19 @@ export const labels = [
   },
 ]
 
+export const status = [
+  {
+    value: false,
+    label: "Recebido",
+    icon: CheckCircledIcon,
+  },
+  {
+    value: true,
+    label: "Não recebido",
+    icon: CircleIcon,
+  },
+]
+
 export const accounts = [
   {
     value: "backlog",
