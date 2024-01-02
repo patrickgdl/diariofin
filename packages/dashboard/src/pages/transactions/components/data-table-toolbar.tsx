@@ -1,32 +1,20 @@
 import { Cross2Icon } from "@radix-ui/react-icons"
 import { Table } from "@tanstack/react-table"
-
 import { Button } from "~/ui/button"
 import { Input } from "~/ui/input"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "~/ui/dialog"
-import * as React from "react"
 import { CalendarDateRangePicker } from "~/components/date-range-picker"
 
 import { DataTableViewOptions } from "./data-table-view-options"
-
 import { priorities, accounts } from "../data/data"
 import { DataTableFacetedFilter } from "./data-table-faceted-filter"
+import { MouseEventHandler } from "react"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
+  onNewClick: MouseEventHandler<HTMLButtonElement> | undefined
 }
 
-export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
-  const [openTransaction, setOpenTransaction] = React.useState(false)
-
+export function DataTableToolbar<TData>({ table, onNewClick }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
 
   return (
@@ -60,30 +48,9 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
 
         <DataTableViewOptions table={table} />
 
-        <Dialog open={openTransaction} onOpenChange={setOpenTransaction}>
-          <DialogTrigger asChild>
-            <Button className="ml-2">Novo Contas a Receber</Button>
-          </DialogTrigger>
-
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Criar fornecedor</DialogTitle>
-              <DialogDescription>Adicione um fornecedor para gerenciar.</DialogDescription>
-            </DialogHeader>
-
-            <div>TESTE DO TESTE</div>
-
-            <DialogFooter>
-              <Button variant="outline" onClick={() => setOpenTransaction(false)}>
-                Cancelar
-              </Button>
-
-              <Button type="submit" form="account-form">
-                Criar
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        <Button className="ml-2" onClick={onNewClick}>
+          Novo
+        </Button>
       </div>
     </div>
   )

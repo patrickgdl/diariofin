@@ -7,6 +7,7 @@ import Login from "./pages/login"
 import NotFound from "./pages/not-found"
 import Clients from "./pages/clients"
 import Transactions from "./pages/transactions"
+import TransactionsForm from "./pages/transactions-form"
 import Reports from "./pages/reports"
 
 const Router = () => {
@@ -20,6 +21,7 @@ const Router = () => {
           <Route path="/dashboard/:accountId" element={<Dashboard />} />
           <Route path="/clients" element={<Clients />} />
           <Route path="/transactions" element={<Transactions />} />
+          <Route path="/transactions/:id" element={<TransactionsForm />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
