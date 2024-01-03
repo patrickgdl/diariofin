@@ -26,18 +26,21 @@ import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover"
 import { cn } from "~/utils/cn"
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<typeof PopoverTrigger> & {
+  isCollapsed?: boolean
   accounts: Account[]
   selectedAccount: Account
   onNewAccount: (values: AccountFormType) => void
   onSelectAccount: (account: Account) => void
+  classNames?: string | undefined
 }
 
 interface AccountSwitcherProps extends PopoverTriggerProps {}
 
 export default function AccountSwitcher({
+  isCollapsed = false,
   selectedAccount,
   accounts,
-  className,
+  classNames,
   onNewAccount,
   onSelectAccount,
 }: AccountSwitcherProps) {
@@ -60,13 +63,16 @@ export default function AccountSwitcher({
             variant="outline"
             aria-expanded={open}
             aria-label="Selecione uma conta"
-            className={cn("w-[200px] justify-between", className)}
+            className={cn("w-[200px] justify-between", classNames)}
           >
             <Avatar className="mr-2 h-5 w-5">
-              <AvatarImage src={`https://avatar.vercel.sh/${selectedAccount.id}.png`} alt={selectedAccount.name} />
+              <AvatarImage
+                src={`https://avatar.vercel.sh/${selectedAccount.id}.png`}
+                alt={selectedAccount.name || ""}
+              />
               <AvatarFallback>SC</AvatarFallback>
             </Avatar>
-            {selectedAccount.name}
+            {!isCollapsed ? selectedAccount.name : ""}
             <CaretSortIcon className="ml-auto h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -90,7 +96,7 @@ export default function AccountSwitcher({
                     <Avatar className="mr-2 h-5 w-5">
                       <AvatarImage
                         src={`https://avatar.vercel.sh/${account.id}.png`}
-                        alt={account.name}
+                        alt={account.name || ""}
                         className="grayscale"
                       />
                       <AvatarFallback>SC</AvatarFallback>

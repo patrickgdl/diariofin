@@ -84,6 +84,7 @@ export interface Database {
           city: string
           client_id: string
           complement: string | null
+          id: string
           neighborhood: string
           number: string
           uf: string
@@ -94,6 +95,7 @@ export interface Database {
           city: string
           client_id: string
           complement?: string | null
+          id?: string
           neighborhood: string
           number: string
           uf: string
@@ -104,6 +106,7 @@ export interface Database {
           city?: string
           client_id?: string
           complement?: string | null
+          id?: string
           neighborhood?: string
           number?: string
           uf?: string
@@ -116,6 +119,21 @@ export interface Database {
             referencedColumns: ["id"]
           }
         ]
+      }
+      category_groups: {
+        Row: {
+          id: string
+          name: string
+        }
+        Insert: {
+          id?: string
+          name: string
+        }
+        Update: {
+          id?: string
+          name?: string
+        }
+        Relationships: []
       }
       clients: {
         Row: {
@@ -192,6 +210,107 @@ export interface Database {
             foreignKeyName: "organization_users_user_id_fkey"
             columns: ["user_id"]
             referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      transaction_categories: {
+        Row: {
+          group_id: string
+          id: string
+          name: string
+        }
+        Insert: {
+          group_id: string
+          id?: string
+          name: string
+        }
+        Update: {
+          group_id?: string
+          id?: string
+          name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transactions_categories_group_fkey"
+            columns: ["group_id"]
+            referencedRelation: "category_groups"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      transaction_types: {
+        Row: {
+          id: string
+          name: string
+        }
+        Insert: {
+          id?: string
+          name: string
+        }
+        Update: {
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      transactions: {
+        Row: {
+          account_id: string
+          amount: number
+          category_id: string | null
+          client_id: string | null
+          date: string | null
+          description: string | null
+          done: boolean | null
+          id: string
+          type_id: string
+        }
+        Insert: {
+          account_id: string
+          amount: number
+          category_id?: string | null
+          client_id?: string | null
+          date?: string | null
+          description?: string | null
+          done?: boolean | null
+          id: string
+          type_id: string
+        }
+        Update: {
+          account_id?: string
+          amount?: number
+          category_id?: string | null
+          client_id?: string | null
+          date?: string | null
+          description?: string | null
+          done?: boolean | null
+          id?: string
+          type_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transactions_account_id_fkey"
+            columns: ["account_id"]
+            referencedRelation: "account"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "transactions_category_id_fkey"
+            columns: ["category_id"]
+            referencedRelation: "transaction_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "transactions_client_id_fkey"
+            columns: ["client_id"]
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "transactions_type_id_fkey"
+            columns: ["type_id"]
+            referencedRelation: "transaction_types"
             referencedColumns: ["id"]
           }
         ]

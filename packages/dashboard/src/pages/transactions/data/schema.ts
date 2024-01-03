@@ -3,13 +3,35 @@ import { z } from "zod"
 // We're keeping a simple non-relational schema here.
 // IRL, you will have a schema for your data models.
 export const transactionSchema = z.object({
-  date: z.string(),
-  description: z.string(),
-  client: z.string(),
-  done: z.boolean(),
-  category: z.string(),
-  account: z.string(),
+  id: z.string(),
   amount: z.number(),
+  description: z.string().nullable(),
+  done: z.boolean().nullable(),
+  // date: z.string(),
+  clients: z
+    .object({
+      id: z.string(),
+      name: z.string().nullable(),
+    })
+    .nullable(),
+  account: z
+    .object({
+      id: z.string(),
+      name: z.string().nullable(),
+    })
+    .nullable(),
+  transaction_types: z
+    .object({
+      id: z.string(),
+      name: z.string().nullable(),
+    })
+    .nullable(),
+  transaction_categories: z
+    .object({
+      id: z.string(),
+      name: z.string().nullable(),
+    })
+    .nullable(),
 })
 
-export type Task = z.infer<typeof transactionSchema>
+export type Transaction = z.infer<typeof transactionSchema>

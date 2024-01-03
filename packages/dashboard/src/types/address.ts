@@ -3,6 +3,7 @@ export interface Address {
   cep: string
   city: string
   complement: string | null
+  id: string
   neighborhood: string
   number: string
   uf: string
