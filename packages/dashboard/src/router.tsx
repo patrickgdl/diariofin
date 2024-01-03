@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
-import Layout from "./components/layout"
+import cookies from "js-cookie"
+import Layout from "./components/new-layout"
 import Account from "./pages/account"
 import Dashboard from "./pages/dashboard"
 import Login from "./pages/login"
@@ -11,11 +12,17 @@ import TransactionsForm from "./pages/transactions-form"
 import Reports from "./pages/reports"
 
 const Router = () => {
+  const layout = JSON.parse(cookies.get("react-resizable-panels:layout") || "")
+  const collapsed = Boolean(cookies.get("react-resizable-panels:collapsed"))
+
+  const defaultLayout = layout || undefined
+  const defaultCollapsed = collapsed || undefined
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route element={<Layout />}>
+        <Route element={<Layout defaultLayout={defaultLayout} defaultCollapsed={defaultCollapsed} />}>
           <Route path="/account" element={<Account />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/:accountId" element={<Dashboard />} />

@@ -4,14 +4,14 @@ import { Badge } from "~/ui/badge"
 import { Checkbox } from "~/ui/checkbox"
 
 import { status } from "../data/data"
-import { Task } from "../data/schema"
+import { Transaction } from "../data/schema"
 import { DataTableColumnHeader } from "./data-table-column-header"
 import { DataTableRowActions } from "./data-table-row-actions"
 import formatDate from "~/utils/format-date"
 import { parseISO } from "date-fns"
 import formatCurrency from "~/utils/format-currency"
 
-export const columns: ColumnDef<Task>[] = [
+export const columns: ColumnDef<Transaction>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -34,9 +34,10 @@ export const columns: ColumnDef<Task>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "date",
+    accessorKey: "id",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Data" />,
-    cell: ({ row }) => <div className="w-[80px]">{formatDate(parseISO(row.getValue("date")))}</div>,
+    // cell: ({ row }) => <div className="w-[80px]">{formatDate(parseISO(row.getValue("id")))}</div>,
+    cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
     enableSorting: false,
     enableHiding: false,
   },
@@ -46,7 +47,7 @@ export const columns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
-          <Badge variant="outline">{row.original.category}</Badge>
+          <Badge variant="outline">{row.original.transaction_categories?.name}</Badge>
           <span className="max-w-[500px] truncate font-medium">{row.getValue("description")}</span>
         </div>
       )
@@ -76,15 +77,15 @@ export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: "account",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Conta" />,
-    cell: ({ row }) => <span>{row.getValue("account")}</span>,
+    cell: ({ row }) => <span>{row.original.account?.name}</span>,
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
     },
   },
   {
-    accessorKey: "client",
+    accessorKey: "clients",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Cliente" />,
-    cell: ({ row }) => <span>{row.getValue("client")}</span>,
+    cell: ({ row }) => <span>{row.original.clients?.name}</span>,
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
     },
