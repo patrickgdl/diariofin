@@ -5,10 +5,8 @@ import { Checkbox } from "~/ui/checkbox"
 
 import { status } from "../data/data"
 import { Transaction } from "../data/schema"
-import { DataTableColumnHeader } from "./data-table-column-header"
-import { DataTableRowActions } from "./data-table-row-actions"
-import formatDate from "~/utils/format-date"
-import { parseISO } from "date-fns"
+import { DataTableColumnHeader } from "./transactions-column-header"
+import { DataTableRowActions } from "./transactions-row-actions"
 import formatCurrency from "~/utils/format-currency"
 
 export const columns: ColumnDef<Transaction>[] = [
@@ -33,24 +31,25 @@ export const columns: ColumnDef<Transaction>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-  {
-    accessorKey: "id",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Data" />,
-    // cell: ({ row }) => <div className="w-[80px]">{formatDate(parseISO(row.getValue("id")))}</div>,
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
-    enableSorting: false,
-    enableHiding: false,
-  },
+  // {
+  //   accessorKey: "date",
+  //   header: ({ column }) => <DataTableColumnHeader column={column} title="Data" />,
+  //   cell: ({ row }) => <div className="w-[80px]">{formatDate(parseISO(row.getValue("date")))}</div>,
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
   {
     accessorKey: "description",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Descrição" />,
     cell: ({ row }) => {
-      return (
-        <div className="flex space-x-2">
-          <Badge variant="outline">{row.original.transaction_categories?.name}</Badge>
-          <span className="max-w-[500px] truncate font-medium">{row.getValue("description")}</span>
-        </div>
-      )
+      return <span className="max-w-[500px] truncate font-medium">{row.getValue("description")}</span>
+    },
+  },
+  {
+    accessorKey: "transaction_categories",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Categoria" />,
+    cell: ({ row }) => {
+      return <Badge variant="outline">{row.original.transaction_categories?.name}</Badge>
     },
   },
   {

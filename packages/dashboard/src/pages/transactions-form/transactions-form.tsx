@@ -18,7 +18,12 @@ export default function TransactionsFormPage() {
 
       <TransactionDataForm onSubmit={() => null} />
 
-      <Button type="submit">{id === "new" ? "Salvar" : "Atualizar"}</Button>
+      <div className="space-x-2 flex items-center justify-end">
+        <Button variant="outline" onClick={() => navigate(-1)}>
+          Voltar
+        </Button>
+        <Button type="submit">{id === "new" ? "Salvar" : "Atualizar"}</Button>
+      </div>
     </div>
   )
 }

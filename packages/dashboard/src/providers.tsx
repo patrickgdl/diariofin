@@ -12,7 +12,7 @@ import supabase from "./services/supabase"
 import { store } from "./store/store"
 import { TooltipProvider } from "./ui/tooltip"
 
-const Provider = ({ children }: { children: React.ReactNode }) => {
+const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <SessionContextProvider supabaseClient={supabase}>
       <UserContextProvider>
@@ -28,4 +28,4 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export default Provider
+export default Providers

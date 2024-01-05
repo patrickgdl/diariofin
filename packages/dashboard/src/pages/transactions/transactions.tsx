@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 
 import { columns } from "./components/columns"
-import { DataTable } from "./components/data-table"
+import { DataTable } from "./components/transactions-table"
 import { useNavigate } from "react-router-dom"
 import supabase from "~/services/supabase"
 import { useToast } from "~/ui/use-toast"
