@@ -33,38 +33,44 @@ const TransactionDataForm = ({ onSubmit }: TransactionDataFormProps) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} id="account-form">
         <div className="space-y-6 py-2 pb-4">
-          <FormField
-            name="amount"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Valor do recebimento</FormLabel>
-                <FormControl>
-                  <InputCurrency
-                    id="input-amount"
-                    name="input-amount"
-                    placeholder="R$ 00,00"
-                    defaultValue={field.value}
-                    onCustomChange={field.onChange}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="flex justify-between items-end w-full space-x-4">
+            <div className="w-2/4">
+              <FormField
+                name="amount"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Valor do recebimento</FormLabel>
+                    <FormControl>
+                      <InputCurrency
+                        id="input-amount"
+                        name="input-amount"
+                        placeholder="R$ 00,00"
+                        defaultValue={field.value}
+                        onCustomChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
-          <FormField
-            control={form.control}
-            name="is_client"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                <FormLabel className="text-base">Já foi recebido?</FormLabel>
-                <FormControl>
-                  <Switch checked={field.value} onCheckedChange={field.onChange} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+            <div className="w-2/4">
+              <FormField
+                control={form.control}
+                name="is_client"
+                render={({ field }) => (
+                  <FormItem className="flex items-center space-y-0 space-x-4">
+                    <FormLabel className="text-base">Já foi recebido?</FormLabel>
+                    <FormControl>
+                      <Switch checked={field.value} onCheckedChange={field.onChange} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
 
           <FormField
             name="description"
