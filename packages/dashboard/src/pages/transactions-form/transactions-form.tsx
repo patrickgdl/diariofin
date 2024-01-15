@@ -9,7 +9,7 @@ export default function TransactionsFormPage() {
   const navigate = useNavigate()
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6">
       <div>
         <h3 className="text-lg font-medium">Conta a receber</h3>
         <p className="text-sm text-muted-foreground">Insira aqui uma conta a receber, uma entrada de valor.</p>
