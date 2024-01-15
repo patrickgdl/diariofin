@@ -66,7 +66,7 @@ export default function ClientsPage() {
 
   return (
     <div className="flex flex-col">
-      <div className="space-y-4 p-8 pt-6 h-[calc(100vh-80px)] overflow-y-auto">
+      <div className="space-y-4 h-[calc(100vh-80px)] overflow-y-auto">
         <div className="flex flex-col justify-between space-y-2">
           <Tabs defaultValue="clients" className="space-y-4">
             <TabsList>

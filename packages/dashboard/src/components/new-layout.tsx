@@ -1,6 +1,6 @@
 import { Home, ArrowRightLeft, Factory, FileDown, LayoutDashboard } from "lucide-react"
 import * as React from "react"
-import { Link, Outlet, Params, useMatches, useNavigate, useParams } from "react-router-dom"
+import { Link, NavLink, Outlet, Params, useMatches, useNavigate, useParams } from "react-router-dom"
 import { AccountFormType } from "~/components/account-form"
 import { Account } from "~/types/account"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resizable"
@@ -162,26 +162,26 @@ export default function Layout() {
         </div>
         <Separator />
 
-        <main className="h-[calc(100vh-52px)] overflow-auto">
+        <div className="h-[calc(100vh-52px)] overflow-auto p-6 space-y-6">
           <Breadcrumb>
             <BreadcrumbItem>
-              <BreadcrumbLink as={Link} className="flex items-center gap-2" href="/">
+              <BreadcrumbLink className="flex items-center gap-2" href="/">
                 <Home className="h-4 w-4" />
                 <span className="inline-block font-bold">Home</span>
               </BreadcrumbLink>
             </BreadcrumbItem>
 
-            {crumbs.map((crumb, index) => (
-              <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink as={Link} href={crumb?.route}>
-                  {crumb?.label}
-                </BreadcrumbLink>
+            {crumbs.map((crumb) => (
+              <BreadcrumbItem key={crumb.label} isCurrentPage={!crumb?.route}>
+                <BreadcrumbLink href={crumb?.route || ""}>{crumb?.label}</BreadcrumbLink>
               </BreadcrumbItem>
             ))}
           </Breadcrumb>
 
-          <Outlet />
-        </main>
+          <main>
+            <Outlet />
+          </main>
+        </div>
       </ResizablePanel>
     </ResizablePanelGroup>
   )
