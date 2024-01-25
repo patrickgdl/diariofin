@@ -52,27 +52,27 @@ export const columns: ColumnDef<Transaction>[] = [
       return <Badge variant="outline">{row.original.transaction_categories?.name}</Badge>
     },
   },
-  {
-    accessorKey: "done",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
-    cell: ({ row }) => {
-      const stts = status.find((account) => account.value === row.getValue("done"))
+  // {
+  //   accessorKey: "done",
+  //   header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
+  //   cell: ({ row }) => {
+  //     const stts = status.find((account) => account.value === row.getValue("done"))
 
-      if (!stts) {
-        return null
-      }
+  //     if (!stts) {
+  //       return null
+  //     }
 
-      return (
-        <div className="flex w-[100px] items-center">
-          {stts.icon && <stts.icon className="mr-2 h-4 w-4 text-muted-foreground" />}
-          <span>{stts.label}</span>
-        </div>
-      )
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
-  },
+  //     return (
+  //       <div className="flex w-[100px] items-center">
+  //         {stts.icon && <stts.icon className="mr-2 h-4 w-4 text-muted-foreground" />}
+  //         <span>{stts.label}</span>
+  //       </div>
+  //     )
+  //   },
+  //   filterFn: (row, id, value) => {
+  //     return value.includes(row.getValue(id))
+  //   },
+  // },
   {
     accessorKey: "account",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Conta" />,

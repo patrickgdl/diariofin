@@ -6,7 +6,6 @@ export const transactionSchema = z.object({
   id: z.string(),
   amount: z.number(),
   description: z.string().nullable(),
-  done: z.boolean().nullable(),
   // date: z.string(),
   clients: z
     .object({
