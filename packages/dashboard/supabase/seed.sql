@@ -39,6 +39,7 @@ INSERT INTO public.address (id, cep, address, number, complement, neighborhood, 
 --
 -- Data for public.category_groups; Schema: public
 --
+INSERT INTO public.category_groups (id, name) VALUES ('492f210b-0def-43e7-9786-393ebf2d6a6a', 'Conta');
 INSERT INTO public.category_groups (id, name) VALUES ('1151ff10-0a2b-498c-b55f-ae4f554d41a4', 'Receita Operacional');
 INSERT INTO public.category_groups (id, name) VALUES ('5011e7e0-9097-4171-a306-5d1d25dee5de', 'Financiamentos');
 
@@ -47,6 +48,7 @@ INSERT INTO public.category_groups (id, name) VALUES ('5011e7e0-9097-4171-a306-5
 --
 -- Data for public.transaction_categories; Schema: public
 --
+INSERT INTO public.transaction_categories (id, name, group_id) VALUES ('c5aee89c-f7ca-430d-ba9e-d9a90ada09d7', 'Criação de Conta', '492f210b-0def-43e7-9786-393ebf2d6a6a');
 INSERT INTO public.transaction_categories (id, name, group_id) VALUES ('3dc3ba14-2243-4003-a03e-fa18331041c0', 'Receitas com Serviços', '1151ff10-0a2b-498c-b55f-ae4f554d41a4');
 INSERT INTO public.transaction_categories (id, name, group_id) VALUES ('83e8b0b5-3d43-4618-9aef-7980022f5603', 'Aporte de Capital', '5011e7e0-9097-4171-a306-5d1d25dee5de');
 
@@ -55,13 +57,31 @@ INSERT INTO public.transaction_categories (id, name, group_id) VALUES ('83e8b0b5
 --
 -- Data for public.transaction_types; Schema: public
 --
-INSERT INTO public.transaction_types (id, name) VALUES ('ee9b7660-332f-4ae3-a6d6-4c630bad2b13', 'INCOME');
-INSERT INTO public.transaction_types (id, name) VALUES ('e18bb7e2-9eac-4fd1-9830-98b3a99173a9', 'EXPENSE');
+INSERT INTO public.transaction_types (id, name) VALUES (1, 'INCOME');
+INSERT INTO public.transaction_types (id, name) VALUES (2, 'EXPENSE');
 
 
 -- Create public.transaction_types values
 --
 -- Data for public.transaction_types; Schema: public
 --
-INSERT INTO transactions (id, amount, description, done, type_id, account_id, category_id, client_id) VALUES ('b7d5044e-e98b-4c1d-b594-1f437b7d2282', 1000, 'Salário', true, 'ee9b7660-332f-4ae3-a6d6-4c630bad2b13', '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
-INSERT INTO transactions (id, amount, description, done, type_id, account_id, category_id, client_id) VALUES ('cfc6efe7-772e-4cc5-bb7d-3c0666a4dd04', -500, 'Pagamento de Fatura', true, 'e18bb7e2-9eac-4fd1-9830-98b3a99173a9', '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
+INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, client_id) VALUES ('b7d5044e-e98b-4c1d-b594-1f437b7d2282', 1000, 'Salário', 1, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
+INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, client_id) VALUES ('cfc6efe7-772e-4cc5-bb7d-3c0666a4dd04', -500, 'Pagamento de Fatura', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
+INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, is_recurring, start_date) VALUES ('1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', 55, 'Netflix', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', true, '2024-01-25 11:30:30');
+INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, is_recurring, start_date, end_date) VALUES ('387d5f46-274b-4ffc-bc53-90c0e43f744a', 120, 'Amazon 1/3', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', true, '2024-01-02 11:30:30', '2024-04-02 11:30:30');
+
+-- Create public.recurring_types values
+--
+-- Data for public.recurring_types; Schema: public
+--
+INSERT INTO public.recurring_types (id, name) VALUES (1, 'Diário');
+INSERT INTO public.recurring_types (id, name) VALUES (2, 'Semanal');
+INSERT INTO public.recurring_types (id, name) VALUES (3, 'Mensal');
+INSERT INTO public.recurring_types (id, name) VALUES (4, 'Anual');
+
+-- Create public.recurring_pattern values
+--
+-- Data for public.recurring_pattern; Schema: public
+--
+INSERT INTO public.recurring_pattern (transaction_id, recurring_type_id, day_of_month) VALUES ('1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', 3, 25);
+INSERT INTO public.recurring_pattern (transaction_id, recurring_type_id, max_num_of_ocurrences, day_of_month) VALUES ('387d5f46-274b-4ffc-bc53-90c0e43f744a', 3, 4, 25);

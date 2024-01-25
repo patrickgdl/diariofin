@@ -5,7 +5,6 @@ export interface Transactions {
   client_id: string | null
   date: string | null
   description: string | null
-  done: boolean | null
   id: string
   type_id: string
 }
