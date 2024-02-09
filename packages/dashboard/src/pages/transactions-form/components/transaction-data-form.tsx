@@ -1,129 +1,153 @@
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "~/ui/form"
-import { Switch } from "~/ui/switch"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
-import { Textarea } from "~/ui/textarea"
+import * as React from "react"
+import { UseFormReturn } from "react-hook-form"
+import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
+import supabase from "~/services/supabase"
+import { Clients } from "~/types/clients"
+import { Badge } from "~/ui/badge"
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/ui/form"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/ui/select"
+import { toast } from "~/ui/use-toast"
 
-import TransactionAmountForm from "./transaction-amount-form"
-import TransactionRecurrenceForm from "./transaction-recurrence-form"
-import formSchema, { ClientFormType } from "../schema/transactions-form-schema"
-import { InputCurrency } from "~/ui/input-currency"
-import { Input } from "~/ui/input"
+import { TransactionFormType } from "../schema/transactions-form-schema"
+import useAppContext from "~/hooks/useAppContext"
+import { CategoryGroups } from "~/types/category-groups"
+import { TransactionCategories } from "~/types/transaction-categories"
 
 type TransactionDataFormProps = {
-  onSubmit: (values: ClientFormType) => void
+  variant: keyof typeof TRANSACTION_TYPE
+  form: UseFormReturn<TransactionFormType, any, undefined>
 }
 
-const TransactionDataForm = ({ onSubmit }: TransactionDataFormProps) => {
-  const form = useForm<ClientFormType>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      amount: 0,
-      description: "",
-      is_supplier: false,
-      email: "",
-      cpf_cnpj: "",
-      phone: "",
-      person_type: "physical",
-    },
-  })
+type Categories = Omit<TransactionCategories, "group_id"> & { category_groups: CategoryGroups | null }
+
+const TransactionDataForm = ({ variant, form }: TransactionDataFormProps) => {
+  const [categories, setCategories] = React.useState<Categories[]>([])
+  const [clientsOrSuppliers, setClientsOrSuppliers] = React.useState<Clients[]>([])
+
+  const { accounts } = useAppContext()
+
+  const isExpense = variant === "EXPENSE"
+
+  const getClientsOrSuppliers = async () => {
+    const { data, error } = await supabase
+      .from("clients")
+      .select("*")
+      .eq(isExpense ? "is_client" : "is_supplier", true)
+
+    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar clientes." })
+
+    setClientsOrSuppliers(data)
+  }
+
+  const getCategories = async () => {
+    const { data, error } = await supabase.from("transaction_categories").select(`id, name, category_groups (id, name)`)
+
+    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar categorias." })
+
+    setCategories(data)
+  }
+
+  React.useEffect(() => {
+    getClientsOrSuppliers()
+    getCategories()
+  }, [])
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} id="account-form">
-        <div className="space-y-6 py-2 pb-4">
-          <div className="flex justify-between items-end w-full space-x-4">
-            <div className="w-2/4">
-              <FormField
-                name="amount"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Valor do recebimento</FormLabel>
-                    <FormControl>
-                      <InputCurrency
-                        id="input-amount"
-                        name="input-amount"
-                        placeholder="R$ 00,00"
-                        defaultValue={field.value}
-                        onCustomChange={field.onChange}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+    <div className="space-y-4 py-2 pb-4">
+      <div className="w-2/4">
+        <FormField
+          control={form.control}
+          name="category_id"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Categoria</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione uma categoria" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {categories?.length > 0
+                    ? categories.map((category) => {
+                        return (
+                          <SelectItem key={category.id} value={category.id} className="justify-between">
+                            <span>{category.name}</span>
+                            <Badge>{category.category_groups?.name}</Badge>
+                          </SelectItem>
+                        )
+                      })
+                    : null}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
 
-            <div className="w-2/4">
-              <FormField
-                control={form.control}
-                name="is_client"
-                render={({ field }) => (
-                  <FormItem className="flex items-center space-y-0 space-x-4">
-                    <FormLabel className="text-base">Já foi recebido?</FormLabel>
-                    <FormControl>
-                      <Switch checked={field.value} onCheckedChange={field.onChange} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-
+      <div className="flex w-full space-x-1">
+        <div className="w-1/4">
           <FormField
-            name="description"
             control={form.control}
+            name="account_id"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Descrição</FormLabel>
-                <FormControl>
-                  <Input placeholder="Breve descrição do recebimento." {...field} />
-                </FormControl>
+                <FormLabel>Conta</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecione uma conta" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {accounts?.length > 0 &&
+                      accounts.map((account) => {
+                        return (
+                          <SelectItem key={account.id} value={account.id}>
+                            {account.name}
+                          </SelectItem>
+                        )
+                      })}
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
           />
-
-          <Tabs defaultValue="data" className="space-y-4">
-            <TabsList>
-              <TabsTrigger value="data">Dados do Lançamento</TabsTrigger>
-              <TabsTrigger value="recurrence">Recorrência</TabsTrigger>
-              <TabsTrigger value="additional">Adicionais</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="data">
-              <TransactionAmountForm form={form} />
-            </TabsContent>
-
-            <TabsContent value="recurrence">
-              <TransactionRecurrenceForm form={form} />
-            </TabsContent>
-
-            <TabsContent value="additional" className="space-y-4">
-              <FormField
-                name="description"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Anotações</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Forneça informações relevantes do cliente nesse campo"
-                        className="resize-none"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </TabsContent>
-          </Tabs>
         </div>
-      </form>
-    </Form>
+
+        <div className="w-1/4">
+          <FormField
+            control={form.control}
+            name="client_id"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Cliente</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecione um cliente" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {clientsOrSuppliers?.length > 0 &&
+                      clientsOrSuppliers.map((client) => {
+                        return (
+                          <SelectItem key={client.id} value={client.id}>
+                            {client.name}
+                          </SelectItem>
+                        )
+                      })}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+      </div>
+    </div>
   )
 }
 
