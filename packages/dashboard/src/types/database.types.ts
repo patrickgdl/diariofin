@@ -214,6 +214,67 @@ export interface Database {
           }
         ]
       }
+      recurring_pattern: {
+        Row: {
+          day_of_month: number | null
+          day_of_week: number | null
+          max_num_of_ocurrences: number | null
+          month_of_year: number | null
+          recurring_type_id: number
+          separation_count: number | null
+          transaction_id: string
+          week_of_month: number | null
+        }
+        Insert: {
+          day_of_month?: number | null
+          day_of_week?: number | null
+          max_num_of_ocurrences?: number | null
+          month_of_year?: number | null
+          recurring_type_id: number
+          separation_count?: number | null
+          transaction_id: string
+          week_of_month?: number | null
+        }
+        Update: {
+          day_of_month?: number | null
+          day_of_week?: number | null
+          max_num_of_ocurrences?: number | null
+          month_of_year?: number | null
+          recurring_type_id?: number
+          separation_count?: number | null
+          transaction_id?: string
+          week_of_month?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recurring_pattern_recurring_type_id_fkey"
+            columns: ["recurring_type_id"]
+            referencedRelation: "recurring_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recurring_pattern_transaction_id_fkey"
+            columns: ["transaction_id"]
+            referencedRelation: "transactions"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      recurring_types: {
+        Row: {
+          id: number
+          name: string
+        }
+        Insert: {
+          id: number
+          name: string
+        }
+        Update: {
+          id?: number
+          name?: string
+        }
+        Relationships: []
+      }
       transaction_categories: {
         Row: {
           group_id: string
@@ -241,15 +302,15 @@ export interface Database {
       }
       transaction_types: {
         Row: {
-          id: string
+          id: number
           name: string
         }
         Insert: {
-          id?: string
+          id: number
           name: string
         }
         Update: {
-          id?: string
+          id?: number
           name?: string
         }
         Relationships: []
@@ -260,33 +321,39 @@ export interface Database {
           amount: number
           category_id: string | null
           client_id: string | null
-          date: string | null
           description: string | null
-          done: boolean | null
+          end_date: string | null
           id: string
-          type_id: string
+          is_recurring: boolean
+          parent_transaction_id: string | null
+          start_date: string | null
+          type_id: number
         }
         Insert: {
           account_id: string
           amount: number
           category_id?: string | null
           client_id?: string | null
-          date?: string | null
           description?: string | null
-          done?: boolean | null
-          id: string
-          type_id: string
+          end_date?: string | null
+          id?: string
+          is_recurring?: boolean
+          parent_transaction_id?: string | null
+          start_date?: string | null
+          type_id: number
         }
         Update: {
           account_id?: string
           amount?: number
           category_id?: string | null
           client_id?: string | null
-          date?: string | null
           description?: string | null
-          done?: boolean | null
+          end_date?: string | null
           id?: string
-          type_id?: string
+          is_recurring?: boolean
+          parent_transaction_id?: string | null
+          start_date?: string | null
+          type_id?: number
         }
         Relationships: [
           {
@@ -308,9 +375,52 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "transactions_parent_id_fkey"
+            columns: ["parent_transaction_id"]
+            referencedRelation: "transactions"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "transactions_type_id_fkey"
             columns: ["type_id"]
             referencedRelation: "transaction_types"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      transactions_instance: {
+        Row: {
+          end_date: string | null
+          id: string
+          is_canceled: boolean
+          is_done: boolean
+          is_rescheduled: boolean
+          start_date: string | null
+          transaction_id: string
+        }
+        Insert: {
+          end_date?: string | null
+          id?: string
+          is_canceled: boolean
+          is_done: boolean
+          is_rescheduled: boolean
+          start_date?: string | null
+          transaction_id: string
+        }
+        Update: {
+          end_date?: string | null
+          id?: string
+          is_canceled?: boolean
+          is_done?: boolean
+          is_rescheduled?: boolean
+          start_date?: string | null
+          transaction_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transactions_instance_transaction_id_fkey"
+            columns: ["transaction_id"]
+            referencedRelation: "transactions"
             referencedColumns: ["id"]
           }
         ]

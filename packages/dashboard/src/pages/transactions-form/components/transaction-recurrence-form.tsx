@@ -1,102 +1,79 @@
+import { useState } from "react"
 import { UseFormReturn } from "react-hook-form"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/ui/form"
 import { Input } from "~/ui/input"
-import { InputMask } from "~/ui/input-mask"
-import { RadioGroup, RadioGroupItem } from "~/ui/radio-group"
-import { cpfCnpjMask } from "~/utils/cpf-cnpj-mask"
-import { phoneMask } from "~/utils/phone-mask"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/ui/select"
+import { Switch } from "~/ui/switch"
 
-import { ClientFormType } from "../schema/transactions-form-schema"
+import { TransactionFormType } from "../schema/transactions-form-schema"
 
 type TransactionRecurrenceFormProps = {
-  form: UseFormReturn<ClientFormType, any, undefined>
+  form: UseFormReturn<TransactionFormType, any, undefined>
 }
 
 const TransactionRecurrenceForm = ({ form }: TransactionRecurrenceFormProps) => {
+  const [hasInstallments, setHasIstallments] = useState(false)
+
   return (
     <div className="space-y-4 py-2 pb-4">
       <FormField
-        name="person_type"
         control={form.control}
+        name="is_recurring"
         render={({ field }) => (
-          <FormItem className="space-y-3">
-            <FormLabel>Tipo de Pessoa</FormLabel>
+          <FormItem className="flex items-center space-y-0 space-x-4">
+            <FormLabel className="text-base">Recorrência/Parcelamento?</FormLabel>
             <FormControl>
-              <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-2 gap-4">
-                <FormItem>
-                  <FormControl>
-                    <RadioGroupItem value="physical" className="peer sr-only" />
-                  </FormControl>
-                  <FormLabel className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-2 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
-                    Pessoa Física
-                  </FormLabel>
-                </FormItem>
-                <FormItem>
-                  <FormControl>
-                    <RadioGroupItem value="legal" className="peer sr-only" />
-                  </FormControl>
-                  <FormLabel className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-2 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
-                    Pessoa Jurídica
-                  </FormLabel>
-                </FormItem>
-              </RadioGroup>
+              <Switch checked={field.value} onCheckedChange={field.onChange} />
             </FormControl>
-            <FormMessage />
           </FormItem>
         )}
       />
 
-      <FormField
-        name="cpf_cnpj"
-        control={form.control}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>CPF/CNPJ</FormLabel>
-            <FormControl>
-              <InputMask
-                maskChar=""
-                defaultValue={field.value}
-                onChange={field.onChange}
-                mask={cpfCnpjMask(field.value || "")}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <div className="flex w-full space-x-1">
-        <div className="w-full">
-          <FormField
-            name="email"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>E-mail</FormLabel>
+      <div className="w-1/4">
+        <FormField
+          control={form.control}
+          name="recurrence.recurring_type_id"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Período</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <Input {...field} />
+                  <SelectTrigger>
+                    <SelectValue placeholder="Mensal/Semanal/etc" />
+                  </SelectTrigger>
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                <SelectContent>
+                  <SelectItem value="m@example.com" className="justify-between">
+                    <span>m@example.com</span>
+                  </SelectItem>
+                  <SelectItem value="m@google.com" className="justify-between">
+                    <span>m@example.com</span>
+                  </SelectItem>
+                  <SelectItem value="m@support.com">m@support.com</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
+
+      <div className="flex w-full space-x-2 items-end">
+        <div className="w-1/4 flex items-center space-y-0 space-x-4">
+          <FormLabel className="text-base">Recorrência/Parcelamento?</FormLabel>
+
+          <Switch checked={hasInstallments} onCheckedChange={() => setHasIstallments(!hasInstallments)} />
         </div>
 
-        <div className="w-full">
+        <div className="w-1/4">
           <FormField
-            name="phone"
+            name="recurrence.max_num_of_ocurrences"
             control={form.control}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Telefone</FormLabel>
+                <FormLabel>Quantidade de Parcelas</FormLabel>
                 <FormControl>
-                  <InputMask
-                    maskChar=""
-                    placeholder="(__) ____-____"
-                    defaultValue={field.value}
-                    onChange={field.onChange}
-                    mask={phoneMask(field.value || "")}
-                  />
+                  <Input placeholder="Núm. de Parcelas" {...field} disabled={!hasInstallments} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

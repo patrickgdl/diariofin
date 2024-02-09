@@ -55,6 +55,7 @@
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
     "cmdk": "^0.2.0",
+    "date-fns": "^3.3.1",
     "i18next": "^21.8.13",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
