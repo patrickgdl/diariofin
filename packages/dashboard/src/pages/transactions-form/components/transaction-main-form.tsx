@@ -6,7 +6,7 @@ import { Button } from "~/ui/button"
 import { Calendar } from "~/ui/calendar"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/ui/form"
 import { Input } from "~/ui/input"
-import { InputCurrency } from "~/ui/input-currency"
+import { InputCurrency } from "~/ui/input-currency-alt"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover"
 import { Switch } from "~/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
@@ -30,12 +30,8 @@ const TransactionMainForm = ({ variant, onSubmit }: TransactionMainFormProps) =>
   const form = useForm<TransactionFormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      amount: 0,
-      description: "",
       is_done: false,
-      category_id: "",
       client_id: "",
-      account_id: "",
     },
   })
 
@@ -51,7 +47,7 @@ const TransactionMainForm = ({ variant, onSubmit }: TransactionMainFormProps) =>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} id="transaction-form">
           <div className="space-y-8 py-2 pb-4">
-            <div className="flex space-x-4 items-end w-full">
+            <div className="flex space-x-4 items-end justify-center w-full">
               <FormField
                 name="amount"
                 control={form.control}
@@ -65,26 +61,27 @@ const TransactionMainForm = ({ variant, onSubmit }: TransactionMainFormProps) =>
                         placeholder="R$ 00,00"
                         defaultValue={field.value}
                         onCustomChange={field.onChange}
+                        autoFocus
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
-              <FormField
-                control={form.control}
-                name="is_done"
-                render={({ field }) => (
-                  <FormItem className="flex items-center space-y-0 space-x-4">
-                    <FormLabel className="text-base">Já foi recebido?</FormLabel>
-                    <FormControl>
-                      <Switch checked={field.value} onCheckedChange={field.onChange} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
             </div>
+
+            <FormField
+              control={form.control}
+              name="is_done"
+              render={({ field }) => (
+                <FormItem className="flex items-center space-y-0 space-x-4">
+                  <FormLabel className="text-base">Já foi recebido?</FormLabel>
+                  <FormControl>
+                    <Switch checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
 
             <div className="flex items-end w-auto">
               <FormField
@@ -121,7 +118,6 @@ const TransactionMainForm = ({ variant, onSubmit }: TransactionMainFormProps) =>
                         </PopoverContent>
                       </Popover>
                     </div>
-
                     <FormMessage />
                   </FormItem>
                 )}
