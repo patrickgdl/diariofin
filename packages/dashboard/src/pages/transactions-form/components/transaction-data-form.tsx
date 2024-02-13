@@ -87,7 +87,7 @@ const TransactionDataForm = ({ variant, form }: TransactionDataFormProps) => {
       </div>
 
       <div className="flex w-full space-x-1">
-        <div className="w-1/4">
+        <div className="w-2/4">
           <FormField
             control={form.control}
             name="account_id"
@@ -117,7 +117,7 @@ const TransactionDataForm = ({ variant, form }: TransactionDataFormProps) => {
           />
         </div>
 
-        <div className="w-1/4">
+        <div className="w-2/4">
           <FormField
             control={form.control}
             name="client_id"
