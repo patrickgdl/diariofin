@@ -69,6 +69,8 @@ npx supabase db reset
 
 ## Recurring Transactions explained
 
+https://vertabelo.com/blog/again-and-again-managing-recurring-events-in-a-data-model/
+
 ##### Daily Recurrence
 
 Do we really need to capture a pattern for a daily recurring transaction? No, because all the details required to generate a daily recurrence pattern are already logged in the transactions table.

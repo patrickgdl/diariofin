@@ -7,7 +7,6 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resiz
 import { Separator } from "~/ui/separator"
 import { cn } from "~/utils/cn"
 import cookies from "js-cookie"
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "~/ui/breadcrumb"
 
 import AccountSwitcher from "./account-switcher"
 import { Nav } from "./nav"
@@ -163,21 +162,6 @@ export default function Layout() {
         <Separator />
 
         <div className="h-[calc(100vh-52px)] overflow-auto p-6 space-y-6">
-          <Breadcrumb>
-            <BreadcrumbItem>
-              <BreadcrumbLink className="flex items-center gap-2" href="/">
-                <Home className="h-4 w-4" />
-                <span className="inline-block font-bold">Home</span>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-
-            {crumbs.map((crumb) => (
-              <BreadcrumbItem key={crumb.label} isCurrentPage={!crumb?.route}>
-                <BreadcrumbLink href={crumb?.route || ""}>{crumb?.label}</BreadcrumbLink>
-              </BreadcrumbItem>
-            ))}
-          </Breadcrumb>
-
           <main>
             <Outlet />
           </main>
