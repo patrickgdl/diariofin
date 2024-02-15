@@ -144,7 +144,6 @@ const TransactionMainForm = ({ variant, onSubmit }: TransactionMainFormProps) =>
               <TabsList>
                 <TabsTrigger value="data">Dados do Lançamento</TabsTrigger>
                 <TabsTrigger value="recurrence">Recorrência</TabsTrigger>
-                <TabsTrigger value="additional">Adicionais</TabsTrigger>
               </TabsList>
 
               <TabsContent value="data">
@@ -153,26 +152,6 @@ const TransactionMainForm = ({ variant, onSubmit }: TransactionMainFormProps) =>
 
               <TabsContent value="recurrence">
                 <TransactionRecurrenceForm form={form} />
-              </TabsContent>
-
-              <TabsContent value="additional" className="space-y-4">
-                <FormField
-                  name="description"
-                  control={form.control}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Anotações</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Forneça informações relevantes do cliente nesse campo"
-                          className="resize-none"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
               </TabsContent>
             </Tabs>
           </div>

@@ -85,3 +85,9 @@ INSERT INTO public.recurring_types (id, name) VALUES (4, 'Anual');
 --
 INSERT INTO public.recurring_pattern (transaction_id, recurring_type_id, day_of_month) VALUES ('1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', 3, 25);
 INSERT INTO public.recurring_pattern (transaction_id, recurring_type_id, max_num_of_ocurrences, day_of_month) VALUES ('387d5f46-274b-4ffc-bc53-90c0e43f744a', 3, 4, 25);
+
+-- Create public.transactions_instance values
+--
+-- Data for public.transactions_instance; Schema: public
+--
+INSERT INTO public.transactions_instance (id, transaction_id, is_done, start_date) VALUES ('f8db0cc6-dbe4-493e-859e-da9c48c14680', '1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', true, '2024-01-25 11:30:30');

@@ -1,11 +1,10 @@
 import * as z from "zod"
 
 export const recurringFormSchema = z.object({
-  recurring_type_id: z.string().optional(),
-  max_num_of_ocurrences: z.string().optional(),
+  recurring_type_id: z.string(),
+  max_num_of_ocurrences: z.string(),
 })
 
-// TODO: CRIAR VALIDACAO PARA CADA CAMPO, HOJE NÃO ESTA SALVANDO POR ALGUM MOTIVO
 export const rootFormSchema = z.object({
   amount: z.number({ required_error: "Valor é obrigatório" }).gt(0, { message: "Valor precisa ser maior que zero" }),
   description: z.string({ required_error: "Descrição é obrigatório" }),
