@@ -1,10 +1,9 @@
-import { useNavigate } from "react-router-dom"
-import { AccountFormType } from "~/components/account-form"
+import * as React from "react"
+import { useParams } from "react-router-dom"
 import AccountSwitcher from "~/components/account-switcher"
 import { CalendarDateRangePicker } from "~/components/date-range-picker"
+import { defaultAccount } from "~/contexts/AppContext"
 import useAppContext from "~/hooks/useAppContext"
-import { useNewAccountMutation } from "~/hooks/useNewAccountMutation"
-import { Account } from "~/types/account"
 import { Card, CardContent, CardHeader, CardTitle } from "~/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 
@@ -12,26 +11,19 @@ import { Consolidated } from "./components/consolidated"
 import { Overview } from "./components/overview"
 
 export default function DashboardPage() {
-  const navigate = useNavigate()
+  const params = useParams()
+  const { accounts, setSelectedAccount } = useAppContext()
 
-  const { selectedAccount, setSelectedAccount, setAccounts, accounts } = useAppContext()
-
-  const { mutateAsync } = useNewAccountMutation()
-
-  const handleNewAccount = async (values: AccountFormType) => {
-    const response = await mutateAsync({ ...values })
-
-    if (response) {
-      setAccounts([...accounts, ...response])
-      setSelectedAccount(response[0])
-      navigate(`/dashboard/${response[0].id}`)
+  React.useEffect(() => {
+    if (params?.accountId) {
+      const selected = accounts.find((account) => account.id === params.accountId)
+      if (selected) {
+        setSelectedAccount(selected)
+      }
+    } else {
+      setSelectedAccount(defaultAccount)
     }
-  }
-
-  const handleSelectNewAccount = (account: Account) => {
-    setSelectedAccount(account)
-    navigate(`/dashboard/${account.id}`)
-  }
+  }, [params])
 
   return (
     <div className="space-y-6">
@@ -40,14 +32,7 @@ export default function DashboardPage() {
         <div className="flex items-center space-x-2">
           <CalendarDateRangePicker />
 
-          {accounts && accounts?.length > 0 && (
-            <AccountSwitcher
-              accounts={accounts}
-              selectedAccount={selectedAccount}
-              onNewAccount={handleNewAccount}
-              onSelectAccount={handleSelectNewAccount}
-            />
-          )}
+          {accounts.length > 1 && <AccountSwitcher accounts={accounts} />}
         </div>
       </div>
 

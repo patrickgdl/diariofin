@@ -36,13 +36,17 @@ export default function TransactionsPage() {
 
         <TabsContent value="income">
           <div className="my-8">
-            <DataTable onNewClick={() => navigate("/transactions/new")} data={income} columns={columns} />
+            <DataTable data={income} columns={columns} onNewClick={() => navigate("/transactions/new?type=INCOME")} />
           </div>
         </TabsContent>
 
         <TabsContent value="expenses">
           <div className="my-8">
-            <DataTable onNewClick={() => navigate("/transactions/new")} data={expenses} columns={columns} />
+            <DataTable
+              data={expenses}
+              columns={columns}
+              onNewClick={() => navigate("/transactions/new?type=EXPENSE")}
+            />
           </div>
         </TabsContent>
       </Tabs>

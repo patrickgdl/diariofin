@@ -1,10 +1,10 @@
 import React, { createContext, useState } from "react"
 import { Account } from "~/types/account"
 
-const defaultAccount: Account = {
+export const defaultAccount: Account = {
   id: "all",
   name: "Contas",
-  status: true,
+  active: true,
   user_id: "",
   account_number: null,
   agency: null,

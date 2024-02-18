@@ -1,5 +1,5 @@
 import { ChevronLeftIcon } from "lucide-react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { useNewRecurringPatternMutation } from "~/hooks/useNewRecurringPatternMutation"
 import { useNewTransactionInstanceMutation } from "~/hooks/useNewTransactionInstanceMutation"
 import { useNewTransactionMutation } from "~/hooks/useNewTransactionMutation"
@@ -10,34 +10,39 @@ import { Separator } from "~/ui/separator"
 
 import TransactionMainForm from "./components/transaction-main-form"
 import { TransactionFormType } from "./schema/transactions-form-schema"
+import { cn } from "~/utils/cn"
 
 export default function TransactionsFormPage() {
   let { id } = useParams()
   const navigate = useNavigate()
 
-  const isAddMode = id === "new"
+  const [searchParams] = useSearchParams()
+  const variant = searchParams.get("type") as "INCOME" | "EXPENSE"
 
+  const isAddMode = id === "new"
+  const isExpense = variant === "EXPENSE"
   const { transaction: transactionToUpdate } = useTransactionById(id)
 
-  const transactionMutation = useNewTransactionMutation()
-  const recurringPatternMutation = useNewRecurringPatternMutation()
-  const transactionInstanceMutation = useNewTransactionInstanceMutation()
-
-  const updateTransactionMutation = useUpdateTransactionMutation()
+  const newTransaction = useNewTransactionMutation()
+  const updateTransaction = useUpdateTransactionMutation()
+  const newRecurringPattern = useNewRecurringPatternMutation()
+  const newTransactionInstance = useNewTransactionInstanceMutation()
 
   async function handleSubmit(values: TransactionFormType) {
+    console.log({ values })
     const { recurring_type_id, max_num_of_ocurrences, is_done, ...transaction } = values
 
     if (isAddMode) {
-      const response = await transactionMutation.mutateAsync({
+      const response = await newTransaction.mutateAsync({
         ...transaction,
+        amount: isExpense ? -transaction.amount : transaction.amount,
         client_id: transaction.client_id ? transaction.client_id : null,
         start_date: transaction.start_date.toISOString(),
         parent_transaction_id: null,
       })
 
       if (is_done && response) {
-        await transactionInstanceMutation.mutateAsync({
+        await newTransactionInstance.mutateAsync({
           is_done: true,
           is_canceled: false,
           is_rescheduled: false,
@@ -48,14 +53,14 @@ export default function TransactionsFormPage() {
       }
 
       if (transaction.is_recurring && recurring_type_id && response) {
-        await recurringPatternMutation.mutateAsync({
+        await newRecurringPattern.mutateAsync({
           recurring_type_id: parseInt(recurring_type_id, 10),
           max_num_of_ocurrences: max_num_of_ocurrences ? parseInt(max_num_of_ocurrences, 10) : null,
           transaction_id: response[0].id,
         })
       }
     } else {
-      await updateTransactionMutation.mutateAsync({
+      await updateTransaction.mutateAsync({
         id: id!,
         transaction: {
           ...transaction,
@@ -76,15 +81,17 @@ export default function TransactionsFormPage() {
         </Button>
 
         <div>
-          <h3 className="text-lg font-medium text-emerald-500">Conta a receber</h3>
-          <p className="text-sm text-muted-foreground">Insira aqui uma conta a receber/entrada de valor.</p>
+          <h3 className={cn("text-lg font-medium", isExpense ? "text-red-500" : "text-emerald-500")}>
+            Conta a {variant === "EXPENSE" ? "pagar" : "receber"}
+          </h3>
+          <p className="text-sm text-muted-foreground">Insira aqui uma transação.</p>
         </div>
       </div>
       <Separator />
 
       <div className="flex flex-col mx-auto max-w-2xl">
         <TransactionMainForm
-          variant="INCOME"
+          variant={variant}
           transactionToUpdate={transactionToUpdate}
           onSubmit={(values) => handleSubmit(values)}
         />
@@ -93,7 +100,7 @@ export default function TransactionsFormPage() {
           <Button variant="outline" onClick={() => navigate(-1)}>
             Voltar
           </Button>
-          <Button type="submit" className="bg-emerald-500" form="transaction-form">
+          <Button type="submit" form="transaction-form" className={isExpense ? "bg-red-500" : "bg-emerald-500"}>
             {isAddMode ? "Salvar" : "Atualizar"}
           </Button>
         </div>
