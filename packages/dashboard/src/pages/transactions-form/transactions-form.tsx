@@ -1,65 +1,71 @@
 import { ChevronLeftIcon } from "lucide-react"
 import { useNavigate, useParams } from "react-router-dom"
-import supabase from "~/services/supabase"
+import { useNewRecurringPatternMutation } from "~/hooks/useNewRecurringPatternMutation"
+import { useNewTransactionInstanceMutation } from "~/hooks/useNewTransactionInstanceMutation"
+import { useNewTransactionMutation } from "~/hooks/useNewTransactionMutation"
+import useTransactionById from "~/hooks/useTransactionByIdQuery"
+import { useUpdateTransactionMutation } from "~/hooks/useUpdateTransactionMutation"
 import { Button } from "~/ui/button"
 import { Separator } from "~/ui/separator"
-import { useToast } from "~/ui/use-toast"
 
 import TransactionMainForm from "./components/transaction-main-form"
 import { TransactionFormType } from "./schema/transactions-form-schema"
 
 export default function TransactionsFormPage() {
   let { id } = useParams()
-  const { toast } = useToast()
   const navigate = useNavigate()
 
+  const isAddMode = id === "new"
+
+  const { transaction: transactionToUpdate } = useTransactionById(id)
+
+  const transactionMutation = useNewTransactionMutation()
+  const recurringPatternMutation = useNewRecurringPatternMutation()
+  const transactionInstanceMutation = useNewTransactionInstanceMutation()
+
+  const updateTransactionMutation = useUpdateTransactionMutation()
+
   async function handleSubmit(values: TransactionFormType) {
-    const { recurrence, is_done, ...transaction } = values
+    const { recurring_type_id, max_num_of_ocurrences, is_done, ...transaction } = values
 
-    const { data, error } = await supabase
-      .from("transactions")
-      .insert({ ...transaction, start_date: transaction.start_date.toISOString() })
-      .select()
-
-    if (error) return toast({ variant: "destructive", description: "Ocorreu um erro." })
-
-    if (data) {
-      toast({ description: "Salvo com sucesso" })
-    }
-
-    if (is_done) {
-      const instanceWithTransactionId = {
-        is_done: true,
-        is_canceled: false,
-        is_rescheduled: false,
-        transaction_id: data[0].id,
+    if (isAddMode) {
+      const response = await transactionMutation.mutateAsync({
+        ...transaction,
+        client_id: transaction.client_id ? transaction.client_id : null,
         start_date: transaction.start_date.toISOString(),
-        end_date: null,
+        parent_transaction_id: null,
+      })
+
+      if (is_done && response) {
+        await transactionInstanceMutation.mutateAsync({
+          is_done: true,
+          is_canceled: false,
+          is_rescheduled: false,
+          transaction_id: response[0].id,
+          start_date: transaction.start_date.toISOString(),
+          end_date: null,
+        })
       }
 
-      const { error } = await supabase
-        .from("transactions_instance")
-        .insert({ ...instanceWithTransactionId })
-        .select()
-
-      if (error) return toast({ variant: "destructive", description: "Ocorreu um erro ao salvar a instância." })
-    }
-
-    if (recurrence) {
-      const recurrenceWithTransactionId = {
-        ...recurrence,
-        recurring_type_id: parseInt(recurrence.recurring_type_id, 10),
-        max_num_of_ocurrences: parseInt(recurrence.max_num_of_ocurrences, 10),
-        transaction_id: data[0].id,
+      if (transaction.is_recurring && recurring_type_id && response) {
+        await recurringPatternMutation.mutateAsync({
+          recurring_type_id: parseInt(recurring_type_id, 10),
+          max_num_of_ocurrences: max_num_of_ocurrences ? parseInt(max_num_of_ocurrences, 10) : null,
+          transaction_id: response[0].id,
+        })
       }
-
-      const { error } = await supabase
-        .from("recurring_pattern")
-        .insert({ ...recurrenceWithTransactionId })
-        .select()
-
-      if (error) return toast({ variant: "destructive", description: "Ocorreu um erro ao salvar a recorrência." })
+    } else {
+      await updateTransactionMutation.mutateAsync({
+        id: id!,
+        transaction: {
+          ...transaction,
+          client_id: transaction.client_id ? transaction.client_id : null,
+          start_date: transaction.start_date.toISOString(),
+        },
+      })
     }
+
+    navigate("/transactions")
   }
 
   return (
@@ -77,14 +83,18 @@ export default function TransactionsFormPage() {
       <Separator />
 
       <div className="flex flex-col mx-auto max-w-2xl">
-        <TransactionMainForm variant="INCOME" onSubmit={console.log} />
+        <TransactionMainForm
+          variant="INCOME"
+          transactionToUpdate={transactionToUpdate}
+          onSubmit={(values) => handleSubmit(values)}
+        />
 
         <div className="space-x-2 flex items-center justify-end">
           <Button variant="outline" onClick={() => navigate(-1)}>
             Voltar
           </Button>
           <Button type="submit" className="bg-emerald-500" form="transaction-form">
-            {id === "new" ? "Salvar" : "Atualizar"}
+            {isAddMode ? "Salvar" : "Atualizar"}
           </Button>
         </div>
       </div>

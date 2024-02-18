@@ -1,38 +1,23 @@
 import * as React from "react"
 import { UseFormReturn } from "react-hook-form"
+import useRecurringTypes from "~/hooks/useRecurringTypesQuery"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/ui/form"
 import { Input } from "~/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/ui/select"
 import { Switch } from "~/ui/switch"
 
 import { TransactionFormType } from "../schema/transactions-form-schema"
-import supabase from "~/services/supabase"
-import { RecurringTypes } from "~/types/recurring-types"
-import { useToast } from "~/ui/use-toast"
 
 type TransactionRecurrenceFormProps = {
   form: UseFormReturn<TransactionFormType, any, undefined>
 }
 
 const TransactionRecurrenceForm = ({ form }: TransactionRecurrenceFormProps) => {
-  const { toast } = useToast()
+  const { recurringTypes } = useRecurringTypes()
 
   const [hasInstallments, setHasIstallments] = React.useState(false)
-  const [recurringTypes, setRecurringTypes] = React.useState<RecurringTypes[]>([])
 
   const isRecurring = form.watch("is_recurring")
-
-  const getRecurrenceTypes = async () => {
-    const { data, error } = await supabase.from("recurring_types").select("*")
-
-    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar categorias." })
-
-    setRecurringTypes(data)
-  }
-
-  React.useEffect(() => {
-    getRecurrenceTypes()
-  }, [])
 
   return (
     <div className="space-y-4 py-2 pb-4">
@@ -55,14 +40,14 @@ const TransactionRecurrenceForm = ({ form }: TransactionRecurrenceFormProps) => 
         <div className="w-2/4">
           <FormField
             control={form.control}
-            name="recurrence.recurring_type_id"
+            name="recurring_type_id"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Período</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isRecurring}>
+                <Select onValueChange={field.onChange} defaultValue={field.value} disabled={!isRecurring}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Recorrência" />
+                      <SelectValue placeholder="Escolha o período" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -85,12 +70,16 @@ const TransactionRecurrenceForm = ({ form }: TransactionRecurrenceFormProps) => 
         <div className="w-2/4 flex flex-col space-y-1">
           <FormLabel className="mt-1 mb-2">Recebimento fixo</FormLabel>
 
-          <Switch checked={!hasInstallments} onCheckedChange={() => setHasIstallments(!hasInstallments)} />
+          <Switch
+            disabled={!isRecurring}
+            checked={!hasInstallments}
+            onCheckedChange={() => setHasIstallments(!hasInstallments)}
+          />
         </div>
 
         <div className="w-2/4">
           <FormField
-            name="recurrence.max_num_of_ocurrences"
+            name="max_num_of_ocurrences"
             control={form.control}
             render={({ field }) => (
               <FormItem>

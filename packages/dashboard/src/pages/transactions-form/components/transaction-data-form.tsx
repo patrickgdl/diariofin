@@ -1,58 +1,26 @@
-import * as React from "react"
 import { UseFormReturn } from "react-hook-form"
+import useAppContext from "~/hooks/useAppContext"
 import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
-import supabase from "~/services/supabase"
+import { CategoryGroups } from "~/types/category-groups"
 import { Clients } from "~/types/clients"
+import { TransactionCategories } from "~/types/transaction-categories"
 import { Badge } from "~/ui/badge"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/ui/select"
 
 import { TransactionFormType } from "../schema/transactions-form-schema"
-import useAppContext from "~/hooks/useAppContext"
-import { CategoryGroups } from "~/types/category-groups"
-import { TransactionCategories } from "~/types/transaction-categories"
-import { useToast } from "~/ui/use-toast"
+
+type Categories = Omit<TransactionCategories, "group_id"> & { category_groups: CategoryGroups | null }
 
 type TransactionDataFormProps = {
   variant: keyof typeof TRANSACTION_TYPE
   form: UseFormReturn<TransactionFormType, any, undefined>
+  categories: Categories[]
+  clientsOrSuppliers: Clients[]
 }
 
-type Categories = Omit<TransactionCategories, "group_id"> & { category_groups: CategoryGroups | null }
-
-const TransactionDataForm = ({ variant, form }: TransactionDataFormProps) => {
-  const { toast } = useToast()
-
-  const [categories, setCategories] = React.useState<Categories[]>([])
-  const [clientsOrSuppliers, setClientsOrSuppliers] = React.useState<Clients[]>([])
-
+const TransactionDataForm = ({ variant, form, categories, clientsOrSuppliers }: TransactionDataFormProps) => {
   const { accounts } = useAppContext()
-
-  const isExpense = variant === "EXPENSE"
-
-  const getClientsOrSuppliers = async () => {
-    const { data, error } = await supabase
-      .from("clients")
-      .select("*")
-      .eq(isExpense ? "is_client" : "is_supplier", true)
-
-    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar clientes." })
-
-    setClientsOrSuppliers(data)
-  }
-
-  const getCategories = async () => {
-    const { data, error } = await supabase.from("transaction_categories").select(`id, name, category_groups (id, name)`)
-
-    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar categorias." })
-
-    setCategories(data)
-  }
-
-  React.useEffect(() => {
-    getClientsOrSuppliers()
-    getCategories()
-  }, [])
 
   return (
     <div className="space-y-4 py-2 pb-4">
@@ -63,7 +31,7 @@ const TransactionDataForm = ({ variant, form }: TransactionDataFormProps) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Categoria</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Selecione uma categoria" />
@@ -96,7 +64,7 @@ const TransactionDataForm = ({ variant, form }: TransactionDataFormProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Conta</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Selecione uma conta" />
@@ -126,7 +94,7 @@ const TransactionDataForm = ({ variant, form }: TransactionDataFormProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Cliente</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select onValueChange={field.onChange} value={field.value ? field.value : undefined}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Selecione um cliente" />

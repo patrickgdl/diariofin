@@ -3,55 +3,35 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 import { columns } from "./components/columns"
 import { DataTable } from "./components/transactions-table"
 import { useNavigate } from "react-router-dom"
-import supabase from "~/services/supabase"
-import { useToast } from "~/ui/use-toast"
-import * as React from "react"
-import { QueryData } from "@supabase/supabase-js"
-
-import { TRANSACTION_QUERY, TRANSACTION_TYPE } from "./constants"
-
-const incomeQuery = supabase.from("transactions").select(TRANSACTION_QUERY).eq("type_id", TRANSACTION_TYPE.INCOME)
-const expensesQuery = supabase.from("transactions").select(TRANSACTION_QUERY).eq("type_id", TRANSACTION_TYPE.EXPENSE)
-
-type IncomeResult = QueryData<typeof incomeQuery>
-type ExpensesResult = QueryData<typeof expensesQuery>
+import useTransactionsQuery from "~/hooks/useTransactionsQuery"
+import { TRANSACTION_TYPE } from "./constants"
 
 export default function TransactionsPage() {
-  const { toast } = useToast()
   const navigate = useNavigate()
 
-  const [income, setIncome] = React.useState<IncomeResult>([])
-  const [expenses, setExpenses] = React.useState<ExpensesResult>([])
+  const { data: expenses } = useTransactionsQuery(TRANSACTION_TYPE.EXPENSE)
+  const { data: income, isLoading, isError } = useTransactionsQuery(TRANSACTION_TYPE.INCOME)
 
-  const getIncome = async () => {
-    const { data, error } = await incomeQuery
-
-    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar entradas." })
-
-    setIncome(data)
+  if (isLoading) {
+    return <div>Loading...</div>
   }
 
-  const getExpenses = async () => {
-    const { data, error } = await expensesQuery
-
-    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar saídas." })
-
-    setExpenses(data)
+  if (isError) {
+    return <div>Error</div>
   }
-
-  React.useEffect(() => {
-    getIncome()
-    getExpenses()
-  }, [])
 
   return (
     <div className="h-full flex-1 flex-col space-y-8 md:flex">
       <h2 className="text-2xl font-bold tracking-tight">Entradas e Saídas</h2>
 
       <Tabs defaultValue="income" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="income">Contas a receber</TabsTrigger>
-          <TabsTrigger value="expenses">Contas a pagar</TabsTrigger>
+        <TabsList className="w-full py-5 px-1">
+          <TabsTrigger className="w-full py-2" value="income">
+            Contas a receber
+          </TabsTrigger>
+          <TabsTrigger className="w-full py-2" value="expenses">
+            Contas a pagar
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="income">

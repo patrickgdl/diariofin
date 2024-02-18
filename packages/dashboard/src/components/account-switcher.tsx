@@ -63,7 +63,7 @@ export default function AccountSwitcher({
             variant="outline"
             aria-expanded={open}
             aria-label="Selecione uma conta"
-            className={cn("w-[200px] justify-between", classNames)}
+            className={cn("w-full justify-between", classNames)}
           >
             <Avatar className="mr-2 h-5 w-5">
               <AvatarImage

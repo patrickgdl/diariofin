@@ -10,7 +10,6 @@ import { InputCurrency } from "~/ui/input-currency-alt"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover"
 import { Switch } from "~/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
-import { Textarea } from "~/ui/textarea"
 import { ToggleGroup, ToggleGroupItem } from "~/ui/toggle-group"
 import { cn } from "~/utils/cn"
 import formatDate from "~/utils/format-date"
@@ -20,17 +19,34 @@ import formSchema, { TransactionFormType } from "../schema/transactions-form-sch
 import TransactionDataForm from "./transaction-data-form"
 import TransactionRecurrenceForm from "./transaction-recurrence-form"
 import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
+import { Transactions } from "~/types/transactions"
+import * as React from "react"
+import { useToast } from "~/ui/use-toast"
+import { TransactionCategories } from "~/types/transaction-categories"
+import { CategoryGroups } from "~/types/category-groups"
+import { Clients } from "~/types/clients"
+import supabase from "~/services/supabase"
 
 type TransactionMainFormProps = {
   variant: keyof typeof TRANSACTION_TYPE
+  transactionToUpdate?: Transactions
   onSubmit: (values: TransactionFormType) => void
 }
 
-const TransactionMainForm = ({ variant, onSubmit }: TransactionMainFormProps) => {
+type Categories = Omit<TransactionCategories, "group_id"> & { category_groups: CategoryGroups | null }
+
+const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: TransactionMainFormProps) => {
+  const { toast } = useToast()
+  const isExpense = variant === "EXPENSE"
+
+  const [categories, setCategories] = React.useState<Categories[]>([])
+  const [clientsOrSuppliers, setClientsOrSuppliers] = React.useState<Clients[]>([])
+
   const form = useForm<TransactionFormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       is_done: false,
+      description: "",
       client_id: "",
     },
   })
@@ -41,6 +57,39 @@ const TransactionMainForm = ({ variant, onSubmit }: TransactionMainFormProps) =>
       form.setValue("start_date", addedDays, { shouldValidate: true })
     }
   }
+
+  const getClientsOrSuppliers = async () => {
+    const { data, error } = await supabase
+      .from("clients")
+      .select("*")
+      .eq(isExpense ? "is_client" : "is_supplier", true)
+
+    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar clientes." })
+
+    setClientsOrSuppliers(data)
+  }
+
+  const getCategories = async () => {
+    const { data, error } = await supabase.from("transaction_categories").select(`id, name, category_groups (id, name)`)
+
+    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar categorias." })
+
+    setCategories(data)
+  }
+
+  React.useEffect(() => {
+    getClientsOrSuppliers()
+    getCategories()
+  }, [])
+
+  React.useEffect(() => {
+    if (transactionToUpdate) {
+      form.reset({
+        ...transactionToUpdate,
+        start_date: transactionToUpdate?.start_date ? new Date(transactionToUpdate.start_date) : new Date(),
+      })
+    }
+  }, [transactionToUpdate])
 
   return (
     <>
@@ -59,7 +108,7 @@ const TransactionMainForm = ({ variant, onSubmit }: TransactionMainFormProps) =>
                         id="input-amount"
                         name="input-amount"
                         placeholder="R$ 00,00"
-                        defaultValue={field.value}
+                        value={field.value}
                         onCustomChange={field.onChange}
                         autoFocus
                       />
@@ -143,11 +192,19 @@ const TransactionMainForm = ({ variant, onSubmit }: TransactionMainFormProps) =>
             <Tabs defaultValue="data" className="space-y-4">
               <TabsList>
                 <TabsTrigger value="data">Dados do Lançamento</TabsTrigger>
-                <TabsTrigger value="recurrence">Recorrência</TabsTrigger>
+
+                <TabsTrigger disabled value="recurrence">
+                  Recorrência (em breve)
+                </TabsTrigger>
               </TabsList>
 
               <TabsContent value="data">
-                <TransactionDataForm variant={variant} form={form} />
+                <TransactionDataForm
+                  form={form}
+                  variant={variant}
+                  categories={categories}
+                  clientsOrSuppliers={clientsOrSuppliers}
+                />
               </TabsContent>
 
               <TabsContent value="recurrence">

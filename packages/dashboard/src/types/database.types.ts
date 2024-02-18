@@ -319,40 +319,40 @@ export interface Database {
         Row: {
           account_id: string
           amount: number
-          category_id: string | null
+          category_id: string
           client_id: string | null
-          description: string | null
+          description: string
           end_date: string | null
           id: string
           is_recurring: boolean
           parent_transaction_id: string | null
-          start_date: string | null
+          start_date: string
           type_id: number
         }
         Insert: {
           account_id: string
           amount: number
-          category_id?: string | null
+          category_id: string
           client_id?: string | null
-          description?: string | null
+          description: string
           end_date?: string | null
           id?: string
           is_recurring?: boolean
           parent_transaction_id?: string | null
-          start_date?: string | null
+          start_date?: string
           type_id: number
         }
         Update: {
           account_id?: string
           amount?: number
-          category_id?: string | null
+          category_id?: string
           client_id?: string | null
-          description?: string | null
+          description?: string
           end_date?: string | null
           id?: string
           is_recurring?: boolean
           parent_transaction_id?: string | null
-          start_date?: string | null
+          start_date?: string
           type_id?: number
         }
         Relationships: [
@@ -375,7 +375,7 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "transactions_parent_id_fkey"
+            foreignKeyName: "transactions_parent_transaction_id_fkey"
             columns: ["parent_transaction_id"]
             referencedRelation: "transactions"
             referencedColumns: ["id"]

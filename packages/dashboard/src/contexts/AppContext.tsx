@@ -3,7 +3,7 @@ import { Account } from "~/types/account"
 
 const defaultAccount: Account = {
   id: "all",
-  name: "Todas as contas",
+  name: "Contas",
   status: true,
   user_id: "",
   account_number: null,
@@ -14,8 +14,6 @@ const defaultAccount: Account = {
 }
 
 interface IAppContext {
-  isMobile: boolean | undefined
-  setIsMobile: React.Dispatch<React.SetStateAction<boolean | undefined>>
   accounts: Account[]
   setAccounts: React.Dispatch<React.SetStateAction<Account[]>>
   selectedAccount: Account
@@ -23,8 +21,6 @@ interface IAppContext {
 }
 
 export const AppContext = createContext<IAppContext>({
-  isMobile: false,
-  setIsMobile: () => {},
   accounts: [],
   setAccounts: () => {},
   selectedAccount: defaultAccount,
@@ -32,13 +28,10 @@ export const AppContext = createContext<IAppContext>({
 })
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined)
   const [accounts, setAccounts] = React.useState<Account[]>([])
   const [selectedAccount, setSelectedAccount] = React.useState<Account>(defaultAccount)
 
   const context = {
-    isMobile,
-    setIsMobile,
     accounts,
     setAccounts,
     selectedAccount,

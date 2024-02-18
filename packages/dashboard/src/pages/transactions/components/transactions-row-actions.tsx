@@ -1,5 +1,7 @@
 import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import { Row } from "@tanstack/react-table"
+import { useNavigate } from "react-router-dom"
+import { TransactionsQuery } from "~/queries/get-transactions"
 import { Button } from "~/ui/button"
 import {
   DropdownMenu,
@@ -10,14 +12,12 @@ import {
   DropdownMenuTrigger,
 } from "~/ui/dropdown-menu"
 
-import { transactionSchema } from "../data/schema"
-
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>
 }
 
-export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
-  const task = transactionSchema.parse(row.original)
+export function DataTableRowActions({ row }: DataTableRowActionsProps<TransactionsQuery[0]>) {
+  const navigate = useNavigate()
 
   return (
     <DropdownMenu>
@@ -28,8 +28,8 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Editar</DropdownMenuItem>
-        <DropdownMenuItem>Favoritar</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => navigate(`/transactions/${row.original.id}`)}>Editar</DropdownMenuItem>
+        <DropdownMenuItem>Estornar/Reverter</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           Deletar

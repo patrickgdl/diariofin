@@ -1,22 +1,19 @@
 import { useNavigate } from "react-router-dom"
 import AccountForm, { AccountFormType } from "~/components/account-form"
-import supabase from "~/services/supabase"
+import { useNewAccountMutation } from "~/hooks/useNewAccountMutation"
 import { Button, buttonVariants } from "~/ui/button"
 import { cn } from "~/utils/cn"
 
-export default function AuthenticationPage() {
+export default function AccountPage() {
   const navigate = useNavigate()
 
+  const mutateAccount = useNewAccountMutation()
+
   async function handleSubmit(values: AccountFormType) {
-    const { data, error } = await supabase
-      .from("account")
-      .insert({ ...values })
-      .select()
+    const response = await mutateAccount.mutateAsync({ ...values })
 
-    if (error) return alert(JSON.stringify(error))
-
-    if (data) {
-      navigate(`/dashboard/${data[0].id}`)
+    if (response) {
+      navigate(`/dashboard/${response[0].id}`)
     }
   }
 

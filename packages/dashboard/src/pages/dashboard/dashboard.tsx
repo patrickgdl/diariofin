@@ -3,33 +3,28 @@ import { AccountFormType } from "~/components/account-form"
 import AccountSwitcher from "~/components/account-switcher"
 import { CalendarDateRangePicker } from "~/components/date-range-picker"
 import useAppContext from "~/hooks/useAppContext"
-import supabase from "~/services/supabase"
+import { useNewAccountMutation } from "~/hooks/useNewAccountMutation"
 import { Account } from "~/types/account"
 import { Card, CardContent, CardHeader, CardTitle } from "~/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
-import { useToast } from "~/ui/use-toast"
 
 import { Consolidated } from "./components/consolidated"
 import { Overview } from "./components/overview"
 
 export default function DashboardPage() {
   const navigate = useNavigate()
-  const { toast } = useToast()
 
   const { selectedAccount, setSelectedAccount, setAccounts, accounts } = useAppContext()
 
+  const { mutateAsync } = useNewAccountMutation()
+
   const handleNewAccount = async (values: AccountFormType) => {
-    const { data, error } = await supabase
-      .from("account")
-      .insert({ ...values })
-      .select()
+    const response = await mutateAsync({ ...values })
 
-    if (error) return toast({ variant: "destructive", description: "Ocorreu um erro." })
-
-    if (data) {
-      setAccounts([...accounts, ...data])
-      setSelectedAccount(data[0])
-      navigate(`/dashboard/${data[0].id}`)
+    if (response) {
+      setAccounts([...accounts, ...response])
+      setSelectedAccount(response[0])
+      navigate(`/dashboard/${response[0].id}`)
     }
   }
 

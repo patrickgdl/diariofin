@@ -7,6 +7,10 @@ export const TRANSACTION_QUERY = `
   id,
   amount,
   description,
+  start_date,
+  transactions_instance (
+    is_done
+  ),
   transaction_types (
     id,
     name
