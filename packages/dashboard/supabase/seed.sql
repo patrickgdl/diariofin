@@ -16,9 +16,9 @@ INSERT INTO auth.identities (id, user_id, identity_data, provider, last_sign_in_
 --
 -- Data for public.account; Schema: public
 --
-INSERT INTO public.account (id, name, balance, status, account_number, agency, pix, pix_type, user_id) VALUES ('589f4b55-4c84-46bd-a31d-5fd8417eebaf', 'C6 Bank', 1000, true, '234527', '0001', '09440091908', 'cpf-cnpj', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
-INSERT INTO public.account (id, name, balance, status, account_number, agency, pix, pix_type, user_id) VALUES ('2c6b5b7a-785e-4ac1-9a4d-24dd2d02aaa4', 'Nubank', 900, true, '12344', '0001', '09295930082', 'cpf-cnpj', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
-INSERT INTO public.account (id, name, balance, status, account_number, agency, pix, pix_type, user_id) VALUES ('ee92d24a-0aa8-4195-9e19-e367c2a8aede', 'Itaú', 700, true, '808080', '0001', 'patrickgdlima@gmail.com', 'email', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.account (id, name, balance, active, account_number, agency, pix, pix_type, user_id) VALUES ('589f4b55-4c84-46bd-a31d-5fd8417eebaf', 'C6 Bank', 1000, true, '234527', '0001', '09440091908', 'cpf-cnpj', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.account (id, name, balance, active, account_number, agency, pix, pix_type, user_id) VALUES ('2c6b5b7a-785e-4ac1-9a4d-24dd2d02aaa4', 'Nubank', 900, true, '12344', '0001', '09295930082', 'cpf-cnpj', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.account (id, name, balance, active, account_number, agency, pix, pix_type, user_id) VALUES ('ee92d24a-0aa8-4195-9e19-e367c2a8aede', 'Itaú', 700, true, '808080', '0001', 'patrickgdlima@gmail.com', 'email', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
 
 
 -- Create public.clients values
@@ -67,8 +67,8 @@ INSERT INTO public.transaction_types (id, name) VALUES (2, 'EXPENSE');
 --
 INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, client_id) VALUES ('b7d5044e-e98b-4c1d-b594-1f437b7d2282', 1000, 'Salário', 1, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
 INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, client_id) VALUES ('cfc6efe7-772e-4cc5-bb7d-3c0666a4dd04', -500, 'Pagamento de Fatura', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
-INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, is_recurring, start_date) VALUES ('1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', 55, 'Netflix', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', true, '2024-01-25 11:30:30');
-INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, is_recurring, start_date, end_date) VALUES ('387d5f46-274b-4ffc-bc53-90c0e43f744a', 120, 'Amazon 1/3', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', true, '2024-01-02 11:30:30', '2024-04-02 11:30:30');
+INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, is_recurring, start_date) VALUES ('1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', -55, 'Netflix', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', true, '2024-01-25 11:30:30');
+INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, is_recurring, start_date, end_date) VALUES ('387d5f46-274b-4ffc-bc53-90c0e43f744a', -120, 'Amazon 1/3', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', true, '2024-01-02 11:30:30', '2024-04-02 11:30:30');
 
 -- Create public.recurring_types values
 --

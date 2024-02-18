@@ -36,16 +36,21 @@ export default function ClientsPage() {
 
   return (
     <div className="flex flex-col">
-      <div className="space-y-4 h-[calc(100vh-80px)] overflow-y-auto">
-        <div className="flex flex-col justify-between space-y-2">
+      <div className="space-y-6 h-[calc(100vh-80px)] overflow-y-auto">
+        <h2 className="text-3xl font-bold tracking-tight">Clientes e Fornecedores</h2>
+
+        <div className="flex flex-col justify-between">
           <Tabs defaultValue="clients" className="space-y-4">
-            <TabsList>
-              <TabsTrigger value="clients">Clientes</TabsTrigger>
-              <TabsTrigger value="suppliers">Fornecedores</TabsTrigger>
+            <TabsList className="w-full py-5 px-1">
+              <TabsTrigger className="w-full py-2" value="clients">
+                Clientes
+              </TabsTrigger>
+              <TabsTrigger className="w-full py-2" value="suppliers">
+                Fornecedores
+              </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="clients" className="space-y-4">
-              <h2 className="text-3xl font-bold tracking-tight">Clientes</h2>
+            <TabsContent value="clients" className="space-y-4 py-4">
               <p className="text-sm text-muted-foreground">
                 Aqui uma lista dos seus clientes. Você pode adicionar, editar e remover clientes.
               </p>
@@ -53,8 +58,7 @@ export default function ClientsPage() {
               <ClientsTable clients={clients} onSubmit={handleSubmit} />
             </TabsContent>
 
-            <TabsContent value="suppliers" className="space-y-4">
-              <h2 className="text-3xl font-bold tracking-tight">Fornecedores</h2>
+            <TabsContent value="suppliers" className="space-y-4 py-4">
               <p className="text-sm text-muted-foreground">
                 Aqui uma lista dos seus fornecedores. Você pode adicionar, editar e remover fornecedores.
               </p>

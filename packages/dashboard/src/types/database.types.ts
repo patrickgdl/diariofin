@@ -37,35 +37,35 @@ export interface Database {
       account: {
         Row: {
           account_number: string | null
+          active: boolean
           agency: string | null
-          balance: number | null
+          balance: number
           id: string
-          name: string | null
+          name: string
           pix: string | null
           pix_type: string | null
-          status: boolean | null
           user_id: string | null
         }
         Insert: {
           account_number?: string | null
+          active?: boolean
           agency?: string | null
-          balance?: number | null
+          balance?: number
           id?: string
-          name?: string | null
+          name: string
           pix?: string | null
           pix_type?: string | null
-          status?: boolean | null
           user_id?: string | null
         }
         Update: {
           account_number?: string | null
+          active?: boolean
           agency?: string | null
-          balance?: number | null
+          balance?: number
           id?: string
-          name?: string | null
+          name?: string
           pix?: string | null
           pix_type?: string | null
-          status?: boolean | null
           user_id?: string | null
         }
         Relationships: [

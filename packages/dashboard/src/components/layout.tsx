@@ -1,20 +1,15 @@
+import cookies from "js-cookie"
 import * as React from "react"
-import { Outlet, useNavigate, useParams } from "react-router-dom"
-import { AccountFormType } from "~/components/account-form"
-import { Account } from "~/types/account"
+import { Outlet } from "react-router-dom"
+import useAccounts from "~/hooks/useAccountsQuery"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resizable"
 import { Separator } from "~/ui/separator"
 import { cn } from "~/utils/cn"
-import cookies from "js-cookie"
+import { LINKS } from "~/utils/constants"
 
 import AccountSwitcher from "./account-switcher"
 import { Nav } from "./nav"
-import useAppContext from "~/hooks/useAppContext"
 import { UserNav } from "./user-nav"
-import { LINKS } from "~/utils/constants"
-import useAccountById from "~/hooks/useAccountByIdQuery"
-import useAccounts from "~/hooks/useAccountsQuery"
-import { useNewAccountMutation } from "~/hooks/useNewAccountMutation"
 
 const layout = JSON.parse(cookies.get("react-resizable-panels:layout") || "")
 const collapsed = Boolean(cookies.get("react-resizable-panels:collapsed"))
@@ -22,30 +17,7 @@ const collapsed = Boolean(cookies.get("react-resizable-panels:collapsed"))
 export default function Layout() {
   const [isCollapsed, setIsCollapsed] = React.useState(collapsed || false)
 
-  const params = useParams()
-  const navigate = useNavigate()
-
-  const { setSelectedAccount, setAccounts } = useAppContext()
-
   const { accounts, isLoading, isError } = useAccounts()
-  const { selectedAccount } = useAccountById(params?.accountId)
-
-  const { mutateAsync } = useNewAccountMutation()
-
-  const handleNewAccount = async (values: AccountFormType) => {
-    const response = await mutateAsync({ ...values })
-
-    if (response) {
-      setAccounts([...accounts, ...response])
-      setSelectedAccount(response[0])
-      navigate(`/dashboard/${response[0].id}`)
-    }
-  }
-
-  const handleSelectNewAccount = (account: Account) => {
-    setSelectedAccount(account)
-    navigate(`/dashboard/${account.id}`)
-  }
 
   return (
     <ResizablePanelGroup
@@ -72,15 +44,8 @@ export default function Layout() {
         className={cn(isCollapsed && "min-w-[50px] transition-all duration-300 ease-in-out")}
       >
         <div className={cn("flex h-[52px] items-center justify-center")}>
-          {selectedAccount && (
-            <AccountSwitcher
-              classNames={"mx-6"}
-              isCollapsed={isCollapsed}
-              accounts={accounts}
-              selectedAccount={selectedAccount}
-              onNewAccount={handleNewAccount}
-              onSelectAccount={handleSelectNewAccount}
-            />
+          {isLoading || isError ? null : (
+            <AccountSwitcher classNames={"mx-6"} accounts={accounts} isCollapsed={isCollapsed} />
           )}
         </div>
         <Separator />

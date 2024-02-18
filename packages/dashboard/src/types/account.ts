@@ -1,11 +1,11 @@
 export interface Account {
   account_number: string | null
   agency: string | null
-  balance: number | null
+  balance: number
   id: string
-  name: string | null
+  name: string
   pix: string | null
   pix_type: string | null
-  status: boolean | null
+  active: boolean
   user_id: string | null
 }

@@ -1,4 +1,4 @@
-import { AccountFormType } from "~/components/account-form"
+import { AccountFormType } from "~/pages/account-form/schema/account-form-schema"
 import { SupabaseClient } from "~/services/supabase"
 
 export async function newAccount(client: SupabaseClient, values: AccountFormType) {

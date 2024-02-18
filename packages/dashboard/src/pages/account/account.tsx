@@ -1,22 +1,8 @@
-import { useNavigate } from "react-router-dom"
-import AccountForm, { AccountFormType } from "~/components/account-form"
-import { useNewAccountMutation } from "~/hooks/useNewAccountMutation"
-import { Button, buttonVariants } from "~/ui/button"
+import AccountForm from "~/pages/account-form"
+import { buttonVariants } from "~/ui/button"
 import { cn } from "~/utils/cn"
 
 export default function AccountPage() {
-  const navigate = useNavigate()
-
-  const mutateAccount = useNewAccountMutation()
-
-  async function handleSubmit(values: AccountFormType) {
-    const response = await mutateAccount.mutateAsync({ ...values })
-
-    if (response) {
-      navigate(`/dashboard/${response[0].id}`)
-    }
-  }
-
   return (
     <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <a
@@ -64,11 +50,7 @@ export default function AccountPage() {
             </p>
           </div>
 
-          <AccountForm onSubmit={handleSubmit} />
-
-          <Button type="submit" form="account-form">
-            Criar
-          </Button>
+          <AccountForm />
 
           <p className="px-8 text-center text-sm text-muted-foreground">
             Ao clicar em criar, você concorda com nossos{" "}

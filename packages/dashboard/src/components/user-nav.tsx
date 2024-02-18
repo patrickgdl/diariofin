@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Avatar, AvatarFallback, AvatarImage } from "~/ui/avatar"
 import { Button } from "~/ui/button"
 import {
@@ -7,7 +8,6 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "~/ui/dropdown-menu"
 
@@ -31,25 +31,21 @@ export function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            Perfil
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+          <DropdownMenuItem asChild>
+            <Link to="/settings/profile">Perfil</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link to="/settings/accounts">Contas</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link to="/settings">Configurações</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            Cobrança
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+            <Link to="/settings/accounts/new">Nova conta</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            Configurações
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>Nova conta</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          Sair
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-        </DropdownMenuItem>
+        <DropdownMenuItem>Sair</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

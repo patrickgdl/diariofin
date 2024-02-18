@@ -42,6 +42,7 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
       is_done: false,
       description: "",
       client_id: "",
+      type_id: isExpense ? TRANSACTION_TYPE.EXPENSE : TRANSACTION_TYPE.INCOME,
     },
   })
 
@@ -78,7 +79,7 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
                         id="input-amount"
                         name="input-amount"
                         placeholder="R$ 00,00"
-                        value={field.value}
+                        defaultValue={field.value}
                         onCustomChange={field.onChange}
                         autoFocus
                       />
@@ -94,7 +95,7 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
               name="is_done"
               render={({ field }) => (
                 <FormItem className="flex items-center space-y-0 space-x-4">
-                  <FormLabel className="text-base">Já foi recebido?</FormLabel>
+                  <FormLabel className="text-base">Já foi {isExpense ? "pago" : "recebido"}?</FormLabel>
                   <FormControl>
                     <Switch checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
@@ -108,7 +109,7 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
                 name="start_date"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Data do Recebimento</FormLabel>
+                    <FormLabel>Data do {isExpense ? "Pagamento" : "Recebimento"}</FormLabel>
 
                     <div className="flex space-x-1">
                       <ToggleGroup variant="outline" type="single" onValueChange={handlePresetDate}>
@@ -151,7 +152,7 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
                   <FormItem>
                     <FormLabel>Descrição</FormLabel>
                     <FormControl>
-                      <Input placeholder="Breve descrição do recebimento." {...field} />
+                      <Input placeholder="Breve descrição da transação..." {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
