@@ -1,13 +1,14 @@
 import { useSessionContext } from "@supabase/auth-helpers-react"
 import { Auth } from "@supabase/auth-ui-react"
-import { ThemeSupa } from "@supabase/auth-ui-shared"
-import React, { useEffect } from "react"
+import * as React from "react"
 import { Navigate } from "react-router-dom"
-import supabase from "~/services/supabase"
+import useSupabase from "~/hooks/useSupabase"
 
 export default function Login() {
   const [role, setRole] = React.useState<"user" | "admin" | null>(null)
   const { session, isLoading: isLoadingUser } = useSessionContext()
+
+  const supabase = useSupabase()
 
   if (!isLoadingUser && session) {
     return <Navigate to={role === "admin" ? "/admin" : "/dashboard"} />

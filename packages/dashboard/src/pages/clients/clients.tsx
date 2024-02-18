@@ -1,16 +1,15 @@
 import { ClientFormType } from "~/components/client-form-schema"
-import useClients from "~/hooks/useClientsQuery"
 import { useNewAddressMutation } from "~/hooks/useNewAddressMutation"
 import { useNewClientMutation } from "~/hooks/useNewClientMutation"
-import useSuppliers from "~/hooks/useSuppliersQuery"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 
 import { ClientsTable } from "./components/clients-table"
 import { SuppliersTable } from "./components/suppliers-table"
+import useClientsByType from "~/hooks/useClientsByTypeQuery"
 
 export default function ClientsPage() {
-  const { suppliers, ...suppliersQuery } = useSuppliers()
-  const { clients, ...clientsQuery } = useClients()
+  const { data: clients, ...clientsQuery } = useClientsByType("CLIENT")
+  const { data: suppliers, ...suppliersQuery } = useClientsByType("SUPPLIER")
 
   const mutateClient = useNewClientMutation()
   const mutateAddress = useNewAddressMutation()
