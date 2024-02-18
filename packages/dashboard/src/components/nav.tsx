@@ -3,6 +3,7 @@ import { ReactNode } from "react"
 import { NavLink } from "react-router-dom"
 import useAppContext from "~/hooks/useAppContext"
 import { buttonVariants } from "~/ui/button"
+import { SparkAreaChart } from "@tremor/react"
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/ui/tooltip"
 import { cn } from "~/utils/cn"
 
@@ -15,6 +16,37 @@ interface NavProps {
     noShortcutNumber?: boolean
   }[]
 }
+
+const chartdata = [
+  {
+    month: "Jan 21",
+    Performance: 4000,
+  },
+  {
+    month: "Feb 21",
+    Performance: 3000,
+  },
+  {
+    month: "Mar 21",
+    Performance: 2000,
+  },
+  {
+    month: "Apr 21",
+    Performance: 2780,
+  },
+  {
+    month: "May 21",
+    Performance: 1890,
+  },
+  {
+    month: "Jun 21",
+    Performance: 2390,
+  },
+  {
+    month: "Jul 21",
+    Performance: 3490,
+  },
+]
 
 export function Nav({ links, isCollapsed }: NavProps) {
   const { accounts } = useAppContext()
@@ -79,19 +111,31 @@ export function Nav({ links, isCollapsed }: NavProps) {
         <hr className="dark:border-muted-foreground my-6" />
 
         <div className="flex flex-col gap-2 text-sm">
-          <span className="px-2 text-xs font-medium leading-relaxed text-gray-600">Contas</span>
+          <span className="px-2 text-sm font-medium leading-relaxed text-gray-600">Contas</span>
 
           <div className="flex flex-col gap-1">
             {accounts.length > 0 &&
               accounts.map((account) => (
-                <NavLink
-                  key={account.id}
-                  to={`/dashboard/${account.id}`}
-                  className="flex items-center justify-between gap-2 rounded-lg p-2 hover:bg-accent hover:text-accent-foreground"
-                >
-                  <span className="inline-flex items-center gap-2 font-medium">{account.name}</span>
+                <NavLink to={`/dashboard/${account.id}`} key={account.id} className="flex justify-between px-4 py-2">
+                  <div className="flex items-center">
+                    <span className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+                      {account.name}
+                    </span>
+                  </div>
 
-                  <ArrowUpRightIcon size={16} />
+                  <div className="flex items-center space-x-2">
+                    <SparkAreaChart
+                      data={chartdata}
+                      categories={["Performance"]}
+                      index={"month"}
+                      colors={["emerald"]}
+                      className="h-8 w-10"
+                    />
+
+                    <div className="flex space-x-2">
+                      <span className="rounded bg-emerald-500 text-xs text-white px-0.5">+1.72%</span>
+                    </div>
+                  </div>
                 </NavLink>
               ))}
           </div>
