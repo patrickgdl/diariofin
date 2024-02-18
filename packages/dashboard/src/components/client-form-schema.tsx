@@ -14,7 +14,7 @@ export const addressFormSchema = z.object({
   ),
   address: z.string(),
   number: z.string(),
-  complement: z.string().optional(),
+  complement: z.string().nullable(),
   neighborhood: z.string(),
   city: z.string(),
   uf: z.string(),

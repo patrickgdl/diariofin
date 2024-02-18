@@ -1,16 +1,14 @@
 import { Cross2Icon } from "@radix-ui/react-icons"
 import { Table } from "@tanstack/react-table"
-import React, { MouseEventHandler } from "react"
+import { MouseEventHandler } from "react"
 import { CalendarDateRangePicker } from "~/components/date-range-picker"
 import useAppContext from "~/hooks/useAppContext"
-import supabase from "~/services/supabase"
 import { Button } from "~/ui/button"
 import { Input } from "~/ui/input"
-import { useToast } from "~/ui/use-toast"
 
 import { DataTableFacetedFilter } from "./transactions-faceted-filter"
 import { DataTableViewOptions } from "./transactions-view-options"
-import { TransactionCategories } from "~/types/transaction-categories"
+import useCategories from "~/hooks/useCategoriesQuery"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -20,22 +18,9 @@ interface DataTableToolbarProps<TData> {
 export function DataTableToolbar<TData>({ table, onNewClick }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
 
-  const [categories, setCategories] = React.useState<TransactionCategories[]>([])
+  const { categories } = useCategories()
 
-  const { toast } = useToast()
   const { accounts } = useAppContext()
-
-  const getCategories = async () => {
-    const { data, error } = await supabase.from("transaction_categories").select("*")
-
-    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar categorias." })
-
-    setCategories(data)
-  }
-
-  React.useEffect(() => {
-    getCategories()
-  }, [])
 
   return (
     <div className="flex items-center justify-between">

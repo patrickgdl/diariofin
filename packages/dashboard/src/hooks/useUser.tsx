@@ -1,6 +1,9 @@
-import { useEffect, useState, createContext, useContext } from "react"
-import { useUser as useSupaUser, useSessionContext, User } from "@supabase/auth-helpers-react"
-import supabase from "~/services/supabase"
+import { User, useSessionContext, useUser as useSupabaseUser } from "@supabase/auth-helpers-react"
+import { createContext, useContext, useEffect, useState } from "react"
+import { getUserById } from "~/queries/get-user-by-id"
+
+import useSupabase from "./useSupabase"
+
 import type { User as UserType } from "~/types/user"
 
 export type UserContextType = {
@@ -20,7 +23,9 @@ export const UserContext = createContext<UserContextType>({
 })
 
 export const UserContextProvider = (props: any) => {
-  const user = useSupaUser()
+  const user = useSupabaseUser()
+  const supabase = useSupabase()
+
   const { session, isLoading: isLoadingUser } = useSessionContext()
   const accessToken = session?.access_token ?? null
 
@@ -28,7 +33,7 @@ export const UserContextProvider = (props: any) => {
   const [subscription, setSubscription] = useState(null)
   const [isLoadingData, setIsloadingData] = useState(false)
 
-  const getUserDetails = () => supabase.from("users").select("*").single()
+  const getUserDetails = (id: string) => supabase.from("users").select("*").eq("id", id).single()
   // const getSubscription = () =>
   //   supabase.from("subscriptions").select("*, prices(*, products(*))").in("status", ["trialing", "active"]).single()
 
@@ -36,13 +41,15 @@ export const UserContextProvider = (props: any) => {
     if (user && !isLoadingData && !userDetails && !subscription) {
       setIsloadingData(true)
       Promise.allSettled([
-        getUserDetails(),
+        getUserDetails(user.id),
         // getSubscription()
       ]).then((results) => {
         const userDetailsPromise = results[0]
+
+        console.log({ userDetailsPromise })
         // const subscriptionPromise = results[1]
 
-        if (userDetailsPromise.status === "fulfilled") setUserDetails(userDetailsPromise.value.data)
+        if (userDetailsPromise.status === "fulfilled") setUserDetails(userDetailsPromise.data.value)
 
         // if (subscriptionPromise.status === "fulfilled") setSubscription(subscriptionPromise.value.data)
 

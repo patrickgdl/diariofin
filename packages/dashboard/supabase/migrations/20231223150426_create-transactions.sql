@@ -1,12 +1,12 @@
 CREATE TABLE public.transactions (
-  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  id uuid DEFAULT gen_random_uuid () PRIMARY KEY,
   amount DECIMAL(10, 2) NOT NULL,
-  description VARCHAR(255),
+  description VARCHAR(255) NOT NULL,
   type_id NUMERIC NOT NULL,
   account_id uuid NOT NULL,
-  category_id uuid NULL,
-  client_id uuid NULL,
-  start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  category_id uuid NOT NULL,
+  client_id uuid DEFAULT NULL,
+  start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   end_date TIMESTAMP DEFAULT NULL,
   is_recurring BOOLEAN NOT NULL DEFAULT FALSE,
   -- This is used when all future instances of a recurring are rescheduled. 

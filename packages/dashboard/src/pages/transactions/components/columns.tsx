@@ -3,13 +3,15 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Badge } from "~/ui/badge"
 import { Checkbox } from "~/ui/checkbox"
 
-import { status } from "../data/data"
-import { Transaction } from "../data/schema"
+import { CheckCircledIcon, CircleIcon } from "@radix-ui/react-icons"
 import { DataTableColumnHeader } from "./transactions-column-header"
 import { DataTableRowActions } from "./transactions-row-actions"
 import formatCurrency from "~/utils/format-currency"
+import formatDate from "~/utils/format-date"
+import { parseISO } from "date-fns"
+import { TransactionsQuery } from "~/queries/get-transactions"
 
-export const columns: ColumnDef<Transaction>[] = [
+export const columns: ColumnDef<TransactionsQuery[0]>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -31,13 +33,13 @@ export const columns: ColumnDef<Transaction>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-  // {
-  //   accessorKey: "date",
-  //   header: ({ column }) => <DataTableColumnHeader column={column} title="Data" />,
-  //   cell: ({ row }) => <div className="w-[80px]">{formatDate(parseISO(row.getValue("date")))}</div>,
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+  {
+    accessorKey: "start_date",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Data" />,
+    cell: ({ row }) => <div className="w-[80px]">{formatDate(parseISO(row.getValue("start_date")))}</div>,
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorKey: "description",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Descrição" />,
@@ -53,19 +55,17 @@ export const columns: ColumnDef<Transaction>[] = [
     },
   },
   // {
-  //   accessorKey: "done",
+  //   accessorKey: "is_done",
   //   header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
   //   cell: ({ row }) => {
-  //     const stts = status.find((account) => account.value === row.getValue("done"))
-
-  //     if (!stts) {
-  //       return null
-  //     }
-
   //     return (
   //       <div className="flex w-[100px] items-center">
-  //         {stts.icon && <stts.icon className="mr-2 h-4 w-4 text-muted-foreground" />}
-  //         <span>{stts.label}</span>
+  //         {row.original.transactions_instance?.is_done ? (
+  //           <CircleIcon className="mr-2 h-4 w-4 text-muted-foreground" />
+  //         ) : (
+  //           <CheckCircledIcon className="mr-2 h-4 w-4 text-muted-foreground" />
+  //         )}
+  //         <span>{row.original.transactions_instance?.is_done ? "Recebido" : "Não recebido"}</span>
   //       </div>
   //     )
   //   },

@@ -1,68 +1,39 @@
-import * as React from "react"
+import { ClientFormType } from "~/components/client-form-schema"
+import useClients from "~/hooks/useClientsQuery"
+import { useNewAddressMutation } from "~/hooks/useNewAddressMutation"
+import { useNewClientMutation } from "~/hooks/useNewClientMutation"
+import useSuppliers from "~/hooks/useSuppliersQuery"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 
 import { ClientsTable } from "./components/clients-table"
 import { SuppliersTable } from "./components/suppliers-table"
-import { useToast } from "~/ui/use-toast"
-import { Clients } from "~/types/clients"
-import { ClientFormType } from "~/components/client-form-schema"
-import supabase from "~/services/supabase"
 
 export default function ClientsPage() {
-  const { toast } = useToast()
+  const { suppliers, ...suppliersQuery } = useSuppliers()
+  const { clients, ...clientsQuery } = useClients()
 
-  const [clients, setClients] = React.useState<Clients[]>([])
-  const [suppliers, setSuppliers] = React.useState<Clients[]>([])
+  const mutateClient = useNewClientMutation()
+  const mutateAddress = useNewAddressMutation()
 
   async function handleSubmit(values: ClientFormType) {
     const { address, ...client } = values
 
-    const { data, error } = await supabase
-      .from("clients")
-      .insert({ ...client })
-      .select()
+    const response = await mutateClient.mutateAsync(client)
 
-    if (error) return toast({ variant: "destructive", description: "Ocorreu um erro." })
+    if (address && response) {
+      const withClientId = { ...address, client_id: response[0].id }
 
-    if (data) {
-      if (data[0].is_client) setClients([...clients, ...data])
-      if (data[0].is_supplier) setSuppliers([...suppliers, ...data])
-
-      toast({ description: "Salvo com sucesso" })
-    }
-
-    if (address) {
-      const withClientId = { ...address, client_id: data[0].id }
-
-      const { error } = await supabase
-        .from("address")
-        .insert({ ...withClientId })
-        .select()
-
-      if (error) return toast({ variant: "destructive", description: "Ocorreu um erro ao salvar o endereço." })
+      await mutateAddress.mutateAsync(withClientId)
     }
   }
 
-  const getClients = async () => {
-    const { data, error } = await supabase.from("clients").select("*").eq("is_client", true)
-
-    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar clientes." })
-
-    setClients(data)
+  if (clientsQuery.isLoading || suppliersQuery.isLoading) {
+    return <div>Loading...</div>
   }
 
-  const getSuppliers = async () => {
-    const { data, error } = await supabase.from("clients").select("*").eq("is_supplier", true)
-
-    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar fornecedores." })
-
-    setSuppliers(data)
+  if (clientsQuery.isError || suppliersQuery.isError) {
+    return <div>Error...</div>
   }
-
-  React.useEffect(() => {
-    getClients()
-    getSuppliers()
-  }, [])
 
   return (
     <div className="flex flex-col">
