@@ -1,7 +1,13 @@
+import { DevTool } from "@hookform/devtools"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { addDays } from "date-fns"
 import { CalendarIcon } from "lucide-react"
+import * as React from "react"
 import { useForm } from "react-hook-form"
+import useCategoriesAndGroups from "~/hooks/useCategoriesAndGroupsQuery"
+import useClientsByType from "~/hooks/useClientsByTypeQuery"
+import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
+import { Transactions } from "~/types/transactions"
 import { Button } from "~/ui/button"
 import { Calendar } from "~/ui/calendar"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/ui/form"
@@ -13,19 +19,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 import { ToggleGroup, ToggleGroupItem } from "~/ui/toggle-group"
 import { cn } from "~/utils/cn"
 import formatDate from "~/utils/format-date"
-import { DevTool } from "@hookform/devtools"
 
 import formSchema, { TransactionFormType } from "../schema/transactions-form-schema"
 import TransactionDataForm from "./transaction-data-form"
 import TransactionRecurrenceForm from "./transaction-recurrence-form"
-import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
-import { Transactions } from "~/types/transactions"
-import * as React from "react"
-import { useToast } from "~/ui/use-toast"
-import { TransactionCategories } from "~/types/transaction-categories"
-import { CategoryGroups } from "~/types/category-groups"
-import { Clients } from "~/types/clients"
-import supabase from "~/services/supabase"
 
 type TransactionMainFormProps = {
   variant: keyof typeof TRANSACTION_TYPE
@@ -33,14 +30,11 @@ type TransactionMainFormProps = {
   onSubmit: (values: TransactionFormType) => void
 }
 
-type Categories = Omit<TransactionCategories, "group_id"> & { category_groups: CategoryGroups | null }
-
 const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: TransactionMainFormProps) => {
-  const { toast } = useToast()
   const isExpense = variant === "EXPENSE"
 
-  const [categories, setCategories] = React.useState<Categories[]>([])
-  const [clientsOrSuppliers, setClientsOrSuppliers] = React.useState<Clients[]>([])
+  const { data: categories } = useCategoriesAndGroups()
+  const { data: clientsOrSuppliers } = useClientsByType(isExpense ? "CLIENT" : "SUPPLIER")
 
   const form = useForm<TransactionFormType>({
     resolver: zodResolver(formSchema),
@@ -57,30 +51,6 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
       form.setValue("start_date", addedDays, { shouldValidate: true })
     }
   }
-
-  const getClientsOrSuppliers = async () => {
-    const { data, error } = await supabase
-      .from("clients")
-      .select("*")
-      .eq(isExpense ? "is_client" : "is_supplier", true)
-
-    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar clientes." })
-
-    setClientsOrSuppliers(data)
-  }
-
-  const getCategories = async () => {
-    const { data, error } = await supabase.from("transaction_categories").select(`id, name, category_groups (id, name)`)
-
-    if (error) return toast({ variant: "destructive", description: "Erro ao requisitar categorias." })
-
-    setCategories(data)
-  }
-
-  React.useEffect(() => {
-    getClientsOrSuppliers()
-    getCategories()
-  }, [])
 
   React.useEffect(() => {
     if (transactionToUpdate) {

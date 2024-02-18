@@ -1,6 +1,6 @@
 import { SupabaseClient } from "~/services/supabase"
 
-export function getClientsByType(supabase: SupabaseClient, type: string) {
+export function getClientsByType(supabase: SupabaseClient, type: "CLIENT" | "SUPPLIER") {
   return supabase
     .from("clients")
     .select("*")

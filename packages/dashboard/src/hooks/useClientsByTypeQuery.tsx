@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 import useSupabase from "./useSupabase"
 import { getClientsByType } from "~/queries/get-clients-by-type"
 
-function useClientsByType(type: string) {
+function useClientsByType(type: "CLIENT" | "SUPPLIER") {
   const supabase = useSupabase()
 
   return useQuery({
