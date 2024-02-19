@@ -1,6 +1,5 @@
 import "./translations"
 
-import { SessionContextProvider } from "@supabase/auth-helpers-react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import i18next from "i18next"
@@ -8,8 +7,8 @@ import React from "react"
 import { I18nextProvider } from "react-i18next"
 
 import { AppProvider } from "./contexts/AppContext"
-import useSupabase from "./hooks/useSupabase"
-import { UserContextProvider } from "./hooks/useUser"
+import { SessionContextProvider } from "./contexts/SessionContext"
+import { UserContextProvider } from "./contexts/UserContext"
 import { TooltipProvider } from "./ui/tooltip"
 
 const queryClient = new QueryClient({
@@ -22,11 +21,9 @@ const queryClient = new QueryClient({
 })
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-  const supabase = useSupabase()
-
   return (
     <QueryClientProvider client={queryClient}>
-      <SessionContextProvider supabaseClient={supabase}>
+      <SessionContextProvider>
         <UserContextProvider>
           <AppProvider>
             <TooltipProvider>

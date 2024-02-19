@@ -8,7 +8,7 @@ export const defaultAccount: Account = {
   user_id: "",
   account_number: null,
   agency: null,
-  balance: null,
+  balance: 0,
   pix: null,
   pix_type: null,
 }

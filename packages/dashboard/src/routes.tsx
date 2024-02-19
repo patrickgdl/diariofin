@@ -1,8 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom"
 
 import AccountForm from "./pages/account-form"
-import Layout from "./components/layout"
-import Account from "./pages/account"
 import Accounts from "./pages/accounts"
 import Appearance from "./pages/appearance"
 import Clients from "./pages/clients"
@@ -14,42 +12,13 @@ import Reports from "./pages/reports"
 import Settings from "./pages/settings"
 import Transactions from "./pages/transactions"
 import TransactionsForm from "./pages/transactions-form"
+import ProtectedRoute from "./components/protected-route"
 
 export const router = createBrowserRouter([
-  { path: "/", element: <Login /> },
+  { path: "/login", element: <Login /> },
   {
-    element: <Layout />,
+    element: <ProtectedRoute />,
     children: [
-      {
-        path: "/account",
-        element: <Account />,
-      },
-      {
-        path: "/settings/",
-        element: <Settings />,
-        children: [
-          {
-            path: "",
-            element: <Navigate to="profile" replace />,
-          },
-          {
-            path: "profile",
-            element: <Profile />,
-          },
-          {
-            path: "accounts",
-            element: <Accounts />,
-          },
-          {
-            path: "accounts/:id",
-            element: <AccountForm />,
-          },
-          {
-            path: "appearance",
-            element: <Appearance />,
-          },
-        ],
-      },
       { path: "/dashboard", element: <Dashboard /> },
       { path: "/dashboard/:accountId", element: <Dashboard /> },
       {
@@ -75,6 +44,32 @@ export const router = createBrowserRouter([
           {
             path: "/transactions/:id",
             element: <TransactionsForm />,
+          },
+        ],
+      },
+      {
+        path: "/settings/",
+        element: <Settings />,
+        children: [
+          {
+            path: "",
+            element: <Navigate to="profile" replace />,
+          },
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+          {
+            path: "accounts",
+            element: <Accounts />,
+          },
+          {
+            path: "accounts/:id",
+            element: <AccountForm />,
+          },
+          {
+            path: "appearance",
+            element: <Appearance />,
           },
         ],
       },

@@ -10,7 +10,7 @@ function useAccounts() {
 
   const { setAccounts } = useAppContext()
 
-  const { data, ...rest } = useQuery({
+  const { data, isLoading, isFetching, ...rest } = useQuery({
     queryKey: ["accounts"],
     queryFn: async () => {
       return getAccounts(client).then((result) => result.data || [])
@@ -24,7 +24,7 @@ function useAccounts() {
     }
   }, [data.length])
 
-  return { accounts: data, ...rest }
+  return { accounts: data, loading: isLoading || isFetching, ...rest }
 }
 
 export default useAccounts

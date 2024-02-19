@@ -1,20 +1,26 @@
-import { Navigate } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom"
+import { useSessionContext } from "~/contexts/SessionContext"
 
-import { useSessionContext } from "@supabase/auth-helpers-react"
+import Layout from "./layout"
+import Loader from "./loader"
 
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { session, isLoading: isLoadingUser } = useSessionContext()
+const ProtectedRoute = () => {
+  const { session, isLoading } = useSessionContext()
 
-  if (!isLoadingUser && !session) {
-    // user is not authenticated
-    return <Navigate to="/" />
+  if (isLoading) {
+    return <Loader />
   }
 
-  if (isLoadingUser) {
-    return <div>Carregando...</div>
+  // user is not authenticated
+  if (!session) {
+    return <Navigate to="/login" />
   }
 
-  return children
+  return (
+    <Layout>
+      <Outlet />
+    </Layout>
+  )
 }
 
 export default ProtectedRoute

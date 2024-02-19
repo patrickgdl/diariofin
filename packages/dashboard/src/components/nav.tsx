@@ -1,11 +1,10 @@
-import { ArrowUpRightIcon } from "lucide-react"
 import { ReactNode } from "react"
 import { NavLink } from "react-router-dom"
-import useAppContext from "~/hooks/useAppContext"
 import { buttonVariants } from "~/ui/button"
 import { SparkAreaChart } from "@tremor/react"
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/ui/tooltip"
 import { cn } from "~/utils/cn"
+import { Account } from "~/types/account"
 
 interface NavProps {
   isCollapsed: boolean
@@ -15,6 +14,7 @@ interface NavProps {
     route: string
     noShortcutNumber?: boolean
   }[]
+  accounts: Array<Account>
 }
 
 const chartdata = [
@@ -48,9 +48,7 @@ const chartdata = [
   },
 ]
 
-export function Nav({ links, isCollapsed }: NavProps) {
-  const { accounts } = useAppContext()
-
+export function Nav({ links, isCollapsed, accounts }: NavProps) {
   return (
     <div data-collapsed={isCollapsed} className="group flex flex-col gap-4 py-4 data-[collapsed=true]:py-4">
       <nav className="grid gap-2 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
@@ -110,12 +108,12 @@ export function Nav({ links, isCollapsed }: NavProps) {
 
         <hr className="dark:border-muted-foreground my-6" />
 
-        <div className="flex flex-col gap-2 text-sm">
-          <span className="px-2 text-sm font-medium leading-relaxed text-gray-600">Contas</span>
+        {accounts?.length > 0 ? (
+          <div className="flex flex-col gap-2 text-sm group-[[data-collapsed=true]]:hidden">
+            <span className="px-2 text-sm font-medium leading-relaxed text-gray-600">Contas</span>
 
-          <div className="flex flex-col gap-1">
-            {accounts.length > 0 &&
-              accounts.map((account) => (
+            <div className="flex flex-col gap-1">
+              {accounts.map((account) => (
                 <NavLink to={`/dashboard/${account.id}`} key={account.id} className="flex justify-between px-4 py-2">
                   <div className="flex items-center">
                     <span className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">
@@ -138,8 +136,9 @@ export function Nav({ links, isCollapsed }: NavProps) {
                   </div>
                 </NavLink>
               ))}
+            </div>
           </div>
-        </div>
+        ) : null}
       </nav>
     </div>
   )
