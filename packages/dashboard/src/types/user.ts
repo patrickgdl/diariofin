@@ -1,10 +1,13 @@
-import { Json } from "./database.types"
-
 export type User = {
-  avatar_url: string | null
-  billing_address: Json | null
-  full_name: string | null
+  created_at: string | null
+  email: string | null
+  email_verified: string | null
   id: string
-  payment_method: Json | null
-  role: string | null
+  image: string | null
+  name: string | null
+  stripe_current_period_end: string | null
+  stripe_customer_id: string | null
+  stripe_price_id: string | null
+  stripe_subscription_id: string | null
+  updated_at: string | null
 }

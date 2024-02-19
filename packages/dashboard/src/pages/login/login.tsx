@@ -1,21 +1,20 @@
-import { useSessionContext } from "@supabase/auth-helpers-react"
 import { Auth } from "@supabase/auth-ui-react"
 import * as React from "react"
 import { Navigate } from "react-router-dom"
+import Loader from "~/components/loader"
+import { useSessionContext } from "~/contexts/SessionContext"
 import useSupabase from "~/hooks/useSupabase"
 
 export default function Login() {
   const [role, setRole] = React.useState<"user" | "admin" | null>(null)
-  const { session, isLoading: isLoadingUser } = useSessionContext()
 
   const supabase = useSupabase()
+  const { session, isLoading: isLoadingUser } = useSessionContext()
 
-  if (!isLoadingUser && session) {
+  if (isLoadingUser) return <Loader />
+
+  if (session) {
     return <Navigate to={role === "admin" ? "/admin" : "/dashboard"} />
-  }
-
-  if (isLoadingUser) {
-    return <div>Carregando...</div>
   }
 
   return (

@@ -14,13 +14,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~
 
 import accountFormSchema, { AccountFormType } from "./schema/account-form-schema"
 
-const AccountForm = () => {
+type AccountFormProps = {
+  isControlledAddMode: boolean
+}
+
+const AccountForm = ({ isControlledAddMode = false }: AccountFormProps) => {
   let { id } = useParams()
   const navigate = useNavigate()
 
   const { accounts, setAccounts } = useAppContext()
 
-  const isAddMode = id === "new"
+  const isAddMode = id === "new" || isControlledAddMode
   const { data: accountToUpdate } = useAccountById(id)
 
   const form = useForm<AccountFormType>({
