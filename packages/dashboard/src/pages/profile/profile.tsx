@@ -1,8 +1,24 @@
-import { Separator } from "~/ui/separator"
+import { useUser } from "~/contexts/UserContext"
+import { useUpdateUserMutation } from "~/hooks/useUpdateUserMutation"
 
-import { ProfileForm } from "./components/profile-form"
+import { ProfileForm, ProfileFormValues } from "./components/profile-form"
+import { Separator } from "~/ui/separator"
+import { toast } from "~/ui/use-toast"
 
 export default function SettingsProfilePage() {
+  const { user } = useUser()
+  const updateUser = useUpdateUserMutation()
+
+  if (!user) return null
+
+  function handleSubmit(data: ProfileFormValues) {
+    if (user?.id) {
+      updateUser.mutate({ id: user.id, user: data })
+
+      toast({ title: "Perfil atualizado com sucesso" })
+    }
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -12,9 +28,7 @@ export default function SettingsProfilePage() {
 
       <Separator />
 
-      {/* <ProfileForm /> */}
-
-      <h3 className="text-lg font-medium">Em breve</h3>
+      <ProfileForm defaultValues={{ name: user.name || "" }} onSubmit={handleSubmit} />
     </div>
   )
 }

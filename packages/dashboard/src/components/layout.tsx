@@ -30,7 +30,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return <ErrorState />
   }
 
-  if (accounts?.length > 1) {
+  if (accounts?.length < 1) {
     return <Account />
   }
 

@@ -204,9 +204,11 @@ const AccountForm = ({ isControlledAddMode = false }: AccountFormProps) => {
           </div>
 
           <div className="flex justify-end space-x-1">
-            <Button variant="outline" onClick={() => navigate(-1)}>
-              Cancelar
-            </Button>
+            {!isControlledAddMode && (
+              <Button variant="outline" onClick={() => navigate(-1)}>
+                Cancelar
+              </Button>
+            )}
 
             <Button type="submit" form="account-form">
               {isAddMode ? "Criar" : "Atualizar"}
