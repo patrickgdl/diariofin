@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom"
 
+import ProtectedRoute from "./components/protected-route"
 import AccountForm from "./pages/account-form"
 import Accounts from "./pages/accounts"
 import Appearance from "./pages/appearance"
@@ -8,14 +9,15 @@ import Dashboard from "./pages/dashboard"
 import Login from "./pages/login"
 import NotFound from "./pages/not-found"
 import Profile from "./pages/profile"
+import Register from "./pages/register"
 import Reports from "./pages/reports"
 import Settings from "./pages/settings"
 import Transactions from "./pages/transactions"
 import TransactionsForm from "./pages/transactions-form"
-import ProtectedRoute from "./components/protected-route"
 
 export const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
+  { path: "/register", element: <Register /> },
   {
     element: <ProtectedRoute />,
     children: [

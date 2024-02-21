@@ -1,14 +1,13 @@
-import { Auth } from "@supabase/auth-ui-react"
+import { PiggyBank } from "lucide-react"
 import * as React from "react"
-import { Navigate } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import Loader from "~/components/loader"
 import { useSessionContext } from "~/contexts/SessionContext"
-import useSupabase from "~/hooks/useSupabase"
+import LoginForm from "./components/login-form"
 
 export default function Login() {
   const [role, setRole] = React.useState<"user" | "admin" | null>(null)
 
-  const supabase = useSupabase()
   const { session, isLoading: isLoadingUser } = useSessionContext()
 
   if (isLoadingUser) return <Loader />
@@ -18,58 +17,20 @@ export default function Login() {
   }
 
   return (
-    <div className="flex items-center justify-center w-screen h-screen">
-      <Auth
-        supabaseClient={supabase}
-        appearance={{
-          className: {
-            anchor: "!text-sm !text-muted-foreground hover:!text-brand !underline !underline-offset-4",
-            button:
-              "!bg-primary !text-sm !text-primary-foreground hover:!bg-primary/90 !rounded-md !h-10 sm:!h-9 sm:!px-3 lg:!h-11 lg:!px-8",
-            container: "",
-            divider: "!bg-input",
-            input:
-              "!h-10 !rounded-md border !border-input !bg-transparent !px-3 !py-2 !text-sm !ring-offset-background file:!border-0 file:!bg-transparent file:!text-sm file:!font-medium placeholder:!text-muted-foreground focus-visible:!outline-none focus-visible:!ring-2 focus-visible:!ring-ring focus-visible:!ring-offset-2 disabled:!cursor-not-allowed disabled:!opacity-50",
-            label: "!mb-2 !text-xs hover:!cursor-pointer",
-            loader: "w-4 h-4 mr-2 animate-spin",
-            message: "!text-xs !text-red-600",
-          },
-        }}
-        providers={["google", "facebook"]}
-        localization={{
-          variables: {
-            sign_in: {
-              email_label: "Seu e-mail",
-              password_label: "Sua senha",
-              email_input_placeholder: "Seu e-mail",
-              password_input_placeholder: "Sua senha",
-              button_label: "Entrar",
-              loading_button_label: "Entrando...",
-              social_provider_text: "Logue com {{provider}}",
-              link_text: "Já tem uma conta? Entre",
-            },
-            forgotten_password: {
-              email_label: "Seu e-mail",
-              password_label: "Sua senha",
-              email_input_placeholder: "Seu e-mail",
-              button_label: "Enviar",
-              loading_button_label: "Enviando...",
-              link_text: "Esqueceu sua senha?",
-              confirmation_text: "Um e-mail foi enviado para você",
-            },
-            sign_up: {
-              email_label: "Seu e-mail",
-              password_label: "Sua senha",
-              email_input_placeholder: "Seu e-mail",
-              password_input_placeholder: "Sua senha",
-              button_label: "Cadastrar",
-              loading_button_label: "Cadastrando...",
-              social_provider_text: "Cadastre-se com {{provider}}",
-              link_text: "Não tem uma conta? Cadastre-se",
-            },
-          },
-        }}
-      />
+    <div className="w-screen h-screen flex items-center justify-center">
+      <div className="relative z-10 h-fit w-full max-w-md overflow-hidden border-y border-gray-200 sm:rounded-2xl sm:border sm:shadow-xl">
+        <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center sm:px-16">
+          <Link to="/">
+            {/* <Logo className="h-10 w-10" /> */}
+            <PiggyBank className="h-10 w-10" />
+          </Link>
+          <h3 className="text-xl font-semibold">Entre</h3>
+          <p className="text-sm text-gray-500">Comece a gerenciar seu negócio agora mesmo</p>
+        </div>
+        <div className="flex flex-col space-y-3 bg-gray-50 px-4 py-8 sm:px-16">
+          <LoginForm />
+        </div>
+      </div>
     </div>
   )
 }

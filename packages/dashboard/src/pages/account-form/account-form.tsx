@@ -15,7 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~
 import accountFormSchema, { AccountFormType } from "./schema/account-form-schema"
 
 type AccountFormProps = {
-  isControlledAddMode: boolean
+  isControlledAddMode?: boolean
 }
 
 const AccountForm = ({ isControlledAddMode = false }: AccountFormProps) => {
