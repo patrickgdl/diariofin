@@ -2,7 +2,7 @@ create table public.account (
     id uuid default gen_random_uuid () not null PRIMARY KEY,
     name text NOT NULL,
     balance numeric DEFAULT 0 NOT NULL,
-    active boolean true,
+    active boolean DEFAULT true,
     account_number text null,
     agency text null,
     pix text null,

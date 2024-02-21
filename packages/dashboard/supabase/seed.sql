@@ -90,4 +90,4 @@ INSERT INTO public.recurring_pattern (transaction_id, recurring_type_id, max_num
 --
 -- Data for public.transactions_instance; Schema: public
 --
-INSERT INTO public.transactions_instance (id, transaction_id, is_done, start_date) VALUES ('f8db0cc6-dbe4-493e-859e-da9c48c14680', '1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', true, '2024-01-25 11:30:30');
+INSERT INTO public.transactions_instance (id, transaction_id, is_done, is_rescheduled, is_canceled, start_date) VALUES ('f8db0cc6-dbe4-493e-859e-da9c48c14680', '1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', true, false, false, '2024-01-25 11:30:30');
