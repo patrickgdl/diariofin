@@ -7,4 +7,5 @@ export interface RecurringPattern {
   separation_count: number | null
   transaction_id: string
   week_of_month: number | null
+  user_id: string
 }

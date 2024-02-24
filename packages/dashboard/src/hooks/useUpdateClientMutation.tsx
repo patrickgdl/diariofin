@@ -1,15 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { updateClient } from "~/queries/update-client"
 import { Clients } from "~/types/clients"
-import { newClient } from "~/queries/new-client"
 
 import useSupabase from "./useSupabase"
 
-export function useNewClientMutation() {
+export function useUpdateClientMutation() {
   const supabase = useSupabase()
   const queryClient = useQueryClient()
 
-  const mutationFn = async (client: Omit<Clients, "id">) => {
-    return newClient(supabase, client).then((result) => result.data)
+  const mutationFn = async ({ id, client }: { id: string; client: Partial<Clients> }) => {
+    return updateClient(supabase, { data: client, id }).then((result) => result.data)
   }
 
   return useMutation({

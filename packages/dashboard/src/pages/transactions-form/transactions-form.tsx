@@ -1,5 +1,6 @@
 import { ChevronLeftIcon } from "lucide-react"
 import { useNavigate, useParams, useSearchParams } from "react-router-dom"
+import { useAuthUser } from "~/contexts/SessionContext"
 import { useNewRecurringPatternMutation } from "~/hooks/useNewRecurringPatternMutation"
 import { useNewTransactionInstanceMutation } from "~/hooks/useNewTransactionInstanceMutation"
 import { useNewTransactionMutation } from "~/hooks/useNewTransactionMutation"
@@ -7,19 +8,22 @@ import useTransactionById from "~/hooks/useTransactionByIdQuery"
 import { useUpdateTransactionMutation } from "~/hooks/useUpdateTransactionMutation"
 import { Button } from "~/ui/button"
 import { Separator } from "~/ui/separator"
+import { cn } from "~/utils/cn"
 
 import TransactionMainForm from "./components/transaction-main-form"
 import { TransactionFormType } from "./schema/transactions-form-schema"
-import { cn } from "~/utils/cn"
+import { toast } from "~/ui/use-toast"
 
 export default function TransactionsFormPage() {
-  let { id } = useParams()
   const navigate = useNavigate()
+  const { id: user_id } = useAuthUser() || {}
+
+  let { id } = useParams()
+  const isAddMode = id === "new"
 
   const [searchParams] = useSearchParams()
   const variant = searchParams.get("type") as "INCOME" | "EXPENSE"
 
-  const isAddMode = id === "new"
   const isExpense = variant === "EXPENSE"
   const { transaction: transactionToUpdate } = useTransactionById(id)
 
@@ -29,48 +33,56 @@ export default function TransactionsFormPage() {
   const newTransactionInstance = useNewTransactionInstanceMutation()
 
   async function handleSubmit(values: TransactionFormType) {
-    console.log({ values })
     const { recurring_type_id, max_num_of_ocurrences, is_done, ...transaction } = values
 
-    if (isAddMode) {
-      const response = await newTransaction.mutateAsync({
-        ...transaction,
-        amount: isExpense ? -transaction.amount : transaction.amount,
-        client_id: transaction.client_id ? transaction.client_id : null,
-        start_date: transaction.start_date.toISOString(),
-        parent_transaction_id: null,
-      })
+    if (!user_id) return
 
-      if (is_done && response) {
-        await newTransactionInstance.mutateAsync({
-          is_done: true,
-          is_canceled: false,
-          is_rescheduled: false,
-          transaction_id: response[0].id,
-          start_date: transaction.start_date.toISOString(),
-          end_date: null,
-        })
-      }
-
-      if (transaction.is_recurring && recurring_type_id && response) {
-        await newRecurringPattern.mutateAsync({
-          recurring_type_id: parseInt(recurring_type_id, 10),
-          max_num_of_ocurrences: max_num_of_ocurrences ? parseInt(max_num_of_ocurrences, 10) : null,
-          transaction_id: response[0].id,
-        })
-      }
-    } else {
-      await updateTransaction.mutateAsync({
-        id: id!,
-        transaction: {
+    try {
+      if (isAddMode) {
+        const response = await newTransaction.mutateAsync({
           ...transaction,
+          user_id,
+          amount: isExpense ? -transaction.amount : transaction.amount,
           client_id: transaction.client_id ? transaction.client_id : null,
           start_date: transaction.start_date.toISOString(),
-        },
-      })
-    }
+          parent_transaction_id: null,
+        })
 
-    navigate("/transactions")
+        if (is_done && response) {
+          await newTransactionInstance.mutateAsync({
+            user_id,
+            is_done: true,
+            is_canceled: false,
+            is_rescheduled: false,
+            transaction_id: response[0].id,
+            start_date: transaction.start_date.toISOString(),
+            end_date: null,
+          })
+        }
+
+        if (transaction.is_recurring && recurring_type_id && response) {
+          await newRecurringPattern.mutateAsync({
+            recurring_type_id: parseInt(recurring_type_id, 10),
+            max_num_of_ocurrences: max_num_of_ocurrences ? parseInt(max_num_of_ocurrences, 10) : null,
+            transaction_id: response[0].id,
+          })
+        }
+      } else {
+        await updateTransaction.mutateAsync({
+          id: id!,
+          transaction: {
+            ...transaction,
+            client_id: transaction.client_id ? transaction.client_id : null,
+            start_date: transaction.start_date.toISOString(),
+          },
+        })
+      }
+
+      toast({ title: `${isExpense ? "Pagamento" : "Recebimento"} criado/atualizado com sucesso` })
+      navigate("/transactions")
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (

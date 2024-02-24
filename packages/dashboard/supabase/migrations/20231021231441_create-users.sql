@@ -20,6 +20,7 @@ create table users (
 alter table users add constraint unique_email unique (email);
 alter table users add constraint unique_stripe_customer_id unique (stripe_customer_id);
 alter table users add constraint unique_stripe_subscription_id unique (stripe_subscription_id);
+
 alter table users enable row level security;
-create policy "Users can view own user data." on users for select using (auth.uid() = id);
-create policy "Users can update own user data." on users for update using (auth.uid() = id);
+create policy "Users can view own user data" on users for select using (auth.uid() = id);
+create policy "Users can update own user data" on users for update using (auth.uid() = id);

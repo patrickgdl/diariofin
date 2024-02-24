@@ -7,5 +7,5 @@ export interface Account {
   pix: string | null
   pix_type: string | null
   active: boolean
-  user_id: string | null
+  user_id: string
 }

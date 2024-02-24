@@ -6,13 +6,13 @@ const accountFormSchema = z.object({
     .max(10, {
       message: "Número da Conta deve conter no máximo 10 caracteres",
     })
-    .optional(),
+    .nullable(),
   agency: z
     .string()
     .max(10, {
       message: "Agência deve conter no máximo 10 caracteres",
     })
-    .optional(),
+    .nullable(),
   balance: z.number({ required_error: "Valor é obrigatório" }).gt(0, { message: "Valor precisa ser maior que zero" }),
   name: z
     .string()
@@ -20,8 +20,8 @@ const accountFormSchema = z.object({
       message: "Nome precisa ser no mínimo 2 caracteres",
     })
     .max(50),
-  pix: z.string().optional(),
-  pix_type: z.string().optional(),
+  pix: z.string().nullable(),
+  pix_type: z.string().nullable(),
 })
 
 export default accountFormSchema

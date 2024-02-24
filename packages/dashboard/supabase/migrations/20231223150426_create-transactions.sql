@@ -9,6 +9,7 @@ CREATE TABLE public.transactions (
   start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   end_date TIMESTAMP DEFAULT NULL,
   is_recurring BOOLEAN NOT NULL DEFAULT FALSE,
+  user_id uuid references auth.users (id) not null,
   -- This is used when all future instances of a recurring are rescheduled. 
   -- Where we create a new transaction with new date and link it with its earlier transaction (the parent transaction) 
   -- With this solution, we can get all past occurrences of an transaction, even when its recurrence pattern has been changed.
@@ -19,3 +20,21 @@ CREATE TABLE public.transactions (
   FOREIGN KEY (client_id) REFERENCES public.clients(id),
   CONSTRAINT transactions_parent_id_fkey FOREIGN KEY (parent_transaction_id) REFERENCES public.transactions(id)
 );
+
+alter table transactions enable row level security;
+
+CREATE POLICY "Users can view own transactions" ON "public"."transactions"
+AS PERMISSIVE FOR SELECT
+TO public
+USING (auth.uid()=user_id);
+
+CREATE POLICY "Users can create own transactions" ON "public"."transactions"
+AS PERMISSIVE FOR INSERT
+TO public
+WITH CHECK (auth.uid()=user_id);
+
+CREATE POLICY "Users can update own transactions" ON "public"."transactions"
+AS PERMISSIVE FOR UPDATE
+TO public
+USING (auth.uid()=user_id)
+WITH CHECK (auth.uid()=user_id);

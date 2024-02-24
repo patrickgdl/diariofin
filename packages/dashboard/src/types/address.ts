@@ -8,4 +8,5 @@ export interface Address {
   number: string
   uf: string
   user_id: string
+  client_id: string
 }

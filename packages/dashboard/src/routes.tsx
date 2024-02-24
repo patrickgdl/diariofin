@@ -4,6 +4,7 @@ import ProtectedRoute from "./components/protected-route"
 import AccountForm from "./pages/account-form"
 import Accounts from "./pages/accounts"
 import Appearance from "./pages/appearance"
+import ClientForm from "./pages/client-form"
 import Clients from "./pages/clients"
 import Dashboard from "./pages/dashboard"
 import Login from "./pages/login"
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "/clients/:id",
-            element: <TransactionsForm />,
+            element: <ClientForm />,
           },
         ],
       },

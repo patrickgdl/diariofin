@@ -12,20 +12,10 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 import * as React from "react"
-import ClientForm from "~/components/client-form"
-import { ClientFormType } from "~/components/client-form-schema"
+import { useNavigate } from "react-router-dom"
 import { Clients } from "~/types/clients"
 import { Button } from "~/ui/button"
 import { Checkbox } from "~/ui/checkbox"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "~/ui/dialog"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -42,21 +32,15 @@ const columnHelper = createColumnHelper<Clients>()
 
 type ClientsTableProps = {
   clients: Clients[]
-  onSubmit: (values: ClientFormType) => void
 }
 
-export function ClientsTable({ clients, onSubmit }: ClientsTableProps) {
+export function ClientsTable({ clients }: ClientsTableProps) {
+  const navigate = useNavigate()
+
   const [rowSelection, setRowSelection] = React.useState({})
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
-
-  const [showNewClientDialog, setShowNewClientDialog] = React.useState(false)
-
-  const handleSubmit = async (values: ClientFormType) => {
-    setShowNewClientDialog(false)
-    onSubmit(values)
-  }
 
   const columns = React.useMemo(
     () => [
@@ -121,7 +105,7 @@ export function ClientsTable({ clients, onSubmit }: ClientsTableProps) {
                   Copiar nome
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => setShowNewClientDialog(true)}>Editar</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate(`/clients/${client.id}`)}>Editar</DropdownMenuItem>
                 <DropdownMenuItem>Excluir</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -187,29 +171,9 @@ export function ClientsTable({ clients, onSubmit }: ClientsTableProps) {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Dialog open={showNewClientDialog} onOpenChange={setShowNewClientDialog}>
-          <DialogTrigger asChild>
-            <Button className="ml-2">Novo cliente</Button>
-          </DialogTrigger>
-
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Criar cliente</DialogTitle>
-              <DialogDescription>Adicione um cliente para gerenciar.</DialogDescription>
-            </DialogHeader>
-            {showNewClientDialog && <ClientForm isSupplier={false} onSubmit={handleSubmit} />}
-
-            <DialogFooter>
-              <Button variant="outline" onClick={() => setShowNewClientDialog(false)}>
-                Cancelar
-              </Button>
-
-              <Button type="submit" form="account-form">
-                Criar
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        <Button className="ml-2" onClick={() => navigate("/clients/new?type=CLIENT")}>
+          Novo cliente
+        </Button>
       </div>
 
       <div className="rounded-md border">

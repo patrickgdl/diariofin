@@ -1,37 +1,21 @@
-import { ClientFormType } from "~/components/client-form-schema"
-import { useNewAddressMutation } from "~/hooks/useNewAddressMutation"
-import { useNewClientMutation } from "~/hooks/useNewClientMutation"
+import ErrorState from "~/components/error-state"
+import Loader from "~/components/loader"
+import useClientsByType from "~/hooks/useClientsByTypeQuery"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 
 import { ClientsTable } from "./components/clients-table"
 import { SuppliersTable } from "./components/suppliers-table"
-import useClientsByType from "~/hooks/useClientsByTypeQuery"
 
 export default function ClientsPage() {
   const { data: clients, ...clientsQuery } = useClientsByType("CLIENT")
   const { data: suppliers, ...suppliersQuery } = useClientsByType("SUPPLIER")
 
-  const mutateClient = useNewClientMutation()
-  const mutateAddress = useNewAddressMutation()
-
-  async function handleSubmit(values: ClientFormType) {
-    const { address, ...client } = values
-
-    const response = await mutateClient.mutateAsync(client)
-
-    if (address && response) {
-      const withClientId = { ...address, client_id: response[0].id }
-
-      await mutateAddress.mutateAsync(withClientId)
-    }
-  }
-
   if (clientsQuery.isLoading || suppliersQuery.isLoading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   if (clientsQuery.isError || suppliersQuery.isError) {
-    return <div>Error...</div>
+    return <ErrorState />
   }
 
   return (
@@ -55,7 +39,7 @@ export default function ClientsPage() {
                 Aqui uma lista dos seus clientes. Você pode adicionar, editar e remover clientes.
               </p>
 
-              <ClientsTable clients={clients} onSubmit={handleSubmit} />
+              <ClientsTable clients={clients} />
             </TabsContent>
 
             <TabsContent value="suppliers" className="space-y-4 py-4">
@@ -63,7 +47,7 @@ export default function ClientsPage() {
                 Aqui uma lista dos seus fornecedores. Você pode adicionar, editar e remover fornecedores.
               </p>
 
-              <SuppliersTable suppliers={suppliers} onSubmit={handleSubmit} />
+              <SuppliersTable suppliers={suppliers} />
             </TabsContent>
           </Tabs>
         </div>

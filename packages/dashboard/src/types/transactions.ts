@@ -10,4 +10,5 @@ export interface Transactions {
   end_date: string | null
   is_recurring: boolean
   parent_transaction_id: string | null
+  user_id: string
 }

@@ -6,4 +6,5 @@ export interface TransactionsInstance {
   is_rescheduled: boolean
   start_date: string | null
   transaction_id: string
+  user_id: string
 }

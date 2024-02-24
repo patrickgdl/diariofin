@@ -15,6 +15,25 @@ CREATE TABLE public.recurring_pattern (
   day_of_month NUMERIC,
   -- This if for Yearly recurrence
   month_of_year NUMERIC,
+  user_id uuid references auth.users (id) not null,
   FOREIGN KEY (transaction_id) REFERENCES public.transactions(id),
   FOREIGN KEY (recurring_type_id) REFERENCES public.recurring_types(id)
 );
+
+alter table recurring_pattern enable row level security;
+
+CREATE POLICY "Users can view own client recurring_pattern" ON "public"."recurring_pattern"
+AS PERMISSIVE FOR SELECT
+TO public
+USING (auth.uid()=user_id);
+
+CREATE POLICY "Users can create own recurring_pattern" ON "public"."recurring_pattern"
+AS PERMISSIVE FOR INSERT
+TO public
+WITH CHECK (auth.uid()=user_id);
+
+CREATE POLICY "Users can update own client recurring_pattern" ON "public"."recurring_pattern"
+AS PERMISSIVE FOR UPDATE
+TO public
+USING (auth.uid()=user_id)
+WITH CHECK (auth.uid()=user_id);

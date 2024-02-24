@@ -3,7 +3,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/ui/f
 import { Input } from "~/ui/input"
 import { InputMask } from "~/ui/input-mask"
 
-import { ClientFormType } from "./client-form-schema"
+import { ClientFormType } from "./schema/client-form-schema"
 
 type AddressFormProps = {
   form: UseFormReturn<ClientFormType, any, undefined>
@@ -71,7 +71,7 @@ const AddressForm = ({ form }: AddressFormProps) => {
               <FormItem>
                 <FormLabel>Complemento</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input {...field} value={field.value || ""} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

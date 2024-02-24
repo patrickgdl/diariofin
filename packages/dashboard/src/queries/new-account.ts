@@ -1,7 +1,7 @@
-import { AccountFormType } from "~/pages/account-form/schema/account-form-schema"
+import { Account } from "~/types/account"
 import { SupabaseClient } from "~/services/supabase"
 
-export async function newAccount(client: SupabaseClient, values: AccountFormType) {
+export async function newAccount(client: SupabaseClient, values: Omit<Account, "id">) {
   return client
     .from("account")
     .insert({ ...values })

@@ -20,7 +20,8 @@ BEGIN
                 category_id,
                 client_id,
                 is_recurring,
-                start_date
+                start_date,
+                user_id
             )
             VALUES (
                 new_transaction_id,
@@ -31,7 +32,8 @@ BEGIN
                 'c5aee89c-f7ca-430d-ba9e-d9a90ada09d7',
                 null,
                 false,
-                CURRENT_TIMESTAMP
+                CURRENT_TIMESTAMP,
+                NEW.user_id
             );
 
             -- Create the transactions_instance as done
@@ -40,14 +42,16 @@ BEGIN
                 is_rescheduled,
                 is_canceled,
                 is_done,
-                start_date
+                start_date,
+                user_id,
             )
             VALUES (
                 new_transaction_id,
                 false,
                 false,
                 true,
-                CURRENT_TIMESTAMP
+                CURRENT_TIMESTAMP,
+                NEW.user_id
             );
 
         EXCEPTION

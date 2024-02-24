@@ -27,7 +27,7 @@ export const rootFormSchema = z.object({
       message: "Nome precisa ser no mínimo 2 caracteres",
     })
     .max(120),
-  description: z.string().optional(),
+  description: z.string().nullable(),
   is_supplier: z.boolean().default(false),
   is_client: z.boolean().default(true),
   address: addressFormSchema.optional(),
@@ -38,6 +38,7 @@ export const clientDataFormSchema = z.object({
     .enum(["physical", "legal"], {
       required_error: "Você precisa selecionar um tipo de pessoa.",
     })
+    .or(z.string())
     .default("physical"),
   cpf_cnpj: z
     .string()
@@ -45,17 +46,15 @@ export const clientDataFormSchema = z.object({
       (val) => isValidCPF(val) || isValidCNPJ(val),
       (val) => ({ message: `${val} não é um CPF ou CNPJ válido.` })
     )
-    .optional()
-    .or(z.literal("")),
-  email: z.string().email("E-mail inválido").optional().or(z.literal("")),
+    .nullable(),
+  email: z.string().email("E-mail inválido").nullable(),
   phone: z
     .string()
     .refine(
       (val) => isValidMobilePhone(val) || isValidLandlinePhone(val),
       (val) => ({ message: `${val} não é um telefone válido.` })
     )
-    .optional()
-    .or(z.literal("")),
+    .nullable(),
 })
 
 const withClientFormSchema = rootFormSchema.merge(clientDataFormSchema)

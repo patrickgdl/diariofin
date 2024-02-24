@@ -13,6 +13,8 @@ import { InputCurrency } from "~/ui/input-currency-alt"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/ui/select"
 
 import accountFormSchema, { AccountFormType } from "./schema/account-form-schema"
+import { useUser } from "~/contexts/UserContext"
+import { useAuthUser } from "~/contexts/SessionContext"
 
 type AccountFormProps = {
   isControlledAddMode?: boolean
@@ -22,6 +24,7 @@ const AccountForm = ({ isControlledAddMode = false }: AccountFormProps) => {
   let { id } = useParams()
   const navigate = useNavigate()
 
+  const { id: user_id } = useAuthUser() || {}
   const { accounts, setAccounts } = useAppContext()
 
   const isAddMode = id === "new" || isControlledAddMode
@@ -41,16 +44,21 @@ const AccountForm = ({ isControlledAddMode = false }: AccountFormProps) => {
   const newAccount = useNewAccountMutation()
   const updateAccount = useUpdateAccountMutation()
 
-  const handleNewAccount = async (values: AccountFormType) => {
+  const handleSubmit = async (values: AccountFormType) => {
+    if (!user_id) return
+
     if (isAddMode) {
-      newAccount.mutate(values, {
-        onSuccess: (response) => {
-          if (response) {
-            setAccounts([...accounts, ...response])
-            navigate(`/dashboard/${response[0].id}`)
-          }
-        },
-      })
+      newAccount.mutate(
+        { ...values, active: true, user_id },
+        {
+          onSuccess: (response) => {
+            if (response) {
+              setAccounts([...accounts, ...response])
+              navigate(`/dashboard/${response[0].id}`)
+            }
+          },
+        }
+      )
     } else {
       updateAccount.mutate({
         id: id!,
@@ -75,7 +83,7 @@ const AccountForm = ({ isControlledAddMode = false }: AccountFormProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleNewAccount)} id="account-form">
+      <form onSubmit={form.handleSubmit(handleSubmit)} id="account-form">
         <div className="space-y-4 py-2 pb-4">
           <div className="space-y-2">
             <FormField
@@ -126,7 +134,7 @@ const AccountForm = ({ isControlledAddMode = false }: AccountFormProps) => {
                   <FormItem>
                     <FormLabel>Número da Conta</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} value={field.value ? field.value : undefined} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -142,7 +150,7 @@ const AccountForm = ({ isControlledAddMode = false }: AccountFormProps) => {
                   <FormItem>
                     <FormLabel>Agência</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} value={field.value ? field.value : undefined} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -159,7 +167,7 @@ const AccountForm = ({ isControlledAddMode = false }: AccountFormProps) => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel htmlFor="pix-type">Tipo da Chave Pix</FormLabel>
-                    <Select onValueChange={field.onChange} value={field.value}>
+                    <Select onValueChange={field.onChange} value={field.value ? field.value : undefined}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Selecione um tipo" />
@@ -194,7 +202,7 @@ const AccountForm = ({ isControlledAddMode = false }: AccountFormProps) => {
                   <FormItem>
                     <FormLabel>Chave Pix</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} value={field.value ? field.value : undefined} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
