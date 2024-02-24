@@ -12,20 +12,11 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 import * as React from "react"
-import ClientForm from "~/components/client-form"
-import { ClientFormType } from "~/components/client-form-schema"
+import { useNavigate } from "react-router-dom"
 import { Clients } from "~/types/clients"
 import { Button } from "~/ui/button"
 import { Checkbox } from "~/ui/checkbox"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "~/ui/dialog"
+
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -39,91 +30,92 @@ import { Input } from "~/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/ui/table"
 
 const columnHelper = createColumnHelper<Clients>()
-const columns = [
-  columnHelper.display({
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={table.getIsAllPageRowsSelected()}
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Selecionar tudo"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Selecionar linha"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  }),
-  columnHelper.accessor("name", {
-    header: "Nome",
-    cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
-  }),
-  columnHelper.accessor("email", {
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Email
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
-  }),
-  columnHelper.accessor("phone", {
-    header: "Telefone",
-    cell: ({ row }) => row.getValue("phone"),
-  }),
-  columnHelper.accessor("cpf_cnpj", {
-    header: "CPF/CNPJ",
-    cell: ({ row }) => row.getValue("cpf_cnpj"),
-  }),
-  columnHelper.display({
-    id: "actions",
-    cell: ({ row }) => {
-      const client = row.original
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Abrir opções</span>
-              <DotsHorizontalIcon className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Editar</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(client.name)}>Copiar nome</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Excluir</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    },
-    enableHiding: false,
-  }),
-]
 
 type SuppliersTableProps = {
   suppliers: Clients[]
-  onSubmit: (values: ClientFormType) => void
 }
 
-export function SuppliersTable({ suppliers, onSubmit }: SuppliersTableProps) {
+export function SuppliersTable({ suppliers }: SuppliersTableProps) {
+  const navigate = useNavigate()
+
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
-  const [showNewClientDialog, setShowNewClientDialog] = React.useState(false)
 
-  function handleSubmit(values: ClientFormType) {
-    setShowNewClientDialog(false)
-    onSubmit(values)
-  }
+  const columns = React.useMemo(
+    () => [
+      columnHelper.display({
+        id: "select",
+        header: ({ table }) => (
+          <Checkbox
+            checked={table.getIsAllPageRowsSelected()}
+            onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+            aria-label="Selecionar tudo"
+          />
+        ),
+        cell: ({ row }) => (
+          <Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={(value) => row.toggleSelected(!!value)}
+            aria-label="Selecionar linha"
+          />
+        ),
+        enableSorting: false,
+        enableHiding: false,
+      }),
+      columnHelper.accessor("name", {
+        header: "Nome",
+        cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
+      }),
+      columnHelper.accessor("email", {
+        header: ({ column }) => {
+          return (
+            <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+              Email
+              <CaretSortIcon className="ml-2 h-4 w-4" />
+            </Button>
+          )
+        },
+        cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+      }),
+      columnHelper.accessor("phone", {
+        header: "Telefone",
+        cell: ({ row }) => row.getValue("phone"),
+      }),
+      columnHelper.accessor("cpf_cnpj", {
+        header: "CPF/CNPJ",
+        cell: ({ row }) => row.getValue("cpf_cnpj"),
+      }),
+      columnHelper.display({
+        id: "actions",
+        cell: ({ row }) => {
+          const client = row.original
+
+          return (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <span className="sr-only">Abrir opções</span>
+                  <DotsHorizontalIcon className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel onClick={() => navigate(`/clients/${client.id}`)}>Editar</DropdownMenuLabel>
+                <DropdownMenuItem onClick={() => navigator.clipboard.writeText(client.name)}>
+                  Copiar nome
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Excluir</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )
+        },
+        enableHiding: false,
+      }),
+    ],
+    []
+  )
 
   const table = useReactTable({
     data: suppliers,
@@ -179,30 +171,9 @@ export function SuppliersTable({ suppliers, onSubmit }: SuppliersTableProps) {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Dialog open={showNewClientDialog} onOpenChange={setShowNewClientDialog}>
-          <DialogTrigger asChild>
-            <Button className="ml-2">Novo fornecedor</Button>
-          </DialogTrigger>
-
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Criar fornecedor</DialogTitle>
-              <DialogDescription>Adicione um fornecedor para gerenciar.</DialogDescription>
-            </DialogHeader>
-
-            {showNewClientDialog && <ClientForm isSupplier onSubmit={handleSubmit} />}
-
-            <DialogFooter>
-              <Button variant="outline" onClick={() => setShowNewClientDialog(false)}>
-                Cancelar
-              </Button>
-
-              <Button type="submit" form="account-form">
-                Criar
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        <Button className="ml-2" onClick={() => navigate("/clients/new?type=SUPPLIER")}>
+          Novo fornecedor
+        </Button>
       </div>
 
       <div className="rounded-md border">

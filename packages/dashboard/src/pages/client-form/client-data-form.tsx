@@ -6,7 +6,7 @@ import { RadioGroup, RadioGroupItem } from "~/ui/radio-group"
 import { cpfCnpjMask } from "~/utils/cpf-cnpj-mask"
 import { phoneMask } from "~/utils/phone-mask"
 
-import { ClientFormType } from "./client-form-schema"
+import { ClientFormType } from "./schema/client-form-schema"
 
 type ClientDataFormProps = {
   form: UseFormReturn<ClientFormType, any, undefined>
@@ -55,7 +55,7 @@ const ClientDataForm = ({ form }: ClientDataFormProps) => {
             <FormControl>
               <InputMask
                 maskChar=""
-                defaultValue={field.value}
+                defaultValue={field.value || ""}
                 onChange={field.onChange}
                 mask={cpfCnpjMask(field.value || "")}
               />
@@ -74,7 +74,7 @@ const ClientDataForm = ({ form }: ClientDataFormProps) => {
               <FormItem>
                 <FormLabel>E-mail</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input {...field} value={field.value || ""} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -93,7 +93,7 @@ const ClientDataForm = ({ form }: ClientDataFormProps) => {
                   <InputMask
                     maskChar=""
                     placeholder="(__) ____-____"
-                    defaultValue={field.value}
+                    defaultValue={field.value || ""}
                     onChange={field.onChange}
                     mask={phoneMask(field.value || "")}
                   />

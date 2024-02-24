@@ -8,4 +8,5 @@ export type Clients = {
   name: string
   person_type: string
   phone: string | null
+  user_id: string
 }

@@ -44,7 +44,7 @@ export interface Database {
           name: string
           pix: string | null
           pix_type: string | null
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           account_number?: string | null
@@ -55,7 +55,7 @@ export interface Database {
           name: string
           pix?: string | null
           pix_type?: string | null
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           account_number?: string | null
@@ -66,7 +66,7 @@ export interface Database {
           name?: string
           pix?: string | null
           pix_type?: string | null
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: [
           {
@@ -88,6 +88,7 @@ export interface Database {
           neighborhood: string
           number: string
           uf: string
+          user_id: string
         }
         Insert: {
           address: string
@@ -99,6 +100,7 @@ export interface Database {
           neighborhood: string
           number: string
           uf: string
+          user_id: string
         }
         Update: {
           address?: string
@@ -110,12 +112,19 @@ export interface Database {
           neighborhood?: string
           number?: string
           uf?: string
+          user_id?: string
         }
         Relationships: [
           {
             foreignKeyName: "address_client_id_fkey"
             columns: ["client_id"]
             referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "address_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]
@@ -124,16 +133,26 @@ export interface Database {
         Row: {
           id: string
           name: string
+          user_id: string
         }
         Insert: {
           id?: string
           name: string
+          user_id: string
         }
         Update: {
           id?: string
           name?: string
+          user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "category_groups_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       clients: {
         Row: {
@@ -146,6 +165,7 @@ export interface Database {
           name: string
           person_type: string
           phone: string | null
+          user_id: string
         }
         Insert: {
           cpf_cnpj?: string | null
@@ -157,6 +177,7 @@ export interface Database {
           name: string
           person_type: string
           phone?: string | null
+          user_id: string
         }
         Update: {
           cpf_cnpj?: string | null
@@ -168,8 +189,16 @@ export interface Database {
           name?: string
           person_type?: string
           phone?: string | null
+          user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "clients_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       organization: {
         Row: {
@@ -223,6 +252,7 @@ export interface Database {
           recurring_type_id: number
           separation_count: number | null
           transaction_id: string
+          user_id: string
           week_of_month: number | null
         }
         Insert: {
@@ -233,6 +263,7 @@ export interface Database {
           recurring_type_id: number
           separation_count?: number | null
           transaction_id: string
+          user_id: string
           week_of_month?: number | null
         }
         Update: {
@@ -243,6 +274,7 @@ export interface Database {
           recurring_type_id?: number
           separation_count?: number | null
           transaction_id?: string
+          user_id?: string
           week_of_month?: number | null
         }
         Relationships: [
@@ -256,6 +288,12 @@ export interface Database {
             foreignKeyName: "recurring_pattern_transaction_id_fkey"
             columns: ["transaction_id"]
             referencedRelation: "transactions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recurring_pattern_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]
@@ -280,18 +318,27 @@ export interface Database {
           group_id: string
           id: string
           name: string
+          user_id: string
         }
         Insert: {
           group_id: string
           id?: string
           name: string
+          user_id: string
         }
         Update: {
           group_id?: string
           id?: string
           name?: string
+          user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "transaction_categories_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "transactions_categories_group_fkey"
             columns: ["group_id"]
@@ -328,6 +375,7 @@ export interface Database {
           parent_transaction_id: string | null
           start_date: string
           type_id: number
+          user_id: string
         }
         Insert: {
           account_id: string
@@ -341,6 +389,7 @@ export interface Database {
           parent_transaction_id?: string | null
           start_date?: string
           type_id: number
+          user_id: string
         }
         Update: {
           account_id?: string
@@ -354,6 +403,7 @@ export interface Database {
           parent_transaction_id?: string | null
           start_date?: string
           type_id?: number
+          user_id?: string
         }
         Relationships: [
           {
@@ -375,7 +425,7 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "transactions_parent_transaction_id_fkey"
+            foreignKeyName: "transactions_parent_id_fkey"
             columns: ["parent_transaction_id"]
             referencedRelation: "transactions"
             referencedColumns: ["id"]
@@ -384,6 +434,12 @@ export interface Database {
             foreignKeyName: "transactions_type_id_fkey"
             columns: ["type_id"]
             referencedRelation: "transaction_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "transactions_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]
@@ -397,6 +453,7 @@ export interface Database {
           is_rescheduled: boolean
           start_date: string | null
           transaction_id: string
+          user_id: string
         }
         Insert: {
           end_date?: string | null
@@ -406,6 +463,7 @@ export interface Database {
           is_rescheduled: boolean
           start_date?: string | null
           transaction_id: string
+          user_id: string
         }
         Update: {
           end_date?: string | null
@@ -415,12 +473,19 @@ export interface Database {
           is_rescheduled?: boolean
           start_date?: string | null
           transaction_id?: string
+          user_id?: string
         }
         Relationships: [
           {
             foreignKeyName: "transactions_instance_transaction_id_fkey"
             columns: ["transaction_id"]
             referencedRelation: "transactions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "transactions_instance_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]

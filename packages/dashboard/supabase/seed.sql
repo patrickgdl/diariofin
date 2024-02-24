@@ -25,32 +25,32 @@ INSERT INTO public.account (id, name, balance, active, account_number, agency, p
 --
 -- Data for public.clients; Schema: public
 --
-INSERT INTO public.clients (id, name, person_type, email, cpf_cnpj, phone, description, is_client, is_supplier) VALUES ('e28e3adc-ccfd-48ae-9f66-83759b29f540', 'Vs Informática', 'legal', 'juliana@solucoesvs.com.br', '08.302.412/0001-98', '(41) 3642-1190', '', true, true);
+INSERT INTO public.clients (id, name, person_type, email, cpf_cnpj, phone, description, is_client, is_supplier, user_id) VALUES ('e28e3adc-ccfd-48ae-9f66-83759b29f540', 'Vs Informática', 'legal', 'juliana@solucoesvs.com.br', '08.302.412/0001-98', '(41) 3642-1190', '', true, true, '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
 
 
 -- Create public.address values
 --
 -- Data for public.address; Schema: public
 --
-INSERT INTO public.address (id, cep, address, number, complement, neighborhood, city, uf, client_id) VALUES ('09e1734d-9356-4cbb-a308-865358fe9c93', '83.701-300', 'Rua Alagoas', '416', NULL, 'Iguaçu', 'Araucária', 'PR', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
+INSERT INTO public.address (id, cep, address, number, complement, neighborhood, city, uf, client_id, user_id) VALUES ('09e1734d-9356-4cbb-a308-865358fe9c93', '83.701-300', 'Rua Alagoas', '416', NULL, 'Iguaçu', 'Araucária', 'PR', 'e28e3adc-ccfd-48ae-9f66-83759b29f540', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
 
 
 -- Create public.category_groups values
 --
 -- Data for public.category_groups; Schema: public
 --
-INSERT INTO public.category_groups (id, name) VALUES ('492f210b-0def-43e7-9786-393ebf2d6a6a', 'Conta');
-INSERT INTO public.category_groups (id, name) VALUES ('1151ff10-0a2b-498c-b55f-ae4f554d41a4', 'Receita Operacional');
-INSERT INTO public.category_groups (id, name) VALUES ('5011e7e0-9097-4171-a306-5d1d25dee5de', 'Financiamentos');
+INSERT INTO public.category_groups (id, name, user_id) VALUES ('492f210b-0def-43e7-9786-393ebf2d6a6a', 'Conta', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.category_groups (id, name, user_id) VALUES ('1151ff10-0a2b-498c-b55f-ae4f554d41a4', 'Receita Operacional', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.category_groups (id, name, user_id) VALUES ('5011e7e0-9097-4171-a306-5d1d25dee5de', 'Financiamentos', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
 
 
 -- Create public.transaction_categories values
 --
 -- Data for public.transaction_categories; Schema: public
 --
-INSERT INTO public.transaction_categories (id, name, group_id) VALUES ('c5aee89c-f7ca-430d-ba9e-d9a90ada09d7', 'Criação de Conta', '492f210b-0def-43e7-9786-393ebf2d6a6a');
-INSERT INTO public.transaction_categories (id, name, group_id) VALUES ('3dc3ba14-2243-4003-a03e-fa18331041c0', 'Receitas com Serviços', '1151ff10-0a2b-498c-b55f-ae4f554d41a4');
-INSERT INTO public.transaction_categories (id, name, group_id) VALUES ('83e8b0b5-3d43-4618-9aef-7980022f5603', 'Aporte de Capital', '5011e7e0-9097-4171-a306-5d1d25dee5de');
+INSERT INTO public.transaction_categories (id, name, group_id, user_id) VALUES ('c5aee89c-f7ca-430d-ba9e-d9a90ada09d7', 'Criação de Conta', '492f210b-0def-43e7-9786-393ebf2d6a6a', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.transaction_categories (id, name, group_id, user_id) VALUES ('3dc3ba14-2243-4003-a03e-fa18331041c0', 'Receitas com Serviços', '1151ff10-0a2b-498c-b55f-ae4f554d41a4', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.transaction_categories (id, name, group_id, user_id) VALUES ('83e8b0b5-3d43-4618-9aef-7980022f5603', 'Aporte de Capital', '5011e7e0-9097-4171-a306-5d1d25dee5de', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
 
 
 -- Create public.transaction_types values
@@ -65,10 +65,10 @@ INSERT INTO public.transaction_types (id, name) VALUES (2, 'EXPENSE');
 --
 -- Data for public.transaction_types; Schema: public
 --
-INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, client_id) VALUES ('b7d5044e-e98b-4c1d-b594-1f437b7d2282', 1000, 'Salário', 1, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
-INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, client_id) VALUES ('cfc6efe7-772e-4cc5-bb7d-3c0666a4dd04', -500, 'Pagamento de Fatura', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540');
-INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, is_recurring, start_date) VALUES ('1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', -55, 'Netflix', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', true, '2024-01-25 11:30:30');
-INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, is_recurring, start_date, end_date) VALUES ('387d5f46-274b-4ffc-bc53-90c0e43f744a', -120, 'Amazon 1/3', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', true, '2024-01-02 11:30:30', '2024-04-02 11:30:30');
+INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, client_id, user_id) VALUES ('b7d5044e-e98b-4c1d-b594-1f437b7d2282', 1000, 'Salário', 1, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, client_id, user_id) VALUES ('cfc6efe7-772e-4cc5-bb7d-3c0666a4dd04', -500, 'Pagamento de Fatura', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', 'e28e3adc-ccfd-48ae-9f66-83759b29f540', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, is_recurring, start_date, user_id) VALUES ('1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', -55, 'Netflix', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', true, '2024-01-25 11:30:30', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO transactions (id, amount, description, type_id, account_id, category_id, is_recurring, start_date, end_date, user_id) VALUES ('387d5f46-274b-4ffc-bc53-90c0e43f744a', -120, 'Amazon 1/3', 2, '589f4b55-4c84-46bd-a31d-5fd8417eebaf', '3dc3ba14-2243-4003-a03e-fa18331041c0', true, '2024-01-02 11:30:30', '2024-04-02 11:30:30', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
 
 -- Create public.recurring_types values
 --
@@ -83,11 +83,11 @@ INSERT INTO public.recurring_types (id, name) VALUES (4, 'Anual');
 --
 -- Data for public.recurring_pattern; Schema: public
 --
-INSERT INTO public.recurring_pattern (transaction_id, recurring_type_id, day_of_month) VALUES ('1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', 3, 25);
-INSERT INTO public.recurring_pattern (transaction_id, recurring_type_id, max_num_of_ocurrences, day_of_month) VALUES ('387d5f46-274b-4ffc-bc53-90c0e43f744a', 3, 4, 25);
+INSERT INTO public.recurring_pattern (transaction_id, recurring_type_id, day_of_month, user_id) VALUES ('1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', 3, 25, '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.recurring_pattern (transaction_id, recurring_type_id, max_num_of_ocurrences, day_of_month, user_id) VALUES ('387d5f46-274b-4ffc-bc53-90c0e43f744a', 3, 4, 25, '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
 
 -- Create public.transactions_instance values
 --
 -- Data for public.transactions_instance; Schema: public
 --
-INSERT INTO public.transactions_instance (id, transaction_id, is_done, is_rescheduled, is_canceled, start_date) VALUES ('f8db0cc6-dbe4-493e-859e-da9c48c14680', '1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', true, false, false, '2024-01-25 11:30:30');
+INSERT INTO public.transactions_instance (id, transaction_id, is_done, is_rescheduled, is_canceled, start_date, user_id) VALUES ('f8db0cc6-dbe4-493e-859e-da9c48c14680', '1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', true, false, false, '2024-01-25 11:30:30', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
