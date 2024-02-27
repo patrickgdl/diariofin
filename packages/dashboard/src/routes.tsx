@@ -15,6 +15,7 @@ import Reports from "./pages/reports"
 import Settings from "./pages/settings"
 import Transactions from "./pages/transactions"
 import TransactionsForm from "./pages/transactions-form"
+import Categories from "./pages/categories"
 
 export const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -51,6 +52,14 @@ export const router = createBrowserRouter([
         ],
       },
       {
+        path: "/accounts/",
+        element: <Accounts />,
+      },
+      {
+        path: "/accounts/:id",
+        element: <AccountForm />,
+      },
+      {
         path: "/settings/",
         element: <Settings />,
         children: [
@@ -63,20 +72,13 @@ export const router = createBrowserRouter([
             element: <Profile />,
           },
           {
-            path: "accounts",
-            element: <Accounts />,
-          },
-          {
-            path: "accounts/:id",
-            element: <AccountForm />,
-          },
-          {
             path: "appearance",
             element: <Appearance />,
           },
         ],
       },
       { path: "/reports", element: <Reports /> },
+      { path: "/categories", element: <Categories /> },
       { path: "/404", element: <NotFound /> },
       { path: "*", element: <Navigate to="/404" replace /> },
     ],

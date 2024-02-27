@@ -89,7 +89,7 @@ export default function AccountSwitcher({ isCollapsed = false, accounts, classNa
 
           <CommandList>
             <CommandGroup>
-              <CommandItem onSelect={() => navigate("/settings/accounts/new")}>
+              <CommandItem onSelect={() => navigate("/accounts/new")}>
                 <PlusCircledIcon className="mr-2 h-5 w-5" />
                 Criar conta
               </CommandItem>

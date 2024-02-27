@@ -8,9 +8,6 @@ export const TRANSACTION_QUERY = `
   amount,
   description,
   start_date,
-  transactions_instance (
-    is_done
-  ),
   transaction_types (
     id,
     name

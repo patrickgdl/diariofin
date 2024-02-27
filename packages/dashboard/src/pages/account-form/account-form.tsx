@@ -66,7 +66,7 @@ const AccountForm = ({ isControlledAddMode = false }: AccountFormProps) => {
       })
     }
 
-    navigate("/settings/accounts")
+    navigate("/accounts")
   }
 
   React.useEffect(() => {
