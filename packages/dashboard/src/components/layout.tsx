@@ -1,18 +1,17 @@
 import cookies from "js-cookie"
 import * as React from "react"
-import { Navigate } from "react-router-dom"
 import useAccounts from "~/hooks/useAccountsQuery"
+import Account from "~/pages/account"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resizable"
 import { Separator } from "~/ui/separator"
 import { cn } from "~/utils/cn"
 import { LINKS } from "~/utils/constants"
 
-import AccountSwitcher from "./account-switcher"
 import ErrorState from "./error-state"
 import Loader from "./loader"
+import Logo from "./logo"
 import { Nav } from "./nav"
 import { UserNav } from "./user-nav"
-import Account from "~/pages/account"
 
 const layout = JSON.parse(cookies.get("react-resizable-panels:layout") || "")
 const collapsed = Boolean(cookies.get("react-resizable-panels:collapsed"))
@@ -58,8 +57,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         }}
         className={cn(isCollapsed && "min-w-[50px] transition-all duration-300 ease-in-out")}
       >
-        <div className={cn("flex h-[52px] items-center justify-center")}>
-          <AccountSwitcher classNames="mx-6" accounts={accounts} isCollapsed={isCollapsed} />
+        <div className={cn("flex h-[52px] items-center px-4 space-x-2")}>
+          <Logo className="h-7 w-7" />
+          <span className="text-xl font-bold">Fluxo Simples</span>
         </div>
 
         <Separator />

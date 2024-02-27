@@ -108,7 +108,7 @@ export default function TransactionsFormPage() {
           onSubmit={(values) => handleSubmit(values)}
         />
 
-        <div className="space-x-2 flex items-center justify-end">
+        <div className="space-x-2 flex w-full items-center justify-end">
           <Button variant="outline" onClick={() => navigate(-1)}>
             Voltar
           </Button>

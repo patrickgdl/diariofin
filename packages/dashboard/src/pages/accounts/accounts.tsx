@@ -1,5 +1,7 @@
+import { useState } from "react"
 import useAppContext from "~/hooks/useAppContext"
-import { Separator } from "~/ui/separator"
+import { useUpdateAccountMutation } from "~/hooks/useUpdateAccountMutation"
+import { Account } from "~/types/account"
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -9,15 +11,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "~/ui/alert-dialog"
-
-import { AccountsTable } from "./components/accounts-table"
 import { Button } from "~/ui/button"
-import { useState } from "react"
-import { useUpdateAccountMutation } from "~/hooks/useUpdateAccountMutation"
-import { Account } from "~/types/account"
 import { ButtonLoading } from "~/ui/button-loading"
 
-export default function SettingsAccountPage() {
+import { AccountsDashboard } from "./components/accounts-layout"
+
+export default function AccountsPage() {
   const { accounts } = useAppContext()
   const [accountToDeactivate, setAccountToDeactivate] = useState<Account | null>()
 
@@ -42,14 +41,7 @@ export default function SettingsAccountPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h3 className="text-lg font-medium">Contas</h3>
-        <p className="text-sm text-muted-foreground">Atualize suas contas, edite ou exclua.</p>
-      </div>
-
-      <Separator />
-
-      <AccountsTable accounts={accounts} onDeactivate={setAccountToDeactivate} />
+      <AccountsDashboard accounts={accounts} onDeactivate={setAccountToDeactivate} />
 
       <AlertDialog open={!!accountToDeactivate} onOpenChange={() => setAccountToDeactivate(null)}>
         <AlertDialogContent>

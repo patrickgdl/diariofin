@@ -3,12 +3,12 @@ import { Table } from "@tanstack/react-table"
 import { MouseEventHandler } from "react"
 import { CalendarDateRangePicker } from "~/components/date-range-picker"
 import useAppContext from "~/hooks/useAppContext"
+import useCategories from "~/hooks/useCategoriesQuery"
 import { Button } from "~/ui/button"
 import { Input } from "~/ui/input"
 
 import { DataTableFacetedFilter } from "./transactions-faceted-filter"
 import { DataTableViewOptions } from "./transactions-view-options"
-import useCategories from "~/hooks/useCategoriesQuery"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>

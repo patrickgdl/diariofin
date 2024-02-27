@@ -10,7 +10,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~
 
 import { TransactionFormType } from "../schema/transactions-form-schema"
 
-type Categories = Omit<TransactionCategories, "group_id"> & { category_groups: CategoryGroups | null }
+type Categories = Omit<TransactionCategories, "group_id" | "user_id"> & {
+  category_groups: Omit<CategoryGroups, "user_id"> | null
+}
 
 type TransactionDataFormProps = {
   variant: keyof typeof TRANSACTION_TYPE

@@ -32,7 +32,7 @@ export default function DashboardPage() {
         <div className="flex items-center space-x-2">
           <CalendarDateRangePicker />
 
-          {accounts.length > 1 && <AccountSwitcher accounts={accounts} />}
+          {accounts.length > 0 && <AccountSwitcher accounts={accounts} />}
         </div>
       </div>
 

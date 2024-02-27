@@ -1,15 +1,16 @@
 import { ColumnDef } from "@tanstack/react-table"
-
-import { Badge } from "~/ui/badge"
-import { Checkbox } from "~/ui/checkbox"
-
-import { CheckCircledIcon, CircleIcon } from "@radix-ui/react-icons"
-import { DataTableColumnHeader } from "./transactions-column-header"
-import { DataTableRowActions } from "./transactions-row-actions"
-import formatCurrency from "~/utils/format-currency"
-import formatDate from "~/utils/format-date"
 import { parseISO } from "date-fns"
 import { TransactionsQuery } from "~/queries/get-transactions"
+import { Badge } from "~/ui/badge"
+import { Checkbox } from "~/ui/checkbox"
+import formatCurrency from "~/utils/format-currency"
+import formatDate from "~/utils/format-date"
+
+import { DataTableColumnHeader } from "./transactions-column-header"
+import { DataTableRowActions } from "./transactions-row-actions"
+import { cn } from "~/utils/cn"
+import { Avatar, AvatarFallback, AvatarImage } from "~/ui/avatar"
+import { getAcronym } from "~/utils/get-acronym"
 
 export const columns: ColumnDef<TransactionsQuery[0]>[] = [
   {
@@ -19,7 +20,6 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
         checked={table.getIsAllPageRowsSelected()}
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Selecionar tudo"
-        className="translate-y-[2px]"
       />
     ),
     cell: ({ row }) => (
@@ -27,7 +27,6 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label="Selecionar linha"
-        className="translate-y-[2px]"
       />
     ),
     enableSorting: false,
@@ -36,23 +35,14 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
   {
     accessorKey: "start_date",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Data" />,
-    cell: ({ row }) => <div className="w-[80px]">{formatDate(parseISO(row.getValue("start_date")))}</div>,
+    cell: ({ row }) => <div className="w-[80px]">{formatDate(parseISO(row.getValue("start_date")), "dd/MM/yyyy")}</div>,
     enableSorting: false,
     enableHiding: false,
   },
   {
     accessorKey: "description",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Descrição" />,
-    cell: ({ row }) => {
-      return <span className="max-w-[500px] truncate font-medium">{row.getValue("description")}</span>
-    },
-  },
-  {
-    accessorKey: "transaction_categories",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Categoria" />,
-    cell: ({ row }) => {
-      return <Badge variant="outline">{row.original.transaction_categories?.name}</Badge>
-    },
+    header: "Descrição",
+    cell: ({ row }) => <div className="capitalize">{row.getValue("description")}</div>,
   },
   // {
   //   accessorKey: "is_done",
@@ -74,9 +64,33 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
   //   },
   // },
   {
+    accessorKey: "transaction_categories",
+    header: "Categoria",
+    cell: ({ row }) => {
+      return (
+        <Badge>
+          {/* {icon && React.cloneElement(icon, { className: "h-4 w-4" })} */}
+          <span className="ml-2">{row.original.transaction_categories?.name}</span>
+        </Badge>
+      )
+    },
+  },
+  {
     accessorKey: "account",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Conta" />,
-    cell: ({ row }) => <span>{row.original.account?.name}</span>,
+    cell: ({ row }) => (
+      <div className="flex items-center space-x-1">
+        <Avatar className="h-5 w-5">
+          <AvatarImage
+            src={`https://avatar.vercel.sh/${row.original.account?.id}.png`}
+            alt={row.original.account?.name || ""}
+          />
+          <AvatarFallback>{getAcronym(row.original.account?.name || "")}</AvatarFallback>
+        </Avatar>
+
+        <span>{row.original.account?.name}</span>
+      </div>
+    ),
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
     },
@@ -91,9 +105,16 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
   },
   {
     accessorKey: "amount",
-    header: ({ column }) => <DataTableColumnHeader className="justify-end" column={column} title="Valor" />,
-    cell: ({ row }) => <div className="text-right">{formatCurrency(row.getValue("amount"))}</div>,
-    enableHiding: false,
+    header: () => <div className="text-right">Valor</div>,
+    cell: ({ row }) => {
+      const amount = parseFloat(row.getValue("amount"))
+
+      return (
+        <div className={cn("text-right font-medium", amount < 0 ? "text-red-500" : "text-green-500")}>
+          {formatCurrency(amount)}
+        </div>
+      )
+    },
   },
   {
     id: "actions",

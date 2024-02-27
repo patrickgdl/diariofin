@@ -51,7 +51,7 @@ export default function LoginForm() {
     })
 
     if (error) {
-      toast({ title: error.message || "Ocorreu um erro ao enviar o link de login.", variant: "destructive" })
+      toast({ title: error.message || "Ocorreu um erro ao autenticar com o Google.", variant: "destructive" })
     }
   }
 

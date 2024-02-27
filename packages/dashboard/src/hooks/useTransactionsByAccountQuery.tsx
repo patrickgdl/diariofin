@@ -1,18 +1,18 @@
 import { useQuery } from "@tanstack/react-query"
 import { compareDesc, isToday, isYesterday, parseISO } from "date-fns"
 import * as React from "react"
-import { getTransactions, TransactionsQuery } from "~/queries/get-transactions"
+import { getTransactionsByAccount, TransactionsQuery } from "~/queries/get-transactions-by-account"
 import formatDate from "~/utils/format-date"
 
 import useSupabase from "./useSupabase"
 
-function useTransactionsQuery(type: number) {
-  const client = useSupabase()
+function useTransactionsByAccountQuery(accountId: string) {
+  const supabase = useSupabase()
 
   const { data, ...transactionQuery } = useQuery({
-    queryKey: ["transactions", { type }],
+    queryKey: ["transactions", { accountId }],
     queryFn: async () => {
-      return getTransactions(client, type).then((result) => result.data || [])
+      return getTransactionsByAccount(supabase, accountId).then((result) => result.data || [])
     },
     initialData: [],
   })
@@ -51,4 +51,4 @@ function useTransactionsQuery(type: number) {
   }
 }
 
-export default useTransactionsQuery
+export default useTransactionsByAccountQuery

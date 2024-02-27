@@ -1,23 +1,29 @@
+import { useNavigate } from "react-router-dom"
+import ErrorState from "~/components/error-state"
+import Loader from "~/components/loader"
+import { TransactionsTable } from "~/components/transactions-table/transactions-table"
+import useTransactionsQuery from "~/hooks/useTransactionsQuery"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 
 import { columns } from "./components/columns"
-import { DataTable } from "./components/transactions-table"
-import { useNavigate } from "react-router-dom"
-import useTransactionsQuery from "~/hooks/useTransactionsQuery"
 import { TRANSACTION_TYPE } from "./constants"
 
 export default function TransactionsPage() {
   const navigate = useNavigate()
 
-  const { data: expenses } = useTransactionsQuery(TRANSACTION_TYPE.EXPENSE)
-  const { data: income, isLoading, isError } = useTransactionsQuery(TRANSACTION_TYPE.INCOME)
+  const { data: income, groupedData: groupedIncome, ...incomeQuery } = useTransactionsQuery(TRANSACTION_TYPE.INCOME)
+  const {
+    data: expenses,
+    groupedData: groupedExpenses,
+    ...expenseQuery
+  } = useTransactionsQuery(TRANSACTION_TYPE.EXPENSE)
 
-  if (isLoading) {
-    return <div>Loading...</div>
+  if (incomeQuery.isLoading || expenseQuery.isLoading) {
+    return <Loader />
   }
 
-  if (isError) {
-    return <div>Error</div>
+  if (incomeQuery.isError || expenseQuery.isError) {
+    return <ErrorState />
   }
 
   return (
@@ -36,15 +42,21 @@ export default function TransactionsPage() {
 
         <TabsContent value="income">
           <div className="my-8">
-            <DataTable data={income} columns={columns} onNewClick={() => navigate("/transactions/new?type=INCOME")} />
+            <TransactionsTable
+              data={income}
+              columns={columns}
+              groupedData={groupedIncome}
+              onNewClick={() => navigate("/transactions/new?type=INCOME")}
+            />
           </div>
         </TabsContent>
 
         <TabsContent value="expenses">
           <div className="my-8">
-            <DataTable
-              data={expenses}
+            <TransactionsTable
               columns={columns}
+              data={expenses}
+              groupedData={groupedExpenses}
               onNewClick={() => navigate("/transactions/new?type=EXPENSE")}
             />
           </div>

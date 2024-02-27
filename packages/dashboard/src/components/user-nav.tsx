@@ -43,13 +43,13 @@ export function UserNav() {
             <Link to="/settings/profile">Perfil</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link to="/settings/accounts">Contas</Link>
+            <Link to="/accounts">Contas</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link to="/settings">Configurações</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link to="/settings/accounts/new">Nova conta</Link>
+            <Link to="/accounts/new">Nova conta</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
