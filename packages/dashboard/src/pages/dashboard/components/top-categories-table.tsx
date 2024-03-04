@@ -1,3 +1,4 @@
+import * as React from "react"
 import { BoltIcon } from "@heroicons/react/20/solid"
 import {
   ColumnDef,
@@ -12,12 +13,10 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 import { CarIcon, CoffeeIcon, HomeIcon, KeyIcon, ShoppingBagIcon, StarIcon } from "lucide-react"
-import * as React from "react"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
 import { Progress } from "~/ui/progress"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/ui/table"
-import formatCurrency from "~/utils/format-currency"
-import formatDate from "~/utils/format-date"
 
 const data: Category[] = [
   {
@@ -30,7 +29,7 @@ const data: Category[] = [
   },
   {
     id: "car",
-    name: "Transporte",
+    name: "Car & Transportation",
     icon: "Car",
     current: 2022,
     max: 2050,
@@ -38,7 +37,7 @@ const data: Category[] = [
   },
   {
     id: "rent",
-    name: "Aluguel",
+    name: "Rent",
     icon: "Key",
     current: 1984,
     max: 2000,
@@ -46,7 +45,7 @@ const data: Category[] = [
   },
   {
     id: "utilities",
-    name: "Utilidades",
+    name: "Utilities",
     icon: "Bolt",
     current: 38,
     max: 50,
@@ -54,7 +53,7 @@ const data: Category[] = [
   },
   {
     id: "subscriptions",
-    name: "Inscrições",
+    name: "Subscriptions",
     icon: "Star",
     current: 35,
     max: 200,
@@ -70,7 +69,7 @@ const data: Category[] = [
   },
   {
     id: "food",
-    name: "Comidas e Bebidas",
+    name: "Food & Drink",
     icon: "Coffee",
     current: 0,
     max: 450,
@@ -102,15 +101,18 @@ export const columns: ColumnDef<Category>[] = [
   {
     id: "date",
     accessorFn: (row) => new Date(row.date), // Accessor function for date
-    header: () => <div>Data</div>,
+    header: () => <div>Date</div>,
     cell: ({ getValue }) => {
       const date = getValue() as Date
-      return formatDate(date)
+      return date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      }) // Format date as "Jan 1st"
     },
   },
   {
     accessorKey: "name",
-    header: "Categoria",
+    header: "Category",
     cell: ({ row }) => {
       const name = row.getValue("name") as string
       const icon = row.original.icon // Assuming 'icon' is the key in your data for icon names
@@ -125,17 +127,22 @@ export const columns: ColumnDef<Category>[] = [
   },
   {
     accessorKey: "current",
-    header: () => <div className="text-right">Valor</div>,
+    header: () => <div className="text-right">Amount</div>,
     cell: ({ row }) => {
       const current = parseFloat(row.getValue("current"))
 
       // Format the amount as a dollar amount
-      return <div className="text-right font-medium">{formatCurrency(current)}</div>
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(current)
+
+      return <div className="text-right font-medium">{formatted}</div>
     },
   },
   {
     id: "progress",
-    header: "Progresso",
+    header: "Progress",
     cell: ({ row }) => {
       const current = row.getValue("current") as number
       const max = row.getValue("max") as number
@@ -150,12 +157,17 @@ export const columns: ColumnDef<Category>[] = [
   },
   {
     accessorKey: "max",
-    header: () => <div className="text-right">Valor</div>,
+    header: () => <div className="text-right">Amount</div>,
     cell: ({ row }) => {
       const max = parseFloat(row.getValue("max"))
 
       // Format the amount as a dollar amount
-      return <div className="text-right font-medium">{formatCurrency(max)}</div>
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(max)
+
+      return <div className="text-right font-medium">{formatted}</div>
     },
   },
 ]
@@ -188,8 +200,8 @@ export function TopCategoriesTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Top de Categorias</CardTitle>
-        <CardDescription>Onde você mais usa seu dinheiro?</CardDescription>
+        <CardTitle>Top categories</CardTitle>
+        <CardDescription>Where do you use most money?</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="rounded-md border">
@@ -221,7 +233,7 @@ export function TopCategoriesTable() {
               ) : (
                 <TableRow>
                   <TableCell colSpan={columns.length} className="h-24 text-center">
-                    Sem resultados.
+                    No results.
                   </TableCell>
                 </TableRow>
               )}

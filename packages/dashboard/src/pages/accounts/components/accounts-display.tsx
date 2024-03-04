@@ -51,17 +51,17 @@ export function AccountsDisplay({ account, onDeactivate, onEdit }: AccountsDispl
                 <span className="sr-only">Editar</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Reply</TooltipContent>
+            <TooltipContent>Editar</TooltipContent>
           </Tooltip>
 
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" disabled={!account} onClick={() => onDeactivate(account)}>
                 <Trash2Icon className="h-4 w-4" />
-                <span className="sr-only">Excluir</span>
+                <span className="sr-only">Inativar</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Reply</TooltipContent>
+            <TooltipContent>Inativar</TooltipContent>
           </Tooltip>
         </div>
         <Separator orientation="vertical" className="mx-2 h-6" />

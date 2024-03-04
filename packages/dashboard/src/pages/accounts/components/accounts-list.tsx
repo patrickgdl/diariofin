@@ -28,7 +28,7 @@ export function AccountsList({ items, onSelect }: AccountsListProps) {
           <Card
             key={item.id}
             onClick={() => onSelect(item)}
-            className="group flex items-center justify-between p-3 hover:bg-gray-100"
+            className="group flex items-center justify-between p-3 hover:cursor-pointer"
           >
             <div className="flex grow flex-col">
               <CardTitle className="text-md font-bold">{item.name}</CardTitle>

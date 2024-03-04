@@ -11,6 +11,7 @@ import ErrorState from "./error-state"
 import Loader from "./loader"
 import Logo from "./logo"
 import { Nav } from "./nav"
+import { ThemeToggle } from "./theme-toggle"
 import { UserNav } from "./user-nav"
 
 const layout = JSON.parse(cookies.get("react-resizable-panels:layout") || "")
@@ -57,25 +58,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         }}
         className={cn(isCollapsed && "min-w-[50px] transition-all duration-300 ease-in-out")}
       >
-        <div className={cn("flex h-[52px] items-center px-4 space-x-2")}>
-          <Logo className="h-7 w-7" />
-          <span className="text-xl font-bold">Fluxo Simples</span>
-        </div>
-
-        <Separator />
-
         <Nav links={LINKS} isCollapsed={isCollapsed} accounts={accounts} />
       </ResizablePanel>
 
       <ResizableHandle withHandle />
 
       <ResizablePanel defaultSize={layout[1] || 85}>
-        <div className="flex items-center px-4 py-2 h-[52px] justify-end">
+        <div className="flex items-center px-4 py-2 h-[52px] justify-end space-x-4">
+          <ThemeToggle />
+
           <UserNav />
         </div>
         <Separator />
 
-        <div className="h-[calc(100vh-52px)] overflow-auto p-6 space-y-6">
+        <div className="h-[calc(100vh-52px)] overflow-auto space-y-6">
           <main>{children}</main>
         </div>
       </ResizablePanel>

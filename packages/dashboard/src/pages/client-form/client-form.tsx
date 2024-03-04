@@ -96,20 +96,22 @@ const ClientForm = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex space-x-2 items-center">
-        <Button variant="outline" size="icon" onClick={() => navigate(-1)}>
-          <ChevronLeftIcon className="h-4 w-4" />
-        </Button>
+      <div>
+        <div className="flex space-x-2 items-center p-6">
+          <Button variant="outline" size="icon" onClick={() => navigate(-1)}>
+            <ChevronLeftIcon className="h-4 w-4" />
+          </Button>
 
-        <div>
-          <h3 className="text-lg font-medium">Formulário de {variant === "CLIENT" ? "Clientes" : "Fornecedores"}</h3>
-          <p className="text-sm text-muted-foreground">
-            Insira aqui um {variant === "CLIENT" ? "cliente" : "fornecedor"}.
-          </p>
+          <div>
+            <h3 className="text-lg font-medium">Formulário de {variant === "CLIENT" ? "Clientes" : "Fornecedores"}</h3>
+            <p className="text-sm text-muted-foreground">
+              Insira aqui um {variant === "CLIENT" ? "cliente" : "fornecedor"}.
+            </p>
+          </div>
         </div>
-      </div>
 
-      <Separator />
+        <Separator />
+      </div>
 
       <div className="flex flex-col mx-auto max-w-2xl">
         <Form {...form}>

@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import i18next from "i18next"
 import React from "react"
 import { I18nextProvider } from "react-i18next"
+import { ThemeProvider } from "next-themes"
 
 import { AppProvider } from "./contexts/AppContext"
 import { SessionContextProvider } from "./contexts/SessionContext"
@@ -22,19 +23,21 @@ const queryClient = new QueryClient({
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <SessionContextProvider>
-        <UserContextProvider>
-          <AppProvider>
-            <TooltipProvider>
-              <I18nextProvider i18n={i18next}>{children}</I18nextProvider>
-            </TooltipProvider>
-          </AppProvider>
-        </UserContextProvider>
-      </SessionContextProvider>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <QueryClientProvider client={queryClient}>
+        <SessionContextProvider>
+          <UserContextProvider>
+            <AppProvider>
+              <TooltipProvider>
+                <I18nextProvider i18n={i18next}>{children}</I18nextProvider>
+              </TooltipProvider>
+            </AppProvider>
+          </UserContextProvider>
+        </SessionContextProvider>
 
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </ThemeProvider>
   )
 }
 

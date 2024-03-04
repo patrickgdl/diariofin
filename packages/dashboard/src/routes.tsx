@@ -16,6 +16,7 @@ import Settings from "./pages/settings"
 import Transactions from "./pages/transactions"
 import TransactionsForm from "./pages/transactions-form"
 import Categories from "./pages/categories"
+import AccountLayout from "./components/account-layout"
 
 export const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -57,7 +58,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/accounts/:id",
-        element: <AccountForm />,
+        element: (
+          <AccountLayout>
+            <AccountForm />
+          </AccountLayout>
+        ),
       },
       {
         path: "/settings/",

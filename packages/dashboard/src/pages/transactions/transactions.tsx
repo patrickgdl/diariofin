@@ -27,7 +27,7 @@ export default function TransactionsPage() {
   }
 
   return (
-    <div className="h-full flex-1 flex-col space-y-8 md:flex">
+    <div className="h-full flex-1 flex-col space-y-8 md:flex p-6">
       <h2 className="text-2xl font-bold tracking-tight">Entradas e Saídas</h2>
 
       <Tabs defaultValue="income" className="space-y-4">
