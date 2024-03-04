@@ -42,9 +42,7 @@ export function ProfileForm({ defaultValues, onSubmit }: ProfileFormProps) {
               <FormControl>
                 <Input placeholder="Seu nome aqui" {...field} />
               </FormControl>
-              <FormDescription>
-                Esse é seu nome. Ele pode ser seu nome real ou pseudônimo, você escolhe.
-              </FormDescription>
+              <FormDescription>Esse é seu nome. Ele pode ser seu nome real ou apelido, você escolhe.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

@@ -19,7 +19,7 @@ export default function ClientsPage() {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col p-6">
       <div className="space-y-6 h-[calc(100vh-80px)] overflow-y-auto">
         <h2 className="text-3xl font-bold tracking-tight">Clientes e Fornecedores</h2>
 

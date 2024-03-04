@@ -4,6 +4,22 @@ import { CategoriesTable } from "./components/allocation-table"
 import { CategoriesDisplay } from "./components/categories-display"
 import { SpentSoFarCard } from "./components/spent-so-far-card"
 import { TopCategoriesTable } from "./components/top-categories-table"
+import { ColorPicker } from "~/ui/color-picker"
+import { useState } from "react"
+import { Separator } from "~/ui/separator"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~/ui/dialog"
+import { Button } from "~/ui/button"
+import { PlusCircleIcon } from "lucide-react"
+import { useNavigate } from "react-router-dom"
+import { CategoriesForm } from "./components/categories-form"
 
 interface MailProps {
   defaultLayout?: number[]
@@ -97,10 +113,40 @@ export const mails = [
 ]
 
 export default function CategoriesDashboard({ defaultLayout = [20, 40, 40] }: MailProps) {
+  const navigate = useNavigate()
+
   return (
-    <ResizablePanelGroup direction="horizontal" className="h-full max-h-[1200px] items-stretch">
+    <ResizablePanelGroup direction="horizontal" className="h-full max-h-[1200px] items-stretch p-6">
       <ResizablePanel minSize={30} defaultSize={defaultLayout[1]}>
         <div className="!overflow-y-scroll">
+          <div className="flex h-[52px] items-center px-4 py-2">
+            <h1 className="text-lg font-medium">Contas</h1>
+
+            <div className="ml-auto space-x-1 flex items-center">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="ghost">
+                    <PlusCircleIcon className="mr-2 h-4 w-4" />
+                    Nova categoria
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <div className="mx-auto w-full max-w-sm space-y-6">
+                    <DialogHeader>
+                      <DialogTitle className="text-sm">Nova categoria</DialogTitle>
+                    </DialogHeader>
+
+                    <CategoriesForm />
+
+                    <Button className="w-full">Salvar</Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+          </div>
+
+          <Separator />
+
           <SpentSoFarCard />
 
           <CategoriesTable />

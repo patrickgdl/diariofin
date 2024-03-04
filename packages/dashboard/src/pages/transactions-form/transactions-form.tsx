@@ -87,19 +87,21 @@ export default function TransactionsFormPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex space-x-2 items-center">
-        <Button variant="outline" size="icon" onClick={() => navigate(-1)}>
-          <ChevronLeftIcon className="h-4 w-4" />
-        </Button>
+      <div>
+        <div className="flex space-x-2 items-center p-6">
+          <Button variant="outline" size="icon" onClick={() => navigate(-1)}>
+            <ChevronLeftIcon className="h-4 w-4" />
+          </Button>
 
-        <div>
-          <h3 className={cn("text-lg font-medium", isExpense ? "text-red-500" : "text-emerald-500")}>
-            Conta a {variant === "EXPENSE" ? "pagar" : "receber"}
-          </h3>
-          <p className="text-sm text-muted-foreground">Insira aqui uma transação.</p>
+          <div>
+            <h3 className={cn("text-lg font-medium", isExpense ? "text-red-500" : "text-emerald-500")}>
+              Conta a {variant === "EXPENSE" ? "pagar" : "receber"}
+            </h3>
+            <p className="text-sm text-muted-foreground">Insira aqui uma transação.</p>
+          </div>
         </div>
+        <Separator />
       </div>
-      <Separator />
 
       <div className="flex flex-col mx-auto max-w-2xl">
         <TransactionMainForm

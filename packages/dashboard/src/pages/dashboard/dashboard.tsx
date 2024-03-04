@@ -9,6 +9,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 
 import { Consolidated } from "./components/consolidated"
 import { Overview } from "./components/overview"
+import { TransactionsReviewTable } from "./components/transaction-review-table"
+import { TopCategoriesTable } from "../categories/components/top-categories-table"
 
 export default function DashboardPage() {
   const params = useParams()
@@ -26,7 +28,7 @@ export default function DashboardPage() {
   }, [params])
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6">
       <div className="flex items-center justify-between">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
         <div className="flex items-center space-x-2">
@@ -41,9 +43,6 @@ export default function DashboardPage() {
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="analytics" disabled>
             Análise
-          </TabsTrigger>
-          <TabsTrigger value="reports" disabled>
-            Relatórios
           </TabsTrigger>
         </TabsList>
 
@@ -181,6 +180,12 @@ export default function DashboardPage() {
                 <Consolidated />
               </CardContent>
             </Card>
+          </div>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
+            <TransactionsReviewTable />
+
+            <TopCategoriesTable />
           </div>
         </TabsContent>
       </Tabs>

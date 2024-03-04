@@ -13,7 +13,6 @@ import { InputCurrency } from "~/ui/input-currency-alt"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/ui/select"
 
 import accountFormSchema, { AccountFormType } from "./schema/account-form-schema"
-import { useUser } from "~/contexts/UserContext"
 import { useAuthUser } from "~/contexts/SessionContext"
 
 type AccountFormProps = {
