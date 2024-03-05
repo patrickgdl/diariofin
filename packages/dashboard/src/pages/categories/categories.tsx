@@ -21,10 +21,6 @@ import { PlusCircleIcon } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { CategoriesForm } from "./components/categories-form"
 
-interface MailProps {
-  defaultLayout?: number[]
-}
-
 export const mails = [
   {
     id: "6c84fb90-12c4-11e1-840d-7b25c5ee775a",
@@ -112,41 +108,39 @@ export const mails = [
   },
 ]
 
-export default function CategoriesDashboard({ defaultLayout = [20, 40, 40] }: MailProps) {
-  const navigate = useNavigate()
-
+export default function CategoriesDashboard() {
   return (
-    <ResizablePanelGroup direction="horizontal" className="h-full max-h-[1200px] items-stretch p-6">
-      <ResizablePanel minSize={30} defaultSize={defaultLayout[1]}>
-        <div className="!overflow-y-scroll">
-          <div className="flex h-[52px] items-center px-4 py-2">
-            <h1 className="text-lg font-medium">Contas</h1>
+    <ResizablePanelGroup direction="horizontal" className="h-full max-h-[1200px] items-stretch">
+      <ResizablePanel minSize={30} defaultSize={55} className="!overflow-y-auto">
+        <div className="flex h-[52px] items-center px-4 py-2">
+          <h1 className="text-lg font-medium">Categorias</h1>
 
-            <div className="ml-auto space-x-1 flex items-center">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button variant="ghost">
-                    <PlusCircleIcon className="mr-2 h-4 w-4" />
-                    Nova categoria
-                  </Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <div className="mx-auto w-full max-w-sm space-y-6">
-                    <DialogHeader>
-                      <DialogTitle className="text-sm">Nova categoria</DialogTitle>
-                    </DialogHeader>
+          <div className="ml-auto space-x-1 flex items-center">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="ghost">
+                  <PlusCircleIcon className="mr-2 h-4 w-4" />
+                  Nova categoria
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <div className="mx-auto w-full max-w-sm space-y-6">
+                  <DialogHeader>
+                    <DialogTitle className="text-sm">Nova categoria</DialogTitle>
+                  </DialogHeader>
 
-                    <CategoriesForm />
+                  <CategoriesForm />
 
-                    <Button className="w-full">Salvar</Button>
-                  </div>
-                </DialogContent>
-              </Dialog>
-            </div>
+                  <Button className="w-full">Salvar</Button>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
+        </div>
 
-          <Separator />
+        <Separator />
 
+        <div className="p-2">
           <SpentSoFarCard />
 
           <CategoriesTable />
@@ -157,7 +151,7 @@ export default function CategoriesDashboard({ defaultLayout = [20, 40, 40] }: Ma
 
       <ResizableHandle withHandle />
 
-      <ResizablePanel defaultSize={defaultLayout[2]}>
+      <ResizablePanel defaultSize={45}>
         <CategoriesDisplay mail={mails[0] || null} />
       </ResizablePanel>
     </ResizablePanelGroup>

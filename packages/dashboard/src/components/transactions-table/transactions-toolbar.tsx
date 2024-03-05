@@ -12,10 +12,9 @@ import { DataTableViewOptions } from "./transactions-view-options"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
-  onNewClick: MouseEventHandler<HTMLButtonElement> | undefined
 }
 
-export function DataTableToolbar<TData>({ table, onNewClick }: DataTableToolbarProps<TData>) {
+export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
 
   const { categories } = useCategories()
@@ -56,15 +55,7 @@ export function DataTableToolbar<TData>({ table, onNewClick }: DataTableToolbarP
         )}
       </div>
 
-      <div className="flex items-center space-x-2">
-        <CalendarDateRangePicker />
-
-        <DataTableViewOptions table={table} />
-
-        <Button className="ml-2" onClick={onNewClick}>
-          Novo
-        </Button>
-      </div>
+      <CalendarDateRangePicker />
     </div>
   )
 }

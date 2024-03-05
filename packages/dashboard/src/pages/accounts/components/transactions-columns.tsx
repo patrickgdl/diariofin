@@ -10,6 +10,7 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
     accessorKey: "description",
     header: "Descrição",
     cell: ({ row }) => <div className="capitalize">{row.getValue("description")}</div>,
+    enableResizing: false, //disable resizing for just this column
   },
   {
     accessorKey: "transaction_categories",

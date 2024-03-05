@@ -14,6 +14,7 @@ import {
 } from "@tanstack/react-table"
 import * as React from "react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/ui/table"
+import { cn } from "~/utils/cn"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -52,48 +53,34 @@ export function TransactionsTableRaw<TData, TValue>({ columns, data, groupedData
   return (
     <div className="space-y-4">
       {Object.entries(groupedData).length ? (
-        Object.entries(groupedData).map(([groupedDate]) => (
+        Object.entries(groupedData).map(([groupedDate, groupedRows]) => (
           <React.Fragment key={groupedDate}>
             <h2 className="ml-2 text-lg font-semibold">{groupedDate}</h2>
 
-            <div className="rounded-md border">
-              <Table>
-                <TableHeader>
-                  {table.getHeaderGroups().map((headerGroup) => (
-                    <TableRow key={headerGroup.id}>
-                      {headerGroup.headers.map((header) => {
-                        return (
-                          <TableHead key={header.id}>
-                            {header.isPlaceholder
-                              ? null
-                              : flexRender(header.column.columnDef.header, header.getContext())}
-                          </TableHead>
-                        )
-                      })}
-                    </TableRow>
-                  ))}
-                </TableHeader>
-                <TableBody>
-                  {table.getRowModel().rows?.length ? (
-                    table.getRowModel().rows.map((row) => (
+            <Table>
+              <TableBody>
+                {table.getRowModel().rows?.length ? (
+                  table
+                    .getRowModel()
+                    .rows.filter((row) => groupedRows.includes(row.original))
+                    .map((row) => (
                       <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                         {row.getVisibleCells().map((cell) => (
-                          <TableCell key={cell.id}>
+                          <TableCell key={cell.id} className={cn(cell.column.getCanResize() ? null : `w-2/5`)}>
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </TableCell>
                         ))}
                       </TableRow>
                     ))
-                  ) : (
-                    <TableRow>
-                      <TableCell colSpan={columns.length} className="h-24 text-center">
-                        Sem resultados.
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </div>
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={columns.length} className="h-24 text-center">
+                      Sem resultados.
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
           </React.Fragment>
         ))
       ) : (
