@@ -72,7 +72,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Separator />
 
         <div className="h-[calc(100vh-52px)] overflow-auto space-y-6">
-          <main>{children}</main>
+          <main className="h-full">{children}</main>
         </div>
       </ResizablePanel>
     </ResizablePanelGroup>

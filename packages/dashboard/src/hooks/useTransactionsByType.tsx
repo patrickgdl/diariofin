@@ -1,18 +1,18 @@
 import { useQuery } from "@tanstack/react-query"
 import { compareDesc, isToday, isYesterday, parseISO } from "date-fns"
 import * as React from "react"
-import { getTransactions, TransactionsQuery } from "~/queries/get-transactions"
+import { getTransactionsByType, TransactionsByTypeQuery } from "~/queries/get-transactions-by-type"
 import formatDate from "~/utils/format-date"
 
 import useSupabase from "./useSupabase"
 
-function useTransactionsQuery() {
+function useTransactionsByTypeQuery(type: number) {
   const client = useSupabase()
 
   const { data, ...transactionQuery } = useQuery({
-    queryKey: ["transactions"],
+    queryKey: ["transactions", { type }],
     queryFn: async () => {
-      return getTransactions(client).then((result) => result.data || [])
+      return getTransactionsByType(client, type).then((result) => result.data || [])
     },
     initialData: [],
   })
@@ -34,16 +34,14 @@ function useTransactionsQuery() {
     const sortedItems = data.sort((a, b) => compareDesc(parseISO(a.start_date), parseISO(b.start_date)))
 
     // Group items by "Hoje", "Ontem", or specific date format
-    const reducedItems = sortedItems.reduce((acc, item) => {
+    return sortedItems.reduce((acc, item) => {
       const formattedDate = customFormatDate(item.start_date) // Use formatDate here
       if (!acc[formattedDate]) {
         acc[formattedDate] = []
       }
       acc[formattedDate]!.push(item)
       return acc
-    }, {} as Record<string, TransactionsQuery[0][]>)
-
-    return reducedItems
+    }, {} as Record<string, TransactionsByTypeQuery[0][]>)
   }, [data]) // No need to depend on formatDate if it's not changing
 
   return {
@@ -53,4 +51,4 @@ function useTransactionsQuery() {
   }
 }
 
-export default useTransactionsQuery
+export default useTransactionsByTypeQuery
