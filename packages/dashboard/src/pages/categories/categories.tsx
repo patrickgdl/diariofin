@@ -1,25 +1,14 @@
+import { PlusIcon } from "lucide-react"
+import { Button } from "~/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "~/ui/dialog"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resizable"
+import { Separator } from "~/ui/separator"
 
 import { CategoriesTable } from "./components/allocation-table"
 import { CategoriesDisplay } from "./components/categories-display"
+import { CategoriesForm } from "./components/categories-form"
 import { SpentSoFarCard } from "./components/spent-so-far-card"
 import { TopCategoriesTable } from "./components/top-categories-table"
-import { ColorPicker } from "~/ui/color-picker"
-import { useState } from "react"
-import { Separator } from "~/ui/separator"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "~/ui/dialog"
-import { Button } from "~/ui/button"
-import { PlusCircleIcon } from "lucide-react"
-import { useNavigate } from "react-router-dom"
-import { CategoriesForm } from "./components/categories-form"
 
 export const mails = [
   {
@@ -119,7 +108,7 @@ export default function CategoriesDashboard() {
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="ghost">
-                  <PlusCircleIcon className="mr-2 h-4 w-4" />
+                  <PlusIcon className="mr-2 h-4 w-4" />
                   Nova categoria
                 </Button>
               </DialogTrigger>

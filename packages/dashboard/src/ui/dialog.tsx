@@ -6,6 +6,8 @@ import { cn } from "~/utils/cn"
 
 const Dialog = DialogPrimitive.Root
 
+const DialogClose = DialogPrimitive.Close
+
 const DialogTrigger = DialogPrimitive.Trigger
 
 const DialogPortal = ({ className, ...props }: DialogPrimitive.DialogPortalProps) => (
@@ -82,4 +84,4 @@ const DialogDescription = React.forwardRef<
 ))
 DialogDescription.displayName = DialogPrimitive.Description.displayName
 
-export { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription }
+export { Dialog, DialogClose, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription }

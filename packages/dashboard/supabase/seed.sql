@@ -39,18 +39,18 @@ INSERT INTO public.address (id, cep, address, number, complement, neighborhood, 
 --
 -- Data for public.category_groups; Schema: public
 --
-INSERT INTO public.category_groups (id, name, user_id) VALUES ('492f210b-0def-43e7-9786-393ebf2d6a6a', 'Conta', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
-INSERT INTO public.category_groups (id, name, user_id) VALUES ('1151ff10-0a2b-498c-b55f-ae4f554d41a4', 'Receita Operacional', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
-INSERT INTO public.category_groups (id, name, user_id) VALUES ('5011e7e0-9097-4171-a306-5d1d25dee5de', 'Financiamentos', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.category_groups (id, name, color, user_id) VALUES ('492f210b-0def-43e7-9786-393ebf2d6a6a', 'Carro & Transporte', '#34D399', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.category_groups (id, name, color, user_id) VALUES ('1151ff10-0a2b-498c-b55f-ae4f554d41a4', 'Casa & Jardim', '#ff75c3', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.category_groups (id, name, color, user_id) VALUES ('5011e7e0-9097-4171-a306-5d1d25dee5de', 'Comida & Bebida', '#ffa647', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
 
 
 -- Create public.transaction_categories values
 --
 -- Data for public.transaction_categories; Schema: public
 --
-INSERT INTO public.transaction_categories (id, name, group_id, user_id) VALUES ('c5aee89c-f7ca-430d-ba9e-d9a90ada09d7', 'Criação de Conta', '492f210b-0def-43e7-9786-393ebf2d6a6a', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
-INSERT INTO public.transaction_categories (id, name, group_id, user_id) VALUES ('3dc3ba14-2243-4003-a03e-fa18331041c0', 'Receitas com Serviços', '1151ff10-0a2b-498c-b55f-ae4f554d41a4', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
-INSERT INTO public.transaction_categories (id, name, group_id, user_id) VALUES ('83e8b0b5-3d43-4618-9aef-7980022f5603', 'Aporte de Capital', '5011e7e0-9097-4171-a306-5d1d25dee5de', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.transaction_categories (id, name, icon, group_id, user_id) VALUES ('c5aee89c-f7ca-430d-ba9e-d9a90ada09d7', 'Combustível', '⛽', '492f210b-0def-43e7-9786-393ebf2d6a6a', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.transaction_categories (id, name, icon, group_id, user_id) VALUES ('3dc3ba14-2243-4003-a03e-fa18331041c0', 'Aluguel', '🏠', '1151ff10-0a2b-498c-b55f-ae4f554d41a4', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.transaction_categories (id, name, icon, group_id, user_id) VALUES ('83e8b0b5-3d43-4618-9aef-7980022f5603', 'Mercado', '🛒', '5011e7e0-9097-4171-a306-5d1d25dee5de', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
 
 
 -- Create public.transaction_types values

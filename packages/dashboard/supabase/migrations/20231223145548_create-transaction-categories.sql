@@ -1,6 +1,7 @@
 CREATE TABLE public.transaction_categories (
   id uuid default gen_random_uuid () NOT NULL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
+  icon VARCHAR(100) NOT NULL,
   group_id uuid NOT NULL,
   user_id uuid references auth.users (id) not null,
   CONSTRAINT transactions_categories_group_fkey FOREIGN KEY (group_id) REFERENCES public.category_groups(id)

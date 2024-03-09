@@ -131,16 +131,19 @@ export interface Database {
       }
       category_groups: {
         Row: {
+          color: string
           id: string
           name: string
           user_id: string
         }
         Insert: {
+          color: string
           id?: string
           name: string
           user_id: string
         }
         Update: {
+          color?: string
           id?: string
           name?: string
           user_id?: string
@@ -316,18 +319,21 @@ export interface Database {
       transaction_categories: {
         Row: {
           group_id: string
+          icon: string
           id: string
           name: string
           user_id: string
         }
         Insert: {
           group_id: string
+          icon: string
           id?: string
           name: string
           user_id: string
         }
         Update: {
           group_id?: string
+          icon?: string
           id?: string
           name?: string
           user_id?: string

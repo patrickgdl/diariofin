@@ -40,7 +40,7 @@ export function AppearanceForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
+        {/* <FormField
           control={form.control}
           name="font"
           render={({ field }) => (
@@ -63,7 +63,7 @@ export function AppearanceForm() {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
 
         <FormItem className="space-y-1">
           <FormLabel>Tema</FormLabel>

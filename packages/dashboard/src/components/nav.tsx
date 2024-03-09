@@ -81,10 +81,7 @@ export function Nav({ links, isCollapsed, accounts }: NavProps) {
                 key={index}
                 to={link.route}
                 className={({ isActive }) =>
-                  cn(
-                    buttonVariants({ variant: isActive ? "default" : "ghost" }),
-                    "font-semibold tracking-wide justify-between"
-                  )
+                  cn(buttonVariants({ variant: isActive ? "default" : "ghost" }), "justify-between")
                 }
               >
                 <span className="flex items-center gap-2">
