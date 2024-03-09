@@ -16,6 +16,7 @@ import {
 } from "~/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover"
 import { cn } from "~/utils/cn"
+import { getAcronym } from "~/utils/get-acronym"
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<typeof PopoverTrigger> & {
   isCollapsed?: boolean
@@ -43,7 +44,7 @@ export default function AccountSwitcher({ isCollapsed = false, accounts, classNa
         >
           <Avatar className="mr-2 h-5 w-5">
             <AvatarImage src={`https://avatar.vercel.sh/${selectedAccount.id}.png`} alt={selectedAccount.name || ""} />
-            <AvatarFallback>SC</AvatarFallback>
+            <AvatarFallback>{getAcronym(selectedAccount.name || "")}</AvatarFallback>
           </Avatar>
           {!isCollapsed ? selectedAccount.name : ""}
           <CaretSortIcon className="ml-auto h-4 w-4 shrink-0 opacity-50" />

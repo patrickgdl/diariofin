@@ -26,6 +26,7 @@ import { Input } from "~/ui/input"
 import { Label } from "~/ui/label"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/ui/select"
+import { getAcronym } from "~/utils/get-acronym"
 
 const groups = [
   {
@@ -95,7 +96,7 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
                           alt={team.label}
                           className="grayscale"
                         />
-                        <AvatarFallback>SC</AvatarFallback>
+                        <AvatarFallback>{getAcronym(team?.value || "")}</AvatarFallback>
                       </Avatar>
                       {team.label}
                       <CheckIcon

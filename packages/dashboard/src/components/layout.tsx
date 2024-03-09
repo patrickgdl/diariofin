@@ -1,7 +1,7 @@
 import cookies from "js-cookie"
 import * as React from "react"
 import useAccounts from "~/hooks/useAccountsQuery"
-import Account from "~/pages/account"
+import OnboardingPage from "~/pages/onboarding"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resizable"
 import { Separator } from "~/ui/separator"
 import { cn } from "~/utils/cn"
@@ -9,7 +9,6 @@ import { LINKS } from "~/utils/constants"
 
 import ErrorState from "./error-state"
 import Loader from "./loader"
-import Logo from "./logo"
 import { Nav } from "./nav"
 import { ThemeToggle } from "./theme-toggle"
 import { UserNav } from "./user-nav"
@@ -31,7 +30,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }
 
   if (accounts?.length < 1) {
-    return <Account />
+    return <OnboardingPage />
   }
 
   return (

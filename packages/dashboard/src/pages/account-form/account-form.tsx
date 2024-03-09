@@ -15,18 +15,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~
 import accountFormSchema, { AccountFormType } from "./schema/account-form-schema"
 import { useAuthUser } from "~/contexts/SessionContext"
 
-type AccountFormProps = {
-  isControlledAddMode?: boolean
-}
-
-const AccountForm = ({ isControlledAddMode = false }: AccountFormProps) => {
+const AccountForm = () => {
   let { id } = useParams()
   const navigate = useNavigate()
 
   const { id: user_id } = useAuthUser() || {}
   const { accounts, setAccounts } = useAppContext()
 
-  const isAddMode = id === "new" || isControlledAddMode
+  const isAddMode = id === "new"
   const { data: accountToUpdate } = useAccountById(id)
 
   const form = useForm<AccountFormType>({
@@ -211,11 +207,9 @@ const AccountForm = ({ isControlledAddMode = false }: AccountFormProps) => {
           </div>
 
           <div className="flex justify-end space-x-1">
-            {!isControlledAddMode && (
-              <Button variant="outline" onClick={() => navigate(-1)}>
-                Cancelar
-              </Button>
-            )}
+            <Button variant="outline" onClick={() => navigate(-1)}>
+              Cancelar
+            </Button>
 
             <Button type="submit" form="account-form">
               {isAddMode ? "Criar" : "Atualizar"}

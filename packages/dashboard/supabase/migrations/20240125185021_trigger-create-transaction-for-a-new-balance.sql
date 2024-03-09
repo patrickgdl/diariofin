@@ -43,7 +43,7 @@ BEGIN
                 is_canceled,
                 is_done,
                 start_date,
-                user_id,
+                user_id
             )
             VALUES (
                 new_transaction_id,

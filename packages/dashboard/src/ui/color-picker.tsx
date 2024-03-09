@@ -1,5 +1,5 @@
 export function ColorPicker({ color, setColor }: { color: string; setColor: (background: string) => void }) {
-  const solids = ["#E2E2E2", "#ff75c3", "#ffa647", "#ffe83f", "#9fff5b", "#70e2ff", "#cd93ff", "#f87171"]
+  const solids = ["#6B7280", "#ff75c3", "#ffa647", "#FBBF24", "#34D399", "#70e2ff", "#cd93ff", "#f87171"]
 
   return (
     <div className="flex flex-wrap gap-1 mt-0">

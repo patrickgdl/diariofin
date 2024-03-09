@@ -29,3 +29,8 @@ export const LINKS: { route: string; label: string; icon: ReactNode }[] = [
     icon: <FileDown size={16} />,
   },
 ]
+
+export const LOCAL_STORAGE_KEYS = {
+  ONBOARDING_ACCOUNTS: "onboarding-accounts",
+  ONBOARDING_CATEGORIES: "onboarding-categories",
+}
