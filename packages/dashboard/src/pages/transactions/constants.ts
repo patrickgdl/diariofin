@@ -18,7 +18,13 @@ export const TRANSACTION_QUERY = `
   ),
   transaction_categories (
     id,
-    name
+    name,
+    icon,
+    category_groups (
+      id, 
+      name, 
+      color
+    )
   ),
   clients (
     id,
