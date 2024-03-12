@@ -1,4 +1,6 @@
+import { subDays } from "date-fns"
 import * as React from "react"
+import { DateRange } from "react-day-picker"
 import { useParams } from "react-router-dom"
 import AccountSwitcher from "~/components/account-switcher"
 import { CalendarDateRangePicker } from "~/components/date-range-picker"
@@ -7,14 +9,25 @@ import useAppContext from "~/hooks/useAppContext"
 import { Card, CardContent, CardHeader, CardTitle } from "~/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 
+import { TopCategoriesTable } from "../categories/components/top-categories-table"
 import { Consolidated } from "./components/consolidated"
 import { Overview } from "./components/overview"
 import { TransactionsReviewTable } from "./components/transaction-review-table"
-import { TopCategoriesTable } from "../categories/components/top-categories-table"
+import useTransactionsByDate from "./hooks/use-transactions-by-date"
+import formatCurrency from "~/utils/format-currency"
+
+const today = new Date()
 
 export default function DashboardPage() {
   const params = useParams()
   const { accounts, setSelectedAccount } = useAppContext()
+
+  const [date, setDate] = React.useState<DateRange>({
+    from: today,
+    to: subDays(today, 30),
+  })
+
+  const { totalCount, expenseCount, incomeCount } = useTransactionsByDate(date)
 
   React.useEffect(() => {
     if (params?.accountId) {
@@ -32,7 +45,7 @@ export default function DashboardPage() {
       <div className="flex items-center justify-between">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
         <div className="flex items-center space-x-2">
-          <CalendarDateRangePicker />
+          <CalendarDateRangePicker date={date} onSelectDate={setDate} />
 
           {accounts.length > 0 && <AccountSwitcher accounts={accounts} />}
         </div>
@@ -65,7 +78,7 @@ export default function DashboardPage() {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">R$ 45.231,89</div>
+                <div className="text-2xl font-bold">{formatCurrency(totalCount)}</div>
                 <p className="text-xs text-muted-foreground">+20.1% no último mês</p>
               </CardContent>
             </Card>
@@ -89,7 +102,7 @@ export default function DashboardPage() {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">R$ 12.321,00</div>
+                <div className="text-2xl font-bold">{formatCurrency(incomeCount)}</div>
                 <p className="text-xs text-muted-foreground">+180.1% no último mês</p>
               </CardContent>
             </Card>
@@ -112,7 +125,7 @@ export default function DashboardPage() {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">R$ 89.121,20</div>
+                <div className="text-2xl font-bold">{formatCurrency(Math.abs(expenseCount))}</div>
                 <p className="text-xs text-muted-foreground">+19% no último mês</p>
               </CardContent>
             </Card>

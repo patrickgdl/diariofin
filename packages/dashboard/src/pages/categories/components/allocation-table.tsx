@@ -139,16 +139,6 @@ export const columns: ColumnDef<Category>[] = [
       )
     },
   },
-
-  {
-    accessorKey: "current",
-    header: () => <div className="text-right">Orçado</div>,
-    cell: ({ row }) => {
-      const budget = parseFloat(row.getValue("current"))
-
-      return <div className="text-right font-medium">{formatCurrency(budget)}</div>
-    },
-  },
 ]
 
 export function CategoriesTable() {
