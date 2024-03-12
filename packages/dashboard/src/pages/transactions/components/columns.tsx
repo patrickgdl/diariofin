@@ -60,8 +60,8 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
     accessorKey: "transaction_categories",
     cell: ({ row }) => {
       return (
-        <Badge>
-          {/* {icon && React.cloneElement(icon, { className: "h-4 w-4" })} */}
+        <Badge style={{ backgroundColor: row.original.transaction_categories?.category_groups?.color }}>
+          <span className="mr-1">{row.original.transaction_categories?.icon}</span>
           {row.original.transaction_categories?.name}
         </Badge>
       )

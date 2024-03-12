@@ -23,9 +23,15 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   groupedData: Record<string, TData[]>
+  onSelect: (data: TData) => void
 }
 
-export function TransactionsTable<TData, TValue>({ columns, data, groupedData }: DataTableProps<TData, TValue>) {
+export function TransactionsTable<TData, TValue>({
+  columns,
+  data,
+  groupedData,
+  onSelect,
+}: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -70,7 +76,11 @@ export function TransactionsTable<TData, TValue>({ columns, data, groupedData }:
                     .getRowModel()
                     .rows.filter((row) => groupedRows.includes(row.original))
                     .map((row) => (
-                      <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                      <TableRow
+                        key={row.id}
+                        data-state={row.getIsSelected() && "selected"}
+                        onClick={() => onSelect(row.original)}
+                      >
                         {row.getVisibleCells().map((cell) => (
                           <TableCell key={cell.id} className={cn(cell.column.getCanResize() ? null : `w-1/4`)}>
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}

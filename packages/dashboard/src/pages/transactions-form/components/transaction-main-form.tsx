@@ -26,7 +26,7 @@ import TransactionRecurrenceForm from "./transaction-recurrence-form"
 
 type TransactionMainFormProps = {
   variant: keyof typeof TRANSACTION_TYPE
-  transactionToUpdate?: Transactions
+  transactionToUpdate?: Transactions | null
   onSubmit: (values: TransactionFormType) => void
 }
 
