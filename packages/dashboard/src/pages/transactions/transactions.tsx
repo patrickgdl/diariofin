@@ -12,9 +12,12 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resiz
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover"
 import * as React from "react"
 import { TransactionDisplay } from "./components/transaction-display"
+import useCategories from "~/hooks/useCategoriesQuery"
 
 export default function TransactionsPage() {
   const navigate = useNavigate()
+
+  const { categories } = useCategories()
   const { data, groupedData, ...transactionsQuery } = useTransactionsQuery()
 
   const [selected, setSelected] = React.useState(data[0] || null)
@@ -76,6 +79,7 @@ export default function TransactionsPage() {
       <ResizablePanel defaultSize={45}>
         {selected ? (
           <TransactionDisplay
+            categories={categories}
             transaction={selected}
             onDeactivate={console.log}
             onEdit={(acc) => navigate(`/accounts/${acc.id}`)}

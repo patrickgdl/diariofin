@@ -96,11 +96,6 @@ export function AccountsDisplay({ account, onDeactivate, onEdit }: AccountsDispl
               </AvatarFallback>
             </Avatar>
             <div>
-              {/* <p className="text-sm text-gray-500">
-                  {formatDistanceToNow(new Date(account.created_at), {
-                    addSuffix: true,
-                  })}
-                </p> */}
               <h1 className="text-xl font-semibold">{account.name}</h1>
             </div>
           </div>
