@@ -44,7 +44,7 @@ export default function TransactionsFormPage() {
           user_id,
           amount: isExpense ? -transaction.amount : transaction.amount,
           client_id: transaction.client_id ? transaction.client_id : null,
-          start_date: transaction.start_date.toISOString(),
+          date: transaction.date.toISOString(),
           parent_transaction_id: null,
         })
 
@@ -53,10 +53,7 @@ export default function TransactionsFormPage() {
             user_id,
             is_done: true,
             is_canceled: false,
-            is_rescheduled: false,
             transaction_id: response[0].id,
-            start_date: transaction.start_date.toISOString(),
-            end_date: null,
           })
         }
 
@@ -73,7 +70,7 @@ export default function TransactionsFormPage() {
           transaction: {
             ...transaction,
             client_id: transaction.client_id ? transaction.client_id : null,
-            start_date: transaction.start_date.toISOString(),
+            date: transaction.date.toISOString(),
           },
         })
       }

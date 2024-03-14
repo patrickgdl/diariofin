@@ -3,5 +3,5 @@ export interface TransactionCategories {
   id: string
   name: string
   icon: string
-  user_id: string
+  user_id: string | null
 }

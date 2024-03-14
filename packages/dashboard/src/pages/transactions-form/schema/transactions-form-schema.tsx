@@ -3,9 +3,8 @@ import * as z from "zod"
 export const transactionFormSchema = z.object({
   amount: z.number({ required_error: "Valor é obrigatório" }).gt(0, { message: "Valor precisa ser maior que zero" }),
   description: z.string({ required_error: "Descrição é obrigatório" }),
-  start_date: z.date({ required_error: "Data da Transação é obrigatório" }),
+  date: z.date({ required_error: "Data da Transação é obrigatório" }),
   type_id: z.number(),
-  end_date: z.string().nullable().default(null),
   is_recurring: z.boolean().default(false),
   is_done: z.boolean(),
   category_id: z.string({ required_error: "Categoria é obrigatório" }),

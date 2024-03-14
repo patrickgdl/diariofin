@@ -6,8 +6,7 @@ CREATE TABLE public.transactions (
   account_id uuid NOT NULL,
   category_id uuid NOT NULL,
   client_id uuid DEFAULT NULL,
-  start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  end_date TIMESTAMP DEFAULT NULL,
+  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   is_recurring BOOLEAN NOT NULL DEFAULT FALSE,
   user_id uuid references auth.users (id) not null,
   -- This is used when all future instances of a recurring are rescheduled. 

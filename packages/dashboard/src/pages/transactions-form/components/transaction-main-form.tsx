@@ -49,7 +49,7 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
   const handlePresetDate = (value: string) => {
     if (value) {
       const addedDays = addDays(new Date(), parseInt(value))
-      form.setValue("start_date", addedDays, { shouldValidate: true })
+      form.setValue("date", addedDays, { shouldValidate: true })
     }
   }
 
@@ -57,7 +57,7 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
     if (transactionToUpdate) {
       form.reset({
         ...transactionToUpdate,
-        start_date: transactionToUpdate?.start_date ? new Date(transactionToUpdate.start_date) : new Date(),
+        date: transactionToUpdate?.date ? new Date(transactionToUpdate.date) : new Date(),
       })
     }
   }, [transactionToUpdate])
@@ -106,7 +106,7 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
             <div className="flex items-end w-auto">
               <FormField
                 control={form.control}
-                name="start_date"
+                name="date"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
                     <FormLabel>Data do {isExpense ? "Pagamento" : "Recebimento"}</FormLabel>
