@@ -1,16 +1,15 @@
+import { CheckCircledIcon } from "@radix-ui/react-icons"
 import { ColumnDef } from "@tanstack/react-table"
-import { parseISO } from "date-fns"
+import { CircleIcon } from "lucide-react"
 import { TransactionsQuery } from "~/queries/get-transactions"
+import { Avatar, AvatarFallback, AvatarImage } from "~/ui/avatar"
 import { Badge } from "~/ui/badge"
 import { Checkbox } from "~/ui/checkbox"
-import formatCurrency from "~/utils/format-currency"
-import formatDate from "~/utils/format-date"
-
-import { DataTableColumnHeader } from "./transactions-column-header"
-import { DataTableRowActions } from "./transactions-row-actions"
 import { cn } from "~/utils/cn"
-import { Avatar, AvatarFallback, AvatarImage } from "~/ui/avatar"
+import formatCurrency from "~/utils/format-currency"
 import { getAcronym } from "~/utils/get-acronym"
+
+import { DataTableRowActions } from "./transactions-row-actions"
 
 export const columns: ColumnDef<TransactionsQuery[0]>[] = [
   {
@@ -37,25 +36,24 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
     cell: ({ row }) => <div className="capitalize">{row.getValue("description")}</div>,
     enableResizing: false, //disable resizing for just this column
   },
-  // {
-  //   accessorKey: "is_done",
-  //   header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
-  //   cell: ({ row }) => {
-  //     return (
-  //       <div className="flex w-[100px] items-center">
-  //         {row.original.transactions_instance?.is_done ? (
-  //           <CircleIcon className="mr-2 h-4 w-4 text-muted-foreground" />
-  //         ) : (
-  //           <CheckCircledIcon className="mr-2 h-4 w-4 text-muted-foreground" />
-  //         )}
-  //         <span>{row.original.transactions_instance?.is_done ? "Recebido" : "Não recebido"}</span>
-  //       </div>
-  //     )
-  //   },
-  //   filterFn: (row, id, value) => {
-  //     return value.includes(row.getValue(id))
-  //   },
-  // },
+  {
+    accessorKey: "is_done",
+    cell: ({ row }) => {
+      return (
+        <div className="flex w-[100px] items-center">
+          {row.original.transactions_instance?.is_done ? (
+            <CheckCircledIcon className="mr-2 h-4 w-4 text-muted-foreground" />
+          ) : (
+            <CircleIcon className="mr-2 h-4 w-4 text-muted-foreground" />
+          )}
+          <span>{row.original.transactions_instance?.is_done ? "Recebido" : "Não recebido"}</span>
+        </div>
+      )
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
+  },
   {
     accessorKey: "transaction_categories",
     cell: ({ row }) => {

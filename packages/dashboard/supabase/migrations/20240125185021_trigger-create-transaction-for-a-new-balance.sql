@@ -20,7 +20,7 @@ BEGIN
                 category_id,
                 client_id,
                 is_recurring,
-                start_date,
+                date,
                 user_id
             )
             VALUES (
@@ -39,18 +39,14 @@ BEGIN
             -- Create the transactions_instance as done
             INSERT INTO transactions_instance (
                 transaction_id,
-                is_rescheduled,
                 is_canceled,
                 is_done,
-                start_date,
                 user_id
             )
             VALUES (
                 new_transaction_id,
                 false,
-                false,
                 true,
-                CURRENT_TIMESTAMP,
                 NEW.user_id
             );
 

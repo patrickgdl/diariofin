@@ -6,8 +6,7 @@ export interface Transactions {
   client_id: string | null
   description: string
   type_id: number
-  start_date: string
-  end_date: string | null
+  date: string
   is_recurring: boolean
   parent_transaction_id: string | null
   user_id: string

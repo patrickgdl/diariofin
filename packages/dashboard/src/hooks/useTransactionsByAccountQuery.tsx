@@ -31,11 +31,11 @@ function useTransactionsByAccountQuery(accountId: string) {
 
   const groupedData = React.useMemo(() => {
     // Sort the items by date in descending order so the most recent dates come first
-    const sortedItems = data.sort((a, b) => compareDesc(parseISO(a.start_date), parseISO(b.start_date)))
+    const sortedItems = data.sort((a, b) => compareDesc(parseISO(a.date), parseISO(b.date)))
 
     // Group items by "Hoje", "Ontem", or specific date format
     return sortedItems.reduce((acc, item) => {
-      const formattedDate = customFormatDate(item.start_date) // Use formatDate here
+      const formattedDate = customFormatDate(item.date) // Use formatDate here
       if (!acc[formattedDate]) {
         acc[formattedDate] = []
       }

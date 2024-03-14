@@ -1,18 +1,18 @@
+import { ArrowDownFromLine, ArrowUpFromLine, PlusCircleIcon } from "lucide-react"
+import * as React from "react"
 import { useNavigate } from "react-router-dom"
 import ErrorState from "~/components/error-state"
 import Loader from "~/components/loader"
 import { TransactionsTable } from "~/components/transactions-table/transactions-table"
+import useCategories from "~/hooks/useCategoriesQuery"
 import useTransactionsQuery from "~/hooks/useTransactionsQuery"
+import { Button } from "~/ui/button"
+import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover"
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resizable"
+import { Separator } from "~/ui/separator"
 
 import { columns } from "./components/columns"
-import { Button } from "~/ui/button"
-import { ArrowDownFromLine, ArrowUpFromLine, PlusCircleIcon } from "lucide-react"
-import { Separator } from "~/ui/separator"
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resizable"
-import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover"
-import * as React from "react"
 import { TransactionDisplay } from "./components/transaction-display"
-import useCategories from "~/hooks/useCategoriesQuery"
 
 export default function TransactionsPage() {
   const navigate = useNavigate()

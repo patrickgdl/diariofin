@@ -134,19 +134,19 @@ export interface Database {
           color: string
           id: string
           name: string
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           color: string
           id?: string
           name: string
-          user_id: string
+          user_id?: string | null
         }
         Update: {
           color?: string
           id?: string
           name?: string
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -322,21 +322,21 @@ export interface Database {
           icon: string
           id: string
           name: string
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           group_id: string
           icon: string
           id?: string
           name: string
-          user_id: string
+          user_id?: string | null
         }
         Update: {
           group_id?: string
           icon?: string
           id?: string
           name?: string
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -374,12 +374,11 @@ export interface Database {
           amount: number
           category_id: string
           client_id: string | null
+          date: string
           description: string
-          end_date: string | null
           id: string
           is_recurring: boolean
           parent_transaction_id: string | null
-          start_date: string
           type_id: number
           user_id: string
         }
@@ -388,12 +387,11 @@ export interface Database {
           amount: number
           category_id: string
           client_id?: string | null
+          date?: string
           description: string
-          end_date?: string | null
           id?: string
           is_recurring?: boolean
           parent_transaction_id?: string | null
-          start_date?: string
           type_id: number
           user_id: string
         }
@@ -402,12 +400,11 @@ export interface Database {
           amount?: number
           category_id?: string
           client_id?: string | null
+          date?: string
           description?: string
-          end_date?: string | null
           id?: string
           is_recurring?: boolean
           parent_transaction_id?: string | null
-          start_date?: string
           type_id?: number
           user_id?: string
         }
@@ -452,32 +449,20 @@ export interface Database {
       }
       transactions_instance: {
         Row: {
-          end_date: string | null
-          id: string
           is_canceled: boolean
           is_done: boolean
-          is_rescheduled: boolean
-          start_date: string | null
           transaction_id: string
           user_id: string
         }
         Insert: {
-          end_date?: string | null
-          id?: string
           is_canceled: boolean
           is_done: boolean
-          is_rescheduled: boolean
-          start_date?: string | null
           transaction_id: string
           user_id: string
         }
         Update: {
-          end_date?: string | null
-          id?: string
           is_canceled?: boolean
           is_done?: boolean
-          is_rescheduled?: boolean
-          start_date?: string | null
           transaction_id?: string
           user_id?: string
         }

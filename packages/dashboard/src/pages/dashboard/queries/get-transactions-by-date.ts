@@ -5,7 +5,7 @@ export function getTransactionByDate(supabase: SupabaseClient, date: DateRange) 
   return supabase
     .from("transactions")
     .select("*")
-    .gt("start_date", date.to?.toISOString())
-    .lt("start_date", date.from?.toISOString())
+    .gt("date", date.to?.toISOString())
+    .lt("date", date.from?.toISOString())
     .throwOnError()
 }

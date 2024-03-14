@@ -5,7 +5,7 @@ export function getTransactionCountByDate(supabase: SupabaseClient, date: DateRa
   return supabase
     .from("transactions")
     .select("*", { count: "exact", head: true })
-    .gt("start_date", date.from)
-    .lt("start_date", date.to)
+    .gt("date", date.from)
+    .lt("date", date.to)
     .throwOnError()
 }
