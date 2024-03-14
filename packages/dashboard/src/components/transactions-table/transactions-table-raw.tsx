@@ -13,7 +13,7 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 import * as React from "react"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/ui/table"
+import { Table, TableBody, TableCell, TableRow } from "~/ui/table"
 import { cn } from "~/utils/cn"
 
 interface DataTableProps<TData, TValue> {

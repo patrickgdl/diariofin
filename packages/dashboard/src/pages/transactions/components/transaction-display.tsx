@@ -1,7 +1,9 @@
 import { formatDistanceToNow } from "date-fns"
+import { ptBR } from "date-fns/locale"
 import { CalendarCheck, Check, Edit2Icon, MoreVertical, Trash2Icon } from "lucide-react"
 import * as React from "react"
 import { TransactionsQuery } from "~/queries/get-transactions-by-account"
+import { TransactionCategories } from "~/types/transaction-categories"
 import { Button } from "~/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "~/ui/command"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "~/ui/dropdown-menu"
@@ -15,34 +17,12 @@ import formatCurrency from "~/utils/format-currency"
 
 interface TransactionDisplayProps {
   transaction: TransactionsQuery[0]
+  categories: TransactionCategories[]
   onDeactivate: (transaction: TransactionsQuery[0]) => void
   onEdit: (transaction: TransactionsQuery[0]) => void
 }
 
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-]
-
-export function TransactionDisplay({ transaction, onDeactivate, onEdit }: TransactionDisplayProps) {
+export function TransactionDisplay({ transaction, categories, onDeactivate, onEdit }: TransactionDisplayProps) {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
 
@@ -92,8 +72,9 @@ export function TransactionDisplay({ transaction, onDeactivate, onEdit }: Transa
           <div>
             <p className="flex text-sm text-gray-500">
               <CalendarCheck className="h-4 w-4 mr-2" />
-              {formatDistanceToNow(new Date(transaction.start_date), {
+              {formatDistanceToNow(new Date(transaction.date), {
                 addSuffix: true,
+                locale: ptBR,
               })}
             </p>
             <h1 className="text-xl font-semibold">{transaction.description}</h1>
@@ -104,40 +85,38 @@ export function TransactionDisplay({ transaction, onDeactivate, onEdit }: Transa
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div>
+        <div className="flex items-center justify-between ">
+          <div className="space-y-2">
             <p className="flex text-sm text-gray-500">Conta</p>
             <h3 className="text-xl font-semibold">{transaction.account?.name}</h3>
           </div>
 
-          <div className="flex flex-col items-end">
+          <div className="flex flex-col items-end space-y-2">
             <h3 className="flex text-sm text-gray-500">Categoria</h3>
 
             <Popover open={open} onOpenChange={setOpen}>
               <PopoverTrigger asChild>
-                <Button variant="outline" role="combobox" aria-expanded={open}>
-                  <span className="text-xl font-semibold">{transaction.transaction_categories?.icon}</span>
-                  <span className="text-xl font-semibold">{transaction.transaction_categories?.name}</span>
+                <Button variant="outline" role="combobox" size="sm" aria-expanded={open}>
+                  <span>{transaction.transaction_categories?.icon}</span>
+                  <span>{transaction.transaction_categories?.name}</span>
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-[200px] p-0">
                 <Command>
-                  <CommandInput placeholder="Buscar nova categoria..." />
-                  <CommandEmpty>Nenhuma categoria encontrada.</CommandEmpty>
+                  <CommandInput placeholder="Buscar categoria" />
+                  <CommandEmpty>Nenhuma categoria.</CommandEmpty>
                   <CommandGroup>
-                    {frameworks.map((framework) => (
+                    {categories.map((category) => (
                       <CommandItem
-                        key={framework.value}
-                        value={framework.value}
+                        key={category.id}
+                        value={category.id}
                         onSelect={(currentValue) => {
                           setValue(currentValue === value ? "" : currentValue)
                           setOpen(false)
                         }}
                       >
-                        <Check
-                          className={cn("mr-2 h-4 w-4", value === framework.value ? "opacity-100" : "opacity-0")}
-                        />
-                        {framework.label}
+                        <Check className={cn("mr-2 h-4 w-4", value === category.id ? "opacity-100" : "opacity-0")} />
+                        {category.name}
                       </CommandItem>
                     ))}
                   </CommandGroup>

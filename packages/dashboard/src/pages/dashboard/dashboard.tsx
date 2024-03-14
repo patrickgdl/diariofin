@@ -6,15 +6,16 @@ import AccountSwitcher from "~/components/account-switcher"
 import { CalendarDateRangePicker } from "~/components/date-range-picker"
 import { defaultAccount } from "~/contexts/AppContext"
 import useAppContext from "~/hooks/useAppContext"
-import { Card, CardContent, CardHeader, CardTitle } from "~/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
+import formatCurrency from "~/utils/format-currency"
 
 import { TopCategoriesTable } from "../categories/components/top-categories-table"
-import { Consolidated } from "./components/consolidated"
+import { MonthByMonthTable } from "./components/month-by-month-table"
 import { Overview } from "./components/overview"
 import { TransactionsReviewTable } from "./components/transaction-review-table"
 import useTransactionsByDate from "./hooks/use-transactions-by-date"
-import formatCurrency from "~/utils/format-currency"
+import { CardMetrics } from "./components/card-metrics"
 
 const today = new Date()
 
@@ -54,9 +55,7 @@ export default function DashboardPage() {
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="analytics" disabled>
-            Análise
-          </TabsTrigger>
+          <TabsTrigger value="consolidated">Consolidado</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
@@ -79,7 +78,7 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{formatCurrency(totalCount)}</div>
-                <p className="text-xs text-muted-foreground">+20.1% no último mês</p>
+                {/* <p className="text-xs text-muted-foreground">+20.1% no último mês</p> */}
               </CardContent>
             </Card>
 
@@ -103,7 +102,7 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{formatCurrency(incomeCount)}</div>
-                <p className="text-xs text-muted-foreground">+180.1% no último mês</p>
+                {/* <p className="text-xs text-muted-foreground">+180.1% no último mês</p> */}
               </CardContent>
             </Card>
 
@@ -126,7 +125,7 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{formatCurrency(Math.abs(expenseCount))}</div>
-                <p className="text-xs text-muted-foreground">+19% no último mês</p>
+                {/* <p className="text-xs text-muted-foreground">+19% no último mês</p> */}
               </CardContent>
             </Card>
 
@@ -148,7 +147,7 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">R$ 531,30</div>
-                <p className="text-xs text-muted-foreground">+201 no último mês</p>
+                {/* <p className="text-xs text-muted-foreground">+201 no último mês</p> */}
               </CardContent>
             </Card>
 
@@ -170,33 +169,35 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">R$ 1.231,20</div>
-                <p className="text-xs text-muted-foreground">+23 no último mês</p>
+                {/* <p className="text-xs text-muted-foreground">+23 no último mês</p> */}
               </CardContent>
             </Card>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-            <Card className="col-span-4">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
+            <Card>
               <CardHeader>
                 <CardTitle>Fluxo de Caixa</CardTitle>
+                <CardDescription>Seu fluxo de caixa durante o período selecionado.</CardDescription>
               </CardHeader>
               <CardContent className="pl-2">
                 <Overview />
               </CardContent>
             </Card>
 
-            <Card className="col-span-3">
-              <CardHeader>
-                <CardTitle>Consolidado mês a mês</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Consolidated />
-              </CardContent>
-            </Card>
+            <CardMetrics />
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
             <TransactionsReviewTable />
+
+            <TopCategoriesTable />
+          </div>
+        </TabsContent>
+
+        <TabsContent value="consolidated" className="space-y-4">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
+            <MonthByMonthTable />
 
             <TopCategoriesTable />
           </div>

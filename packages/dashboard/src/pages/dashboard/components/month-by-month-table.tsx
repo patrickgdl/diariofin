@@ -1,3 +1,4 @@
+import * as React from "react"
 import { BoltIcon } from "@heroicons/react/20/solid"
 import {
   ColumnDef,
@@ -12,155 +13,127 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 import { CarIcon, CoffeeIcon, HomeIcon, KeyIcon, ShoppingBagIcon, StarIcon } from "lucide-react"
-import * as React from "react"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
-import { Progress } from "~/ui/progress"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/ui/table"
 import formatCurrency from "~/utils/format-currency"
+import { cn } from "~/utils/cn"
 import formatDate from "~/utils/format-date"
 
-const data: Category[] = [
+interface Transaction {
+  date: string
+  incoming: number
+  outgoing: number
+}
+
+const data: Transaction[] = [
   {
-    id: "home",
-    name: "Home",
-    icon: "Home",
-    current: 1000,
-    max: 2050,
-    date: "2023-01-01", // Example date in ISO format
+    date: "2023-01-01T14:48:00",
+    incoming: 732.65,
+    outgoing: -800.4,
   },
   {
-    id: "car",
-    name: "Transporte",
-    icon: "Car",
-    current: 2022,
-    max: 2050,
-    date: "2023-01-01", // Example date in ISO format
+    date: "2023-02-01T14:48:00",
+    incoming: 820.8,
+    outgoing: -550.55,
   },
   {
-    id: "rent",
-    name: "Aluguel",
-    icon: "Key",
-    current: 1984,
-    max: 2000,
-    date: "2023-01-01", // Example date in ISO format
+    date: "2023-03-01T14:48:00",
+    incoming: 820.8,
+    outgoing: -550.55,
   },
   {
-    id: "utilities",
-    name: "Utilidades",
-    icon: "Bolt",
-    current: 38,
-    max: 50,
-    date: "2023-01-01", // Example date in ISO format
+    date: "2023-04-01T14:48:00",
+    incoming: 820.8,
+    outgoing: -550.55,
   },
   {
-    id: "subscriptions",
-    name: "Inscrições",
-    icon: "Star",
-    current: 35,
-    max: 200,
-    date: "2023-01-01", // Example date in ISO format
+    date: "2023-05-01T14:48:00",
+    incoming: 820.8,
+    outgoing: -550.55,
   },
   {
-    id: "shopping",
-    name: "Shopping",
-    icon: "ShoppingBag",
-    current: 15,
-    max: 250,
-    date: "2023-01-01", // Example date in ISO format
+    date: "2023-06-01T14:48:00",
+    incoming: 820.8,
+    outgoing: -550.55,
   },
   {
-    id: "food",
-    name: "Comidas e Bebidas",
-    icon: "Coffee",
-    current: 0,
-    max: 450,
-    date: "2023-01-01", // Example date in ISO format
+    date: "2023-07-01T14:48:00",
+    incoming: 820.8,
+    outgoing: -550.55,
+  },
+  {
+    date: "2023-08-01T14:48:00",
+    incoming: 820.8,
+    outgoing: -550.55,
+  },
+  {
+    date: "2023-09-01T14:48:00",
+    incoming: 820.8,
+    outgoing: -550.55,
+  },
+  {
+    date: "2023-10-01T14:48:00",
+    incoming: 820.8,
+    outgoing: -550.55,
+  },
+  {
+    date: "2023-11-01T14:48:00",
+    incoming: 820.8,
+    outgoing: -550.55,
+  },
+  {
+    date: "2023-12-01T14:48:00",
+    incoming: 820.8,
+    outgoing: -550.55,
   },
 ]
 
-export type Category = {
-  id: string
-  name: string
-  icon: string
-  current: number
-  max: number
-  date: string // Add date field
-}
-
-const iconMap = {
-  Home: <HomeIcon className="mr-2 h-5 w-5" />,
-  Car: <CarIcon className="mr-2 h-5 w-5" />,
-  Key: <KeyIcon className="mr-2 h-5 w-5" />,
-  Bolt: <BoltIcon className="mr-2 h-5 w-5" />,
-  Star: <StarIcon className="mr-2 h-5 w-5" />,
-  ShoppingBag: <ShoppingBagIcon className="mr-2 h-5 w-5" />,
-  Coffee: <CoffeeIcon className="mr-2 h-5 w-5" />,
-  // ... add other icon mappings
-}
-
-export const columns: ColumnDef<Category>[] = [
+export const columns: ColumnDef<Transaction>[] = [
   {
     id: "date",
     accessorFn: (row) => new Date(row.date), // Accessor function for date
-    header: () => <div>Data</div>,
+    header: () => <div>Mês</div>,
     cell: ({ getValue }) => {
       const date = getValue() as Date
-      return formatDate(date)
+      return formatDate(date, "dd/MM")
     },
   },
   {
-    accessorKey: "name",
-    header: "Categoria",
+    accessorKey: "incoming",
+    header: () => <div className="text-right">Entradas</div>,
     cell: ({ row }) => {
-      const name = row.getValue("name") as string
-      const icon = row.original.icon // Assuming 'icon' is the key in your data for icon names
-      return (
-        <div className="flex items-center">
-          {/* @ts-ignore */}
-          {iconMap[icon]} {/* Render the corresponding icon */}
-          <div className="capitalize">{name}</div>
-        </div>
-      )
+      const incoming = parseFloat(row.getValue("incoming"))
+      return <div className="text-right font-medium">{formatCurrency(incoming)}</div>
     },
   },
   {
-    accessorKey: "current",
-    header: () => <div className="text-right">Valor</div>,
+    accessorKey: "outgoing",
+    header: () => <div className="text-right">Saídas</div>,
     cell: ({ row }) => {
-      const current = parseFloat(row.getValue("current"))
+      const outgoing = parseFloat(row.getValue("outgoing"))
+      return <div className="text-right font-medium">{formatCurrency(outgoing)}</div>
+    },
+  },
+  {
+    id: "diff",
+    header: () => <div className="text-right">Diferença</div>,
+    cell: ({ row }) => {
+      const incoming = parseFloat(row.getValue("incoming"))
+      const outgoing = parseFloat(row.getValue("outgoing"))
 
-      // Format the amount as a dollar amount
-      return <div className="text-right font-medium">{formatCurrency(current)}</div>
-    },
-  },
-  {
-    id: "progress",
-    header: "Progresso",
-    cell: ({ row }) => {
-      const current = row.getValue("current") as number
-      const max = row.getValue("max") as number
-      const progressPercent = (current / max) * 100 // Calculate progress percentage
+      const diff = incoming + outgoing
 
       return (
-        <div className="w-full px-2">
-          <Progress value={progressPercent} className="w-full" />
+        <div className={cn("text-right font-medium", diff < 0 ? "text-red-500" : "text-green-500")}>
+          {formatCurrency(diff)}
         </div>
       )
-    },
-  },
-  {
-    accessorKey: "max",
-    header: () => <div className="text-right">Valor</div>,
-    cell: ({ row }) => {
-      const max = parseFloat(row.getValue("max"))
-
-      // Format the amount as a dollar amount
-      return <div className="text-right font-medium">{formatCurrency(max)}</div>
     },
   },
 ]
 
-export function TopCategoriesTable() {
+export function MonthByMonthTable() {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -188,8 +161,8 @@ export function TopCategoriesTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Top Categorias</CardTitle>
-        <CardDescription>Onde você mais usa seu dinheiro?</CardDescription>
+        <CardTitle>Consolidado Mês-a-Mês</CardTitle>
+        <CardDescription>Como foi seus gastos nos últimos 12 meses?</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="rounded-md border">
@@ -221,7 +194,7 @@ export function TopCategoriesTable() {
               ) : (
                 <TableRow>
                   <TableCell colSpan={columns.length} className="h-24 text-center">
-                    Sem resultados.
+                    No results.
                   </TableCell>
                 </TableRow>
               )}

@@ -1,9 +1,11 @@
 import { ChevronRight } from "lucide-react"
 import { Account } from "~/types/account"
+import { Avatar, AvatarFallback, AvatarImage } from "~/ui/avatar"
 import { Badge } from "~/ui/badge"
 import { Card, CardTitle } from "~/ui/card"
 import { ScrollArea } from "~/ui/scroll-area"
 import formatCurrency from "~/utils/format-currency"
+import { getAcronym } from "~/utils/get-acronym"
 
 interface AccountsListProps {
   items: Account[]
@@ -31,12 +33,18 @@ export function AccountsList({ items, onSelect }: AccountsListProps) {
             className="group flex items-center justify-between p-3 hover:cursor-pointer"
           >
             <div className="flex grow flex-col">
-              <CardTitle className="text-md font-bold">{item.name}</CardTitle>
+              <CardTitle className="text-md font-bold">
+                <div className="flex items-center space-x-1">
+                  <Avatar className="h-5 w-5">
+                    <AvatarImage src={`https://avatar.vercel.sh/${item.id}.png`} alt={item.name} />
+                    <AvatarFallback>{getAcronym(item.name)}</AvatarFallback>
+                  </Avatar>
+
+                  <span>{item.name}</span>
+                </div>
+              </CardTitle>
             </div>
             <div className="flex items-center space-x-4">
-              <Badge variant={item.balance >= 0 ? "default" : "destructive"} className="self-start">
-                {item.balance >= 0 ? `▲ ${1}%` : `▼ ${Math.abs(12)}%`}
-              </Badge>
               <p className="flex-1 truncate text-sm font-medium">{formatCurrency(item.balance)}</p>
               <ChevronRight className="h-5 w-5 text-gray-400" />
             </div>
