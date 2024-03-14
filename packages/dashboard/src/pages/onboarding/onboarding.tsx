@@ -12,15 +12,15 @@ import { TransactionCategories } from "~/types/transaction-categories"
 import { Button } from "~/ui/button"
 import { Separator } from "~/ui/separator"
 import { Stepper, StepperItem, useStepper } from "~/ui/stepper"
+import { toast } from "~/ui/use-toast"
 import { LOCAL_STORAGE_KEYS } from "~/utils/constants"
 
+import { CategoryOnboarding } from "./constants"
 import { AccountMainStep, AccountSecondaryStep } from "./steps/account-step"
 import { AppearanceMainStep } from "./steps/appearance-step"
 import { TransactionTypesMainStep, TransactionTypesSecondaryStep } from "./steps/transaction-types-step"
 
-import type { CategoryOnboarding } from "./constants"
 import type { AccountWithoutId } from "./steps/account-step"
-
 function BackButton() {
   const { isDisabledStep, prevStep } = useStepper()
 
@@ -48,8 +48,6 @@ export default function OnboardingPage() {
     LOCAL_STORAGE_KEYS.ONBOARDING_ACCOUNTS,
     []
   )
-
-  console.log(selectedCategories)
 
   const handleAddAccount = async (account: AccountWithoutId) => {
     setOnboardingAccounts([...onboardingAccounts, account])
@@ -93,20 +91,22 @@ export default function OnboardingPage() {
     }
   }
 
-  const handleFinalize = () => {
+  const handleFinalize = async () => {
     if (!user_id) return
 
     if (onboardingAccounts?.length > 0) {
-      newAccounts.mutate(onboardingAccounts, {
-        onSuccess: (response) => {
-          if (response) {
-            setAccounts(response)
-          }
-        },
-      })
+      toast({ title: "Estamos criando suas contas..." })
+
+      const response = await newAccounts.mutateAsync(onboardingAccounts)
+      if (response) {
+        setAccounts(response)
+        toast({ title: "Contas criadas com sucesso" })
+      }
     }
 
     if (selectedCategories.length > 0) {
+      toast({ title: "Estamos criando suas categorias..." })
+
       const selectedGroups = selectedCategories.map((category) => ({
         name: category.group,
         color: category.color,
@@ -124,20 +124,18 @@ export default function OnboardingPage() {
       // Convert map values back to an array
       const uniqueGroups = Array.from(uniqueMapGroups.values())
 
-      newCategoryGroups.mutate(uniqueGroups, {
-        onSuccess: (response: CategoryGroups[] | null) => {
-          if (response) {
-            const selectedCategoriesWithGroupIds = selectedCategories
-              .map((category) => mapCategoriesWithGroupId(response, category))
-              .filter((s) => Boolean(s)) as TransactionCategories[]
+      const response = await newCategoryGroups.mutateAsync(uniqueGroups)
 
-            newCategories.mutate(selectedCategoriesWithGroupIds)
-          }
-        },
-      })
+      if (response) {
+        const selectedCategoriesWithGroupIds = selectedCategories
+          .map((category) => mapCategoriesWithGroupId(response, category))
+          .filter((s) => Boolean(s)) as TransactionCategories[]
+
+        await newCategories.mutateAsync(selectedCategoriesWithGroupIds)
+      }
+
+      toast({ title: "Categorias criadas com sucesso" })
     }
-
-    navigate("/dashboard")
   }
 
   const steps = [
@@ -156,7 +154,7 @@ export default function OnboardingPage() {
     {
       id: 1,
       label: "Tipos de Transação",
-      content: <TransactionTypesMainStep />,
+      content: <TransactionTypesMainStep selectedCategories={selectedCategories} />,
       secondary: <TransactionTypesSecondaryStep onSelectCategory={handleSelectCategory} />,
     },
     { id: 2, label: "Aparência", content: <AppearanceMainStep onFinalize={handleFinalize} /> },

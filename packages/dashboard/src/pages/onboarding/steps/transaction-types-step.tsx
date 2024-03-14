@@ -5,21 +5,25 @@ import { Card, CardContent } from "~/ui/card"
 import { useStepper } from "~/ui/stepper"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 import { Toggle } from "~/ui/toggle"
+import { toast } from "~/ui/use-toast"
 import formatCurrency from "~/utils/format-currency"
 
 import { CategoryOnboarding, onboardingCategories } from "../constants"
 
-export function TransactionTypesMainStep() {
+type TransactionTypesProps = {
+  selectedCategories: CategoryOnboarding[]
+}
+
+export function TransactionTypesMainStep({ selectedCategories }: TransactionTypesProps) {
   const { nextStep } = useStepper()
 
   const handleNextStep = () => {
-    // if (selectedCategories.length < 1) {
-    //   toast({
-    //     title: `Estamos criando a categoria "Outros".`,
-    //     description: `Ela será usada como transações padrões que não possuam categoria.`,
-    //     variant: "default",
-    //   })
-    // }
+    if (selectedCategories.length < 1) {
+      toast({
+        title: "Nenhuma categoria selecionada",
+        description: `Vamos criar somente a categoria "Outros". Você poderá criar novas categorias depois.`,
+      })
+    }
 
     nextStep()
   }
@@ -91,11 +95,11 @@ export function TransactionTypesMainStep() {
   )
 }
 
-type TransactionTypesProps = {
+type TransactionTypesSecondaryProps = {
   onSelectCategory: (category: CategoryOnboarding) => void
 }
 
-export function TransactionTypesSecondaryStep({ onSelectCategory }: TransactionTypesProps) {
+export function TransactionTypesSecondaryStep({ onSelectCategory }: TransactionTypesSecondaryProps) {
   const groupedByGroup = groupBy(onboardingCategories, "group")
 
   return (
