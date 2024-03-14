@@ -13,11 +13,12 @@ import { Nav } from "./nav"
 import { ThemeToggle } from "./theme-toggle"
 import { UserNav } from "./user-nav"
 
-const layout = JSON.parse(cookies.get("react-resizable-panels:layout") || "")
-const collapsed = Boolean(cookies.get("react-resizable-panels:collapsed"))
+// const layout = JSON.parse(cookies.get("react-resizable-panels:layout") || "")
+// const collapsed = Boolean(cookies.get("react-resizable-panels:collapsed"))
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [isCollapsed, setIsCollapsed] = React.useState(collapsed || false)
+  // const [isCollapsed, setIsCollapsed] = React.useState(collapsed || false)
+  const [isCollapsed, setIsCollapsed] = React.useState(false)
 
   const { accounts, loading, isError } = useAccounts()
 
@@ -42,7 +43,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       }}
     >
       <ResizablePanel
-        defaultSize={layout[0] || 15}
+        // defaultSize={layout[0] || 15}
+        defaultSize={15}
         minSize={15}
         maxSize={15}
         collapsible
@@ -62,7 +64,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       <ResizableHandle withHandle />
 
-      <ResizablePanel defaultSize={layout[1] || 85}>
+      {/* <ResizablePanel defaultSize={layout[1] || 85}> */}
+      <ResizablePanel defaultSize={85}>
         <div className="flex items-center px-4 py-2 h-[52px] justify-end space-x-4">
           <ThemeToggle />
 

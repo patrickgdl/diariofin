@@ -3,16 +3,16 @@ CREATE TABLE public.transaction_categories (
   name VARCHAR(255) NOT NULL,
   icon VARCHAR(100) NOT NULL,
   group_id uuid NOT NULL,
-  user_id uuid references auth.users (id) not null,
+  user_id uuid references auth.users (id),
   CONSTRAINT transactions_categories_group_fkey FOREIGN KEY (group_id) REFERENCES public.category_groups(id)
 );
 
 alter table transaction_categories enable row level security;
 
-CREATE POLICY "Users can view own transaction_categories" ON "public"."transaction_categories"
+CREATE POLICY "Users can view own and special transaction_categories" ON "public"."transaction_categories"
 AS PERMISSIVE FOR SELECT
 TO public
-USING (auth.uid()=user_id);
+USING ((auth.uid() = user_id) OR (user_id IS NULL));
 
 CREATE POLICY "Users can create own transaction_categories" ON "public"."transaction_categories"
 AS PERMISSIVE FOR INSERT

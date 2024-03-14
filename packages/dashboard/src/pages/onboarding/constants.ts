@@ -301,17 +301,4 @@ export const onboardingCategories = [
     group: "Saúde & Fitness",
     color: "#cd93ff",
   },
-
-  {
-    name: "Doações",
-    icon: "❤️",
-    group: "Outros",
-    color: "#6B7280",
-  },
-  {
-    name: "Presentes",
-    icon: "🎁",
-    group: "Outros",
-    color: "#6B7280",
-  },
 ]
