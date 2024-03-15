@@ -1,8 +1,9 @@
 import { SupabaseClient } from "~/services/supabase"
 
-export function getCategoriesAndGroups(supabase: SupabaseClient) {
+export function getCategoriesAndGroups(supabase: SupabaseClient, userId: string) {
   return supabase
     .from("transaction_categories")
-    .select(`id, name, icon, category_groups (id, name, color)`)
+    .select(`id, name, icon, user_id, category_groups(id, name, color)`)
+    .eq("user_id", userId)
     .throwOnError()
 }

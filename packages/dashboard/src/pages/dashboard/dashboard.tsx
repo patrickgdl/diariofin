@@ -16,6 +16,7 @@ import { Overview } from "./components/overview"
 import { TransactionsReviewTable } from "./components/transaction-review-table"
 import useTransactionsByDate from "./hooks/use-transactions-by-date"
 import { CardMetrics } from "./components/card-metrics"
+import MonthlyIncomeProgress from "./components/monthly-income"
 
 const today = new Date()
 
@@ -24,11 +25,12 @@ export default function DashboardPage() {
   const { accounts, setSelectedAccount } = useAppContext()
 
   const [date, setDate] = React.useState<DateRange>({
-    from: today,
-    to: subDays(today, 30),
+    from: subDays(today, 30),
+    to: today,
   })
 
-  const { totalCount, expenseCount, incomeCount } = useTransactionsByDate(date)
+  const pendingTransactions = useTransactionsByDate({ date })
+  const doneTransactions = useTransactionsByDate({ date, isDone: true })
 
   React.useEffect(() => {
     if (params?.accountId) {
@@ -77,7 +79,7 @@ export default function DashboardPage() {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{formatCurrency(totalCount)}</div>
+                <div className="text-2xl font-bold">{formatCurrency(doneTransactions.totalCount)}</div>
                 {/* <p className="text-xs text-muted-foreground">+20.1% no último mês</p> */}
               </CardContent>
             </Card>
@@ -101,14 +103,14 @@ export default function DashboardPage() {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{formatCurrency(incomeCount)}</div>
+                <div className="text-2xl font-bold">{formatCurrency(doneTransactions.incomeCount)}</div>
                 {/* <p className="text-xs text-muted-foreground">+180.1% no último mês</p> */}
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Despesas</CardTitle>
+                <CardTitle className="text-sm font-medium">Pagos</CardTitle>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -124,14 +126,14 @@ export default function DashboardPage() {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{formatCurrency(Math.abs(expenseCount))}</div>
+                <div className="text-2xl font-bold">{formatCurrency(Math.abs(doneTransactions.expenseCount))}</div>
                 {/* <p className="text-xs text-muted-foreground">+19% no último mês</p> */}
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Vencidos a receber</CardTitle>
+                <CardTitle className="text-sm font-medium">A receber</CardTitle>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -146,14 +148,14 @@ export default function DashboardPage() {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">R$ 531,30</div>
+                <div className="text-2xl font-bold">{formatCurrency(pendingTransactions.incomeCount)}</div>
                 {/* <p className="text-xs text-muted-foreground">+201 no último mês</p> */}
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Vencidos a pagar</CardTitle>
+                <CardTitle className="text-sm font-medium">A pagar</CardTitle>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -168,7 +170,7 @@ export default function DashboardPage() {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">R$ 1.231,20</div>
+                <div className="text-2xl font-bold">{formatCurrency(Math.abs(pendingTransactions.expenseCount))}</div>
                 {/* <p className="text-xs text-muted-foreground">+23 no último mês</p> */}
               </CardContent>
             </Card>
@@ -200,6 +202,15 @@ export default function DashboardPage() {
             <MonthByMonthTable />
 
             <TopCategoriesTable />
+          </div>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
+            <MonthlyIncomeProgress
+              incomeTotal={doneTransactions.incomeCount}
+              pendingIncomeTotal={pendingTransactions.incomeCount}
+            />
+
+            <div />
           </div>
         </TabsContent>
       </Tabs>

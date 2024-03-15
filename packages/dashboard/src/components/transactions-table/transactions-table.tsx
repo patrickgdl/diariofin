@@ -82,7 +82,7 @@ export function TransactionsTable<TData, TValue>({
                         onClick={() => onSelect(row.original)}
                       >
                         {row.getVisibleCells().map((cell) => (
-                          <TableCell key={cell.id} className={cn(cell.column.getCanResize() ? null : `w-1/4`)}>
+                          <TableCell key={cell.id} className={cn(cell.column.getCanResize() ? null : `w-1/5`)}>
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </TableCell>
                         ))}

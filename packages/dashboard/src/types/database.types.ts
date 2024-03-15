@@ -372,12 +372,13 @@ export interface Database {
         Row: {
           account_id: string
           amount: number
-          category_id: string
+          category_id: string | null
           client_id: string | null
           date: string
           description: string
           id: string
           is_recurring: boolean
+          notes: string | null
           parent_transaction_id: string | null
           type_id: number
           user_id: string
@@ -385,12 +386,13 @@ export interface Database {
         Insert: {
           account_id: string
           amount: number
-          category_id: string
+          category_id?: string | null
           client_id?: string | null
           date?: string
           description: string
           id?: string
           is_recurring?: boolean
+          notes?: string | null
           parent_transaction_id?: string | null
           type_id: number
           user_id: string
@@ -398,12 +400,13 @@ export interface Database {
         Update: {
           account_id?: string
           amount?: number
-          category_id?: string
+          category_id?: string | null
           client_id?: string | null
           date?: string
           description?: string
           id?: string
           is_recurring?: boolean
+          notes?: string | null
           parent_transaction_id?: string | null
           type_id?: number
           user_id?: string
@@ -449,20 +452,23 @@ export interface Database {
       }
       transactions_instance: {
         Row: {
-          is_canceled: boolean
+          is_cancelled: boolean | null
           is_done: boolean
+          is_refunded: boolean | null
           transaction_id: string
           user_id: string
         }
         Insert: {
-          is_canceled: boolean
+          is_cancelled?: boolean | null
           is_done: boolean
+          is_refunded?: boolean | null
           transaction_id: string
           user_id: string
         }
         Update: {
-          is_canceled?: boolean
+          is_cancelled?: boolean | null
           is_done?: boolean
+          is_refunded?: boolean | null
           transaction_id?: string
           user_id?: string
         }

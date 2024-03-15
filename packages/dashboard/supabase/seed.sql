@@ -50,6 +50,7 @@ INSERT INTO public.category_groups (id, name, color, user_id) VALUES ('5011e7e0-
 --
 INSERT INTO public.transaction_categories (id, name, icon, group_id) VALUES ('c5aee89c-f7ca-430d-ba9e-d9a90ada09d7', 'Saldo inicial', '💰', '492f210b-0def-43e7-9786-393ebf2d6a6a');
 INSERT INTO public.transaction_categories (id, name, icon, group_id) VALUES ('e4767738-5a72-4947-a9f5-b4b4a12681e3', 'Outros', '🟢', '492f210b-0def-43e7-9786-393ebf2d6a6a');
+INSERT INTO public.transaction_categories (id, name, icon, group_id) VALUES ('97b483f4-5452-43e4-9d40-2eadc28bfc0f', 'Estorno', '↩️', '492f210b-0def-43e7-9786-393ebf2d6a6a');
 INSERT INTO public.transaction_categories (id, name, icon, group_id, user_id) VALUES ('3dc3ba14-2243-4003-a03e-fa18331041c0', 'Aluguel', '🏠', '1151ff10-0a2b-498c-b55f-ae4f554d41a4', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
 INSERT INTO public.transaction_categories (id, name, icon, group_id, user_id) VALUES ('83e8b0b5-3d43-4618-9aef-7980022f5603', 'Mercado', '🛒', '5011e7e0-9097-4171-a306-5d1d25dee5de', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
 
@@ -91,4 +92,4 @@ INSERT INTO public.recurring_pattern (transaction_id, recurring_type_id, max_num
 --
 -- Data for public.transactions_instance; Schema: public
 --
-INSERT INTO public.transactions_instance (transaction_id, is_done, is_canceled, user_id) VALUES ('1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', true, false, '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO public.transactions_instance (transaction_id, is_done, is_cancelled, user_id) VALUES ('1e3440c3-d8a0-41b3-b09b-9d637f2d5a48', true, false, '677fe9e0-b364-4a5d-b5e3-03be82e1f435');

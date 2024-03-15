@@ -15,7 +15,7 @@ import { Stepper, StepperItem, useStepper } from "~/ui/stepper"
 import { toast } from "~/ui/use-toast"
 import { LOCAL_STORAGE_KEYS } from "~/utils/constants"
 
-import { CategoryOnboarding } from "./constants"
+import { CategoryOnboarding, OTHER_CATEGORY_ID } from "./constants"
 import { AccountMainStep, AccountSecondaryStep } from "./steps/account-step"
 import { AppearanceMainStep } from "./steps/appearance-step"
 import { TransactionTypesMainStep, TransactionTypesSecondaryStep } from "./steps/transaction-types-step"
@@ -94,16 +94,6 @@ export default function OnboardingPage() {
   const handleFinalize = async () => {
     if (!user_id) return
 
-    if (onboardingAccounts?.length > 0) {
-      toast({ title: "Estamos criando suas contas..." })
-
-      const response = await newAccounts.mutateAsync(onboardingAccounts)
-      if (response) {
-        setAccounts(response)
-        toast({ title: "Contas criadas com sucesso" })
-      }
-    }
-
     if (selectedCategories.length > 0) {
       toast({ title: "Estamos criando suas categorias..." })
 
@@ -135,6 +125,28 @@ export default function OnboardingPage() {
       }
 
       toast({ title: "Categorias criadas com sucesso" })
+    } else {
+      await newCategories.mutateAsync([
+        {
+          name: "Outros",
+          icon: "🟢",
+          group_id: OTHER_CATEGORY_ID,
+          user_id: user_id,
+        },
+      ])
+
+      toast({ title: 'Categoria "Outros" criada com sucesso' })
+    }
+
+    if (onboardingAccounts?.length > 0) {
+      toast({ title: "Estamos criando suas contas..." })
+
+      const response = await newAccounts.mutateAsync(onboardingAccounts)
+      if (response) {
+        setAccounts(response)
+        toast({ title: "Contas criadas com sucesso" })
+        localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_ACCOUNTS)
+      }
     }
   }
 

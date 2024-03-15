@@ -17,7 +17,7 @@ const InputCurrency = ({ className, onCustomChange, ...props }: CurrencyInputPro
       decimalSeparator=","
       placeholder="R$ 00,00"
       className={cn(
-        "flex h-9 rounded-md bg-background font-semibold py-1 text-3xl w-56 transition-colors placeholder:text-gray-300 placeholder:font-semibold focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+        "flex h-9 rounded-md bg-background font-semibold py-1 text-3xl w-56 transition-colors placeholder:text-muted-foreground placeholder:font-semibold focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       onValueChange={(_, __, values) => onCustomChange(values?.float || null)}

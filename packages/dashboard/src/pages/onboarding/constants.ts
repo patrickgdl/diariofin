@@ -1,3 +1,5 @@
+export const OTHER_CATEGORY_ID = "492f210b-0def-43e7-9786-393ebf2d6a6a"
+
 export type CategoryOnboarding = {
   name: string
   icon: string

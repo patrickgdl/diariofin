@@ -4,7 +4,9 @@ CREATE TABLE public.transactions_instance (
   -- UUID from public.transactions
   transaction_id uuid REFERENCES public.transactions(id) NOT NULL PRIMARY KEY,
   -- This column signify whether this instance is cancelled.
-  is_canceled BOOLEAN NOT NULL,
+  is_cancelled BOOLEAN DEFAULT FALSE,
+  -- This column signify whether this instance is refunded.
+  is_refunded BOOLEAN DEFAULT FALSE,
   -- This column signify whether this instance is done.
   is_done BOOLEAN NOT NULL,
   user_id uuid references auth.users (id) not null

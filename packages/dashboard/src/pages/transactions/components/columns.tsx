@@ -10,6 +10,9 @@ import formatCurrency from "~/utils/format-currency"
 import { getAcronym } from "~/utils/get-acronym"
 
 import { DataTableRowActions } from "./transactions-row-actions"
+import { TRANSACTION_TYPE } from "../constants"
+import { hexToRgb } from "~/utils/hexToRgb"
+import CategoryBadge from "~/components/category-badge"
 
 export const columns: ColumnDef<TransactionsQuery[0]>[] = [
   {
@@ -24,8 +27,8 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label="Selecionar linha"
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
       />
     ),
     enableSorting: false,
@@ -33,35 +36,44 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
   },
   {
     accessorKey: "description",
-    cell: ({ row }) => <div className="capitalize">{row.getValue("description")}</div>,
-    enableResizing: false, //disable resizing for just this column
+    cell: ({ row }) => (
+      // @ts-ignore
+      <div className={cn("capitalize", row.original.transactions_instance.is_cancelled && "line-through")}>
+        {row.getValue("description")}
+      </div>
+    ),
+    enableResizing: false,
   },
   {
     accessorKey: "is_done",
     cell: ({ row }) => {
       return (
-        <div className="flex w-[100px] items-center">
+        <div className="flex w-[150px] items-center">
+          {/* @ts-ignore */}
           {row.original.transactions_instance?.is_done ? (
             <CheckCircledIcon className="mr-2 h-4 w-4 text-muted-foreground" />
           ) : (
             <CircleIcon className="mr-2 h-4 w-4 text-muted-foreground" />
           )}
-          <span>{row.original.transactions_instance?.is_done ? "Recebido" : "Não recebido"}</span>
+          {/* @ts-ignore */}
+          <span>{row.original.transactions_instance?.is_done ? "Confirmado" : "Não confirmado"}</span>
         </div>
       )
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
     },
+    enableResizing: false,
   },
   {
     accessorKey: "transaction_categories",
     cell: ({ row }) => {
       return (
-        <Badge style={{ backgroundColor: row.original.transaction_categories?.category_groups?.color }}>
-          <span className="mr-1">{row.original.transaction_categories?.icon}</span>
-          {row.original.transaction_categories?.name}
-        </Badge>
+        <>
+          {row.original.transaction_types?.id === TRANSACTION_TYPE.EXPENSE ? (
+            <CategoryBadge category={row.original.transaction_categories!} />
+          ) : null}
+        </>
       )
     },
     enableResizing: false,
@@ -84,6 +96,7 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
     },
+    enableResizing: false,
   },
   {
     accessorKey: "amount",
@@ -91,14 +104,19 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
       const amount = parseFloat(row.getValue("amount"))
 
       return (
-        <div className={cn("text-right font-medium", amount < 0 ? "text-red-500" : "text-green-500")}>
-          {formatCurrency(amount)}
-        </div>
+        <div className={cn("text-right font-medium", amount < 0 ? "" : "text-green-500")}>{formatCurrency(amount)}</div>
       )
     },
   },
   {
     id: "actions",
-    cell: ({ row }) => <DataTableRowActions row={row} />,
+    cell: ({ row }) => {
+      // @ts-ignore
+      return row.original.transactions_instance.is_cancelled ||
+        // @ts-ignore
+        row.original.transactions_instance.is_refunded ? null : (
+        <DataTableRowActions row={row} />
+      )
+    },
   },
 ]
