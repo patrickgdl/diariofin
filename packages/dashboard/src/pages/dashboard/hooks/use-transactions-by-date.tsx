@@ -28,7 +28,7 @@ function useTransactionsByDate({ date, isDone = false }: TransactionByDateProps)
       ?.filter((d) => d.type_id === TRANSACTION_TYPE.INCOME)
       ?.reduce((acc, transaction) => acc + transaction.amount, 0) || 0
 
-  return { totalCount, expenseCount, incomeCount, ...rest }
+  return { totalCount, expenseCount, incomeCount, data, ...rest }
 }
 
 export default useTransactionsByDate

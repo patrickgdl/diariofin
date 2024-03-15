@@ -1,4 +1,3 @@
-import * as React from "react"
 import { ChevronDownIcon, DotsHorizontalIcon } from "@radix-ui/react-icons"
 import {
   ColumnDef,
@@ -12,21 +11,10 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table"
-import {
-  ArrowRightLeftIcon,
-  BadgeDollarSign,
-  Building,
-  Car,
-  Check,
-  Divide,
-  Mail,
-  MessageSquare,
-  PlusCircle,
-  Repeat2,
-  ShoppingCartIcon,
-} from "lucide-react"
-
-import { Badge } from "~/ui/badge"
+import { Check, CopyIcon } from "lucide-react"
+import * as React from "react"
+import CategoryBadge from "~/components/category-badge"
+import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
 import { Button } from "~/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
 import { Checkbox } from "~/ui/checkbox"
@@ -36,78 +24,21 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "~/ui/dropdown-menu"
 import { Input } from "~/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/ui/table"
+import { cn } from "~/utils/cn"
 import formatCurrency from "~/utils/format-currency"
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "Spotify",
-    label: "Subscriptions",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "Gas",
-    label: "Car",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "Electrical bill",
-    label: "House",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "Pizza",
-    label: "Food",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "Meme-food",
-    label: "Food",
-  },
-]
+import { TransactionsByDateQuery } from "../queries/get-transactions-by-date"
 
-export type Payment = {
-  id: string
-  amount: number
-  status: string
-  label: string
-}
-
-// Define the icon mapping
-const labelToIconMap = {
-  Subscriptions: <BadgeDollarSign />,
-  Car: <Car />, // Use the actual icon component
-  House: <Building />,
-  Food: <ShoppingCartIcon />,
-  // Add other mappings as needed
-}
-
-// Helper function to get the icon based on the label
-const getIconForLabel = (label: string) => {
-  // @ts-ignore
-  return labelToIconMap[label] || null // Return null if no icon is found for the label
-}
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<TransactionsByDateQuery[0]>[] = [
   {
     id: "select",
     header: ({ table }) => (
       <Checkbox
-        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+        checked={table.getIsAllPageRowsSelected()}
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Selecionar tudo"
       />
@@ -115,51 +46,32 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label="Selecionar linha"
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
       />
     ),
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: "status",
+    accessorKey: "description",
     header: "Descrição",
-    cell: ({ row }) => <div className="capitalize">{row.getValue("status")}</div>,
+    cell: ({ row }) => <div className="capitalize">{row.getValue("description")}</div>,
+    enableResizing: false,
   },
   {
-    accessorKey: "label",
+    accessorKey: "transaction_categories",
     header: "Categoria",
     cell: ({ row }) => {
-      const label = row.getValue("label") as string
-      const icon = getIconForLabel(label)
-      let badgeVariant
-
-      // Example logic to determine the badge variant based on the label
-      switch (label) {
-        case "Subscriptions":
-          badgeVariant = "default"
-          break
-        case "Car":
-          badgeVariant = "secondary"
-          break
-        case "House":
-          badgeVariant = "destructive"
-          break
-        case "Food":
-        default:
-          badgeVariant = "outline"
-          break
-      }
-
       return (
-        // @ts-ignore
-        <Badge variant={badgeVariant}>
-          {icon && React.cloneElement(icon, { className: "h-4 w-4" })}
-          <span className="ml-2">{label}</span>
-        </Badge>
+        <>
+          {row.original.transaction_types?.id === TRANSACTION_TYPE.EXPENSE ? (
+            <CategoryBadge category={row.original.transaction_categories!} />
+          ) : null}
+        </>
       )
     },
+    enableResizing: false,
   },
   {
     accessorKey: "amount",
@@ -167,8 +79,9 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("amount"))
 
-      // Format the amount as a dollar amount
-      return <div className="text-right font-medium">{formatCurrency(amount)}</div>
+      return (
+        <div className={cn("text-right font-medium", amount < 0 ? "" : "text-green-500")}>{formatCurrency(amount)}</div>
+      )
     },
   },
   {
@@ -186,52 +99,31 @@ export const columns: ColumnDef<Payment>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuLabel>Ações</DropdownMenuLabel>
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(payment.id)}>
+              <CopyIcon className="mr-2 h-4 w-4" />
+              <span>Copiar nome</span>
+            </DropdownMenuItem>
             <DropdownMenuItem onClick={() => navigator.clipboard.writeText(payment.id)}>
               <Check className="mr-2 h-4 w-4" />
-              <span>Review</span>
+              <span>Revisar</span>
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Divide className="mr-2 h-4 w-4" />
-              <span>Split</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Repeat2 className="mr-2 h-4 w-4" />
-              <span>Recurring</span>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger>
-                <ArrowRightLeftIcon className="mr-2 h-4 w-4" />
-                <span>Transaction Type</span>
-              </DropdownMenuSubTrigger>
-              <DropdownMenuPortal>
-                <DropdownMenuSubContent>
-                  <DropdownMenuItem>
-                    <Mail className="mr-2 h-4 w-4" />
-                    <span>Internal transfer</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <MessageSquare className="mr-2 h-4 w-4" />
-                    <span>Regular</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <PlusCircle className="mr-2 h-4 w-4" />
-                    <span>More...</span>
-                  </DropdownMenuItem>
-                </DropdownMenuSubContent>
-              </DropdownMenuPortal>
-            </DropdownMenuSub>
+            {/* <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Divide className="mr-2 h-4 w-4" />
+                <span>Split</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Repeat2 className="mr-2 h-4 w-4" />
+                <span>Recurring</span>
+              </DropdownMenuItem> */}
           </DropdownMenuContent>
         </DropdownMenu>
       )
     },
   },
 ]
-
-export function TransactionsReviewTable() {
+export function TransactionsReviewTable({ data }: { data: TransactionsByDateQuery }) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -260,7 +152,7 @@ export function TransactionsReviewTable() {
     <Card>
       <CardHeader>
         <CardTitle>Transações para Revisar</CardTitle>
-        <CardDescription>Gerencie seus pagamentos/recebimentos.</CardDescription>
+        <CardDescription>Gerencie seus pagamentos/recebimentos pendentes.</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="mb-4 flex items-center gap-4">

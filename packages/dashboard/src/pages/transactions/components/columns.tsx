@@ -3,7 +3,6 @@ import { ColumnDef } from "@tanstack/react-table"
 import { CircleIcon } from "lucide-react"
 import { TransactionsQuery } from "~/queries/get-transactions"
 import { Avatar, AvatarFallback, AvatarImage } from "~/ui/avatar"
-import { Badge } from "~/ui/badge"
 import { Checkbox } from "~/ui/checkbox"
 import { cn } from "~/utils/cn"
 import formatCurrency from "~/utils/format-currency"
@@ -11,19 +10,11 @@ import { getAcronym } from "~/utils/get-acronym"
 
 import { DataTableRowActions } from "./transactions-row-actions"
 import { TRANSACTION_TYPE } from "../constants"
-import { hexToRgb } from "~/utils/hexToRgb"
 import CategoryBadge from "~/components/category-badge"
 
 export const columns: ColumnDef<TransactionsQuery[0]>[] = [
   {
     id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={table.getIsAllPageRowsSelected()}
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Selecionar tudo"
-      />
-    ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
