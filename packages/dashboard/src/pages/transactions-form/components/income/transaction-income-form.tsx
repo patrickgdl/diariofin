@@ -4,7 +4,6 @@ import { addDays } from "date-fns"
 import { CalendarIcon } from "lucide-react"
 import * as React from "react"
 import { useForm } from "react-hook-form"
-import useCategoriesAndGroups from "~/hooks/useCategoriesAndGroupsQuery"
 import useClientsByType from "~/hooks/useClientsByTypeQuery"
 import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
 import { Transactions } from "~/types/transactions"
@@ -15,34 +14,30 @@ import { Input } from "~/ui/input"
 import { InputCurrency } from "~/ui/input-currency-alt"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover"
 import { Switch } from "~/ui/switch"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 import { ToggleGroup, ToggleGroupItem } from "~/ui/toggle-group"
 import { cn } from "~/utils/cn"
 import formatDate from "~/utils/format-date"
 
-import formSchema, { TransactionFormType } from "../schema/transactions-form-schema"
-import TransactionDataForm from "./transaction-data-form"
-import TransactionRecurrenceForm from "./transaction-recurrence-form"
+import formSchema, { TransactionIncomeFormType } from "./transaction-income-form-schema"
+import TransactionDataForm from "./transaction-income-data-form"
 
-type TransactionMainFormProps = {
-  variant: keyof typeof TRANSACTION_TYPE
+type TransactionIncomeFormProps = {
   transactionToUpdate?: Transactions | null
-  onSubmit: (values: TransactionFormType) => void
+  onSubmit: (values: TransactionIncomeFormType) => void
 }
 
-const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: TransactionMainFormProps) => {
-  const isExpense = variant === "EXPENSE"
+const TransactionIncomeForm = ({ onSubmit, transactionToUpdate }: TransactionIncomeFormProps) => {
+  const { data: clientsOrSuppliers } = useClientsByType("SUPPLIER")
 
-  const { data: categories } = useCategoriesAndGroups()
-  const { data: clientsOrSuppliers } = useClientsByType(isExpense ? "CLIENT" : "SUPPLIER")
-
-  const form = useForm<TransactionFormType>({
+  const form = useForm<TransactionIncomeFormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       is_done: false,
       description: "",
+      notes: "",
+      date: new Date(),
       client_id: "",
-      type_id: isExpense ? TRANSACTION_TYPE.EXPENSE : TRANSACTION_TYPE.INCOME,
+      type_id: TRANSACTION_TYPE.INCOME,
     },
   })
 
@@ -73,7 +68,7 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Valor do recebimento</FormLabel>
+                    <FormLabel htmlFor="input-amount">Valor do recebimento</FormLabel>
                     <FormControl>
                       <InputCurrency
                         id="input-amount"
@@ -95,7 +90,7 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
               name="is_done"
               render={({ field }) => (
                 <FormItem className="flex items-center space-y-0 space-x-4">
-                  <FormLabel className="text-base">Já foi {isExpense ? "pago" : "recebido"}?</FormLabel>
+                  <FormLabel className="text-base">Já foi recebido?</FormLabel>
                   <FormControl>
                     <Switch checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
@@ -109,13 +104,12 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
                 name="date"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Data do {isExpense ? "Pagamento" : "Recebimento"}</FormLabel>
+                    <FormLabel>Data do Recebimento</FormLabel>
 
                     <div className="flex space-x-1">
                       <ToggleGroup variant="outline" type="single" onValueChange={handlePresetDate}>
                         <ToggleGroupItem value="0">Hoje</ToggleGroupItem>
                         <ToggleGroupItem value="1">Amanhã</ToggleGroupItem>
-                        <ToggleGroupItem value="7">Semana que vem</ToggleGroupItem>
                       </ToggleGroup>
 
                       <Popover>
@@ -160,28 +154,7 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
               />
             </div>
 
-            <Tabs defaultValue="data" className="space-y-4">
-              <TabsList>
-                <TabsTrigger value="data">Dados do Lançamento</TabsTrigger>
-
-                <TabsTrigger disabled value="recurrence">
-                  Recorrência (em breve)
-                </TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="data">
-                <TransactionDataForm
-                  form={form}
-                  variant={variant}
-                  categories={categories}
-                  clientsOrSuppliers={clientsOrSuppliers}
-                />
-              </TabsContent>
-
-              <TabsContent value="recurrence">
-                <TransactionRecurrenceForm form={form} />
-              </TabsContent>
-            </Tabs>
+            <TransactionDataForm form={form} clientsOrSuppliers={clientsOrSuppliers} />
           </div>
         </form>
       </Form>
@@ -191,4 +164,4 @@ const TransactionMainForm = ({ variant, onSubmit, transactionToUpdate }: Transac
   )
 }
 
-export default TransactionMainForm
+export default TransactionIncomeForm

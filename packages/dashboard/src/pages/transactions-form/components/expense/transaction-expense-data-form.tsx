@@ -1,6 +1,5 @@
 import { UseFormReturn } from "react-hook-form"
 import useAppContext from "~/hooks/useAppContext"
-import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
 import { CategoryGroups } from "~/types/category-groups"
 import { Clients } from "~/types/clients"
 import { TransactionCategories } from "~/types/transaction-categories"
@@ -8,20 +7,20 @@ import { Badge } from "~/ui/badge"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/ui/select"
 
-import { TransactionFormType } from "../schema/transactions-form-schema"
+import { TransactionExpenseFormType } from "./transactions-expense-form-schema"
+import CategoryBadge from "~/components/category-badge"
 
 type Categories = Omit<TransactionCategories, "group_id" | "user_id"> & {
   category_groups: Omit<CategoryGroups, "user_id"> | null
 }
 
 type TransactionDataFormProps = {
-  variant: keyof typeof TRANSACTION_TYPE
-  form: UseFormReturn<TransactionFormType, any, undefined>
+  form: UseFormReturn<TransactionExpenseFormType, any, undefined>
   categories: Categories[]
   clientsOrSuppliers: Clients[]
 }
 
-const TransactionDataForm = ({ variant, form, categories, clientsOrSuppliers }: TransactionDataFormProps) => {
+const TransactionDataForm = ({ form, categories, clientsOrSuppliers }: TransactionDataFormProps) => {
   const { accounts } = useAppContext()
 
   return (
@@ -43,9 +42,11 @@ const TransactionDataForm = ({ variant, form, categories, clientsOrSuppliers }: 
                   {categories?.length > 0
                     ? categories.map((category) => {
                         return (
-                          <SelectItem key={category.id} value={category.id} className="justify-between">
-                            <span>{category.name}</span>
-                            <Badge className="ml-4">{category.category_groups?.name}</Badge>
+                          <SelectItem key={category.id} value={category.id}>
+                            <div className="flex items-center space-x-4">
+                              <span>{category.name}</span>
+                              <CategoryBadge category={category} />
+                            </div>
                           </SelectItem>
                         )
                       })

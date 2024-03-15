@@ -17,7 +17,7 @@ const AccountForm = ({ form, onSubmit }: AccountFormProps) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} id="account-form">
         <div className="space-y-4 py-4">
-          <div className="flex items-center justify-between space-y-2">
+          <div className="flex items-center justify-between space-x-6">
             <FormField
               name="name"
               control={form.control}

@@ -1,9 +1,13 @@
 import * as z from "zod"
 
-export const transactionFormSchema = z.object({
+export const transactionExpenseFormSchema = z.object({
   amount: z.number({ required_error: "Valor é obrigatório" }).gt(0, { message: "Valor precisa ser maior que zero" }),
-  description: z.string({ required_error: "Descrição é obrigatório" }),
+  description: z
+    .string({ required_error: "Descrição é obrigatório" })
+    .trim()
+    .min(1, { message: "Descrição é obrigatório" }),
   date: z.date({ required_error: "Data da Transação é obrigatório" }),
+  notes: z.string().optional().nullable(),
   type_id: z.number(),
   is_recurring: z.boolean().default(false),
   is_done: z.boolean(),
@@ -24,5 +28,5 @@ export const transactionFormSchema = z.object({
 //   }
 // })
 
-export default transactionFormSchema
-export type TransactionFormType = z.infer<typeof transactionFormSchema>
+export default transactionExpenseFormSchema
+export type TransactionExpenseFormType = z.infer<typeof transactionExpenseFormSchema>

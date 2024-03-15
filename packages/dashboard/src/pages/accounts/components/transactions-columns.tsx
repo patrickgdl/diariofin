@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table"
+import CategoryBadge from "~/components/category-badge"
 import { DataTableRowActions } from "~/pages/transactions/components/transactions-row-actions"
 import { TransactionsQuery } from "~/queries/get-transactions"
-import { Badge } from "~/ui/badge"
 import { cn } from "~/utils/cn"
 import formatCurrency from "~/utils/format-currency"
 
@@ -16,12 +16,7 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
     accessorKey: "transaction_categories",
     header: "Categoria",
     cell: ({ row }) => {
-      return (
-        <Badge style={{ backgroundColor: row.original.transaction_categories?.category_groups?.color }}>
-          <span className="mr-1">{row.original.transaction_categories?.icon}</span>
-          {row.original.transaction_categories?.name}
-        </Badge>
-      )
+      return <CategoryBadge category={row.original.transaction_categories} />
     },
   },
   {

@@ -1,20 +1,19 @@
 import { useQuery } from "@tanstack/react-query"
-import { DateRange } from "react-day-picker"
 import useSupabase from "~/hooks/useSupabase"
-
-import { getTransactionByDate } from "../queries/get-transactions-by-date"
 import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
 
-function useTransactionsByDate(date: DateRange) {
+import { getTransactionByDate, TransactionByDateProps } from "../queries/get-transactions-by-date"
+
+function useTransactionsByDate({ date, isDone = false }: TransactionByDateProps) {
   const supabase = useSupabase()
 
   const { data, ...rest } = useQuery({
-    queryKey: ["transactions", { from: date.from?.toISOString(), to: date.to?.toISOString() }],
+    queryKey: ["transactions", { from: date.from?.toISOString(), to: date.to?.toISOString() }, { isDone }],
     queryFn: async () => {
-      return getTransactionByDate(supabase, date).then((result) => result.data || null)
+      return getTransactionByDate(supabase, { date, isDone }).then((result) => result.data || null)
     },
     initialData: [],
-    enabled: !!date.from && !!date.to,
+    enabled: Boolean(date.from) && Boolean(date.to),
   })
 
   const totalCount = data?.reduce((acc, transaction) => acc + transaction.amount, 0) || 0

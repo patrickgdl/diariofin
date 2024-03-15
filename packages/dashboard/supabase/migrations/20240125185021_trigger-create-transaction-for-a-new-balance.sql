@@ -39,7 +39,7 @@ BEGIN
             -- Create the transactions_instance as done
             INSERT INTO transactions_instance (
                 transaction_id,
-                is_canceled,
+                is_cancelled,
                 is_done,
                 user_id
             )

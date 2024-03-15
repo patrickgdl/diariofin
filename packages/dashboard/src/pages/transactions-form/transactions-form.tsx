@@ -8,11 +8,13 @@ import useTransactionById from "~/hooks/useTransactionByIdQuery"
 import { useUpdateTransactionMutation } from "~/hooks/useUpdateTransactionMutation"
 import { Button } from "~/ui/button"
 import { Separator } from "~/ui/separator"
+import { toast } from "~/ui/use-toast"
 import { cn } from "~/utils/cn"
 
-import TransactionMainForm from "./components/transaction-main-form"
-import { TransactionFormType } from "./schema/transactions-form-schema"
-import { toast } from "~/ui/use-toast"
+import { TransactionExpenseFormType } from "./components/expense/transactions-expense-form-schema"
+import { TransactionIncomeFormType } from "./components/income/transaction-income-form-schema"
+import TransactionExpenseForm from "./components/expense/transaction-expense-form"
+import TransactionIncomeForm from "./components/income/transaction-income-form"
 
 export default function TransactionsFormPage() {
   const navigate = useNavigate()
@@ -32,7 +34,7 @@ export default function TransactionsFormPage() {
   const newRecurringPattern = useNewRecurringPatternMutation()
   const newTransactionInstance = useNewTransactionInstanceMutation()
 
-  async function handleSubmit(values: TransactionFormType) {
+  async function handleSubmit(values: TransactionExpenseFormType | TransactionIncomeFormType) {
     const { recurring_type_id, max_num_of_ocurrences, is_done, ...transaction } = values
 
     if (!user_id) return
@@ -43,26 +45,30 @@ export default function TransactionsFormPage() {
           ...transaction,
           user_id,
           amount: isExpense ? -transaction.amount : transaction.amount,
+          notes: transaction.notes ? transaction.notes : null,
           client_id: transaction.client_id ? transaction.client_id : null,
+          category_id: transaction.category_id ? transaction.category_id : null,
           date: transaction.date.toISOString(),
           parent_transaction_id: null,
         })
 
-        if (is_done && response) {
+        if (response) {
+          const transactionId = response[0].id
           await newTransactionInstance.mutateAsync({
             user_id,
-            is_done: true,
-            is_canceled: false,
-            transaction_id: response[0].id,
+            is_done: is_done,
+            is_cancelled: false,
+            is_refunded: false,
+            transaction_id: transactionId,
           })
-        }
 
-        if (transaction.is_recurring && recurring_type_id && response) {
-          await newRecurringPattern.mutateAsync({
-            recurring_type_id: parseInt(recurring_type_id, 10),
-            max_num_of_ocurrences: max_num_of_ocurrences ? parseInt(max_num_of_ocurrences, 10) : null,
-            transaction_id: response[0].id,
-          })
+          if (transaction.is_recurring && recurring_type_id) {
+            await newRecurringPattern.mutateAsync({
+              recurring_type_id: parseInt(recurring_type_id, 10),
+              max_num_of_ocurrences: max_num_of_ocurrences ? parseInt(max_num_of_ocurrences, 10) : null,
+              transaction_id: transactionId,
+            })
+          }
         }
       } else {
         await updateTransaction.mutateAsync({
@@ -92,7 +98,7 @@ export default function TransactionsFormPage() {
 
           <div>
             <h3 className={cn("text-lg font-medium", isExpense ? "text-red-500" : "text-emerald-500")}>
-              Conta a {variant === "EXPENSE" ? "pagar" : "receber"}
+              Conta a {isExpense ? "pagar" : "receber"}
             </h3>
             <p className="text-sm text-muted-foreground">Insira aqui uma transação.</p>
           </div>
@@ -101,12 +107,17 @@ export default function TransactionsFormPage() {
       </div>
 
       <div className="flex flex-col mx-auto max-w-2xl">
-        <TransactionMainForm
-          variant={variant}
-          transactionToUpdate={transactionToUpdate}
-          onSubmit={(values) => handleSubmit(values)}
-        />
-
+        {isExpense ? (
+          <TransactionExpenseForm
+            transactionToUpdate={transactionToUpdate}
+            onSubmit={(values) => handleSubmit(values)}
+          />
+        ) : (
+          <TransactionIncomeForm
+            transactionToUpdate={transactionToUpdate}
+            onSubmit={(values) => handleSubmit(values)}
+          />
+        )}
         <div className="space-x-2 flex w-full items-center justify-end">
           <Button variant="outline" onClick={() => navigate(-1)}>
             Voltar

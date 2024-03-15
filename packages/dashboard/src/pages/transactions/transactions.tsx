@@ -32,7 +32,7 @@ export default function TransactionsPage() {
 
   return (
     <ResizablePanelGroup direction="horizontal" className="h-screen items-stretch">
-      <ResizablePanel minSize={30} defaultSize={55} className="!overflow-y-auto">
+      <ResizablePanel minSize={30} defaultSize={60} className="!overflow-y-auto">
         <div className="flex h-[52px] items-center px-4 py-2">
           <h1 className="text-lg font-medium">Todas as Transações</h1>
 
@@ -76,7 +76,7 @@ export default function TransactionsPage() {
 
       <ResizableHandle withHandle />
 
-      <ResizablePanel defaultSize={45}>
+      <ResizablePanel defaultSize={40}>
         {selected ? (
           <TransactionDisplay
             categories={categories}
