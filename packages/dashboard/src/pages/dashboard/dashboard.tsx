@@ -191,7 +191,7 @@ export default function DashboardPage() {
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
-            <TransactionsReviewTable />
+            {pendingTransactions.data && <TransactionsReviewTable data={pendingTransactions.data} />}
 
             <TopCategoriesTable />
           </div>
