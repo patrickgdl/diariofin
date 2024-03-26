@@ -4,11 +4,22 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resizable"
 import { Separator } from "~/ui/separator"
 
-import { CategoriesTable } from "./components/allocation-table"
-import { CategoriesDisplay } from "./components/categories-display"
+import { CategoriesTable } from "./components/categories-table"
+import { CategoriesDisplay, CategoriesDisplayProps } from "./components/categories-display"
 import { CategoriesForm } from "./components/categories-form"
 import { SpentSoFarCard } from "./components/spent-so-far-card"
-import { TopCategoriesTable } from "./components/top-categories-table"
+import { TopCategoriesTable, TransactionsByDateGrouped } from "./components/top-categories-table"
+import useTransactionsQuery from "~/hooks/useTransactionsQuery"
+import Loader from "~/components/loader"
+import ErrorState from "~/components/error-state"
+import * as React from "react"
+import { Badge } from "~/ui/badge"
+import { hexToRgb } from "~/utils/hexToRgb"
+import formatCurrency from "~/utils/format-currency"
+import { Progress } from "~/ui/progress"
+import useTransactionsByTypeQuery from "~/hooks/useTransactionsByType"
+import { TRANSACTION_TYPE } from "../transactions/constants"
+import useTransactionsByCategoryQuery from "~/hooks/useTransactionsByCategory"
 
 export const mails = [
   {
@@ -25,82 +36,58 @@ export const mails = [
     income: 10400,
     limit: 25000,
   },
-  {
-    id: "110e8400-e29b-11d4-a716-446655440000",
-    name: "Chase Credit Card",
-    available: 4566,
-    change: -3,
-    date: "2023-12-12T09:00:00",
-    read: true,
-    labels: ["Reccuring"],
-    category: "Credit Card",
-    paymentIds: ["3u1reuv4"],
-    income: 14405,
-    limit: 25000,
-  },
-  {
-    id: "3e7c3f6d-bdf5-46ae-8d90-171300f27ae2",
-    name: "Cash Rewards",
-    available: 4568,
-    change: 1,
-    text: "Hi, let's have a meeting tomorrow to discuss the project. I've been reviewing the project details and have some ideas I'd like to share. It's crucial that we align on our next steps to ensure the project's success.\n\nPlease come prepared with any questions or insights you may have. Looking forward to our meeting!\n\nBest regards, William",
-    date: "2023-12-31T09:00:00",
-    read: true,
-    labels: ["Reccuring"],
-    category: "Credit Card",
-    income: 9400,
-    limit: 25000,
-  },
-  {
-    id: "3e7c3f6d-bdf5-46ae-8d90-171300f27ae2",
-    name: "Regular Savings",
-    available: 4568,
-    change: 14,
-    text: "Hi, let's have a meeting tomorrow to discuss the project. I've been reviewing the project details and have some ideas I'd like to share. It's crucial that we align on our next steps to ensure the project's success.\n\nPlease come prepared with any questions or insights you may have. Looking forward to our meeting!\n\nBest regards, William",
-    date: "2023-12-31T09:00:00",
-    read: true,
-    labels: ["Reccuring"],
-    category: "Savings",
-  },
-  {
-    id: "3e7c3f6d-bdf5-46ae-8d90-17112333",
-    name: "Checkings Account",
-    available: 8574,
-    change: -2,
-    text: "Hi, let's have a meeting tomorrow to discuss the project. I've been reviewing the project details and have some ideas I'd like to share. It's crucial that we align on our next steps to ensure the project's success.\n\nPlease come prepared with any questions or insights you may have. Looking forward to our meeting!\n\nBest regards, William",
-    date: "2023-12-31T09:00:00",
-    read: true,
-    labels: ["Reccuring"],
-    category: "Savings",
-  },
-  {
-    id: "3e7c3f6d-bdf5-46ae-8d90-17131231231",
-    name: "Robinhood",
-    available: 5010,
-    change: -26,
-    text: "Hi, let's have a meeting tomorrow to discuss the project. I've been reviewing the project details and have some ideas I'd like to share. It's crucial that we align on our next steps to ensure the project's success.\n\nPlease come prepared with any questions or insights you may have. Looking forward to our meeting!\n\nBest regards, William",
-    date: "2023-12-31T09:00:00",
-    read: true,
-    labels: ["Reccuring"],
-    category: "Investments",
-  },
-  {
-    id: "3e7c3f6d-bdf5-4sdae-8d90-17131231231",
-    name: "Wealthfront",
-    available: 10708,
-    change: 19,
-    text: "Hi, let's have a meeting tomorrow to discuss the project. I've been reviewing the project details and have some ideas I'd like to share. It's crucial that we align on our next steps to ensure the project's success.\n\nPlease come prepared with any questions or insights you may have. Looking forward to our meeting!\n\nBest regards, William",
-    date: "2023-12-31T09:00:00",
-    read: true,
-    labels: ["Reccuring"],
-    category: "Investments",
-  },
 ]
 
 export default function CategoriesDashboard() {
+  const [selectedCategory, setSelectedCategory] = React.useState<CategoriesDisplayProps["category"] | null>(null)
+  const { data, isLoading, isError } = useTransactionsByTypeQuery(TRANSACTION_TYPE.EXPENSE)
+
+  const groupedByCategoryGroup = data.reduce((acc, curr) => {
+    if (!curr.transaction_categories?.category_groups) {
+      return acc
+    }
+
+    const groupId = curr.transaction_categories.category_groups.id
+    const transactionId = curr.id
+    const amount = curr.amount
+
+    if (!acc[groupId]) {
+      acc[groupId] = {
+        id: curr.transaction_categories.category_groups.id,
+        name: curr.transaction_categories.category_groups.name,
+        color: curr.transaction_categories.category_groups.color,
+        totalAmount: 0,
+        categories: [],
+      }
+    }
+
+    let categoryObject = acc[groupId].categories.find((obj) => obj.transactionId === transactionId)
+
+    if (!categoryObject) {
+      categoryObject = {
+        transactionId: transactionId,
+        transaction_categories: curr.transaction_categories,
+        amount,
+      }
+      acc[groupId].categories.push(categoryObject)
+    }
+
+    acc[groupId].totalAmount += amount
+
+    return acc
+  }, {} as Record<string, TransactionsByDateGrouped>)
+
+  if (isLoading) {
+    return <Loader />
+  }
+
+  if (isError) {
+    return <ErrorState />
+  }
+
   return (
     <ResizablePanelGroup direction="horizontal" className="h-full max-h-[1200px] items-stretch">
-      <ResizablePanel minSize={30} defaultSize={55} className="!overflow-y-auto">
+      <ResizablePanel minSize={30} defaultSize={50} className="!overflow-y-auto">
         <div className="flex h-[52px] items-center px-4 py-2">
           <h1 className="text-lg font-medium">Categorias</h1>
 
@@ -130,18 +117,46 @@ export default function CategoriesDashboard() {
         <Separator />
 
         <div className="p-2">
-          <SpentSoFarCard />
+          <SpentSoFarCard data={data} />
 
-          <CategoriesTable />
+          <div className="px-4 py-6">
+            {Object.entries(groupedByCategoryGroup).length ? (
+              Object.entries(groupedByCategoryGroup).map(([groupedDate, groupedRows]) => (
+                <React.Fragment key={groupedDate}>
+                  <div className="flex items-center space-x-3 w-full">
+                    <Badge
+                      className="px-1.5"
+                      style={{ backgroundColor: hexToRgb(groupedRows.color || "#000000", "0.2") }}
+                    >
+                      <span className="font-medium" style={{ color: groupedRows.color }}>
+                        {groupedRows.categories.length}
+                      </span>
+                    </Badge>
 
-          <TopCategoriesTable />
+                    <span className="flex w-2/3">{groupedRows.name}</span>
+                    <Progress value={80} className="w-1/3" />
+                    <span className="flex justify-end w-1/3 text-right font-medium">
+                      {formatCurrency(groupedRows.totalAmount)}
+                    </span>
+                  </div>
+
+                  <CategoriesTable
+                    data={groupedRows.categories}
+                    onSelect={(row) => setSelectedCategory(row.transaction_categories)}
+                  />
+                </React.Fragment>
+              ))
+            ) : (
+              <div className="rounded-md border h-24 flex justify-center items-center">Sem resultados.</div>
+            )}
+          </div>
         </div>
       </ResizablePanel>
 
       <ResizableHandle withHandle />
 
-      <ResizablePanel defaultSize={45}>
-        <CategoriesDisplay mail={mails[0] || null} />
+      <ResizablePanel defaultSize={50}>
+        <CategoriesDisplay category={selectedCategory} />
       </ResizablePanel>
     </ResizablePanelGroup>
   )

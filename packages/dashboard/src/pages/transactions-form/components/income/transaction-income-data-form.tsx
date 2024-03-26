@@ -46,7 +46,7 @@ const TransactionDataForm = ({ form, clientsOrSuppliers }: TransactionDataFormPr
         />
       </div>
 
-      <div className="w-2/4">
+      {/* <div className="w-2/4">
         <FormField
           control={form.control}
           name="client_id"
@@ -73,8 +73,8 @@ const TransactionDataForm = ({ form, clientsOrSuppliers }: TransactionDataFormPr
               <FormMessage />
             </FormItem>
           )}
-        />
-      </div>
+        /> 
+      </div>*/}
     </div>
   )
 }

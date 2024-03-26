@@ -25,41 +25,41 @@ const TransactionDataForm = ({ form, categories, clientsOrSuppliers }: Transacti
 
   return (
     <div className="space-y-4 py-2 pb-4">
-      <div className="w-3/4">
-        <FormField
-          control={form.control}
-          name="category_id"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Categoria</FormLabel>
-              <Select onValueChange={field.onChange} value={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecione uma categoria" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {categories?.length > 0
-                    ? categories.map((category) => {
-                        return (
-                          <SelectItem key={category.id} value={category.id}>
-                            <div className="flex items-center space-x-4">
-                              <span>{category.name}</span>
-                              <CategoryBadge category={category} />
-                            </div>
-                          </SelectItem>
-                        )
-                      })
-                    : null}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
       <div className="flex w-full space-x-1">
+        <div className="w-2/4">
+          <FormField
+            control={form.control}
+            name="category_id"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Categoria</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecione uma categoria" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {categories?.length > 0
+                      ? categories.map((category) => {
+                          return (
+                            <SelectItem key={category.id} value={category.id}>
+                              <div className="flex items-center space-x-4">
+                                <span>{category.name}</span>
+                                <CategoryBadge category={category} />
+                              </div>
+                            </SelectItem>
+                          )
+                        })
+                      : null}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
         <div className="w-2/4">
           <FormField
             control={form.control}
@@ -90,7 +90,7 @@ const TransactionDataForm = ({ form, categories, clientsOrSuppliers }: Transacti
           />
         </div>
 
-        <div className="w-2/4">
+        {/* <div className="w-2/4">
           <FormField
             control={form.control}
             name="client_id"
@@ -118,7 +118,7 @@ const TransactionDataForm = ({ form, categories, clientsOrSuppliers }: Transacti
               </FormItem>
             )}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   )

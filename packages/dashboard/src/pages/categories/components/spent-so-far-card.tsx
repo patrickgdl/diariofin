@@ -1,52 +1,64 @@
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts"
-
-import { Card, CardContent, CardHeader, CardTitle } from "~/ui/card"
+import { TransactionsQuery } from "~/queries/get-transactions-by-account"
+import { TransactionsByTypeQuery } from "~/queries/get-transactions-by-type"
+import { Card, CardContent } from "~/ui/card"
 import formatCurrency from "~/utils/format-currency"
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-]
+type GroupForChart = { id: string; name: string; value: number; color: string }
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"]
+export function SpentSoFarCard({ data }: { data: TransactionsByTypeQuery }) {
+  const onlySpentTransactions = data.filter((transaction) => transaction.amount < 0)
 
-export function SpentSoFarCard() {
+  const formattedData = onlySpentTransactions.reduce((acc, curr) => {
+    const group = curr?.transaction_categories?.category_groups
+
+    if (!acc[group?.id || ""]) {
+      acc[group?.id || ""] = {
+        id: group?.id || "",
+        name: group?.name || "",
+        color: group?.color || "",
+        value: Math.abs(curr.amount),
+      }
+    } else {
+      acc[group?.id || ""].value += Math.abs(curr.amount)
+    }
+
+    return acc
+  }, {} as Record<string, GroupForChart>)
+
   return (
     <div className="">
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-base font-normal">Gastos até agora</CardTitle>
-        </CardHeader>
-        <CardContent className="flex justify-between">
-          {/* Left side details */}
+        <CardContent className="flex justify-between h-[225px] p-6 space-x-4">
           <div>
             <div className="text-2xl font-bold">{formatCurrency(1248)}</div>
-            <p className="text-xs text-muted-foreground">Você tem {formatCurrency(248)} para receber</p>
+            <p className="text-xs text-muted-foreground">Gastos até agora</p>
           </div>
-        </CardContent>
 
-        <div className="h-[200px]">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
-                data={data}
+                data={Object.values(formattedData)}
                 cx="50%"
                 cy="50%"
                 innerRadius={60}
                 outerRadius={80}
-                fill="#8884d8"
                 dataKey="value"
                 paddingAngle={5}
               >
-                {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
+                {Object.values(formattedData).map((entry, index) => {
+                  console.log(entry)
+                  return <Cell key={`cell-${index}`} fill={entry.color} />
+                })}
               </Pie>
             </PieChart>
           </ResponsiveContainer>
-        </div>
+
+          <div className="flex flex-col items-end">
+            <div className="text-2xl font-bold">{formatCurrency(1248)}</div>
+            <p className="text-xs text-muted-foreground">Á confirmar</p>
+          </div>
+        </CardContent>
       </Card>
     </div>
   )

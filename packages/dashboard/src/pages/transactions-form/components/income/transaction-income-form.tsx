@@ -4,7 +4,7 @@ import { addDays } from "date-fns"
 import { CalendarIcon } from "lucide-react"
 import * as React from "react"
 import { useForm } from "react-hook-form"
-import useClientsByType from "~/hooks/useClientsByTypeQuery"
+import useAppContext from "~/hooks/useAppContext"
 import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
 import { Transactions } from "~/types/transactions"
 import { Button } from "~/ui/button"
@@ -13,13 +13,13 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "~/ui/input"
 import { InputCurrency } from "~/ui/input-currency-alt"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/ui/select"
 import { Switch } from "~/ui/switch"
 import { ToggleGroup, ToggleGroupItem } from "~/ui/toggle-group"
 import { cn } from "~/utils/cn"
 import formatDate from "~/utils/format-date"
 
 import formSchema, { TransactionIncomeFormType } from "./transaction-income-form-schema"
-import TransactionDataForm from "./transaction-income-data-form"
 
 type TransactionIncomeFormProps = {
   transactionToUpdate?: Transactions | null
@@ -27,7 +27,8 @@ type TransactionIncomeFormProps = {
 }
 
 const TransactionIncomeForm = ({ onSubmit, transactionToUpdate }: TransactionIncomeFormProps) => {
-  const { data: clientsOrSuppliers } = useClientsByType("SUPPLIER")
+  // const { data: clientsOrSuppliers } = useClientsByType("SUPPLIER")
+  const { accounts } = useAppContext()
 
   const form = useForm<TransactionIncomeFormType>({
     resolver: zodResolver(formSchema),
@@ -138,23 +139,53 @@ const TransactionIncomeForm = ({ onSubmit, transactionToUpdate }: TransactionInc
               />
             </div>
 
-            <div className="w-2/4">
-              <FormField
-                name="description"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Descrição</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Breve descrição da transação..." {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <div className="flex w-full space-x-1">
+              <div className="w-2/4">
+                <FormField
+                  name="description"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Descrição</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Breve descrição da transação..." {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
-            <TransactionDataForm form={form} clientsOrSuppliers={clientsOrSuppliers} />
+              <div className="w-2/4">
+                <FormField
+                  control={form.control}
+                  name="account_id"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Conta</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Selecione uma conta" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {accounts?.length > 0 &&
+                            accounts.map((account) => {
+                              return (
+                                <SelectItem key={account.id} value={account.id}>
+                                  {account.name}
+                                </SelectItem>
+                              )
+                            })}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
           </div>
         </form>
       </Form>

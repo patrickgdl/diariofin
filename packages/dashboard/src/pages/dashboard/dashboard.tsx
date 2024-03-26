@@ -6,7 +6,7 @@ import AccountSwitcher from "~/components/account-switcher"
 import { CalendarDateRangePicker } from "~/components/date-range-picker"
 import { defaultAccount } from "~/contexts/AppContext"
 import useAppContext from "~/hooks/useAppContext"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "~/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 import formatCurrency from "~/utils/format-currency"
 
@@ -16,7 +16,7 @@ import { Overview } from "./components/overview"
 import { TransactionsReviewTable } from "./components/transaction-review-table"
 import useTransactionsByDate from "./hooks/use-transactions-by-date"
 import { CardMetrics } from "./components/card-metrics"
-import MonthlyIncomeProgress from "./components/monthly-income"
+import { ArrowDownFromLine, ArrowUpFromLine, CalendarClockIcon, DollarSignIcon, HourglassIcon } from "lucide-react"
 
 const today = new Date()
 
@@ -65,18 +65,7 @@ export default function DashboardPage() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Saldo atual</CardTitle>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="h-4 w-4 text-muted-foreground"
-                >
-                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                </svg>
+                <DollarSignIcon className="mr-2 h-4 w-4" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{formatCurrency(doneTransactions.totalCount)}</div>
@@ -87,20 +76,7 @@ export default function DashboardPage() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Recebidos</CardTitle>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="h-4 w-4 text-muted-foreground"
-                >
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
+                <ArrowDownFromLine className="mr-2 h-4 w-4" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{formatCurrency(doneTransactions.incomeCount)}</div>
@@ -111,19 +87,7 @@ export default function DashboardPage() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Pagos</CardTitle>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="h-4 w-4 text-muted-foreground"
-                >
-                  <rect width="20" height="14" x="2" y="5" rx="2" />
-                  <path d="M2 10h20" />
-                </svg>
+                <ArrowUpFromLine className="mr-2 h-4 w-4" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{formatCurrency(Math.abs(doneTransactions.expenseCount))}</div>
@@ -134,18 +98,7 @@ export default function DashboardPage() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">A receber</CardTitle>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="h-4 w-4 text-muted-foreground"
-                >
-                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                </svg>
+                <HourglassIcon className="mr-2 h-4 w-4" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{formatCurrency(pendingTransactions.incomeCount)}</div>
@@ -156,18 +109,7 @@ export default function DashboardPage() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">A pagar</CardTitle>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="h-4 w-4 text-muted-foreground"
-                >
-                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                </svg>
+                <CalendarClockIcon className="mr-2 h-4 w-4" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{formatCurrency(Math.abs(pendingTransactions.expenseCount))}</div>
@@ -177,41 +119,45 @@ export default function DashboardPage() {
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
-            <Card>
-              <CardHeader>
-                <CardTitle>Fluxo de Caixa</CardTitle>
-                <CardDescription>Seu fluxo de caixa durante o período selecionado.</CardDescription>
-              </CardHeader>
-              <CardContent className="pl-2">
-                <Overview />
-              </CardContent>
-            </Card>
+            {doneTransactions.data && pendingTransactions.data && (
+              <>
+                <Overview data={[...doneTransactions.data, ...pendingTransactions.data]} />
 
-            <CardMetrics />
+                <CardMetrics data={[...doneTransactions.data, ...pendingTransactions.data]} />
+              </>
+            )}
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
-            {pendingTransactions.data && <TransactionsReviewTable data={pendingTransactions.data} />}
+            {doneTransactions.data && pendingTransactions.data && (
+              <>
+                <TransactionsReviewTable data={pendingTransactions.data} />
 
-            <TopCategoriesTable />
+                <TopCategoriesTable data={[...doneTransactions.data, ...pendingTransactions.data]} />
+              </>
+            )}
           </div>
         </TabsContent>
 
         <TabsContent value="consolidated" className="space-y-4">
           <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
-            <MonthByMonthTable />
+            {doneTransactions.data && pendingTransactions.data && (
+              <>
+                <MonthByMonthTable />
 
-            <TopCategoriesTable />
+                <TopCategoriesTable data={[...doneTransactions.data, ...pendingTransactions.data]} />
+              </>
+            )}
           </div>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
+          {/* <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
             <MonthlyIncomeProgress
               incomeTotal={doneTransactions.incomeCount}
               pendingIncomeTotal={pendingTransactions.incomeCount}
             />
 
             <div />
-          </div>
+          </div> */}
         </TabsContent>
       </Tabs>
     </div>

@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { ArrowRightLeft, CreditCardIcon, Factory, FileDown, LayoutDashboard, TagIcon } from "lucide-react"
+import { ArrowRightLeft, CreditCardIcon, FileDown, LayoutDashboard, TagIcon } from "lucide-react"
 
 export const LINKS: { route: string; label: string; icon: ReactNode }[] = [
   { label: "Dashboard", route: "/dashboard", icon: <LayoutDashboard size={16} /> },
@@ -8,11 +8,11 @@ export const LINKS: { route: string; label: string; icon: ReactNode }[] = [
     route: "/transactions",
     icon: <ArrowRightLeft size={16} />,
   },
-  {
-    label: "Clientes",
-    route: "/clients",
-    icon: <Factory size={16} />,
-  },
+  // {
+  //   label: "Clientes",
+  //   route: "/clients",
+  //   icon: <Factory size={16} />,
+  // },
   {
     label: "Contas",
     route: "/accounts",
@@ -23,11 +23,11 @@ export const LINKS: { route: string; label: string; icon: ReactNode }[] = [
     route: "/categories",
     icon: <TagIcon size={16} />,
   },
-  {
-    label: "Relatórios",
-    route: "/reports",
-    icon: <FileDown size={16} />,
-  },
+  // {
+  //   label: "Relatórios",
+  //   route: "/reports",
+  //   icon: <FileDown size={16} />,
+  // },
 ]
 
 export const LOCAL_STORAGE_KEYS = {
