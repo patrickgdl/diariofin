@@ -1,9 +1,12 @@
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
+import { TransactionsTableRaw } from "~/components/transactions-table/transactions-table-raw"
+import useTransactionsByCategoryQuery from "~/hooks/useTransactionsByCategory"
+import { columns } from "~/pages/accounts/components/transactions-columns"
 import { Avatar, AvatarFallback } from "~/ui/avatar"
-import formatCurrency from "~/utils/format-currency"
+import { Separator } from "~/ui/separator"
 
 import { KeyMetricsTable } from "./key-metrics-table"
-import { Separator } from "~/ui/separator"
+import formatCurrency from "~/utils/format-currency"
 
 const data2 = [
   {
@@ -56,14 +59,25 @@ const data2 = [
   },
 ]
 
-interface CategoriesDisplayProps {
-  mail: any | null
+export interface CategoriesDisplayProps {
+  category: {
+    id: string
+    name: string
+    icon: string
+    category_groups: {
+      id: string
+      name: string
+      color: string
+    } | null
+  } | null
 }
 
-export function CategoriesDisplay({ mail }: CategoriesDisplayProps) {
+export function CategoriesDisplay({ category }: CategoriesDisplayProps) {
+  const { data, groupedData, ...transactionsQuery } = useTransactionsByCategoryQuery(category?.id || "")
+
   return (
     <div className="flex h-full flex-col">
-      {mail ? (
+      {category ? (
         <div className="flex flex-1 flex-col">
           {/* Top bar with avatar, text, and badge */}
           <div className="flex items-center justify-between p-4">
@@ -75,50 +89,41 @@ export function CategoriesDisplay({ mail }: CategoriesDisplayProps) {
                   alt={mail.name}
                 /> */}
                 <AvatarFallback delayMs={600}>
-                  {mail.name
+                  {category.name
                     .split(" ")
                     .map((n) => n[0])
                     .join("")}
                 </AvatarFallback>
               </Avatar>
               <div>
-                <h1 className="text-xl font-semibold ">{mail.name}</h1>
+                <h1 className="text-xl font-semibold ">{category.name}</h1>
               </div>
             </div>
 
             {/* Right section with badge */}
-            {mail.date && (
+            {category.name && (
               <div className="flex flex-col items-end">
-                <div className="text-m -mb-2 font-semibold">Gastos até agora</div>
+                <div className="text-m -mb-2 font-medium">Gastos até agora</div>
                 <div className="mt-2 flex items-baseline">
-                  <span className="text-m font-semibold">{formatCurrency(mail.income as number)}</span>
+                  <span className="text-sm font-semibold">{formatCurrency(1240.0)}</span>
                 </div>
-                <div className="mt-1 text-sm text-gray-500">{formatCurrency(1240.0)} acima</div>
+                <div className="mt-1 text-sm text-gray-500">{formatCurrency(1240.0)} á confirmar</div>
               </div>
             )}
           </div>
 
-          <div className="mx-6 h-[160px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data2}>
-                <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis
-                  stroke="#888888"
-                  fontSize={12}
-                  tickLine={false}
-                  axisLine={false}
-                  tickFormatter={(value) => `$${value}`}
-                />
-                <Bar dataKey="total" fill="currentColor" radius={[4, 4, 0, 0]} className="fill-primary" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-
           <Separator />
-          <KeyMetricsTable />
+
+          {transactionsQuery.isLoading ? (
+            <div className="p-8 text-center text-muted-foreground">Carregando transações...</div>
+          ) : (
+            <div className="p-4">
+              <TransactionsTableRaw columns={columns} data={data} groupedData={groupedData} />
+            </div>
+          )}
         </div>
       ) : (
-        <div className="p-8 text-center text-muted-foreground">No message selected</div>
+        <div className="p-8 text-center text-muted-foreground">Sem categoria selecionada</div>
       )}
     </div>
   )

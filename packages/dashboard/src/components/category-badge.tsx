@@ -20,7 +20,10 @@ const CategoryBadge = ({ category }: { category: CategoriesQuery | null }) => {
   }
 
   return (
-    <Badge style={{ backgroundColor: hexToRgb(category.category_groups?.color || "#000000", "0.5") }}>
+    <Badge
+      className="px-1.5"
+      style={{ backgroundColor: hexToRgb(category.category_groups?.color || "#000000", "0.2") }}
+    >
       <span className="mr-1">{category.icon}</span>
       <span className="font-medium" style={{ color: category.category_groups?.color }}>
         {category.name}

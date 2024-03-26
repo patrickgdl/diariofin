@@ -1,70 +1,96 @@
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
+import { getMonth, parseISO } from "date-fns"
+import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
 
-const data = [
-  {
-    name: "Jan",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Fev",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Mar",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Abr",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Mai",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Jun",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Jul",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Ago",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Set",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Out",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Nov",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Dez",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-]
+import { TransactionsByDateQuery } from "../queries/get-transactions-by-date"
+import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
+import formatCurrency from "~/utils/format-currency"
 
-export function Overview() {
+type GroupForChart = { pendingIncome: number; doneIncome: number; pendingExpense: number; doneExpense: number }
+
+const groupByMonthAndSum = (data: TransactionsByDateQuery) => {
+  const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+  const grouped: Record<string, GroupForChart> = {}
+
+  // Initialize totals for all months to zero for both "pending" and "done"
+  months.forEach((month) => {
+    grouped[month] = {
+      pendingIncome: 0,
+      doneIncome: 0,
+      pendingExpense: 0,
+      doneExpense: 0,
+    }
+  })
+
+  data.forEach((item) => {
+    const monthIndex = getMonth(parseISO(item.date))
+    const month = months[monthIndex]
+    // @ts-ignore
+    if (item.transactions_instance.is_done) {
+      if (item.transaction_types?.id === TRANSACTION_TYPE.INCOME) {
+        grouped[month].doneIncome += item.amount
+      } else {
+        grouped[month].doneExpense += Math.abs(item.amount)
+      }
+    } else {
+      if (item.transaction_types?.id === TRANSACTION_TYPE.INCOME) {
+        grouped[month].pendingIncome += item.amount
+      } else {
+        grouped[month].pendingExpense += Math.abs(item.amount)
+      }
+    }
+  })
+
+  return months.map((month) => ({
+    name: month,
+    pendingIncome: grouped[month].pendingIncome,
+    doneIncome: grouped[month].doneIncome,
+    pendingExpense: grouped[month].pendingExpense,
+    doneExpense: grouped[month].doneExpense,
+  }))
+}
+
+const CustomTooltip = ({ active, payload, label }: { active: boolean; payload: any[]; label: string }) => {
+  if (active && payload?.length) {
+    return (
+      <div className="bg-muted p-3 shadow">
+        {payload.map((ele, index) => (
+          <>
+            <small key={index}>
+              <span style={{ color: ele.color }}>{ele.name}</span> : {formatCurrency(ele.value)}
+            </small>
+            <br />
+          </>
+        ))}
+      </div>
+    )
+  }
+  return null
+}
+
+export function Overview({ data }: { data: TransactionsByDateQuery }) {
+  const groupedData = groupByMonthAndSum(data)
+
   return (
-    <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={data}>
-        <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
-        <YAxis
-          stroke="#888888"
-          fontSize={12}
-          tickLine={false}
-          axisLine={false}
-          tickFormatter={(value) => `R$ ${value}`}
-        />
-        <Bar dataKey="total" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-      </BarChart>
-    </ResponsiveContainer>
+    <Card>
+      <CardHeader>
+        <CardTitle>Fluxo de Caixa</CardTitle>
+        <CardDescription>Seu fluxo de caixa de transações concluídas e pendentes.</CardDescription>
+      </CardHeader>
+      <CardContent className="pl-2">
+        <ResponsiveContainer width="100%" height={350}>
+          <BarChart width={500} height={300} data={groupedData}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip content={<CustomTooltip active={false} payload={[]} label={""} />} />
+            {/* <Legend /> */}
+            <Bar dataKey="doneIncome" name="Entradas Concluídas" fill="#10b981" stackId="a" minPointSize={1} />
+            <Bar dataKey="pendingIncome" name="Entradas Pendentes" fill="#8884d8" stackId="a" minPointSize={1} />
+            <Bar dataKey="doneExpense" name="Gastos Concluídos" fill="#10b981" stackId="b" minPointSize={1} />
+            <Bar dataKey="pendingExpense" name="Gastos Pendentes" fill="#8884d8" stackId="b" minPointSize={1} />
+          </BarChart>
+        </ResponsiveContainer>
+      </CardContent>
+    </Card>
   )
 }

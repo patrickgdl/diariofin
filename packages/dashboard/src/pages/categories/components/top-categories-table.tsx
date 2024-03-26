@@ -1,233 +1,114 @@
-import { BoltIcon } from "@heroicons/react/20/solid"
-import {
-  ColumnDef,
-  ColumnFiltersState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  SortingState,
-  useReactTable,
-  VisibilityState,
-} from "@tanstack/react-table"
-import { CarIcon, CoffeeIcon, HomeIcon, KeyIcon, ShoppingBagIcon, StarIcon } from "lucide-react"
-import * as React from "react"
+import { TransactionsByDateQuery } from "~/pages/dashboard/queries/get-transactions-by-date"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/ui/accordion"
+import { Badge } from "~/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
 import { Progress } from "~/ui/progress"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/ui/table"
 import formatCurrency from "~/utils/format-currency"
-import formatDate from "~/utils/format-date"
+import { hexToRgb } from "~/utils/hexToRgb"
 
-const data: Category[] = [
-  {
-    id: "home",
-    name: "Home",
-    icon: "Home",
-    current: 1000,
-    max: 2050,
-    date: "2023-01-01", // Example date in ISO format
-  },
-  {
-    id: "car",
-    name: "Transporte",
-    icon: "Car",
-    current: 2022,
-    max: 2050,
-    date: "2023-01-01", // Example date in ISO format
-  },
-  {
-    id: "rent",
-    name: "Aluguel",
-    icon: "Key",
-    current: 1984,
-    max: 2000,
-    date: "2023-01-01", // Example date in ISO format
-  },
-  {
-    id: "utilities",
-    name: "Utilidades",
-    icon: "Bolt",
-    current: 38,
-    max: 50,
-    date: "2023-01-01", // Example date in ISO format
-  },
-  {
-    id: "subscriptions",
-    name: "Inscrições",
-    icon: "Star",
-    current: 35,
-    max: 200,
-    date: "2023-01-01", // Example date in ISO format
-  },
-  {
-    id: "shopping",
-    name: "Shopping",
-    icon: "ShoppingBag",
-    current: 15,
-    max: 250,
-    date: "2023-01-01", // Example date in ISO format
-  },
-  {
-    id: "food",
-    name: "Comidas e Bebidas",
-    icon: "Coffee",
-    current: 0,
-    max: 450,
-    date: "2023-01-01", // Example date in ISO format
-  },
-]
-
-export type Category = {
+export type TransactionsByDateGrouped = {
   id: string
   name: string
-  icon: string
-  current: number
-  max: number
-  date: string // Add date field
+  color: string
+  totalAmount: number
+  categories: {
+    transaction_categories: {
+      id: string
+      name: string
+      icon: string
+      category_groups: {
+        id: string
+        name: string
+        color: string
+      } | null
+    }
+    transactionId: string
+    amount: number
+  }[]
 }
 
-const iconMap = {
-  Home: <HomeIcon className="mr-2 h-5 w-5" />,
-  Car: <CarIcon className="mr-2 h-5 w-5" />,
-  Key: <KeyIcon className="mr-2 h-5 w-5" />,
-  Bolt: <BoltIcon className="mr-2 h-5 w-5" />,
-  Star: <StarIcon className="mr-2 h-5 w-5" />,
-  ShoppingBag: <ShoppingBagIcon className="mr-2 h-5 w-5" />,
-  Coffee: <CoffeeIcon className="mr-2 h-5 w-5" />,
-  // ... add other icon mappings
-}
+export function TopCategoriesTable({ data }: { data: TransactionsByDateQuery }) {
+  const groupedData = data.reduce((acc, curr) => {
+    if (!curr.transaction_categories?.category_groups) {
+      return acc
+    }
 
-export const columns: ColumnDef<Category>[] = [
-  {
-    id: "date",
-    accessorFn: (row) => new Date(row.date), // Accessor function for date
-    header: () => <div>Data</div>,
-    cell: ({ getValue }) => {
-      const date = getValue() as Date
-      return formatDate(date)
-    },
-  },
-  {
-    accessorKey: "name",
-    header: "Categoria",
-    cell: ({ row }) => {
-      const name = row.getValue("name") as string
-      const icon = row.original.icon // Assuming 'icon' is the key in your data for icon names
-      return (
-        <div className="flex items-center">
-          {/* @ts-ignore */}
-          {iconMap[icon]} {/* Render the corresponding icon */}
-          <div className="capitalize">{name}</div>
-        </div>
-      )
-    },
-  },
-  {
-    accessorKey: "current",
-    header: () => <div className="text-right">Valor</div>,
-    cell: ({ row }) => {
-      const current = parseFloat(row.getValue("current"))
+    const groupId = curr.transaction_categories.category_groups.id
+    const transactionId = curr.id
+    const amount = curr.amount
 
-      // Format the amount as a dollar amount
-      return <div className="text-right font-medium">{formatCurrency(current)}</div>
-    },
-  },
-  {
-    id: "progress",
-    header: "Progresso",
-    cell: ({ row }) => {
-      const current = row.getValue("current") as number
-      const max = row.getValue("max") as number
-      const progressPercent = (current / max) * 100 // Calculate progress percentage
+    if (!acc[groupId]) {
+      acc[groupId] = {
+        id: curr.transaction_categories.category_groups.id,
+        name: curr.transaction_categories.category_groups.name,
+        color: curr.transaction_categories.category_groups.color,
+        totalAmount: 0,
+        categories: [],
+      }
+    }
 
-      return (
-        <div className="w-full px-2">
-          <Progress value={progressPercent} className="w-full" />
-        </div>
-      )
-    },
-  },
-  {
-    accessorKey: "max",
-    header: () => <div className="text-right">Valor</div>,
-    cell: ({ row }) => {
-      const max = parseFloat(row.getValue("max"))
+    let categoryObject = acc[groupId].categories.find((obj) => obj.transactionId === transactionId)
 
-      // Format the amount as a dollar amount
-      return <div className="text-right font-medium">{formatCurrency(max)}</div>
-    },
-  },
-]
+    if (!categoryObject) {
+      categoryObject = {
+        transactionId: transactionId,
+        transaction_categories: curr.transaction_categories,
+        amount,
+      }
+      acc[groupId].categories.push(categoryObject)
+    }
 
-export function TopCategoriesTable() {
-  const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
+    acc[groupId].totalAmount += amount
 
-  const table = useReactTable({
-    data,
-    columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      sorting,
-      columnFilters,
-      columnVisibility,
-      rowSelection,
-    },
-  })
+    return acc
+  }, {} as Record<string, TransactionsByDateGrouped>)
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Top Categorias</CardTitle>
-        <CardDescription>Onde você mais usa seu dinheiro?</CardDescription>
+        <CardDescription>Onde você mais gasta seu dinheiro?</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="rounded-md border">
-          <Table>
-            <TableHeader>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <TableHead key={header.id} className="[&:has([role=checkbox])]:pl-3">
-                        {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                      </TableHead>
-                    )
-                  })}
-                </TableRow>
-              ))}
-            </TableHeader>
-            <TableBody>
-              {table.getRowModel().rows?.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} className="[&:has([role=checkbox])]:pl-3">
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </TableCell>
+        {Object.entries(groupedData).length ? (
+          <Accordion type="single" collapsible>
+            {Object.entries(groupedData).map(([groupId, groupedRows]) => (
+              <AccordionItem key={groupId} value={groupId} className="border-none">
+                <AccordionTrigger className="flex-row-reverse py-2 flex-none w-full [&>svg]:text-primary">
+                  <div className="flex items-center space-x-3 w-full">
+                    <Badge
+                      className="px-1.5"
+                      style={{ backgroundColor: hexToRgb(groupedRows.color || "#000000", "0.2") }}
+                    >
+                      <span className="font-medium" style={{ color: groupedRows.color }}>
+                        {groupedRows.categories.length}
+                      </span>
+                    </Badge>
+
+                    <span className="flex w-2/3">{groupedRows.name}</span>
+                    <Progress value={80} className="w-1/3" />
+                    <span className="flex justify-end w-1/3">{formatCurrency(groupedRows.totalAmount)}</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="p-0 px-5">
+                  {groupedRows &&
+                    groupedRows.categories.map((category) => (
+                      <div key={category.transaction_categories.id} className="flex items-center space-x-6">
+                        <div className="flex items-center space-x-3">
+                          <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: groupedRows.color }} />
+                          <span>{category.transaction_categories.icon}</span>
+                          <span>{category.transaction_categories.name}</span>
+                        </div>
+                        <span>{formatCurrency(category.amount)}</span>
+                      </div>
                     ))}
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={columns.length} className="h-24 text-center">
-                    Sem resultados.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        ) : (
+          <div className="rounded-md border h-24 flex justify-center items-center">Sem transações para mostrar.</div>
+        )}
       </CardContent>
     </Card>
   )

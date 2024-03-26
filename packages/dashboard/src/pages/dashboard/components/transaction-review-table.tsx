@@ -99,7 +99,6 @@ export const columns: ColumnDef<TransactionsByDateQuery[0]>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Ações</DropdownMenuLabel>
             <DropdownMenuItem onClick={() => navigator.clipboard.writeText(payment.id)}>
               <CopyIcon className="mr-2 h-4 w-4" />
               <span>Copiar nome</span>
@@ -152,41 +151,9 @@ export function TransactionsReviewTable({ data }: { data: TransactionsByDateQuer
     <Card>
       <CardHeader>
         <CardTitle>Transações para Revisar</CardTitle>
-        <CardDescription>Gerencie seus pagamentos/recebimentos pendentes.</CardDescription>
+        <CardDescription>Gerencie seus pagamentos e recebimentos pendentes.</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="mb-4 flex items-center gap-4">
-          <Input
-            placeholder="Buscar transações..."
-            value={(table.getColumn("status")?.getFilterValue() as string) ?? ""}
-            onChange={(event) => table.getColumn("status")?.setFilterValue(event.target.value)}
-            className="max-w-sm"
-          />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
-                Colunas <ChevronDownIcon className="ml-2 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {table
-                .getAllColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className="capitalize"
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                    >
-                      {column.id}
-                    </DropdownMenuCheckboxItem>
-                  )
-                })}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
         <div className="rounded-md border">
           <Table>
             <TableHeader>
