@@ -6,7 +6,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "~/ui/tooltip"
 import { cn } from "~/utils/cn"
 import { Account } from "~/types/account"
 import Logo from "./logo"
-import { Settings, Settings2 } from "lucide-react"
+import { ArrowUpRightIcon, Settings, Settings2 } from "lucide-react"
 
 interface NavProps {
   isCollapsed: boolean
@@ -105,7 +105,7 @@ export function Nav({ links, isCollapsed, accounts }: NavProps) {
                       <span className="text-sm font-medium">{account.name}</span>
                     </div>
 
-                    <div className="flex items-center space-x-2">
+                    {/* <div className="flex items-center space-x-2">
                       <SparkAreaChart
                         data={chartdata}
                         categories={["Performance"]}
@@ -117,7 +117,9 @@ export function Nav({ links, isCollapsed, accounts }: NavProps) {
                       <div className="flex space-x-2">
                         <span className="rounded bg-emerald-500 text-xs text-white px-0.5">+1.72%</span>
                       </div>
-                    </div>
+                    </div> */}
+
+                    <ArrowUpRightIcon className="h-4 w-4 text-primary" />
                   </NavLink>
                 ))}
               </div>

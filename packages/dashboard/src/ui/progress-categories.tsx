@@ -8,7 +8,7 @@ const getColorForPercentage = (value) => {
   if (value > 100) {
     return "bg-red-500" // Red for over 100%
   } else if (value > 80) {
-    return "bg-orange-500" // Orange for over 80%
+    return "bg-green-500" // Green for over 80%
   }
   return "bg-primary" // Default color
 }

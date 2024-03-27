@@ -102,9 +102,6 @@ export function AccountsDisplay({ account, onDeactivate, onEdit }: AccountsDispl
 
           {/* Right section with badge */}
           <div className="flex flex-col items-end">
-            <Badge variant={account.balance >= 0 ? "default" : "destructive"} className="self-end">
-              {account.balance >= 0 ? `▲ ${1}%` : `▼ ${Math.abs(1).toFixed(2)}%`}
-            </Badge>
             <div className="mt-2 flex items-baseline">
               <span className="text-m font-semibold">{formatCurrency(account.balance)}</span>
               <span className="text-m text-muted-foreground">/ {formatCurrency(account.balance)}</span>

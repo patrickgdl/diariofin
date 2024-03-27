@@ -1,10 +1,11 @@
 import { getMonth, parseISO } from "date-fns"
-import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import * as React from "react"
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
+import formatCurrency from "~/utils/format-currency"
 
 import { TransactionsByDateQuery } from "../queries/get-transactions-by-date"
-import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
-import formatCurrency from "~/utils/format-currency"
 
 type GroupForChart = { pendingIncome: number; doneIncome: number; pendingExpense: number; doneExpense: number }
 
@@ -55,12 +56,12 @@ const CustomTooltip = ({ active, payload, label }: { active: boolean; payload: a
     return (
       <div className="bg-muted p-3 shadow">
         {payload.map((ele, index) => (
-          <>
+          <React.Fragment key={index}>
             <small key={index}>
               <span style={{ color: ele.color }}>{ele.name}</span> : {formatCurrency(ele.value)}
             </small>
             <br />
-          </>
+          </React.Fragment>
         ))}
       </div>
     )

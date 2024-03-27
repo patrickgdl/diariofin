@@ -7,6 +7,7 @@ import { Separator } from "~/ui/separator"
 
 import { KeyMetricsTable } from "./key-metrics-table"
 import formatCurrency from "~/utils/format-currency"
+import { TransactionsByDateGrouped } from "./top-categories-table"
 
 const data2 = [
   {
@@ -60,20 +61,13 @@ const data2 = [
 ]
 
 export interface CategoriesDisplayProps {
-  category: {
-    id: string
-    name: string
-    icon: string
-    category_groups: {
-      id: string
-      name: string
-      color: string
-    } | null
-  } | null
+  category: TransactionsByDateGrouped["categories"][0] | null
 }
 
 export function CategoriesDisplay({ category }: CategoriesDisplayProps) {
-  const { data, groupedData, ...transactionsQuery } = useTransactionsByCategoryQuery(category?.id || "")
+  const { data, groupedData, ...transactionsQuery } = useTransactionsByCategoryQuery(
+    category?.transaction_categories?.id || ""
+  )
 
   return (
     <div className="flex h-full flex-col">
@@ -89,25 +83,25 @@ export function CategoriesDisplay({ category }: CategoriesDisplayProps) {
                   alt={mail.name}
                 /> */}
                 <AvatarFallback delayMs={600}>
-                  {category.name
+                  {category.transaction_categories.name
                     .split(" ")
                     .map((n) => n[0])
                     .join("")}
                 </AvatarFallback>
               </Avatar>
               <div>
-                <h1 className="text-xl font-semibold ">{category.name}</h1>
+                <h1 className="text-xl font-semibold ">{category.transaction_categories.name}</h1>
               </div>
             </div>
 
             {/* Right section with badge */}
-            {category.name && (
+            {category.transaction_categories.name && (
               <div className="flex flex-col items-end">
                 <div className="text-m -mb-2 font-medium">Gastos até agora</div>
                 <div className="mt-2 flex items-baseline">
-                  <span className="text-sm font-semibold">{formatCurrency(1240.0)}</span>
+                  <span className="text-sm font-semibold">{formatCurrency(category.amount)}</span>
                 </div>
-                <div className="mt-1 text-sm text-gray-500">{formatCurrency(1240.0)} á confirmar</div>
+                <div className="mt-1 text-sm text-gray-500">{formatCurrency(0)} á confirmar</div>
               </div>
             )}
           </div>

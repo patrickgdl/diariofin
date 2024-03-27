@@ -22,15 +22,15 @@ const today = new Date()
 
 export default function DashboardPage() {
   const params = useParams()
-  const { accounts, setSelectedAccount } = useAppContext()
+  const { accounts, selectedAccount, setSelectedAccount } = useAppContext()
 
   const [date, setDate] = React.useState<DateRange>({
     from: subDays(today, 30),
     to: today,
   })
 
-  const pendingTransactions = useTransactionsByDate({ date })
-  const doneTransactions = useTransactionsByDate({ date, isDone: true })
+  const pendingTransactions = useTransactionsByDate({ date, accountId: selectedAccount.id })
+  const doneTransactions = useTransactionsByDate({ date, accountId: selectedAccount.id, isDone: true })
 
   React.useEffect(() => {
     if (params?.accountId) {
@@ -143,7 +143,7 @@ export default function DashboardPage() {
           <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
             {doneTransactions.data && pendingTransactions.data && (
               <>
-                <MonthByMonthTable />
+                <MonthByMonthTable data={[...doneTransactions.data, ...pendingTransactions.data]} />
 
                 <TopCategoriesTable data={[...doneTransactions.data, ...pendingTransactions.data]} />
               </>

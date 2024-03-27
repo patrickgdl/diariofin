@@ -19,89 +19,52 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~
 import formatCurrency from "~/utils/format-currency"
 import { cn } from "~/utils/cn"
 import formatDate from "~/utils/format-date"
+import { TransactionsByDateQuery } from "../queries/get-transactions-by-date"
+import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
+import { getMonth, parseISO } from "date-fns"
 
-interface Transaction {
-  date: string
-  incoming: number
-  outgoing: number
+type GroupForTable = { month: string; incoming: number; outgoing: number }
+
+const groupByMonthAndSum = (data: TransactionsByDateQuery) => {
+  const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+  const grouped: Record<string, GroupForTable> = {}
+
+  // Initialize totals for all months to zero for both "pending" and "done"
+  months.forEach((month) => {
+    grouped[month] = {
+      month: month,
+      incoming: 0,
+      outgoing: 0,
+    }
+  })
+
+  data.forEach((item) => {
+    const monthIndex = getMonth(parseISO(item.date))
+    const month = months[monthIndex]
+    // @ts-ignore
+    if (item.transaction_types?.id === TRANSACTION_TYPE.INCOME) {
+      grouped[month].incoming += item.amount
+    } else {
+      grouped[month].outgoing += Math.abs(item.amount)
+    }
+  })
+
+  return Object.values(grouped)
 }
 
-const data: Transaction[] = [
+export const columns: ColumnDef<GroupForTable>[] = [
   {
-    date: "2023-01-01T14:48:00",
-    incoming: 732.65,
-    outgoing: -800.4,
-  },
-  {
-    date: "2023-02-01T14:48:00",
-    incoming: 820.8,
-    outgoing: -550.55,
-  },
-  {
-    date: "2023-03-01T14:48:00",
-    incoming: 820.8,
-    outgoing: -550.55,
-  },
-  {
-    date: "2023-04-01T14:48:00",
-    incoming: 820.8,
-    outgoing: -550.55,
-  },
-  {
-    date: "2023-05-01T14:48:00",
-    incoming: 820.8,
-    outgoing: -550.55,
-  },
-  {
-    date: "2023-06-01T14:48:00",
-    incoming: 820.8,
-    outgoing: -550.55,
-  },
-  {
-    date: "2023-07-01T14:48:00",
-    incoming: 820.8,
-    outgoing: -550.55,
-  },
-  {
-    date: "2023-08-01T14:48:00",
-    incoming: 820.8,
-    outgoing: -550.55,
-  },
-  {
-    date: "2023-09-01T14:48:00",
-    incoming: 820.8,
-    outgoing: -550.55,
-  },
-  {
-    date: "2023-10-01T14:48:00",
-    incoming: 820.8,
-    outgoing: -550.55,
-  },
-  {
-    date: "2023-11-01T14:48:00",
-    incoming: 820.8,
-    outgoing: -550.55,
-  },
-  {
-    date: "2023-12-01T14:48:00",
-    incoming: 820.8,
-    outgoing: -550.55,
-  },
-]
-
-export const columns: ColumnDef<Transaction>[] = [
-  {
-    id: "date",
-    accessorFn: (row) => new Date(row.date), // Accessor function for date
+    id: "month",
+    accessorFn: (row) => row.month, // Accessor function for date
     header: () => <div>Mês</div>,
-    cell: ({ getValue }) => {
-      const date = getValue() as Date
-      return formatDate(date, "dd/MM")
+    cell: ({ row }) => {
+      const month = row.getValue("month")
+      return month
     },
   },
   {
     accessorKey: "incoming",
-    header: () => <div className="text-right">Entradas</div>,
+    header: () => <div className="text-right">Entrada</div>,
     cell: ({ row }) => {
       const incoming = parseFloat(row.getValue("incoming"))
       return <div className="text-right font-medium">{formatCurrency(incoming)}</div>
@@ -109,7 +72,7 @@ export const columns: ColumnDef<Transaction>[] = [
   },
   {
     accessorKey: "outgoing",
-    header: () => <div className="text-right">Saídas</div>,
+    header: () => <div className="text-right">Saída</div>,
     cell: ({ row }) => {
       const outgoing = parseFloat(row.getValue("outgoing"))
       return <div className="text-right font-medium">{formatCurrency(outgoing)}</div>
@@ -124,23 +87,23 @@ export const columns: ColumnDef<Transaction>[] = [
 
       const diff = incoming + outgoing
 
-      return (
-        <div className={cn("text-right font-medium", diff < 0 ? "text-red-500" : "text-green-500")}>
-          {formatCurrency(diff)}
-        </div>
-      )
+      const textColor = diff < 0 ? "text-red-500" : diff === 0 ? "" : "text-green-500"
+
+      return <div className={cn("text-right font-medium", textColor)}>{formatCurrency(diff)}</div>
     },
   },
 ]
 
-export function MonthByMonthTable() {
+export function MonthByMonthTable({ data }: { data: TransactionsByDateQuery }) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
+  const groupedData = groupByMonthAndSum(data)
+
   const table = useReactTable({
-    data,
+    data: groupedData,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
