@@ -96,9 +96,9 @@ export function Nav({ links, isCollapsed, accounts }: NavProps) {
         <div className="flex flex-col gap-2 px-4 group-[[data-collapsed=true]]:hidden">
           {accounts?.length > 0 ? (
             <div>
-              <span className="text-xs font-medium text-muted-foreground uppercase">Contas</span>
+              <span className="text-xs font-semibold text-muted-foreground uppercase">Contas</span>
 
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1 py-4">
                 {accounts.map((account) => (
                   <NavLink to={`/dashboard/${account.id}`} key={account.id} className="flex justify-between py-2">
                     <div className="flex items-center">
