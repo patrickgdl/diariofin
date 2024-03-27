@@ -68,7 +68,9 @@ export default function DashboardPage() {
                 <DollarSignIcon className="mr-2 h-4 w-4" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{formatCurrency(doneTransactions.totalCount)}</div>
+                <div className="text-2xl font-bold">
+                  {formatCurrency(doneTransactions.totalCount + pendingTransactions.totalCount)}
+                </div>
                 {/* <p className="text-xs text-muted-foreground">+20.1% no último mês</p> */}
               </CardContent>
             </Card>
