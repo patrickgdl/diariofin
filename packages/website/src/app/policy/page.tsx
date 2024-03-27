@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Policy | Midday",
+  title: "Políticas | Fluxozen",
 };
 
 export default function Page() {
@@ -16,7 +16,7 @@ export default function Page() {
           <p className="leading-7 mt-8">Last updated: October 26, 2023</p>
 
           <p className="leading-7 mt-8">
-            Midday Labs AB ("us", "we", or "our") operates the Midday
+            Fluxozen Labs AB ("us", "we", or "our") operates the Fluxozen
             application (hereinafter referred to as the "Service").
           </p>
 
@@ -41,7 +41,7 @@ export default function Page() {
                 <strong>Service</strong>
               </p>
               <p className="leading-7 mt-8">
-                Service is the Midday application operated by Midday Labs AB
+                Service is the Fluxozen application operated by Fluxozen Labs AB
               </p>
             </li>
             <li>
@@ -187,7 +187,7 @@ export default function Page() {
 
           <h2>Use of Data</h2>
           <p className="leading-7 mt-8">
-            Midday Labs AB uses the collected data for various purposes:
+            Fluxozen Labs AB uses the collected data for various purposes:
           </p>
           <ul>
             <li>To provide and maintain our Service</li>
@@ -216,13 +216,13 @@ export default function Page() {
             Protection Regulation (GDPR)
           </h2>
           <p className="leading-7 mt-8">
-            If you are from the European Economic Area (EEA), Midday Labs AB
+            If you are from the European Economic Area (EEA), Fluxozen Labs AB
             legal basis for collecting and using the personal information
             described in this Privacy Policy depends on the Personal Data we
             collect and the specific context in which we collect it.
           </p>
           <p className="leading-7 mt-8">
-            Midday Labs AB may process your Personal Data because:
+            Fluxozen Labs AB may process your Personal Data because:
           </p>
           <ul>
             <li>We need to perform a contract with you</li>
@@ -237,15 +237,15 @@ export default function Page() {
 
           <h2>Retention of Data</h2>
           <p className="leading-7 mt-8">
-            Midday Labs AB will retain your Personal Data only for as long as is
-            necessary for the purposes set out in this Privacy Policy. We will
-            retain and use your Personal Data to the extent necessary to comply
-            with our legal obligations (for example, if we are required to
-            retain your data to comply with applicable laws), resolve disputes
-            and enforce our legal agreements and policies.
+            Fluxozen Labs AB will retain your Personal Data only for as long as
+            is necessary for the purposes set out in this Privacy Policy. We
+            will retain and use your Personal Data to the extent necessary to
+            comply with our legal obligations (for example, if we are required
+            to retain your data to comply with applicable laws), resolve
+            disputes and enforce our legal agreements and policies.
           </p>
           <p className="leading-7 mt-8">
-            Midday Labs AB will also retain Usage Data for internal analysis
+            Fluxozen Labs AB will also retain Usage Data for internal analysis
             purposes. Usage Data is generally retained for a shorter period of
             time, except when this data is used to strengthen the security or to
             improve the functionality of our Service, or we are legally
@@ -269,7 +269,7 @@ export default function Page() {
             such information represents your agreement to that transfer.
           </p>
           <p className="leading-7 mt-8">
-            Midday Labs AB will take all the steps reasonably necessary to
+            Fluxozen Labs AB will take all the steps reasonably necessary to
             ensure that your data is treated securely and in accordance with
             this Privacy Policy and no transfer of your Personal Data will take
             place to an organisation or a country unless there are adequate
@@ -280,7 +280,7 @@ export default function Page() {
           <h2>Disclosure of Data</h2>
           <h3>Business Transaction</h3>
           <p className="leading-7 mt-8">
-            If Midday Labs AB is involved in a merger, acquisition or asset
+            If Fluxozen Labs AB is involved in a merger, acquisition or asset
             sale, your Personal Data may be transferred. We will provide notice
             before your Personal Data is transferred and becomes subject to a
             different Privacy Policy.
@@ -288,7 +288,7 @@ export default function Page() {
 
           <h3>Disclosure for Law Enforcement</h3>
           <p className="leading-7 mt-8">
-            Under certain circumstances, Midday Labs AB may be required to
+            Under certain circumstances, Fluxozen Labs AB may be required to
             disclose your Personal Data if required to do so by law or in
             response to valid requests by public authorities (e.g. a court or a
             government agency).
@@ -296,13 +296,13 @@ export default function Page() {
 
           <h3>Legal Requirements</h3>
           <p className="leading-7 mt-8">
-            Midday Labs AB may disclose your Personal Data in the good faith
+            Fluxozen Labs AB may disclose your Personal Data in the good faith
             belief that such action is necessary to:
           </p>
           <ul>
             <li>To comply with a legal obligation</li>
             <li>
-              To protect and defend the rights or property of Midday Labs AB
+              To protect and defend the rights or property of Fluxozen Labs AB
             </li>
             <li>
               To prevent or investigate possible wrongdoing in connection with
@@ -344,7 +344,7 @@ export default function Page() {
           </h2>
           <p className="leading-7 mt-8">
             If you are a resident of the European Economic Area (EEA), you have
-            certain data protection rights. Midday Labs AB aims to take
+            certain data protection rights. Fluxozen Labs AB aims to take
             reasonable steps to allow you to correct, amend, delete or limit the
             use of your Personal Data.
           </p>
@@ -563,7 +563,7 @@ export default function Page() {
             us:
           </p>
           <ul>
-            <li>By email: support@midday.ai</li>
+            <li>By email: support@fluxozen</li>
           </ul>
         </div>
       </div>

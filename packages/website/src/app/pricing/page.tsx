@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Pricing | Midday",
+  title: "Preços | Fluxozen",
 };
 
 export default function Page() {
@@ -41,7 +41,7 @@ export default function Page() {
                   </Button>
                 </Link>
 
-                <a href="https://app.midday.ai">
+                <a href="https://app.fluxozen">
                   <Button className="h-12 px-5">Acesso antecipado</Button>
                 </a>
               </div>

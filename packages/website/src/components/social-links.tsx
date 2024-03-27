@@ -7,7 +7,7 @@ export function SocialLinks() {
   return (
     <ul className="flex space-x-4 items-center md:ml-5">
       <li>
-        <a href="https://go.midday.ai/lS72Toq">
+        <a href="https://go.fluxozen.com/lS72Toq">
           <span className="sr-only">Twitter</span>
           <FaXTwitter
             size={22}
@@ -16,7 +16,7 @@ export function SocialLinks() {
         </a>
       </li>
       <li>
-        <a href="https://go.midday.ai/7rhA3rz">
+        <a href="https://go.fluxozen.com/7rhA3rz">
           <span className="sr-only">Producthunt</span>
           <FaProductHunt
             size={22}
@@ -25,7 +25,7 @@ export function SocialLinks() {
         </a>
       </li>
       <li>
-        <a href="https://go.midday.ai/anPiuRx">
+        <a href="https://go.fluxozen.com/anPiuRx">
           <span className="sr-only">Discord</span>
           <FaDiscord size={24} className="fill-[#707070] dark:fill-[#878787]" />
         </a>

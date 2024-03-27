@@ -7,7 +7,7 @@ export function SectionSubscription() {
       <div className="absolute left-4 right-4 md:left-8 md:right-8 top-4 flex justify-between text-lg">
         <span>How we will make money</span>
         <span className="text-[#878787]">
-          <Link href="/">Midday</Link>
+          <Link href="/">Fluxozen</Link>
         </span>
       </div>
       <div className="flex flex-col min-h-screen justify-center container">
@@ -81,7 +81,8 @@ export function SectionSubscription() {
               <h2>Custom domain</h2>
               <p className="text-[#878787] text-sm text-center">
                 If the user want a custom inbox email, for example
-                acme.inbox@midday.ai, we can provide this for an additional fee.
+                acme.inbox@fluxozen.com, we can provide this for an additional
+                fee.
               </p>
             </Card>
           </div>

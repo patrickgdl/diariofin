@@ -44,7 +44,7 @@ export function Hero() {
             </Button>
           </Link>
 
-          <a href="https://app.midday.ai">
+          <a href="https://app.fluxozen.com">
             <Button className="h-12 px-5">Acesso antecipado</Button>
           </a>
         </div>
