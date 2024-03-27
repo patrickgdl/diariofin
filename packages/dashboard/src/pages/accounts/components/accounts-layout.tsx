@@ -15,17 +15,16 @@ import { AccountsList } from "./accounts-list"
 
 interface AccountsDashboardProps {
   accounts: Account[]
-  defaultLayout?: number[] | undefined
   onDeactivate: (account: Account) => void
 }
 
-export function AccountsDashboard({ accounts, defaultLayout = [20, 40, 40], onDeactivate }: AccountsDashboardProps) {
+export function AccountsDashboard({ accounts, onDeactivate }: AccountsDashboardProps) {
   const navigate = useNavigate()
   const [selected, setSelected] = React.useState(accounts[0])
 
   return (
     <ResizablePanelGroup direction="horizontal" className="h-full max-h-[1200px] items-stretch">
-      <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
+      <ResizablePanel defaultSize={50} minSize={30}>
         <Tabs defaultValue="all">
           <div className="flex h-[52px] items-center px-4 py-2">
             <h1 className="text-lg font-medium">Contas</h1>
@@ -74,7 +73,7 @@ export function AccountsDashboard({ accounts, defaultLayout = [20, 40, 40], onDe
 
       <ResizableHandle withHandle />
 
-      <ResizablePanel defaultSize={defaultLayout[2]}>
+      <ResizablePanel defaultSize={50}>
         {selected ? (
           <AccountsDisplay
             account={selected}
