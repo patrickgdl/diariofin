@@ -129,7 +129,7 @@ export function Header() {
         </button>
 
         <a
-          href="https://app.midday.ai"
+          href="https://app.fluxozen.com"
           className="hidden md:inline-flex h-8 items-center justify-center rounded-md text-sm font-medium transition-colors px-3 py-2 bg-primary text-primary-foreground hover:bg-primary/90"
         >
           Entrar
@@ -144,7 +144,7 @@ export function Header() {
         >
           <div className="mt-4 flex justify-between p-3 relative">
             <button type="button" onClick={handleToggleMenu}>
-              <span className="sr-only">Midday Logo</span>
+              <span className="sr-only">Fluxozen Logo</span>
               <LogoIcon />
             </button>
 
@@ -196,7 +196,7 @@ export function Header() {
               </motion.li>
 
               <motion.li variants={itemVariant}>
-                <Link href="https://app.midday.ai">Get started</Link>
+                <Link href="https://app.fluxozen.com">Get started</Link>
               </motion.li>
 
               <motion.li
@@ -205,7 +205,7 @@ export function Header() {
               >
                 <Link
                   className="text-xl text-primary"
-                  href="https://app.midday.ai"
+                  href="https://app.fluxozen.com"
                 >
                   Entrar
                 </Link>

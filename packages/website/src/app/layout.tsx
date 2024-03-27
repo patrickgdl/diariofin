@@ -13,10 +13,10 @@ import type { ReactElement } from "react";
 import { Provider } from "./provider";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://midday.ai"),
-  title: "Midday | Run your business smarter",
+  metadataBase: new URL("https://fluxozen.com"),
+  title: "Fluxozen | Run your business smarter",
   description:
-    "Midday provides you with greater insight into your business and automates the boring tasks, allowing you to focus on what you love to do instead.",
+    "Fluxozen provides you with greater insight into your business and automates the boring tasks, allowing you to focus on what you love to do instead.",
 };
 
 export const viewport = {

@@ -34,7 +34,7 @@ export function FooterCTA() {
             </Button>
           </Link>
 
-          <a href="https://app.midday.ai">
+          <a href="https://app.fluxozen.com">
             <Button className="h-12 px-5 bg-white text-black hover:bg-white/80">
               Acesso antecipado
             </Button>

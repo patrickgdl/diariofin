@@ -6,7 +6,7 @@ import engineSDK from "public/engine-sdk.png";
 import engine from "public/engine-ui.png";
 
 export const metadata: Metadata = {
-  title: "Engine | Midday",
+  title: "Engine | Fluxozen",
 };
 
 export default function Page() {
@@ -17,7 +17,7 @@ export default function Page() {
       </h1>
 
       <p className="text-[#707070] mt-4 mb-8 text-center max-w-[550px] font-mono">
-        Midday Engine streamlines banking integrations with a single API,
+        Fluxozen Engine streamlines banking integrations with a single API,
         effortlessly connecting to multiple providers and get one unified
         format.
       </p>
@@ -49,7 +49,7 @@ export default function Page() {
           height={421}
           className="mt-16"
           quality={100}
-          alt="Midday Engine"
+          alt="Fluxozen Engine"
           priority
         />
 
@@ -79,7 +79,7 @@ export default function Page() {
           One SDK, implement in minutes
         </h3>
         <p className="text-[#878787] font-sm max-w-[600px]">
-          With Midday Engine SDK you can implement banking providers in matter
+          With Fluxozen Engine SDK you can implement banking providers in matter
           of minutes.
         </p>
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { AdaptiveImage } from "@/components/adaptive-image";
-import { useRouter } from "next/navigation";
 import screen1Light from "public/screen-1-light.png";
 import screen1 from "public/screen-1.png";
 import screen2Light from "public/screen-2-light.png";
@@ -16,14 +15,13 @@ import { useState } from "react";
 import { BlurryCircle } from "./blurry-circle";
 import { CalEmbed } from "./cal-embed";
 import { CardStack } from "./card-stack";
-import { Dock } from "./dock";
 
 export function Screens() {
-  const [activeApp, setActiveApp] = useState<"cal" | "midday">("midday");
+  const [activeApp, setActiveApp] = useState<"cal" | "fluxozen">("fluxozen");
 
   const renderActiveApp = () => {
     switch (activeApp) {
-      case "midday":
+      case "fluxozen":
         return (
           <div className="relative">
             <BlurryCircle className="absolute -top-2 right-[320px]  hidden md:block bg-[#FFECBB] dark:bg-[#FFECBB]/40" />
@@ -110,7 +108,7 @@ export function Screens() {
       case "cal":
         return (
           <div className="w-full max-h-[760px] overflow-auto md:h-[600px] md:mt-[70px]">
-            <CalEmbed calLink="pontus-midday/15min" />
+            <CalEmbed calLink="patrickgdl/15min" />
           </div>
         );
       default:

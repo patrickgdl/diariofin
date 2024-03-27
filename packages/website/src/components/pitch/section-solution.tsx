@@ -9,7 +9,7 @@ export function SectionSolution() {
       <div className="absolute left-4 right-4 md:left-8 md:right-8 top-4 flex justify-between text-lg">
         <span>Our solution</span>
         <span className="text-[#878787]">
-          <Link href="/">Midday</Link>
+          <Link href="/">Fluxozen</Link>
         </span>
       </div>
       <div className="flex flex-col min-h-screen justify-center container">
@@ -70,7 +70,7 @@ export function SectionSolution() {
               <h2 className="text-2xl">Intermediary</h2>
 
               <p className="text-[#878787] text-sm text-center">
-                Midday serves as the bridge between you and your accountant,
+                Fluxozen serves as the bridge between you and your accountant,
                 streamlining your month-end procedures, reducing manual work,
                 and easily packaging everything up for financial review. By
                 prioritizing user experience over building a accountant system,
@@ -127,7 +127,8 @@ export function SectionSolution() {
                 various AI aspects into our platform. For instance, we've
                 implemented features such as matching receipts to transactions,
                 category automation, and engaging with your financials through
-                Midday AI, allowing users to ask for any insights they may need.
+                Fluxozen AI, allowing users to ask for any insights they may
+                need.
               </p>
             </Card>
           </div>
