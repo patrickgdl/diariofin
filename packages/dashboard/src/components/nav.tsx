@@ -1,12 +1,10 @@
+import { ArrowUpRightIcon, Settings } from "lucide-react"
 import { ReactNode } from "react"
 import { NavLink } from "react-router-dom"
-import { Button, buttonVariants } from "~/ui/button"
-import { SparkAreaChart } from "@tremor/react"
+import { Account } from "~/types/account"
+import { buttonVariants } from "~/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/ui/tooltip"
 import { cn } from "~/utils/cn"
-import { Account } from "~/types/account"
-import Logo from "./logo"
-import { ArrowUpRightIcon, Settings, Settings2 } from "lucide-react"
 
 interface NavProps {
   isCollapsed: boolean
@@ -81,7 +79,7 @@ export function Nav({ links, isCollapsed, accounts }: NavProps) {
                 key={index}
                 to={link.route}
                 className={({ isActive }) =>
-                  cn(buttonVariants({ variant: isActive ? "default" : "ghost" }), "justify-between")
+                  cn(buttonVariants({ variant: isActive ? "default" : "ghost", size: "sm" }), "justify-between")
                 }
               >
                 <span className="flex items-center gap-2">
@@ -100,10 +98,12 @@ export function Nav({ links, isCollapsed, accounts }: NavProps) {
 
               <div className="flex flex-col gap-1 py-4">
                 {accounts.map((account) => (
-                  <NavLink to={`/dashboard/${account.id}`} key={account.id} className="flex justify-between py-2">
-                    <div className="flex items-center">
-                      <span className="text-sm font-medium">{account.name}</span>
-                    </div>
+                  <NavLink
+                    to={`/dashboard/${account.id}`}
+                    key={account.id}
+                    className="flex items-center justify-between py-1"
+                  >
+                    <span className="text-sm font-medium">{account.name}</span>
 
                     {/* <div className="flex items-center space-x-2">
                       <SparkAreaChart
