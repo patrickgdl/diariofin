@@ -37,8 +37,6 @@ export function TopCategoriesTable({ data }: { data: TransactionsByDateQuery }) 
 
   const expenseTransactions = data.filter((transaction) => transaction.amount < 0)
 
-  console.log(expenseTransactions)
-
   const groupedData = expenseTransactions.reduce((acc, curr) => {
     if (!curr.transaction_categories?.category_groups) {
       return acc
