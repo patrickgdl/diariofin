@@ -43,12 +43,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       }}
     >
       <ResizablePanel
-        // defaultSize={layout[0] || 15}
-        defaultSize={15}
-        minSize={15}
+        defaultSize={13}
+        minSize={13}
         maxSize={15}
         collapsible
-        collapsedSize={6}
+        collapsedSize={5}
         onCollapse={() => {
           setIsCollapsed(true)
           document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(true)}`
