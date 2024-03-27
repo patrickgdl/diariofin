@@ -34,7 +34,7 @@ export function AccountsList({ items, onSelect }: AccountsListProps) {
           >
             <div className="flex grow flex-col">
               <CardTitle className="text-md font-bold">
-                <div className="flex items-center space-x-1">
+                <div className="flex items-center space-x-4">
                   <Avatar className="h-5 w-5">
                     <AvatarImage src={`https://avatar.vercel.sh/${item.id}.png`} alt={item.name} />
                     <AvatarFallback>{getAcronym(item.name)}</AvatarFallback>
@@ -45,7 +45,7 @@ export function AccountsList({ items, onSelect }: AccountsListProps) {
               </CardTitle>
             </div>
             <div className="flex items-center space-x-4">
-              <p className="flex-1 truncate text-sm font-medium">{formatCurrency(item.balance)}</p>
+              <p className="flex-1 truncate text-sm font-medium">{item.pix}</p>
               <ChevronRight className="h-5 w-5 text-gray-400" />
             </div>
           </Card>
