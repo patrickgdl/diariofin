@@ -1,10 +1,14 @@
 import { TransactionsByDateQuery } from "~/pages/dashboard/queries/get-transactions-by-date"
+import { Table, TableBody, TableCell, TableRow } from "~/ui/table"
+import { Tooltip, TooltipContent, TooltipTrigger } from "~/ui/tooltip"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/ui/accordion"
 import { Badge } from "~/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
 import { Progress } from "~/ui/progress"
 import formatCurrency from "~/utils/format-currency"
 import { hexToRgb } from "~/utils/hexToRgb"
+import { CategoriesTable } from "./categories-table"
+import { formatPercentage } from "~/utils/format-percentage"
 
 export type TransactionsByDateGrouped = {
   id: string
@@ -24,10 +28,13 @@ export type TransactionsByDateGrouped = {
     }
     transactionId: string
     amount: number
+    totalAmount: number
   }[]
 }
 
 export function TopCategoriesTable({ data }: { data: TransactionsByDateQuery }) {
+  const total = data.reduce((acc, curr) => acc + curr.amount, 0)
+
   const groupedData = data.reduce((acc, curr) => {
     if (!curr.transaction_categories?.category_groups) {
       return acc
@@ -47,6 +54,8 @@ export function TopCategoriesTable({ data }: { data: TransactionsByDateQuery }) 
       }
     }
 
+    acc[groupId].totalAmount += amount
+
     let categoryObject = acc[groupId].categories.find((obj) => obj.transactionId === transactionId)
 
     if (!categoryObject) {
@@ -54,11 +63,10 @@ export function TopCategoriesTable({ data }: { data: TransactionsByDateQuery }) 
         transactionId: transactionId,
         transaction_categories: curr.transaction_categories,
         amount,
+        totalAmount: acc[groupId].totalAmount,
       }
       acc[groupId].categories.push(categoryObject)
     }
-
-    acc[groupId].totalAmount += amount
 
     return acc
   }, {} as Record<string, TransactionsByDateGrouped>)
@@ -74,34 +82,46 @@ export function TopCategoriesTable({ data }: { data: TransactionsByDateQuery }) 
           <Accordion type="single" collapsible>
             {Object.entries(groupedData).map(([groupId, groupedRows]) => (
               <AccordionItem key={groupId} value={groupId} className="border-none">
-                <AccordionTrigger className="flex-row-reverse py-2 flex-none w-full [&>svg]:text-primary">
-                  <div className="flex items-center space-x-3 w-full">
-                    <Badge
-                      className="px-1.5"
-                      style={{ backgroundColor: hexToRgb(groupedRows.color || "#000000", "0.2") }}
-                    >
-                      <span className="font-medium" style={{ color: groupedRows.color }}>
-                        {groupedRows.categories.length}
-                      </span>
-                    </Badge>
+                <AccordionTrigger className="flex-row-reverse py-0 flex-none w-full [&>svg]:text-primary">
+                  <Table>
+                    <TableBody>
+                      <TableRow
+                      // onClick={() => onSelect(row.original)}
+                      >
+                        <TableCell className="flex w-full">
+                          <div className="space-x-3">
+                            <Badge
+                              className="px-1.5"
+                              style={{ backgroundColor: hexToRgb(groupedRows.color || "#000000", "0.2") }}
+                            >
+                              <span className="font-medium" style={{ color: groupedRows.color }}>
+                                {groupedRows.categories.length}
+                              </span>
+                            </Badge>
 
-                    <span className="flex w-2/3">{groupedRows.name}</span>
-                    <Progress value={80} className="w-1/3" />
-                    <span className="flex justify-end w-1/3">{formatCurrency(groupedRows.totalAmount)}</span>
-                  </div>
+                            <span>{groupedRows.name}</span>
+                          </div>
+                        </TableCell>
+
+                        <TableCell className="w-1/5">
+                          <Tooltip delayDuration={0}>
+                            <TooltipTrigger asChild>
+                              <Progress value={(groupedRows.totalAmount / total) * 100} className="w-full" />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              Essa categoria equivale a {formatPercentage((groupedRows.totalAmount / total) * 100)} do
+                              seu gasto total.
+                            </TooltipContent>
+                          </Tooltip>
+                        </TableCell>
+
+                        <TableCell className="w-1/3 text-right">{formatCurrency(groupedRows.totalAmount)}</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
                 </AccordionTrigger>
-                <AccordionContent className="p-0 px-5">
-                  {groupedRows &&
-                    groupedRows.categories.map((category) => (
-                      <div key={category.transaction_categories.id} className="flex items-center space-x-6">
-                        <div className="flex items-center space-x-3">
-                          <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: groupedRows.color }} />
-                          <span>{category.transaction_categories.icon}</span>
-                          <span>{category.transaction_categories.name}</span>
-                        </div>
-                        <span>{formatCurrency(category.amount)}</span>
-                      </div>
-                    ))}
+                <AccordionContent className="p-0">
+                  <CategoriesTable data={groupedRows.categories} onSelect={console.log} />
                 </AccordionContent>
               </AccordionItem>
             ))}

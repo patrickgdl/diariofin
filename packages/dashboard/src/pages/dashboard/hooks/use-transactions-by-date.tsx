@@ -4,13 +4,18 @@ import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
 
 import { getTransactionByDate, TransactionByDateProps } from "../queries/get-transactions-by-date"
 
-function useTransactionsByDate({ date, isDone = false }: TransactionByDateProps) {
+function useTransactionsByDate({ date, accountId, isDone = false }: TransactionByDateProps) {
   const supabase = useSupabase()
 
   const { data, ...rest } = useQuery({
-    queryKey: ["transactions", { from: date.from?.toISOString(), to: date.to?.toISOString() }, { isDone }],
+    queryKey: [
+      "transactions",
+      { from: date.from?.toISOString(), to: date.to?.toISOString() },
+      { isDone },
+      { accountId },
+    ],
     queryFn: async () => {
-      return getTransactionByDate(supabase, { date, isDone }).then((result) => result.data || null)
+      return getTransactionByDate(supabase, { date, accountId, isDone }).then((result) => result.data || null)
     },
     initialData: [],
     enabled: Boolean(date.from) && Boolean(date.to),

@@ -6,7 +6,13 @@ import formatCurrency from "~/utils/format-currency"
 
 type GroupForChart = { id: string; name: string; value: number; color: string }
 
-export function SpentSoFarCard({ data }: { data: TransactionsByTypeQuery }) {
+type SpentSoFarCardProps = {
+  data: TransactionsByTypeQuery
+  doneTotal: number
+  pendingTotal: number
+}
+
+export function SpentSoFarCard({ data, doneTotal, pendingTotal }: SpentSoFarCardProps) {
   const onlySpentTransactions = data.filter((transaction) => transaction.amount < 0)
 
   const formattedData = onlySpentTransactions.reduce((acc, curr) => {
@@ -29,9 +35,9 @@ export function SpentSoFarCard({ data }: { data: TransactionsByTypeQuery }) {
   return (
     <div className="">
       <Card>
-        <CardContent className="flex justify-between h-[225px] p-6 space-x-4">
-          <div>
-            <div className="text-2xl font-bold">{formatCurrency(1248)}</div>
+        <CardContent className="flex justify-between h-[225px] p-4 relative">
+          <div className="absolute top-4 left-4">
+            <div className="text-2xl font-bold">{formatCurrency(doneTotal)}</div>
             <p className="text-xs text-muted-foreground">Gastos até agora</p>
           </div>
 
@@ -47,15 +53,14 @@ export function SpentSoFarCard({ data }: { data: TransactionsByTypeQuery }) {
                 paddingAngle={5}
               >
                 {Object.values(formattedData).map((entry, index) => {
-                  console.log(entry)
                   return <Cell key={`cell-${index}`} fill={entry.color} />
                 })}
               </Pie>
             </PieChart>
           </ResponsiveContainer>
 
-          <div className="flex flex-col items-end">
-            <div className="text-2xl font-bold">{formatCurrency(1248)}</div>
+          <div className="flex flex-col items-end absolute top-4 right-4">
+            <div className="text-2xl font-bold">{formatCurrency(pendingTotal)}</div>
             <p className="text-xs text-muted-foreground">Á confirmar</p>
           </div>
         </CardContent>
