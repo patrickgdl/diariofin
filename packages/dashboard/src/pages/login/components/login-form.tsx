@@ -58,7 +58,6 @@ export default function LoginForm() {
   return (
     <div className="flex flex-col space-y-4">
       <Button onClick={handleGoogleLogin} disabled={clickedEmail}>
-        {" "}
         <Google className="h-5 w-5 mr-2" />
         Continuar com Google
       </Button>
