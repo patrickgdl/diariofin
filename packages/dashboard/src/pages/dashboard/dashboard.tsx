@@ -18,16 +18,16 @@ import useTransactionsByDate from "./hooks/use-transactions-by-date"
 import { CardMetrics } from "./components/card-metrics"
 import { ArrowDownFromLine, ArrowUpFromLine, CalendarClockIcon, DollarSignIcon, HourglassIcon } from "lucide-react"
 
-const today = new Date()
-
 export default function DashboardPage() {
   const params = useParams()
   const { accounts, selectedAccount, setSelectedAccount } = useAppContext()
 
   const [date, setDate] = React.useState<DateRange>({
-    from: subDays(today, 30),
-    to: today,
+    from: subDays(new Date(), 30),
+    to: new Date(),
   })
+
+  console.log(date)
 
   const pendingTransactions = useTransactionsByDate({ date, accountId: selectedAccount.id })
   const doneTransactions = useTransactionsByDate({ date, accountId: selectedAccount.id, isDone: true })
