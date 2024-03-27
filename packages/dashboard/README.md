@@ -106,3 +106,33 @@ On similar lines, half-yearly transactions can be logged as monthly transactions
 ##### Yearly Recurrence
 
 Yearly recurrence is quite straightforward. We have columns for particular days of the week and the month, so we only require one additional column for the month of year. We’ve named this column month_of_year.
+
+## Deploy Supabase
+
+If you haven't yet, you should first link your local project and remote project (one time only)
+
+```
+npx supabase@beta link --project-ref jejzmdizmkkczvnfvggc --debug
+```
+
+Deploy any local database migrations using db push, this is the daily basis command you should run for any new migrations:
+
+```
+npx supabase@beta db push
+```
+
+To run any local seed.sql you can reset the remote database (not usual). Something like:
+
+```
+npx supabase@beta db reset --db-url 'postgres://postgres:postgres@localhost:54322/postgres'
+```
+
+This is going to make something like this, note that this is only going to populate public schemas, auth is going to be empty by default:
+
+```
+Resetting remote database...
+Applying migration 20220810154537_full.sql...
+Seeding data supabase/seed.sql...
+```
+
+If seed is not created remember to run the seed.sql query manually on Supabase SQL Editor. It should already have a query called "Create Initial Data"
