@@ -96,7 +96,7 @@ export function Nav({ links, isCollapsed, accounts }: NavProps) {
             <div>
               <span className="text-xs font-semibold text-muted-foreground uppercase">Contas</span>
 
-              <div className="flex flex-col gap-1 py-4">
+              <div className="flex flex-col gap-3 py-4">
                 {accounts.map((account) => (
                   <NavLink
                     to={`/dashboard/${account.id}`}
