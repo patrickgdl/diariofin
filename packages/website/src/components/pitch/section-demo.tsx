@@ -94,7 +94,7 @@ export function SectionDemo({ playVideo }: Props) {
           </div>
           <ReactHlsPlayer
             onClick={togglePlay}
-            src="https://customer-oh6t55xltlgrfayh.cloudflarestream.com/3c8ebd39be71d2451dee78d497b89a23/manifest/video.m3u8"
+            src=""
             autoPlay={false}
             controls={!isDesktop}
             playerRef={playerRef}

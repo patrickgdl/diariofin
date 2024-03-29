@@ -435,40 +435,6 @@ export default function Page() {
             We may use third-party Service Providers to monitor and analyse the
             use of our Service.
           </p>
-          <ul>
-            <li>
-              <p className="leading-7 mt-8">
-                <strong>Firebase</strong>
-              </p>
-              <p className="leading-7 mt-8">
-                Firebase is analytics service provided by Google Inc.
-              </p>
-              <p className="leading-7 mt-8">
-                You may opt-out of certain Firebase features through your mobile
-                device settings, such as your device advertising settings or by
-                following the instructions provided by Google in their Privacy
-                Policy:{" "}
-                <a href="https://policies.google.com/privacy?hl=en">
-                  https://policies.google.com/privacy?hl=en
-                </a>
-              </p>
-              <p className="leading-7 mt-8">
-                We also encourage you to review the Google's policy for
-                safeguarding your data:{" "}
-                <a href="https://support.google.com/analytics/answer/6004245">
-                  https://support.google.com/analytics/answer/6004245
-                </a>
-                .
-              </p>
-              <p className="leading-7 mt-8">
-                For more information on what type of information Firebase
-                collects, please visit the Google Privacy & Terms web page:{" "}
-                <a href="https://policies.google.com/privacy?hl=en">
-                  https://policies.google.com/privacy?hl=en
-                </a>
-              </p>
-            </li>
-          </ul>
 
           <h3>Payments</h3>
           <p className="leading-7 mt-8">
@@ -489,30 +455,6 @@ export default function Page() {
           <p className="leading-7 mt-8">
             The payment processors we work with are:
           </p>
-          <ul>
-            <li>
-              <p className="leading-7 mt-8">
-                <strong>Apple Store In-App Payments</strong>
-              </p>
-              <p className="leading-7 mt-8">
-                Their Privacy Policy can be viewed at{" "}
-                <a href="https://www.apple.com/legal/privacy/en-ww/">
-                  https:// www.apple.com/legal/privacy/en-ww/
-                </a>
-              </p>
-            </li>
-            <li>
-              <p className="leading-7 mt-8">
-                <strong>Google Play In-App Payments</strong>
-              </p>
-              <p className="leading-7 mt-8">
-                Their Privacy Policy can be viewed at{" "}
-                <a href="https://www.google.com/policies/privacy/">
-                  https:// www.google.com/policies/privacy/
-                </a>
-              </p>
-            </li>
-          </ul>
 
           <h2>Links to Other Sites</h2>
           <p className="leading-7 mt-8">
