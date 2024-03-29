@@ -1,30 +1,27 @@
-import { BlurryCircle } from "@/components/blurry-circle";
-import { InfiniteMovingCards } from "@/components/infinite-moving-cards";
+import { BlurryCircle } from "@fulanocomponents/blurry-circle";
+import { InfiniteMovingCards } from "@fulanocomponents/infinite-moving-cards";
 
 const testimonials = [
   {
-    name: "Lucas Grey",
-    avatarUrl:
-      "https://pbs.twimg.com/profile_images/1744288035314008064/kAQycMrk_400x400.png",
-    handle: "@ImLucasGrey",
+    name: "Fulano de Tal",
+    avatarUrl: "",
+    handle: "@fulano",
     verified: true,
-    quote: "This is so ingenious and good!",
+    quote: "Adoro isso!!",
   },
   {
-    name: "Bailey Simrell",
-    avatarUrl:
-      "https://pbs.twimg.com/profile_images/1488962358609330178/tdTC7o6M_400x400.jpg",
-    handle: "@baileysimrell",
+    name: "John Doe",
+    avatarUrl: "",
+    handle: "@fulano",
     verified: true,
-    quote: "Awesome man, looks amazing 🔥",
+    quote: "Muito bom 🔥",
   },
   {
-    name: "Gokul",
-    avatarUrl:
-      "https://pbs.twimg.com/profile_images/1687344852600516608/gVS34j7h_400x400.jpg",
-    handle: "@KyTechInc",
+    name: "Aaron Smith",
+    avatarUrl: "",
+    handle: "@fulano",
     verified: true,
-    quote: "🖤 Awesome work. just love it.",
+    quote: "🖤 Trabalho incrível! 🔥🔥",
   },
 ];
 
