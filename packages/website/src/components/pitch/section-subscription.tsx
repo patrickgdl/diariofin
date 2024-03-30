@@ -5,15 +5,15 @@ export function SectionSubscription() {
   return (
     <div className="min-h-screen relative w-screen">
       <div className="absolute left-4 right-4 md:left-8 md:right-8 top-4 flex justify-between text-lg">
-        <span>How we will make money</span>
+        <span>Como faremos dinheiro</span>
         <span className="text-[#878787]">
-          <Link href="/">Fluxozen</Link>
+          <Link href="/">FluxoZen</Link>
         </span>
       </div>
-      <div className="flex flex-col min-h-screen justify-center container">
+      <div className="flex flex-col min-h-screen justify-center container mx-auto">
         <div className="px-4 md:px-0 md:pt-0 h-[580px] md:h-auto overflow-auto pb-[100px] md:pb-0">
           <div className="mb-4">
-            <h2 className="text-2xl">Tiers</h2>
+            <h2 className="text-2xl">Níveis</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 px-4 md:px-0 md:pt-0 md:mb-[80px] mb-12">
@@ -22,10 +22,10 @@ export function SectionSubscription() {
                 Base
               </span>
 
-              <h2 className="text-2xl">Free</h2>
+              <h2 className="text-2xl">Gratuíto</h2>
               <p className="text-[#878787] text-sm text-center">
-                We will offer a free limited plan for customers to get to know
-                the system.
+                Ofereceremos um plano gratuito limitado para os clientes
+                conhecerem o sistema.
               </p>
             </Card>
 
@@ -34,10 +34,10 @@ export function SectionSubscription() {
                 Pro
               </span>
 
-              <h2 className="text-2xl">TBD/ mo</h2>
+              <h2 className="text-2xl">TBD/mês</h2>
               <p className="text-[#878787] text-sm text-center">
-                This is the price new users will pay when we launch. The price
-                is yet to be determined.
+                Este é o preço que os novos usuários pagarão quando lançarmos. O
+                preço ainda está para ser determinado.
               </p>
             </Card>
 
@@ -48,9 +48,9 @@ export function SectionSubscription() {
 
               <h2 className="text-2xl">TBD</h2>
               <p className="text-[#878787] text-sm text-center">
-                This plan will be offered to bigger companies with lots of
-                seats. This will be licensed based and the price is yet to be
-                determined.
+                Este plano será oferecido a empresas maiores com muitos membros.
+                Este será licenciado com base e o preço ainda não foi
+                determinado.
               </p>
             </Card>
           </div>
@@ -61,28 +61,10 @@ export function SectionSubscription() {
 
           <div className="grid md:grid-cols-3 gap-8 px-4 md:px-0 md:pt-0">
             <Card className="pb-8">
-              <h2>Team seats</h2>
+              <h2>+ Membros</h2>
               <p className="text-[#878787] text-sm text-center">
-                Additional team members will be per seat pricing. The team will
-                have the ability to invite how many users they want.
-              </p>
-            </Card>
-
-            <Card className="pb-8">
-              <h2>Vault storage</h2>
-              <p className="text-[#878787] text-sm text-center">
-                A limit will be set to the storage since this is also a moving
-                cost for us. Everything above that limit will cost the users
-                extra. Price is yet to be determined.
-              </p>
-            </Card>
-
-            <Card className="pb-8">
-              <h2>Custom domain</h2>
-              <p className="text-[#878787] text-sm text-center">
-                If the user want a custom inbox email, for example
-                acme.inbox@fluxozen.com, we can provide this for an additional
-                fee.
+                Membros adicionais de equipe terão preço por assento. A equipe
+                terá a capacidade de convidar quantos usuários quiserem.
               </p>
             </Card>
           </div>

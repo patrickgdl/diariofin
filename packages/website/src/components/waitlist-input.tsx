@@ -23,7 +23,7 @@ function SubmitButton() {
       type="submit"
       className="absolute right-2 h-7 bg-primary top-2 px-4 rounded-md font-medium text-sm z-10 text-primary-foreground"
     >
-      Join
+      Participar
     </button>
   );
 }
@@ -76,12 +76,12 @@ export function WaitlistInput() {
           >
             <fieldset className="relative z-50">
               <input
-                placeholder="Enter your email"
+                placeholder="insira seu e-mail"
                 type="email"
                 name="email"
                 id="email"
                 autoComplete="email"
-                aria-label="Email address"
+                aria-label="Endereço de Email"
                 required
                 className="bg-transparent font-sm text-primary outline-none py-1 px-3 w-[360px] placeholder-[#606060] rounded-lg h-11 border border-border"
               />

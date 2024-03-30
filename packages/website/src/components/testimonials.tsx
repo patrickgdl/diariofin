@@ -1,5 +1,5 @@
-import { BlurryCircle } from "@fulanocomponents/blurry-circle";
-import { InfiniteMovingCards } from "@fulanocomponents/infinite-moving-cards";
+import { BlurryCircle } from "@/components/blurry-circle";
+import { InfiniteMovingCards } from "@/components/infinite-moving-cards";
 
 const testimonials = [
   {

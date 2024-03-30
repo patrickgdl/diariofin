@@ -41,7 +41,7 @@ export function SectionSix() {
           </h3>
 
           <p className="text-[#878787]">
-            Com a IA da Fluxozen, você pode perguntar qualquer coisa e obter
+            Com a IA da FluxoZen, você pode perguntar qualquer coisa e obter
             insights sobre o seu situação financeira. Entenda suas principais
             despesas e receitas fontes. Informe-se sobre transações sem recibos
             ou explore padrões de receita como taxa de consumo ou MRR.

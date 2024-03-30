@@ -49,9 +49,6 @@ export function PitchCarusel() {
         <CarouselItem>
           <SectionDemo playVideo={current === 4} />
         </CarouselItem>
-        {/* <CarouselItem>
-          <SectionTraction />
-        </CarouselItem> */}
         <CarouselItem>
           <SectionTeam />
         </CarouselItem>
@@ -69,7 +66,7 @@ export function PitchCarusel() {
         </CarouselItem>
       </CarouselContent>
 
-      <CarouselToolbar views={12345} />
+      <CarouselToolbar />
     </Carousel>
   );
 }

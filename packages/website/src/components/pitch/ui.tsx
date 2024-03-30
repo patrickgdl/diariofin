@@ -1,6 +1,12 @@
 import { cn } from "../../ui/utils";
 
-export function Card({ children, className }) {
+export function Card({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
     <div
       className={cn(

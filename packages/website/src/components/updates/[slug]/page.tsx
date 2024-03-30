@@ -25,7 +25,7 @@ export async function generateMetadata({
   const post = await fetchPageBySlug(slug);
 
   return {
-    title: `Fluxozen | ${post.properties.Title.title.at(0)?.plain_text}`,
+    title: `FluxoZen | ${post.properties.Title.title.at(0)?.plain_text}`,
   };
 }
 
@@ -59,7 +59,7 @@ export default async function Page({
 
       <aside className="sticky h-screen min-w-[260px] pt-[150px] flex-col space-y-4 hidden md:flex">
         <Link href="/updates" className="text-sm font-normal text-[#878787]">
-          View all posts
+          Visualizar todas as postagens
         </Link>
         <span className="font-medium text-sm">
           {format(new Date(post.created_time), "MMMM d, y")}

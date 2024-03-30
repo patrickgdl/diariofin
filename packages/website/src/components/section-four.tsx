@@ -51,29 +51,34 @@ export function SectionFour() {
         onMouseEnter={() => setActive2(true)}
         onMouseLeave={() => setActive2(false)}
       >
-        <h4 className="font-medium text-xl md:text-2xl mb-4">
-          Seamless export
-        </h4>
-        <p className="text-[#878787]">
-          Take the hassle out of preparing exports for your accountant. Just
-          select any time period or transaction you want and hit export. We
-          package everything up neatly in a CSV file (accountants loves these)
-          clearly pointing to the right attachment.
-        </p>
+        <div className="flex flex-col md:basis-1/2">
+          <h4 className="font-medium text-xl md:text-2xl mb-4">
+            Exportação perfeita
+          </h4>
 
-        <motion.div
-          animate={isActive2 ? { y: -5, x: -5 } : { y: 0, x: 0 }}
-          initial={{ y: -5, x: 0 }}
-          transition={{ type: "spring", stiffness: 100 }}
-          className="mt-8 lg:mt-auto"
-        >
-          <AdaptiveImage
-            darkSrc={exporting}
-            lightSrc={exportingLight}
-            quality={100}
-            alt="Export"
-          />
-        </motion.div>
+          <p className="text-[#878787]">
+            Elimine o incômodo de preparar exportações para seu contador. Apenas
+            selecione qualquer período de tempo ou transação desejada e clique
+            em exportar. Nós empacotamos tudo ordenadamente em um arquivo CSV
+            (os contadores adoram isso).
+          </p>
+
+          <div className="flex items-center relative w-full rounded-md border border-border py-2 px-4 max-w-[240px] mt-8">
+            <motion.div
+              animate={isActive2 ? { y: -5, x: -5 } : { y: 0, x: 0 }}
+              initial={{ y: -5, x: 0 }}
+              transition={{ type: "spring", stiffness: 100 }}
+              className="mt-8 lg:mt-auto"
+            >
+              <AdaptiveImage
+                darkSrc={exporting}
+                lightSrc={exportingLight}
+                quality={100}
+                alt="Export"
+              />
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
