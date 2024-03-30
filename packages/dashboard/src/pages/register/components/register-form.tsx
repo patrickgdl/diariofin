@@ -40,7 +40,7 @@ export default function RegisterForm() {
 
       <p className="text-center text-sm text-gray-500">
         Já tem uma conta?{" "}
-        <Link to="/login" className="font-semibold text-gray-500 transition-colors hover:text-black">
+        <Link to="/login" className="font-semibold text-gray-500 transition-colors hover:text-gray-600">
           Entre
         </Link>
       </p>
