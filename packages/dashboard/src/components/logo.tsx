@@ -2,8 +2,8 @@ import { useTheme } from "next-themes"
 import { SVGAttributes } from "react"
 
 const Logo = ({ className, ...rest }: SVGAttributes<SVGElement>) => {
-  const { theme } = useTheme()
-  const isDark = theme === "dark" || !theme
+  const { theme, resolvedTheme } = useTheme()
+  const isDark = theme === "dark" || resolvedTheme === "dark"
 
   return (
     <svg
