@@ -27,8 +27,6 @@ export default function DashboardPage() {
     to: new Date(),
   })
 
-  console.log(date)
-
   const pendingTransactions = useTransactionsByDate({ date, accountId: selectedAccount.id })
   const doneTransactions = useTransactionsByDate({ date, accountId: selectedAccount.id, isDone: true })
 

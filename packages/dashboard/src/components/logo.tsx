@@ -3,7 +3,7 @@ import { SVGAttributes } from "react"
 
 const Logo = ({ className, ...rest }: SVGAttributes<SVGElement>) => {
   const { theme } = useTheme()
-  const isDark = theme === "dark"
+  const isDark = theme === "dark" || !theme
 
   return (
     <svg
