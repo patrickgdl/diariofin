@@ -30,7 +30,7 @@ export const CardStack = ({
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const CARD_OFFSET = isDesktop ? 10 : 5;
   const SCALE_FACTOR = scaleFactor || 0.06;
-  const [cards, setCards] = useState<Card[]>([items.at(0)]);
+  const [cards, setCards] = useState<Card[]>([items.at(0)!]);
 
   useEffect(() => {
     startFlipping();
@@ -49,12 +49,16 @@ export const CardStack = ({
     }, 5000);
   };
 
-  const onChangeCardByIndex = (index) => {
+  const onChangeCardByIndex = (index: number) => {
     const item = cards.at(index);
-    setCards([item, ...cards.slice(0, index), ...cards.slice(index + 1)]);
+    if (item) {
+      setCards([item, ...cards.slice(0, index), ...cards.slice(index + 1)]);
+    }
   };
 
-  const onChangeCard = (item) => {
+  const onChangeCard = (item: Card | undefined) => {
+    if (!item) return;
+
     const index = cards.findIndex((card) => card.id === item.id);
     setCards([item, ...cards.slice(0, index), ...cards.slice(index + 1)]);
   };
