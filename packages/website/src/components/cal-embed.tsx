@@ -8,7 +8,7 @@ type Props = {
   calLink: string;
 };
 
-export function CalEmbed({ calLink, theme }) {
+export function CalEmbed({ calLink, theme = "light" }: Props) {
   useEffect(() => {
     (async function () {
       const cal = await getCalApi();

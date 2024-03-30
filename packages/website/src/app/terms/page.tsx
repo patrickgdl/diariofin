@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms and Conditions | Fluxozen",
+  title: "Termos e Condições | FluxoZen",
 };
 
 export default function Page() {
@@ -9,306 +9,320 @@ export default function Page() {
     <>
       <div className="max-w-[600px] m-auto my-20">
         <h1 className="scroll-m-20 text-2xl tracking-tight lg:text-3xl">
-          Terms and Conditions
+          Termos e Condições
         </h1>
 
         <div className="text-component line-height-lg v-space-md">
-          <p className="leading-7 mt-8">Last updated: October 26, 2023</p>
-
           <p className="leading-7 mt-8">
-            These Terms and Conditions ("Terms", "Terms and Conditions") govern
-            your relationship with Fluxozen application (the "Service") operated
-            by Fluxozen Labs AB ("us", "we", or "our").
+            Última atualização: 26 de outubro de 2023
           </p>
 
           <p className="leading-7 mt-8">
-            Please read these Terms and Conditions carefully before using our
-            Fluxozen application (the "Service").
+            Estes Termos e Condições ("Termos", "Termos e Condições") regem sua
+            relação com o aplicativo FluxoZen (o "Serviço") operado pela
+            FluxoZen Labs AB ("nós", "nos" ou "nosso").
           </p>
 
           <p className="leading-7 mt-8">
-            Your access to and use of the Service is conditioned on your
-            acceptance of and compliance with these Terms. These Terms apply to
-            all visitors, users and others who access or use the Service.
+            Por favor, leia estes Termos e Condições cuidadosamente antes de
+            usar nosso aplicativo FluxoZen (o "Serviço").
           </p>
 
           <p className="leading-7 mt-8">
-            By accessing or using the Service you agree to be bound by these
-            Terms. If you disagree with any part of the terms then you may not
-            access the Service.
-          </p>
-
-          <h2>Subscriptions</h2>
-
-          <p className="leading-7 mt-8">
-            Some parts of the Service are billed on a subscription basis
-            ("Subscription(s)"). You will be billed in advance on a recurring
-            and periodic basis ("Billing Cycle"). Billing cycles are set on a
-            monthly basis.
+            Seu acesso e uso do Serviço estão condicionados à sua aceitação e
+            cumprimento destes Termos. Estes Termos se aplicam a todos os
+            visitantes, usuários e outras pessoas que acessam ou usam o Serviço.
           </p>
 
           <p className="leading-7 mt-8">
-            At the end of each Billing Cycle, your Subscription will
-            automatically renew under the exact same conditions unless you
-            cancel it or Fluxozen Labs AB cancels it. You may cancel your
-            Subscription renewal either through your online account management
-            page or by contacting Fluxozen Labs AB customer support team.
+            Ao acessar ou usar o Serviço, você concorda em ficar vinculado a
+            estes Termos. Se você discordar de qualquer parte dos termos, você
+            não poderá acessar o Serviço.
+          </p>
+
+          <h2>Assinaturas</h2>
+
+          <p className="leading-7 mt-8">
+            Algumas partes do Serviço são cobradas com base em uma assinatura
+            ("Assinaturas"). Você será cobrado antecipadamente em uma base
+            recorrente e periódica ("Ciclo de Faturamento"). Os ciclos de
+            faturamento são definidos em uma base mensal.
           </p>
 
           <p className="leading-7 mt-8">
-            A valid payment method, including credit card, is required to
-            process the payment for your Subscription. You shall provide Acre
-            Labs Ab with accurate and complete billing information including
-            full name, address, state, zip code, telephone number, and a valid
-            payment method information. By submitting such payment information,
-            you automatically authorize Fluxozen Labs AB to charge all
-            Subscription fees incurred through your account to any such payment
-            instruments.
+            Ao final de cada Ciclo de Faturamento, sua Assinatura será renovada
+            automaticamente nas exatas mesmas condições, a menos que você a
+            cancele ou a FluxoZen Labs AB a cancele. Você pode cancelar a
+            renovação de sua Assinatura seja através da página de gerenciamento
+            de conta online ou entrando em contato com a equipe de suporte ao
+            cliente da FluxoZen Labs AB.
           </p>
 
           <p className="leading-7 mt-8">
-            Should automatic billing fail to occur for any reason, Fluxozen Labs
-            AB will issue an electronic invoice indicating that you must proceed
-            manually, within a certain deadline date, with the full payment
-            corresponding to the billing period as indicated on the invoice.
-          </p>
-
-          <h2>Fee Changes</h2>
-
-          <p className="leading-7 mt-8">
-            Fluxozen Labs AB, in its sole discretion and at any time, may modify
-            the Subscription fees for the Subscriptions. Any Subscription fee
-            change will become effective at the end of the then-current Billing
-            Cycle.
+            Um método de pagamento válido, incluindo cartão de crédito, é
+            necessário para processar o pagamento de sua Assinatura. Você deve
+            fornecer à FluxoZen Labs AB informações de faturamento precisas e
+            completas, incluindo nome completo, endereço, estado, código postal,
+            número de telefone e informações de método de pagamento válido. Ao
+            enviar tais informações de pagamento, você autoriza automaticamente
+            a FluxoZen Labs AB a cobrar todas as taxas de assinatura incorridas
+            através de sua conta para quaisquer instrumentos de pagamento.
           </p>
 
           <p className="leading-7 mt-8">
-            Fluxozen Labs AB will provide you with a reasonable prior notice of
-            any change in Subscription fees to give you an opportunity to
-            terminate your Subscription before such change becomes effective.
+            Caso a cobrança automática falhe por qualquer motivo, a FluxoZen
+            Labs AB emitirá uma fatura eletrônica indicando que você deve
+            proceder manualmente, dentro de um prazo específico, com o pagamento
+            integral correspondente ao período de faturamento conforme indicado
+            na fatura.
+          </p>
+
+          <h2>Alterações de Taxas</h2>
+
+          <p className="leading-7 mt-8">
+            A FluxoZen Labs AB, a seu exclusivo critério e a qualquer momento,
+            pode modificar as taxas de assinatura para as Assinaturas. Qualquer
+            alteração nas taxas de assinatura entrará em vigor ao final do Ciclo
+            de Faturamento então vigente.
           </p>
 
           <p className="leading-7 mt-8">
-            Your continued use of the Service after the Subscription fee change
-            comes into effect constitutes your agreement to pay the modified
-            Subscription fee amount.
-          </p>
-
-          <h2>Refunds</h2>
-
-          <p className="leading-7 mt-8">
-            Certain refund requests for Subscriptions may be considered by Acre
-            Labs AB on a case-by-case basis and granted in sole discretion of
-            Fluxozen Labs AB.
-          </p>
-
-          <h2>Content</h2>
-
-          <p className="leading-7 mt-8">
-            Our Service allows you to post, link, store, share and otherwise
-            make available certain information, text, graphics, videos, or other
-            material ("Content"). You are responsible for the Content that you
-            post to the Service, including its legality, reliability, and
-            appropriateness.
+            A FluxoZen Labs AB fornecerá a você um aviso prévio razoável de
+            qualquer alteração nas taxas de assinatura para lhe dar a
+            oportunidade de rescindir sua Assinatura antes que tal alteração
+            entre em vigor.
           </p>
 
           <p className="leading-7 mt-8">
-            By posting Content to the Service, you grant us the right and
-            license to use, modify, publicly perform, publicly display,
-            reproduce, and distribute such Content on and through the Service.
-            You retain any and all of your rights to any Content you submit,
-            post or display on or through the Service and you are responsible
-            for protecting those rights. You agree that this license includes
-            the right for us to make your Content available to other users of
-            the Service, who may also use your Content subject to these Terms.
+            Seu uso continuado do Serviço após a mudança na taxa de assinatura
+            entrar em vigor constitui sua concordância em pagar o valor
+            modificado da taxa de assinatura.
+          </p>
+
+          <h2>Reembolsos</h2>
+
+          <p className="leading-7 mt-8">
+            Determinados pedidos de reembolso para Assinaturas podem ser
+            considerados pela Acre Labs AB caso a caso e concedidos a critério
+            exclusivo da FluxoZen Labs AB.
+          </p>
+
+          <h2>Conteúdo</h2>
+
+          <p className="leading-7 mt-8">
+            Nosso Serviço permite que você poste, vincule, armazene, compartilhe
+            e disponibilize de outra forma certas informações, textos, gráficos,
+            vídeos ou outro material ("Conteúdo"). Você é responsável pelo
+            Conteúdo que posta no Serviço, incluindo sua legalidade,
+            confiabilidade e adequação.
           </p>
 
           <p className="leading-7 mt-8">
-            You represent and warrant that: (i) the Content is yours (you own
-            it) or you have the right to use it and grant us the rights and
-            license as provided in these Terms, and (ii) the posting of your
-            Content on or through the Service does not violate the privacy
-            rights, publicity rights, copyrights, contract rights or any other
-            rights of any person.
-          </p>
-
-          <h2>Accounts</h2>
-
-          <p className="leading-7 mt-8">
-            When you create an account with us, you must provide us information
-            that is accurate, complete, and current at all times. Failure to do
-            so constitutes a breach of the Terms, which may result in immediate
-            termination of your account on our Service.
+            Ao postar Conteúdo no Serviço, você nos concede o direito e a
+            licença de usar, modificar, executar publicamente, exibir
+            publicamente, reproduzir e distribuir tal Conteúdo no e através do
+            Serviço. Você retém todos e quaisquer direitos sobre qualquer
+            Conteúdo que você envie, poste ou exiba no ou através do Serviço e
+            você é responsável por proteger esses direitos. Você concorda que
+            esta licença inclui o direito de nós tornarmos seu Conteúdo
+            disponível para outros usuários do Serviço, que também podem usar
+            seu Conteúdo sujeito a estes Termos.
           </p>
 
           <p className="leading-7 mt-8">
-            You are responsible for safeguarding the password that you use to
-            access the Service and for any activities or actions under your
-            password, whether your password is with our Service or a third-party
-            service.
+            Você declara e garante que: (i) o Conteúdo é seu (você o possui) ou
+            você tem o direito de usá-lo e nos conceder os direitos e licença
+            conforme fornecido nestes Termos, e (ii) a postagem de seu Conteúdo
+            no ou através do Serviço não viola os direitos de privacidade,
+            direitos de publicidade, direitos autorais, direitos de contrato ou
+            quaisquer outros direitos de qualquer pessoa.
+          </p>
+
+          <h2>Contas</h2>
+
+          <p className="leading-7 mt-8">
+            Ao criar uma conta conosco, você deve nos fornecer informações
+            precisas, completas e atualizadas em todos os momentos. O não
+            cumprimento disso constitui uma violação dos Termos, o que pode
+            resultar na rescisão imediata de sua conta em nosso Serviço.
           </p>
 
           <p className="leading-7 mt-8">
-            You agree not to disclose your password to any third party. You must
-            notify us immediately upon becoming aware of any breach of security
-            or unauthorized use of your account.
+            Você é responsável por proteger a senha que você usa para acessar o
+            Serviço e por quaisquer atividades ou ações sob sua senha, seja sua
+            senha com nosso Serviço ou com um serviço de terceiros.
           </p>
 
           <p className="leading-7 mt-8">
-            You may not use as a username the name of another person or entity
-            or that is not lawfully available for use, a name or trade mark that
-            is subject to any rights of another person or entity other than you
-            without appropriate authorization, or a name that is otherwise
-            offensive, vulgar or obscene.
-          </p>
-
-          <h2>Copyright Policy</h2>
-
-          <p className="leading-7 mt-8">
-            We respect the intellectual property rights of others. It is our
-            policy to respond to any claim that Content posted on the Service
-            infringes the copyright or other intellectual property infringement
-            ("Infringement") of any person.
+            Você concorda em não divulgar sua senha a terceiros. Você deve nos
+            notificar imediatamente após tomar conhecimento de qualquer violação
+            de segurança ou uso não autorizado de sua conta.
           </p>
 
           <p className="leading-7 mt-8">
-            If you are a copyright owner, or authorized on behalf of one, and
-            you believe that the copyrighted work has been copied in a way that
-            constitutes copyright infringement that is taking place through the
-            Service, you must submit your notice in writing to the attention of
-            "Copyright Infringement" of dmca@fluxozen and include in your notice
-            a detailed description of the alleged Infringement.
+            Você não pode usar como nome de usuário o nome de outra pessoa ou
+            entidade que não esteja legalmente disponível para uso, um nome ou
+            marca registrada que esteja sujeito a quaisquer direitos de outra
+            pessoa ou entidade que não seja você sem autorização apropriada, ou
+            um nome que seja de outra forma ofensivo, vulgar ou obsceno.
+          </p>
+
+          <h2>Política de Direitos Autorais</h2>
+
+          <p className="leading-7 mt-8">
+            Respeitamos os direitos de propriedade intelectual de terceiros. É
+            nossa política responder a qualquer reivindicação de que o Conteúdo
+            postado no Serviço infringe os direitos autorais ou outras violações
+            de propriedade intelectual ("Violação") de qualquer pessoa.
           </p>
 
           <p className="leading-7 mt-8">
-            You may be held accountable for damages (including costs and
-            attorneys' fees) for misrepresenting that any Content is infringing
-            your copyright.
-          </p>
-
-          <h2>Intellectual Property</h2>
-
-          <p className="leading-7 mt-8">
-            The Service and its original content (excluding Content provided by
-            users), features and functionality are and will remain the exclusive
-            property of Fluxozen Labs AB and its licensors. The Service is
-            protected by copyright, trademark, and other laws of both the Sweden
-            and foreign countries. Our trademarks and trade dress may not be
-            used in connection with any product or service without the prior
-            written consent of Fluxozen Labs AB.
-          </p>
-
-          <h2>Links To Other Web Sites</h2>
-
-          <p className="leading-7 mt-8">
-            Our Service may contain links to third-party web sites or services
-            that are not owned or controlled by Fluxozen Labs AB.
+            Se você é proprietário de direitos autorais ou autorizado em nome de
+            um, e você acredita que o trabalho protegido por direitos autorais
+            foi copiado de forma que constitua uma violação de direitos autorais
+            que está ocorrendo através do Serviço, você deve enviar sua
+            notificação por escrito à atenção de "Violação de Direitos Autorais"
+            para dmca@fluxozen e incluir em sua notificação uma descrição
+            detalhada da alegada Violação.
           </p>
 
           <p className="leading-7 mt-8">
-            Fluxozen Labs AB has no control over, and assumes no responsibility
-            for, the content, privacy policies, or practices of any third party
-            web sites or services. You further acknowledge and agree that Acre
-            Labs Ab shall not be responsible or liable, directly or indirectly,
-            for any damage or loss caused or alleged to be caused by or in
-            connection with use of or reliance on any such content, goods or
-            services available on or through any such web sites or services.
+            Você pode ser responsabilizado por danos (incluindo custos e
+            honorários advocatícios) por fornecer informações falsas de que
+            algum Conteúdo está infringindo seus direitos autorais.
+          </p>
+
+          <h2>Propriedade Intelectual</h2>
+
+          <p className="leading-7 mt-8">
+            O Serviço e seu conteúdo original (excluindo o Conteúdo fornecido
+            pelos usuários), recursos e funcionalidades são e permanecerão como
+            propriedade exclusiva da FluxoZen Labs AB e seus licenciantes. O
+            Serviço é protegido por direitos autorais, marcas registradas e
+            outras leis tanto da Suécia quanto de países estrangeiros. Nossas
+            marcas registradas e trade dress não podem ser usadas em conexão com
+            qualquer produto ou serviço sem o consentimento prévio por escrito
+            da FluxoZen Labs AB.
+          </p>
+
+          <h2>Links para Outros Sites da Web</h2>
+
+          <p className="leading-7 mt-8">
+            Nosso Serviço pode conter links para sites ou serviços de terceiros
+            que não são de propriedade ou controlados pela FluxoZen Labs AB.
           </p>
 
           <p className="leading-7 mt-8">
-            We strongly advise you to read the terms and conditions and privacy
-            policies of any third-party web sites or services that you visit.
-          </p>
-
-          <h2>Termination</h2>
-
-          <p className="leading-7 mt-8">
-            We may terminate or suspend your account immediately, without prior
-            notice or liability, for any reason whatsoever, including without
-            limitation if you breach the Terms.
-          </p>
-
-          <p className="leading-7 mt-8">
-            Upon termination, your right to use the Service will immediately
-            cease. If you wish to terminate your account, you may simply
-            discontinue using the Service.
-          </p>
-
-          <h2>Limitation Of Liability</h2>
-
-          <p className="leading-7 mt-8">
-            In no event shall Fluxozen Labs AB, nor its directors, employees,
-            partners, agents, suppliers, or affiliates, be liable for any
-            indirect, incidental, special, consequential or punitive damages,
-            including without limitation, loss of profits, data, use, goodwill,
-            or other intangible losses, resulting from (i) your access to or use
-            of or inability to access or use the Service; (ii) any conduct or
-            content of any third party on the Service; (iii) any content
-            obtained from the Service; and (iv) unauthorized access, use or
-            alteration of your transmissions or content, whether based on
-            warranty, contract, tort (including negligence) or any other legal
-            theory, whether or not we have been informed of the possibility of
-            such damage, and even if a remedy set forth herein is found to have
-            failed of its essential purpose.
-          </p>
-
-          <h2>Disclaimer</h2>
-
-          <p className="leading-7 mt-8">
-            Your use of the Service is at your sole risk. The Service is
-            provided on an "AS IS" and "AS AVAILABLE" basis. The Service is
-            provided without warranties of any kind, whether express or implied,
-            including, but not limited to, implied warranties of
-            merchantability, fitness for a particular purpose, non-infringement
-            or course of performance.
+            A FluxoZen Labs AB não tem controle sobre e não assume
+            responsabilidade pelo conteúdo, políticas de privacidade ou práticas
+            de quaisquer sites ou serviços de terceiros. Você reconhece ainda e
+            concorda que a Acre Labs Ab não será responsável ou
+            responsabilizada, direta ou indiretamente, por qualquer dano ou
+            perda causada ou alegadamente causada pelo uso ou confiança em
+            qualquer conteúdo, bens ou serviços disponíveis em ou através de
+            tais sites ou serviços da web de terceiros.
           </p>
 
           <p className="leading-7 mt-8">
-            Fluxozen Labs AB its subsidiaries, affiliates, and its licensors do
-            not warrant that a) the Service will function uninterrupted, secure
-            or available at any particular time or location; b) any errors or
-            defects will be corrected; c) the Service is free of viruses or
-            other harmful components; or d) the results of using the Service
-            will meet your requirements.
+            Recomendamos fortemente que você leia os termos e condições e
+            políticas de privacidade de quaisquer sites ou serviços de terceiros
+            que você visite.
           </p>
 
-          <h2>Governing Law</h2>
+          <h2>Rescisão</h2>
 
           <p className="leading-7 mt-8">
-            These Terms shall be governed and construed in accordance with the
-            laws of Sweden, without regard to its conflict of law provisions.
-          </p>
-
-          <p className="leading-7 mt-8">
-            Our failure to enforce any right or provision of these Terms will
-            not be considered a waiver of those rights. If any provision of
-            these Terms is held to be invalid or unenforceable by a court, the
-            remaining provisions of these Terms will remain in effect. These
-            Terms constitute the entire agreement between us regarding our
-            Service, and supersede and replace any prior agreements we might
-            have between us regarding the Service.
-          </p>
-
-          <h2>Changes</h2>
-
-          <p className="leading-7 mt-8">
-            We reserve the right, at our sole discretion, to modify or replace
-            these Terms at any time. If a revision is material we will try to
-            provide at least 30 days notice prior to any new terms taking
-            effect. What constitutes a material change will be determined at our
-            sole discretion.
+            Podemos rescindir ou suspender sua conta imediatamente, sem aviso
+            prévio ou responsabilidade, por qualquer motivo, inclusive, sem
+            limitação, se você violar os Termos.
           </p>
 
           <p className="leading-7 mt-8">
-            By continuing to access or use our Service after those revisions
-            become effective, you agree to be bound by the revised terms. If you
-            do not agree to the new terms, please stop using the Service.
+            Após a rescisão, seu direito de usar o Serviço cessará
+            imediatamente. Se você deseja rescindir sua conta, pode simplesmente
+            interromper o uso do Serviço.
           </p>
 
-          <h2>Contact Us</h2>
+          <h2>Limitação de Responsabilidade</h2>
 
           <p className="leading-7 mt-8">
-            If you have any questions about these Terms, please contact us.
+            Em nenhum caso a FluxoZen Labs AB, nem seus diretores, funcionários,
+            parceiros, agentes, fornecedores ou afiliados, serão responsáveis
+            por quaisquer danos indiretos, incidentais, especiais,
+            consequenciais ou punitivos, incluindo, sem limitação, perda de
+            lucros, dados, uso, boa vontade ou outros danos intangíveis,
+            resultantes de (i) seu acesso ou uso ou incapacidade de acessar ou
+            usar o Serviço; (ii) qualquer conduta ou conteúdo de qualquer
+            terceiro no Serviço; (iii) qualquer conteúdo obtido do Serviço; e
+            (iv) acesso não autorizado, uso ou alteração de suas transmissões ou
+            conteúdo, seja com base em garantia, contrato, ato ilícito
+            (incluindo negligência) ou qualquer outra teoria legal, mesmo que
+            tenhamos sido informados da possibilidade de tais danos, e mesmo que
+            um remédio previsto aqui seja considerado ter falhado em seu
+            propósito essencial.
+          </p>
+
+          <h2>Aviso Legal</h2>
+
+          <p className="leading-7 mt-8">
+            Seu uso do Serviço é por sua conta e risco exclusivos. O Serviço é
+            fornecido em uma base "COMO ESTÁ" e "CONFORME DISPONÍVEL". O Serviço
+            é fornecido sem garantias de qualquer tipo, expressas ou implícitas,
+            incluindo, mas não se limitando a, garantias implícitas de
+            comercialização, adequação a um propósito específico, não violação
+            ou desempenho.
+          </p>
+
+          <p className="leading-7 mt-8">
+            A FluxoZen Labs AB, suas subsidiárias, afiliadas e licenciantes não
+            garantem que a) o Serviço funcionará ininterruptamente, seguro ou
+            disponível em qualquer momento ou local; b) quaisquer erros ou
+            defeitos serão corrigidos; c) o Serviço está livre de vírus ou
+            outros componentes prejudiciais; ou d) os resultados do uso do
+            Serviço atenderão às suas necessidades.
+          </p>
+
+          <h2>Lei Aplicável</h2>
+
+          <p className="leading-7 mt-8">
+            Estes Termos serão regidos e interpretados de acordo com as leis da
+            Suécia, sem levar em consideração suas disposições de conflito de
+            leis.
+          </p>
+
+          <p className="leading-7 mt-8">
+            Nossa omissão em fazer valer qualquer direito ou disposição destes
+            Termos não será considerada uma renúncia a esses direitos. Se
+            qualquer disposição destes Termos for considerada inválida ou
+            inexequível por um tribunal, as disposições restantes destes Termos
+            permanecerão em vigor. Estes Termos constituem o acordo completo
+            entre nós em relação ao nosso Serviço e substituem e substituem
+            quaisquer acordos anteriores que possamos ter entre nós em relação
+            ao Serviço.
+          </p>
+
+          <h2>Alterações</h2>
+
+          <p className="leading-7 mt-8">
+            Reservamos o direito, a nosso exclusivo critério, de modificar ou
+            substituir estes Termos a qualquer momento. Se uma revisão for
+            material, tentaremos fornecer pelo menos 30 dias de aviso prévio
+            antes que quaisquer novos termos entrem em vigor. O que constitui
+            uma mudança material será determinado a nosso exclusivo critério.
+          </p>
+
+          <p className="leading-7 mt-8">
+            Ao continuar a acessar ou usar nosso Serviço após essas revisões
+            entrarem em vigor, você concorda em ficar vinculado pelos termos
+            revisados. Se você não concordar com os novos termos, por favor,
+            pare de usar o Serviço.
+          </p>
+
+          <h2>Entre em Contato</h2>
+
+          <p className="leading-7 mt-8">
+            Se você tiver alguma dúvida sobre estes Termos, entre em contato
+            conosco.
           </p>
         </div>
       </div>

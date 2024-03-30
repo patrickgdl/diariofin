@@ -1,34 +1,13 @@
 "use client";
 
-import { GlowingStarsBackgroundCard } from "@/components/glowing-stars";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "../ui/components/navigation-menu";
-import { cn } from "../ui/utils";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { FaDiscord, FaGithub } from "react-icons/fa";
-import {
-  MdOutlineDescription,
-  MdOutlineIntegrationInstructions,
-  MdOutlineMemory,
-} from "react-icons/md";
-import { LogoIcon } from "./logo-icon";
 
-type ListItemProps = {
-  title: string;
-  href: string;
-  external?: boolean;
-  icon: () => React.JSX.Element;
-  className?: string;
-};
+import { NavigationMenu } from "../ui/components/navigation-menu";
+import { cn } from "../ui/utils";
+import { LogoIcon } from "./logo-icon";
 
 const links = [
   {
@@ -144,7 +123,7 @@ export function Header() {
         >
           <div className="mt-4 flex justify-between p-3 relative">
             <button type="button" onClick={handleToggleMenu}>
-              <span className="sr-only">Fluxozen Logo</span>
+              <span className="sr-only">FluxoZen Logo</span>
               <LogoIcon />
             </button>
 
@@ -190,14 +169,6 @@ export function Header() {
                   </motion.li>
                 );
               })}
-
-              <motion.li variants={itemVariant} onClick={handleToggleMenu}>
-                <Link href="/engine">Engine</Link>
-              </motion.li>
-
-              <motion.li variants={itemVariant}>
-                <Link href="https://app.fluxozen.com">Get started</Link>
-              </motion.li>
 
               <motion.li
                 className="mt-auto border-t-[1px] pt-8"

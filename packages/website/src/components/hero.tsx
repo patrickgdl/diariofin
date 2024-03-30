@@ -25,11 +25,11 @@ export function Hero() {
       </Link>
 
       <h1 className="text-6xl font-medium mt-6">
-        Administre seu negócio de maneira mais inteligente.
+        Seu negócio de maneira mais inteligente.
       </h1>
 
       <p className="mt-4 md:mt-6 text-[#707070] max-w-[600px]">
-        Fluxozen fornece uma visão melhor do seu negócio e automatiza as tarefas
+        FluxoZen fornece uma visão melhor do seu negócio e automatiza as tarefas
         chatas, permitindo que você se concentre no que você gosta de fazer.
       </p>
 

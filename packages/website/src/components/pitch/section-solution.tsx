@@ -7,12 +7,12 @@ export function SectionSolution() {
   return (
     <div className="min-h-screen relative w-screen">
       <div className="absolute left-4 right-4 md:left-8 md:right-8 top-4 flex justify-between text-lg">
-        <span>Our solution</span>
+        <span>Nossa solução</span>
         <span className="text-[#878787]">
-          <Link href="/">Fluxozen</Link>
+          <Link href="/">FluxoZen</Link>
         </span>
       </div>
-      <div className="flex flex-col min-h-screen justify-center container">
+      <div className="flex flex-col min-h-screen justify-center container mx-auto">
         <div className="grid md:grid-cols-3 gap-8 px-4 md:px-0 md:pt-0 h-[580px] md:h-auto overflow-auto pb-[100px] md:pb-0">
           <div className="space-y-8">
             <Card>
@@ -27,15 +27,15 @@ export function SectionSolution() {
                   d="M0 67.333V.667l5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5v66.666l-5-5-5 5-5-5-5 5-5-5-5 5-5-5-5 5-5-5-5 5-5-5-5 5Zm10-16.666h40V44H10v6.667Zm0-13.334h40v-6.666H10v6.666ZM10 24h40v-6.667H10V24ZM6.667 57.667h46.666V10.333H6.667v47.334Z"
                 />
               </svg>
-              <h2 className="text-2xl">One OS</h2>
+              <h2 className="text-2xl">Um sistema operacional</h2>
 
               <p className="text-[#878787] text-sm text-center">
-                We set out on a journey to develop an all-encompassing business
-                operating system. Our overarching aim is to empower
-                entrepreneurs by providing them with a comprehensive suite of
-                tools that not only streamlines tedious tasks but also
-                facilitates the acquisition of deeper insights into their
-                businesses.
+                Partimos em uma jornada para desenvolver um negócio abrangente
+                como um sistema operacional. Nosso objetivo geral é capacitar
+                empreendedores, fornecendo-lhes um conjunto abrangente de
+                ferramentas que não apenas agilizam tarefas tediosas, mas também
+                facilite a aquisição de insights mais profundos sobre seus
+                negócios.
               </p>
             </Card>
 
@@ -67,25 +67,26 @@ export function SectionSolution() {
                 </g>
               </svg>
 
-              <h2 className="text-2xl">Intermediary</h2>
+              <h2 className="text-2xl">Intermediário</h2>
 
               <p className="text-[#878787] text-sm text-center">
-                Fluxozen serves as the bridge between you and your accountant,
-                streamlining your month-end procedures, reducing manual work,
-                and easily packaging everything up for financial review. By
-                prioritizing user experience over building a accountant system,
-                we ensure our platform remains user-friendly and entirely
-                focused on what entrepreneurs need. This approach enables us to
-                scale quickly and globally without the need to navigate domestic
-                tax laws and change accountants current workflows.
+                FluxoZen serve como ponte entre você e seu contador, agilizando
+                seus procedimentos de final de mês, reduzindo o trabalho manual,
+                e empacotando tudo facilmente para a análise financeira.
+                Priorizando a experiência do usuário em vez de construir um
+                sistema contábil, garantimos que nossa plataforma permaneça
+                fácil de usar e totalmente focado no que os empreendedores
+                precisam. Esta abordagem permite-nos escalar rapidamente sem a
+                necessidade de navegar internamente leis tributárias e alterar
+                os fluxos de trabalho atuais dos contadores.
               </p>
             </Card>
           </div>
           <div className="space-y-8">
             <div className="px-8">
               <h2 className="text-[42px] text-center leading-[58px]">
-                We offer business insights and automates tedious tasks, freeing
-                users to focus on what they love.
+                Oferecemos insights de negócios e automatizamos tarefas
+                tediosas, liberando os usuários se concentrem no que amam.
               </h2>
             </div>
 
@@ -117,18 +118,18 @@ export function SectionSolution() {
                 </g>
               </svg>
 
-              <h2 className="text-2xl">User friendly & AI</h2>
+              <h2 className="text-2xl">Fácil de usar e com IA</h2>
 
               <p className="text-[#878787] text-sm text-center">
-                We're focusing on building the platform with our community to
-                ensure it's as user-friendly as possible and covers all the
-                features needed to assist as many business owners as possible.
-                We've all witnessed the rise of AI, and we've already integrated
-                various AI aspects into our platform. For instance, we've
-                implemented features such as matching receipts to transactions,
-                category automation, and engaging with your financials through
-                Fluxozen AI, allowing users to ask for any insights they may
-                need.
+                Estamos nos concentrando em construir a plataforma com nossa
+                comunidade para garantir que seja o mais fácil de usar possível
+                e cubra todos os recursos necessários para ajudar o maior número
+                possível de proprietários de empresas. Todos nós testemunhamos a
+                ascensão da IA e já integramos vários aspectos de IA em nossa
+                plataforma. Por exemplo, implementamos como automação de
+                categorias e envolvimento com suas finanças por meio do FluxoZen
+                AI, permitindo que os usuários solicitem quaisquer insights que
+                possam precisar.
               </p>
             </Card>
           </div>

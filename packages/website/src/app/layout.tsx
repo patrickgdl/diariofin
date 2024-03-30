@@ -14,9 +14,9 @@ import { Provider } from "./provider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fluxozen.com"),
-  title: "Fluxozen | Run your business smarter",
+  title: "FluxoZen | Seu negócio de maneira mais inteligente",
   description:
-    "Fluxozen provides you with greater insight into your business and automates the boring tasks, allowing you to focus on what you love to do instead.",
+    "O FluxoZen fornece uma visão melhor do seu negócio e automatiza as tarefas chatas, permitindo que você se concentre no que você gosta de fazer.",
 };
 
 export const viewport = {
