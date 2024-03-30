@@ -6,6 +6,8 @@ import { buttonVariants } from "~/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/ui/tooltip"
 import { cn } from "~/utils/cn"
 
+import Logo from "./logo"
+
 interface NavProps {
   isCollapsed: boolean
   links: {
@@ -16,42 +18,11 @@ interface NavProps {
   accounts: Array<Account>
 }
 
-const chartdata = [
-  {
-    month: "Jan 21",
-    Performance: 4000,
-  },
-  {
-    month: "Feb 21",
-    Performance: 3000,
-  },
-  {
-    month: "Mar 21",
-    Performance: 2000,
-  },
-  {
-    month: "Apr 21",
-    Performance: 2780,
-  },
-  {
-    month: "May 21",
-    Performance: 1890,
-  },
-  {
-    month: "Jun 21",
-    Performance: 2390,
-  },
-  {
-    month: "Jul 21",
-    Performance: 3490,
-  },
-]
-
 export function Nav({ links, isCollapsed, accounts }: NavProps) {
   return (
     <div data-collapsed={isCollapsed} className="group h-screen flex-1 flex flex-col data-[collapsed=true]:py-4 px-4">
-      <div className="flex items-center flex-shrink-0 px-4 py-5">
-        <div className="h-8 w-auto" />
+      <div className="flex items-center flex-shrink-0 mx-auto py-5">
+        <Logo className="w-32" />
       </div>
 
       <div className="flex-1 flex flex-col overflow-y-auto gap-10">
