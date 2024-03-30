@@ -1,5 +1,6 @@
-# fluxo-simples
--------------
+# fluxozen
+
+---
 
 Copy .env file and set your environment variables
 

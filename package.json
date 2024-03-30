@@ -3,17 +3,17 @@
     "packages/dashboard",
     "packages/website"
   ],
-  "name": "fluxo-simples",
-  "description": "Fluxo Simples's packages",
+  "name": "fluxozen",
+  "description": "FluxoZen's packages",
   "private": true,
   "version": "0.0.1",
   "scripts": {
     "dev:all": "concurrently \"npm run dev:dashboard\" \"npm run dev:website\"",
-    "dev:dashboard": "npm run dev -w @fluxo-simples/dashboard",
-    "dev:website": "npm run dev -w @fluxo-simples/website",
+    "dev:dashboard": "npm run dev -w @fluxozen/dashboard",
+    "dev:website": "npm run dev -w @fluxozen/website",
     "build:all": "concurrently \"npm run build:dashboard\" \"npm run build:website\"",
-    "build:dashboard": "npm run build -w @fluxo-simples/dashboard",
-    "build:website": "npm run build -w @fluxo-simples/website"
+    "build:dashboard": "npm run build -w @fluxozen/dashboard",
+    "build:website": "npm run build -w @fluxozen/website"
   },
   "dependencies": {
     "tailwind-merge": "^1.12.0",

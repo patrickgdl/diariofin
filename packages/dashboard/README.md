@@ -1,6 +1,6 @@
-# Fluxo Simples's Dashboard
+# FluxoZen's Dashboard
 
-This is the dashboard for Fluxo Simples's website.
+This is the dashboard for FluxoZen's website.
 
 ## Running locally
 
