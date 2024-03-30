@@ -3,7 +3,6 @@ import { BlurImage } from "~/components/blur-image"
 import Logo from "~/components/logo"
 
 import RegisterForm from "./components/register-form"
-// import dashboardImg from "./dashboard.png"
 
 export default function RegisterPage() {
   return (
@@ -12,10 +11,9 @@ export default function RegisterPage() {
         <div className="w-full max-w-md overflow-hidden border-y border-gray-200 sm:rounded-2xl sm:border sm:shadow-xl">
           <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 px-4 py-6 pt-8 text-center sm:px-16">
             <Link to="/">
-              <Logo className="h-10 w-10" />
+              <Logo className="w-32" />
             </Link>
             <h3 className="text-xl font-semibold">Crie sua conta</h3>
-            <p className="text-sm text-gray-500">Comece agora mesmo.</p>
             <p className="text-sm text-gray-500">Sem cartão de crédito obrigatório.</p>
           </div>
           <div className="flex flex-col space-y-3 px-4 py-8 sm:px-16">

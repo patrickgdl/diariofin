@@ -1,3 +1,4 @@
+import { Loader2 } from "lucide-react"
 import { FormEvent, useState } from "react"
 import { Link } from "react-router-dom"
 import Google from "~/components/icons/google"
@@ -93,6 +94,7 @@ export default function LoginForm() {
           })}
           disabled={clickedGoogle}
         >
+          {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
           Continuar com Email
         </Button>
       </form>
