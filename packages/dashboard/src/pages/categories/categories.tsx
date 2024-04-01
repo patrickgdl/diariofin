@@ -117,7 +117,7 @@ export default function CategoriesDashboard() {
               <Table>
                 <TableBody>
                   {groupedData.map((row) => (
-                    <CategoryRow key={row.id} row={row} total={total} onSelect={setSelectedCategory} />
+                    <CategoryRow key={row.id} row={row} total={total} defaultOpen onSelect={setSelectedCategory} />
                   ))}
                 </TableBody>
               </Table>

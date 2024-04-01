@@ -12,10 +12,12 @@ import { CategoryOnboarding, onboardingCategories } from "../constants"
 
 type TransactionTypesProps = {
   selectedCategories: CategoryOnboarding[]
+  onSelectCategory: (category: CategoryOnboarding) => void
 }
 
-export function TransactionTypesMainStep({ selectedCategories }: TransactionTypesProps) {
+export function TransactionTypesMainStep({ onSelectCategory, selectedCategories }: TransactionTypesProps) {
   const { nextStep } = useStepper()
+  const groupedByGroup = groupBy(onboardingCategories, "group")
 
   const handleNextStep = () => {
     if (selectedCategories.length < 1) {
@@ -28,6 +30,51 @@ export function TransactionTypesMainStep({ selectedCategories }: TransactionType
     nextStep()
   }
 
+  return (
+    <div className="space-y-8">
+      <div className="space-y-2">
+        <div className="space-y-2">
+          <h1 className="text-2xl font-semibold tracking-tight">Tipos de Transação</h1>
+          <p className="text-sm text-muted-foreground">Aqui estão algumas sugestões de tipos de transações.</p>
+          <p className="text-sm font-semibold">Selecione as quê considerar relevante.</p>
+        </div>
+
+        <div className="overflow-y-auto space-y-6 px-2 py-8 h-[calc(100vh-450px)]">
+          {Object.entries(groupedByGroup).map(([group, categories]) => (
+            <div className="flex flex-col space-y-4" key={group}>
+              <p
+                className="font-medium leading-none"
+                style={{ color: categories.find((c) => c.group === group)?.color }}
+              >
+                {group}
+              </p>
+
+              <div className="flex flex-col space-y-2">
+                {categories.map((category) => (
+                  <Toggle key={category.name} asChild onPressedChange={() => onSelectCategory(category)}>
+                    <Badge
+                      style={{ backgroundColor: category.color }}
+                      className="data-[state=on]:opacity-100 data-[state=off]:opacity-50"
+                    >
+                      {category.icon}
+                      <span className="ml-1 text-sm font-medium leading-none">{category.name}</span>
+                    </Badge>
+                  </Toggle>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <Button className="w-full" variant="outline" onClick={handleNextStep}>
+        Continuar
+      </Button>
+    </div>
+  )
+}
+
+export function TransactionTypesSecondaryStep() {
   return (
     <div className="space-y-12">
       <div className="space-y-4">
@@ -86,52 +133,6 @@ export function TransactionTypesMainStep({ selectedCategories }: TransactionType
             </div>
           </TabsContent>
         </Tabs>
-      </div>
-
-      <Button className="w-full" variant="outline" onClick={handleNextStep}>
-        Continuar
-      </Button>
-    </div>
-  )
-}
-
-type TransactionTypesSecondaryProps = {
-  onSelectCategory: (category: CategoryOnboarding) => void
-}
-
-export function TransactionTypesSecondaryStep({ onSelectCategory }: TransactionTypesSecondaryProps) {
-  const groupedByGroup = groupBy(onboardingCategories, "group")
-
-  return (
-    <div className="space-y-2">
-      <div className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">Tipos de Transação</h1>
-        <p className="text-sm text-muted-foreground">Aqui estão algumas sugestões de tipos de transações.</p>
-        <p className="text-sm font-semibold">Selecione as quê considerar relevante.</p>
-      </div>
-
-      <div className="overflow-y-auto space-y-6 px-2 py-8 h-[calc(100vh-220px)]">
-        {Object.entries(groupedByGroup).map(([group, categories]) => (
-          <div className="flex flex-col space-y-4" key={group}>
-            <p className="font-medium leading-none" style={{ color: categories.find((c) => c.group === group)?.color }}>
-              {group}
-            </p>
-
-            <div className="flex flex-col space-y-2">
-              {categories.map((category) => (
-                <Toggle key={category.name} asChild onPressedChange={() => onSelectCategory(category)}>
-                  <Badge
-                    style={{ backgroundColor: category.color }}
-                    className="data-[state=on]:opacity-100 data-[state=off]:opacity-50"
-                  >
-                    {category.icon}
-                    <span className="ml-1 text-sm font-medium leading-none">{category.name}</span>
-                  </Badge>
-                </Toggle>
-              ))}
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   )

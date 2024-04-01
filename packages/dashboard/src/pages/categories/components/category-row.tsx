@@ -15,12 +15,13 @@ import { ChevronRightIcon } from "lucide-react"
 type CategoryRowProps = {
   total: number
   row: TransactionsByCategoryGrouped
+  defaultOpen?: boolean
   onSelect: (category: TransactionsByCategoryGrouped["categories"][0]) => void
 }
 
-export function CategoryRow({ row, total, onSelect }: CategoryRowProps) {
+export function CategoryRow({ row, total, onSelect, defaultOpen }: CategoryRowProps) {
   return (
-    <Collapsible asChild>
+    <Collapsible defaultOpen={defaultOpen} asChild>
       {/* this fragment is necessary to avoid a needless div wrapper around the row */}
       <React.Fragment>
         <CollapsibleTrigger asChild>

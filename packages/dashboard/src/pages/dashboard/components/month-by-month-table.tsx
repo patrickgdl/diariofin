@@ -1,5 +1,4 @@
 import * as React from "react"
-import { BoltIcon } from "@heroicons/react/20/solid"
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -85,7 +84,7 @@ export const columns: ColumnDef<GroupForTable>[] = [
       const incoming = parseFloat(row.getValue("incoming"))
       const outgoing = parseFloat(row.getValue("outgoing"))
 
-      const diff = incoming + outgoing
+      const diff = incoming + -outgoing
 
       const textColor = diff < 0 ? "text-red-500" : diff === 0 ? "" : "text-green-500"
 
@@ -157,7 +156,7 @@ export function MonthByMonthTable({ data }: { data: TransactionsByDateQuery }) {
               ) : (
                 <TableRow>
                   <TableCell colSpan={columns.length} className="h-24 text-center">
-                    No results.
+                    Sem resultados
                   </TableCell>
                 </TableRow>
               )}
