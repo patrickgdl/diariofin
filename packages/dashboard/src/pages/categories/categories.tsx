@@ -3,27 +3,21 @@ import * as React from "react"
 import ErrorState from "~/components/error-state"
 import Loader from "~/components/loader"
 import useTransactionsByTypeQuery from "~/hooks/useTransactionsByType"
-import { Badge } from "~/ui/badge"
 import { Button } from "~/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "~/ui/dialog"
-import { Progress } from "~/ui/progress"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resizable"
 import { Separator } from "~/ui/separator"
-import { Table, TableBody, TableCell, TableRow } from "~/ui/table"
-import formatCurrency from "~/utils/format-currency"
-import { hexToRgb } from "~/utils/hexToRgb"
+import { Table, TableBody } from "~/ui/table"
 
 import { TRANSACTION_TYPE } from "../transactions/constants"
-import { CategoriesDisplay, CategoriesDisplayProps } from "./components/categories-display"
+import { CategoriesDisplay } from "./components/categories-display"
 import { CategoriesForm } from "./components/categories-form"
-import { CategoriesTable } from "./components/categories-table"
+import { CategoryRow } from "./components/category-row"
 import { SpentSoFarCard } from "./components/spent-so-far-card"
-import { TransactionsByDateGrouped } from "./components/top-categories-table"
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/ui/tooltip"
-import { formatPercentage } from "~/utils/format-percentage"
+import { TransactionsByCategoryGrouped } from "./components/top-categories-table"
 
 export default function CategoriesDashboard() {
-  const [selectedCategory, setSelectedCategory] = React.useState<TransactionsByDateGrouped["categories"][0] | null>(
+  const [selectedCategory, setSelectedCategory] = React.useState<TransactionsByCategoryGrouped["categories"][0] | null>(
     null
   )
   const { data, isLoading, isError } = useTransactionsByTypeQuery(TRANSACTION_TYPE.EXPENSE)
@@ -40,40 +34,41 @@ export default function CategoriesDashboard() {
 
   const total = doneTotal + pendingTotal
 
-  const groupedByCategoryGroup = data.reduce((acc, curr) => {
+  const groupedData = data.reduce((acc, curr) => {
     if (!curr.transaction_categories?.category_groups) {
       return acc
     }
 
-    const groupId = curr.transaction_categories.category_groups.id
-    const transactionId = curr.id
-    const amount = curr.amount
+    const categoryId = curr.transaction_categories.id
+    const existingCategory = acc.find((cat) => cat.id === categoryId)
 
-    if (!acc[groupId]) {
-      acc[groupId] = {
-        id: curr.transaction_categories.category_groups.id,
-        name: curr.transaction_categories.category_groups.name,
-        color: curr.transaction_categories.category_groups.color,
-        totalAmount: 0,
-        categories: [],
-      }
-    }
-    acc[groupId].totalAmount += amount
-
-    let categoryObject = acc[groupId].categories.find((obj) => obj.transactionId === transactionId)
-
-    if (!categoryObject) {
-      categoryObject = {
-        transactionId: transactionId,
+    if (existingCategory) {
+      existingCategory.totalAmount += curr.amount
+      existingCategory.categories.push({
+        transactionId: curr.id,
         transaction_categories: curr.transaction_categories,
-        amount,
-        totalAmount: acc[groupId].totalAmount,
-      }
-      acc[groupId].categories.push(categoryObject)
+        amount: curr.amount,
+        totalAmount: existingCategory.totalAmount,
+      })
+    } else {
+      acc.push({
+        id: categoryId,
+        name: curr.transaction_categories.name,
+        color: curr.transaction_categories.category_groups.color,
+        totalAmount: curr.amount,
+        categories: [
+          {
+            transactionId: curr.id,
+            transaction_categories: curr.transaction_categories,
+            amount: curr.amount,
+            totalAmount: curr.amount,
+          },
+        ],
+      })
     }
 
     return acc
-  }, {} as Record<string, TransactionsByDateGrouped>)
+  }, [] as TransactionsByCategoryGrouped[])
 
   if (isLoading) {
     return <Loader />
@@ -118,47 +113,14 @@ export default function CategoriesDashboard() {
           <SpentSoFarCard data={data} doneTotal={doneTotal} pendingTotal={pendingTotal} />
 
           <div className="py-8">
-            {Object.entries(groupedByCategoryGroup).length ? (
-              Object.entries(groupedByCategoryGroup).map(([groupedDate, groupedRows]) => (
-                <React.Fragment key={groupedDate}>
-                  <Table>
-                    <TableBody>
-                      <TableRow
-                      // onClick={() => onSelect(row.original)}
-                      >
-                        <TableCell className="w-1/3 space-x-2">
-                          <Badge
-                            className="px-1.5"
-                            style={{ backgroundColor: hexToRgb(groupedRows.color || "#000000", "0.2") }}
-                          >
-                            <span className="font-medium" style={{ color: groupedRows.color }}>
-                              {groupedRows.categories.length}
-                            </span>
-                          </Badge>
-
-                          <span>{groupedRows.name}</span>
-                        </TableCell>
-
-                        <TableCell className="w-1/5">
-                          <Tooltip delayDuration={0}>
-                            <TooltipTrigger asChild>
-                              <Progress value={(groupedRows.totalAmount / total) * 100} className="w-full" />
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              Essa categoria equivale a {formatPercentage((groupedRows.totalAmount / total) * 100)} do
-                              seu gasto total.
-                            </TooltipContent>
-                          </Tooltip>
-                        </TableCell>
-
-                        <TableCell className="w-1/3 text-right">{formatCurrency(groupedRows.totalAmount)}</TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-
-                  <CategoriesTable data={groupedRows.categories} onSelect={(row) => setSelectedCategory(row)} />
-                </React.Fragment>
-              ))
+            {groupedData.length ? (
+              <Table>
+                <TableBody>
+                  {groupedData.map((row) => (
+                    <CategoryRow key={row.id} row={row} total={total} onSelect={setSelectedCategory} />
+                  ))}
+                </TableBody>
+              </Table>
             ) : (
               <div className="rounded-md border h-24 flex justify-center items-center">Sem resultados.</div>
             )}

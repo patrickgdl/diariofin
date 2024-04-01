@@ -104,7 +104,7 @@ export function KeyMetricsTable() {
   })
 
   return (
-    <div className="flex flex-col space-y-1.5 p-6">
+    <div className="flex flex-col space-y-1.5 p-4 md:p-6">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

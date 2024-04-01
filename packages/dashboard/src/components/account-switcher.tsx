@@ -40,7 +40,7 @@ export default function AccountSwitcher({ isCollapsed = false, accounts, classNa
           variant="outline"
           aria-expanded={open}
           aria-label="Selecione uma conta"
-          className={cn("w-full justify-between", classNames)}
+          className={cn("md:w-full justify-between", classNames)}
         >
           <Avatar className="mr-2 h-5 w-5">
             <AvatarImage src={`https://avatar.vercel.sh/${selectedAccount.id}.png`} alt={selectedAccount.name || ""} />

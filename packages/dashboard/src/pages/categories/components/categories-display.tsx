@@ -1,73 +1,30 @@
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
+import ErrorState from "~/components/error-state"
+import Loader from "~/components/loader"
 import { TransactionsTableRaw } from "~/components/transactions-table/transactions-table-raw"
 import useTransactionsByCategoryQuery from "~/hooks/useTransactionsByCategory"
 import { columns } from "~/pages/accounts/components/transactions-columns"
-import { Avatar, AvatarFallback } from "~/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "~/ui/avatar"
 import { Separator } from "~/ui/separator"
-
-import { KeyMetricsTable } from "./key-metrics-table"
 import formatCurrency from "~/utils/format-currency"
-import { TransactionsByDateGrouped } from "./top-categories-table"
 
-const data2 = [
-  {
-    name: "Jan",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Feb",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Mar",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Apr",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "May",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Jun",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Jul",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Aug",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Sep",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Oct",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Nov",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Dec",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-]
+import { TransactionsByCategoryGrouped } from "./top-categories-table"
 
 export interface CategoriesDisplayProps {
-  category: TransactionsByDateGrouped["categories"][0] | null
+  category: TransactionsByCategoryGrouped["categories"][0] | null
 }
 
 export function CategoriesDisplay({ category }: CategoriesDisplayProps) {
   const { data, groupedData, ...transactionsQuery } = useTransactionsByCategoryQuery(
     category?.transaction_categories?.id || ""
   )
+
+  if (transactionsQuery.isLoading || transactionsQuery.isFetching) {
+    return <Loader />
+  }
+
+  if (transactionsQuery.isError) {
+    return <ErrorState />
+  }
 
   return (
     <div className="flex h-full flex-col">
@@ -76,25 +33,16 @@ export function CategoriesDisplay({ category }: CategoriesDisplayProps) {
           {/* Top bar with avatar, text, and badge */}
           <div className="flex items-center justify-between p-4">
             {/* Left section with avatar and text */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
               <Avatar>
-                {/* <AvatarImage
-                  src="/path-to-your-avatar-image.png"
-                  alt={mail.name}
-                /> */}
-                <AvatarFallback delayMs={600}>
-                  {category.transaction_categories.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
-                </AvatarFallback>
+                <AvatarFallback>{category.transaction_categories.icon}</AvatarFallback>
               </Avatar>
               <div>
-                <h1 className="text-xl font-semibold ">{category.transaction_categories.name}</h1>
+                <h2 className="text-xl font-semibold ">{category.transaction_categories.name}</h2>
               </div>
             </div>
 
-            {/* Right section with badge */}
+            {/* Right section with text */}
             {category.transaction_categories.name && (
               <div className="flex flex-col items-end">
                 <div className="text-m -mb-2 font-medium">Gastos até agora</div>
