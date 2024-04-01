@@ -166,8 +166,10 @@ export default function OnboardingPage() {
     {
       id: 1,
       label: "Tipos de Transação",
-      content: <TransactionTypesMainStep selectedCategories={selectedCategories} />,
-      secondary: <TransactionTypesSecondaryStep onSelectCategory={handleSelectCategory} />,
+      content: (
+        <TransactionTypesMainStep selectedCategories={selectedCategories} onSelectCategory={handleSelectCategory} />
+      ),
+      secondary: <TransactionTypesSecondaryStep />,
     },
     { id: 2, label: "Aparência", content: <AppearanceMainStep onFinalize={handleFinalize} /> },
   ]
