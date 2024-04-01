@@ -42,11 +42,12 @@ export default function DashboardPage() {
   }, [params])
 
   return (
-    <div className="space-y-6 p-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 p-4 md:p-6">
+      <div className="flex flex-col md:flex-row md:items-center space-y-4 justify-between">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-        <div className="flex items-center space-x-2">
-          <CalendarDateRangePicker date={date} onSelectDate={setDate} />
+
+        <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-2">
+          <CalendarDateRangePicker className="w-full" date={date} onSelectDate={setDate} />
 
           {accounts.length > 0 && <AccountSwitcher accounts={accounts} />}
         </div>
@@ -118,7 +119,7 @@ export default function DashboardPage() {
             </Card>
           </div>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {doneTransactions.data && pendingTransactions.data && (
               <>
                 <Overview data={[...doneTransactions.data, ...pendingTransactions.data]} />
@@ -128,7 +129,7 @@ export default function DashboardPage() {
             )}
           </div>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
+          <div className="mt-6 flex flex-col sm:grid gap-4 sm:grid-cols-2">
             {doneTransactions.data && pendingTransactions.data && (
               <>
                 <TransactionsReviewTable data={pendingTransactions.data} />
@@ -140,7 +141,7 @@ export default function DashboardPage() {
         </TabsContent>
 
         <TabsContent value="consolidated" className="space-y-4">
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
+          <div className="mt-6 flex flex-col sm:grid gap-4 sm:grid-cols-2">
             {doneTransactions.data && pendingTransactions.data && (
               <>
                 <MonthByMonthTable data={[...doneTransactions.data, ...pendingTransactions.data]} />
@@ -150,7 +151,7 @@ export default function DashboardPage() {
             )}
           </div>
 
-          {/* <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
+          {/* <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <MonthlyIncomeProgress
               incomeTotal={doneTransactions.incomeCount}
               pendingIncomeTotal={pendingTransactions.incomeCount}

@@ -20,12 +20,15 @@ interface NavProps {
 
 export function Nav({ links, isCollapsed, accounts }: NavProps) {
   return (
-    <div data-collapsed={isCollapsed} className="group h-screen flex-1 flex flex-col data-[collapsed=true]:py-4 px-4">
+    <div
+      data-collapsed={isCollapsed}
+      className="group h-screen flex-1 hidden md:flex flex-col data-[collapsed=true]:py-4 px-4"
+    >
       <div className="flex items-center flex-shrink-0 mx-auto py-5">
         <Logo className="w-32" />
       </div>
 
-      <div className="flex-1 flex flex-col overflow-y-auto gap-10">
+      <div className="flex-1 flex-col overflow-y-auto gap-10 flex">
         <nav className="grid gap-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
           {links.map((link, index) =>
             isCollapsed ? (
@@ -62,7 +65,7 @@ export function Nav({ links, isCollapsed, accounts }: NavProps) {
           )}
         </nav>
 
-        <div className="flex flex-col gap-2 px-4 group-[[data-collapsed=true]]:hidden">
+        <div className="flex flex-col gap-2 group-[[data-collapsed=true]]:hidden">
           {accounts?.length > 0 ? (
             <div>
               <span className="text-xs font-semibold text-muted-foreground uppercase">Contas</span>

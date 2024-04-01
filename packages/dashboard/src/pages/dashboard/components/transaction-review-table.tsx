@@ -1,4 +1,4 @@
-import { ChevronDownIcon, DotsHorizontalIcon } from "@radix-ui/react-icons"
+import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -18,15 +18,7 @@ import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
 import { Button } from "~/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
 import { Checkbox } from "~/ui/checkbox"
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "~/ui/dropdown-menu"
-import { Input } from "~/ui/input"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "~/ui/dropdown-menu"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/ui/table"
 import { cn } from "~/utils/cn"
 import formatCurrency from "~/utils/format-currency"
@@ -34,25 +26,25 @@ import formatCurrency from "~/utils/format-currency"
 import { TransactionsByDateQuery } from "../queries/get-transactions-by-date"
 
 export const columns: ColumnDef<TransactionsByDateQuery[0]>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={table.getIsAllPageRowsSelected()}
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Selecionar tudo"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        aria-label="Selecionar linha"
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={table.getIsAllPageRowsSelected()}
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Selecionar tudo"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       aria-label="Selecionar linha"
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
   {
     accessorKey: "description",
     header: "Descrição",
@@ -162,7 +154,7 @@ export function TransactionsReviewTable({ data }: { data: TransactionsByDateQuer
                   {headerGroup.headers.map((header) => {
                     return (
                       <TableHead key={header.id} className="[&:has([role=checkbox])]:pl-3">
-                        {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                        {flexRender(header.column.columnDef.header, header.getContext())}
                       </TableHead>
                     )
                   })}
@@ -189,25 +181,6 @@ export function TransactionsReviewTable({ data }: { data: TransactionsByDateQuer
               )}
             </TableBody>
           </Table>
-        </div>
-        <div className="flex items-center justify-end space-x-2 pt-4">
-          <div className="flex-1 text-sm text-muted-foreground">
-            {table.getFilteredSelectedRowModel().rows.length} de {table.getFilteredRowModel().rows.length} linha(s)
-            selecionada(s).
-          </div>
-          <div className="space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
-            >
-              Anterior
-            </Button>
-            <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-              Próximo
-            </Button>
-          </div>
         </div>
       </CardContent>
     </Card>

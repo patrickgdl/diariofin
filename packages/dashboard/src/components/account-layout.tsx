@@ -9,7 +9,7 @@ const AccountLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="space-y-6">
       <div>
-        <div className="flex space-x-2 items-center p-6">
+        <div className="flex space-x-2 items-center p-4 md:p-6">
           <Button variant="outline" size="icon" onClick={() => navigate(-1)}>
             <ChevronLeftIcon className="h-4 w-4" />
           </Button>
