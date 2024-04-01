@@ -1,6 +1,6 @@
 "use client";
 
-import { useMediaQuery } from "@/hooks/use-media-query";
+import useMediaQuery from "@/hooks/use-media-query";
 import { Button } from "../../ui/components/button";
 import { Icons } from "../../ui/components/icons";
 import dynamic from "next/dynamic";
@@ -20,7 +20,7 @@ type Props = {
 export function SectionDemo({ playVideo }: Props) {
   const playerRef = useRef();
   const [isPlaying, setPlaying] = useState(true);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery();
 
   useHotkeys(
     "space",

@@ -27,8 +27,7 @@ export function SectionFour() {
         </h4>
         <p className="text-[#878787]">
           Estamos trabalhando duro para oferecer a você a melhor solução de
-          invoice e faturas. Iremos apresentar faturas baseadas na web,
-          colaboração ao vivo e sincronização de projetos.
+          invoice e faturas. Iremos apresentar faturas baseadas na web.
         </p>
         <motion.div
           animate={isActive2 ? { y: -5 } : { y: 0 }}

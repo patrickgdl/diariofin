@@ -28,16 +28,14 @@ export function FooterCTA() {
           <Link href="/talk-to-us">
             <Button
               variant="outline"
-              className="border border-primary h-12 px-6 border-white text-white hidden md:block"
+              className="border border-primary h-12 px-6 hidden md:block"
             >
               Fale conosco
             </Button>
           </Link>
 
           <a href="https://app.fluxozen.com">
-            <Button className="h-12 px-5 bg-white text-black hover:bg-white/80">
-              Acesso antecipado
-            </Button>
+            <Button className="h-12 px-5">Acesso antecipado</Button>
           </a>
         </div>
       </div>
