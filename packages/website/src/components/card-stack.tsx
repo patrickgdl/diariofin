@@ -1,6 +1,6 @@
 "use client";
 
-import { useMediaQuery } from "@/hooks/use-media-query";
+import useMediaQuery from "@/hooks/use-media-query";
 import {
   Tooltip,
   TooltipContent,
@@ -27,7 +27,7 @@ export const CardStack = ({
   offset?: number;
   scaleFactor?: number;
 }) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery();
   const CARD_OFFSET = isDesktop ? 10 : 5;
   const SCALE_FACTOR = scaleFactor || 0.06;
   const [cards, setCards] = useState<Card[]>([items.at(0)!]);
@@ -89,7 +89,7 @@ export const CardStack = ({
             }}
             onMouseEnter={() => clearInterval(interval)}
           >
-            <div className="rounded-md md:rounded-2xl border border-border overflow-hidden">
+            <div className="rounded-md md:rounded-2xl border border-[#1e293b] overflow-hidden">
               <TooltipProvider delayDuration={0}>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -121,7 +121,7 @@ export const CardStack = ({
                         onChangeCard(cards.find((c) => c.id === 5))
                       }
                     >
-                      <span className="sr-only">Transactions</span>
+                      <span className="sr-only">Transações</span>
                     </button>
                   </TooltipTrigger>
                   <TooltipContent
@@ -129,7 +129,7 @@ export const CardStack = ({
                     className="py-1 px-3 rounded-sm"
                     sideOffset={8}
                   >
-                    <p className="text-xs">Transactions</p>
+                    <p className="text-xs">Transações</p>
                   </TooltipContent>
                 </Tooltip>
 
@@ -142,7 +142,7 @@ export const CardStack = ({
                         onChangeCard(cards.find((c) => c.id === 3))
                       }
                     >
-                      <span className="sr-only">Inbox</span>
+                      <span className="sr-only">Contas</span>
                     </button>
                   </TooltipTrigger>
                   <TooltipContent
@@ -150,7 +150,7 @@ export const CardStack = ({
                     className="py-1 px-3 rounded-sm"
                     sideOffset={8}
                   >
-                    <p className="text-xs">Inbox</p>
+                    <p className="text-xs">Contas</p>
                   </TooltipContent>
                 </Tooltip>
 
@@ -163,7 +163,7 @@ export const CardStack = ({
                         onChangeCard(cards.find((c) => c.id === 2))
                       }
                     >
-                      <span className="sr-only">Tracker</span>
+                      <span className="sr-only">Categorias</span>
                     </button>
                   </TooltipTrigger>
                   <TooltipContent
@@ -171,28 +171,7 @@ export const CardStack = ({
                     className="py-1 px-3 rounded-sm"
                     sideOffset={8}
                   >
-                    <p className="text-xs">Tracker</p>
-                  </TooltipContent>
-                </Tooltip>
-
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button
-                      type="button"
-                      className="w-[35px] h-[20px] z-20 absolute top-[230px] left-[8px]"
-                      onClick={() =>
-                        onChangeCard(cards.find((c) => c.id === 4))
-                      }
-                    >
-                      <span className="sr-only">Vault</span>
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent
-                    side="right"
-                    className="py-1 px-3 rounded-sm"
-                    sideOffset={8}
-                  >
-                    <p className="text-xs">Vault</p>
+                    <p className="text-xs">Categorias</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>

@@ -164,26 +164,6 @@ export const LogEvents = {
     icon: "🔁",
     channel: "transaction",
   },
-  CreateFolder: {
-    name: "Create Folder",
-    icon: "📂",
-    channel: "vault",
-  },
-  DeleteFolder: {
-    name: "Delete Folder",
-    icon: "📂",
-    channel: "vault",
-  },
-  DeleteFile: {
-    name: "Delete File",
-    icon: "📄",
-    channel: "vault",
-  },
-  ShareFile: {
-    name: "Share File",
-    icon: "📄",
-    channel: "vault",
-  },
   MfaVerify: {
     name: "MFA Verify",
     icon: "🔐",
