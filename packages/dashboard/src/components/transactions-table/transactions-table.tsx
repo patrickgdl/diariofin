@@ -72,7 +72,7 @@ export function TransactionsTable<TData, TValue>({
                 {table.getRowModel().rows?.length &&
                 table.getRowModel().rows.filter((row) => groupedRows.includes(row.original)).length > 0 ? (
                   <>
-                    <TableRow className="bg-gray-50 border-b border-gray-200">
+                    <TableRow className="bg-gray-50 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                       <TableCell colSpan={columns.length}>
                         <h2 className="ml-2 text-base font-semibold">{groupedDate}</h2>
                       </TableCell>

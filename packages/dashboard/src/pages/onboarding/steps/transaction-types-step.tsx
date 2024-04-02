@@ -8,7 +8,7 @@ import { Toggle } from "~/ui/toggle"
 import { toast } from "~/ui/use-toast"
 import formatCurrency from "~/utils/format-currency"
 
-import { CategoryOnboarding, onboardingCategories } from "../constants"
+import { CategoryOnboarding, businessCategories } from "../constants"
 
 type TransactionTypesProps = {
   selectedCategories: CategoryOnboarding[]
@@ -17,7 +17,7 @@ type TransactionTypesProps = {
 
 export function TransactionTypesMainStep({ onSelectCategory, selectedCategories }: TransactionTypesProps) {
   const { nextStep } = useStepper()
-  const groupedByGroup = groupBy(onboardingCategories, "group")
+  const groupedByGroup = groupBy(businessCategories, "group")
 
   const handleNextStep = () => {
     if (selectedCategories.length < 1) {

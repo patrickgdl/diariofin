@@ -19,6 +19,7 @@ import MonthlyIncomeProgress from "./components/monthly-income"
 import Overview from "./components/overview"
 import TransactionsReviewTable from "./components/transaction-review-table"
 import useTransactionsByDate from "./hooks/use-transactions-by-date"
+import { Insights } from "./components/insights"
 
 export default function DashboardPage() {
   const params = useParams()
@@ -58,7 +59,7 @@ export default function DashboardPage() {
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="consolidated">Consolidado</TabsTrigger>
+          <TabsTrigger value="insights">Insights</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
@@ -69,7 +70,7 @@ export default function DashboardPage() {
                 <DollarSignIcon className="mr-2 h-4 w-4" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">
+                <div className="text-2xl font-bold tabular-nums">
                   {formatCurrency(doneTransactions.totalCount + pendingTransactions.totalCount)}
                 </div>
                 {/* <p className="text-xs text-muted-foreground">+20.1% no último mês</p> */}
@@ -82,7 +83,7 @@ export default function DashboardPage() {
                 <ArrowDownFromLine className="mr-2 h-4 w-4" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{formatCurrency(doneTransactions.incomeCount)}</div>
+                <div className="text-2xl font-bold tabular-nums">{formatCurrency(doneTransactions.incomeCount)}</div>
                 {/* <p className="text-xs text-muted-foreground">+180.1% no último mês</p> */}
               </CardContent>
             </Card>
@@ -93,7 +94,9 @@ export default function DashboardPage() {
                 <ArrowUpFromLine className="mr-2 h-4 w-4" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{formatCurrency(Math.abs(doneTransactions.expenseCount))}</div>
+                <div className="text-2xl font-bold tabular-nums">
+                  {formatCurrency(Math.abs(doneTransactions.expenseCount))}
+                </div>
                 {/* <p className="text-xs text-muted-foreground">+19% no último mês</p> */}
               </CardContent>
             </Card>
@@ -104,7 +107,7 @@ export default function DashboardPage() {
                 <HourglassIcon className="mr-2 h-4 w-4" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{formatCurrency(pendingTransactions.incomeCount)}</div>
+                <div className="text-2xl font-bold tabular-nums">{formatCurrency(pendingTransactions.incomeCount)}</div>
                 {/* <p className="text-xs text-muted-foreground">+201 no último mês</p> */}
               </CardContent>
             </Card>
@@ -115,7 +118,9 @@ export default function DashboardPage() {
                 <CalendarClockIcon className="mr-2 h-4 w-4" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{formatCurrency(Math.abs(pendingTransactions.expenseCount))}</div>
+                <div className="text-2xl font-bold tabular-nums">
+                  {formatCurrency(Math.abs(pendingTransactions.expenseCount))}
+                </div>
                 {/* <p className="text-xs text-muted-foreground">+23 no último mês</p> */}
               </CardContent>
             </Card>
@@ -157,8 +162,10 @@ export default function DashboardPage() {
           )}
         </TabsContent>
 
-        <TabsContent value="consolidated" className="space-y-4">
-          <div className="mt-6 flex flex-col sm:grid gap-4 sm:grid-cols-2">{/* TODO */}</div>
+        <TabsContent value="insights" className="space-y-4">
+          <div className="mt-6 flex flex-col sm:grid gap-4 sm:grid-cols-2">
+            <Insights />
+          </div>
         </TabsContent>
       </Tabs>
     </div>
