@@ -50,13 +50,18 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
               <CircleIcon className="mr-2 h-4 w-4 text-muted-foreground" />
             )}
             {/* @ts-ignore */}
-            <span>{row.original.transactions_instance?.is_done ? "Confirmado" : "Á confirmar"}</span>
+            <span>{row.original.transactions_instance?.is_done ? "Confirmado" : "Pendente"}</span>
           </div>
         </TableCell>
       )
     },
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
+      return (
+        // @ts-ignore
+        (value[0] === "true" && row.original.transactions_instance?.is_done) ||
+        // @ts-ignore
+        (value[0] === "false" && !row.original.transactions_instance?.is_done)
+      )
     },
   },
   {
@@ -69,6 +74,9 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
           ) : null}
         </TableCell>
       )
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.original.transaction_categories?.id)
     },
   },
   {
@@ -89,7 +97,7 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
       </TableCell>
     ),
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
+      return value.includes(row.original.account?.id)
     },
   },
   {

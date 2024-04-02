@@ -1,6 +1,5 @@
 import { CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons"
 import { Column } from "@tanstack/react-table"
-import * as React from "react"
 import { Badge } from "~/ui/badge"
 import { Button } from "~/ui/button"
 import {
@@ -68,7 +67,7 @@ export function DataTableFacetedFilter<TData, TValue>({
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>
-            <CommandEmpty>Sem resultados encontrados.</CommandEmpty>
+            <CommandEmpty>Sem resultados.</CommandEmpty>
             <CommandGroup>
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.id)
