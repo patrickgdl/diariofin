@@ -1,10 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import * as React from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "~/ui/form"
 import { Input } from "~/ui/input"
-import { InputCurrency } from "~/ui/input-currency"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/ui/select"
 
 const formSchema = z.object({
@@ -20,7 +18,6 @@ const formSchema = z.object({
       message: "Agência deve conter no máximo 10 caracteres",
     })
     .optional(),
-  balance: z.coerce.number().optional(),
   name: z
     .string()
     .min(2, {
@@ -64,28 +61,6 @@ const SupplierForm = ({ onSubmit }: SupplierFormProps) => {
                     <Input placeholder="Minha conta" {...field} />
                   </FormControl>
                   <FormDescription>Esse é o nome da conta para visualização.</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <FormField
-              name="balance"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Saldo</FormLabel>
-                  <FormControl>
-                    <InputCurrency
-                      id="input-balance"
-                      name="input-balance"
-                      placeholder="R$ 00,00"
-                      defaultValue={field.value}
-                      onCustomChange={field.onChange}
-                    />
-                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}

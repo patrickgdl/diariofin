@@ -114,7 +114,7 @@ export const columns: ColumnDef<TransactionsByDateQuery[0]>[] = [
     },
   },
 ]
-export function TransactionsReviewTable({ data }: { data: TransactionsByDateQuery }) {
+export default function TransactionsReviewTable({ data }: { data: TransactionsByDateQuery }) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -140,10 +140,10 @@ export function TransactionsReviewTable({ data }: { data: TransactionsByDateQuer
   })
 
   return (
-    <Card>
+    <Card className="h-full w-full">
       <CardHeader>
-        <CardTitle>Transações para Revisar</CardTitle>
-        <CardDescription>Gerencie seus pagamentos e recebimentos pendentes.</CardDescription>
+        <CardTitle>Em Revisão</CardTitle>
+        <CardDescription>Revisar suas transações pendentes.</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="rounded-md border">
@@ -181,6 +181,22 @@ export function TransactionsReviewTable({ data }: { data: TransactionsByDateQuer
               )}
             </TableBody>
           </Table>
+        </div>
+
+        <div className="flex items-center justify-end space-x-2 pt-4">
+          <div className="space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              Anterior
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+              Próximo
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>

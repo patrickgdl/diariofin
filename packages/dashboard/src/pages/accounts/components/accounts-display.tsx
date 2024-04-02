@@ -119,7 +119,7 @@ export function AccountsDisplay({ account, onDeactivate, onEdit }: AccountsDispl
                     const incomeData = payload.find((p) => p.dataKey === "income")
 
                     return (
-                      <div className="rounded-lg border bg-background p-2 shadow-sm">
+                      <div className="rounded-lg border bg-background p-2">
                         <div className="flex flex-col">
                           {incomeData && (
                             <div>

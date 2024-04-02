@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Link, Navigate } from "react-router-dom"
 import Google from "~/components/icons/google"
-import Loader from "~/components/loader"
 import { useSessionContext } from "~/contexts/SessionContext"
 import useSupabase from "~/hooks/useSupabase"
 import { Button } from "~/ui/button"
@@ -13,7 +12,7 @@ export default function RegisterForm() {
 
   const [role, setRole] = React.useState<"user" | "admin" | null>(null)
 
-  if (isLoadingUser) return <Loader />
+  if (isLoadingUser) return
 
   if (session) {
     return <Navigate to={role === "admin" ? "/admin" : "/dashboard"} />

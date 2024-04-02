@@ -1,18 +1,15 @@
 import { MenuIcon } from "lucide-react"
-import React, { ReactNode } from "react"
+import React from "react"
 import { NavLink } from "react-router-dom"
 import { Button, buttonVariants } from "~/ui/button"
 import { Dialog, DialogContent } from "~/ui/dialog"
 import { cn } from "~/utils/cn"
+import { LinkProps } from "~/utils/constants"
 
 import Logo from "./logo"
 
 interface MobileNavProps {
-  links: {
-    label?: string
-    icon: ReactNode
-    route: string
-  }[]
+  links: LinkProps[]
 }
 
 export function MobileNav({ links }: MobileNavProps) {
@@ -41,7 +38,7 @@ export function MobileNav({ links }: MobileNavProps) {
                 }
               >
                 <span className="flex items-center gap-2">
-                  {link.icon}
+                  <link.icon size={16} />
                   {link.label}
                 </span>
               </NavLink>

@@ -1,4 +1,5 @@
-import { subDays } from "date-fns"
+import { endOfYear, startOfYear } from "date-fns"
+import { ArrowDownFromLine, ArrowUpFromLine, CalendarClockIcon, DollarSignIcon, HourglassIcon } from "lucide-react"
 import * as React from "react"
 import { DateRange } from "react-day-picker"
 import { useParams } from "react-router-dom"
@@ -7,24 +8,25 @@ import { CalendarDateRangePicker } from "~/components/date-range-picker"
 import { defaultAccount } from "~/contexts/AppContext"
 import useAppContext from "~/hooks/useAppContext"
 import { Card, CardContent, CardHeader, CardTitle } from "~/ui/card"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "~/ui/carousel"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 import formatCurrency from "~/utils/format-currency"
 
 import { TopCategoriesTable } from "../categories/components/top-categories-table"
-import { MonthByMonthTable } from "./components/month-by-month-table"
-import { Overview } from "./components/overview"
-import { TransactionsReviewTable } from "./components/transaction-review-table"
+import CardMetrics from "./components/card-metrics"
+import MonthByMonthTable from "./components/month-by-month-table"
+import MonthlyIncomeProgress from "./components/monthly-income"
+import Overview from "./components/overview"
+import TransactionsReviewTable from "./components/transaction-review-table"
 import useTransactionsByDate from "./hooks/use-transactions-by-date"
-import { CardMetrics } from "./components/card-metrics"
-import { ArrowDownFromLine, ArrowUpFromLine, CalendarClockIcon, DollarSignIcon, HourglassIcon } from "lucide-react"
 
 export default function DashboardPage() {
   const params = useParams()
   const { accounts, selectedAccount, setSelectedAccount } = useAppContext()
 
   const [date, setDate] = React.useState<DateRange>({
-    from: subDays(new Date(), 30),
-    to: new Date(),
+    from: startOfYear(new Date()),
+    to: endOfYear(new Date()),
   })
 
   const pendingTransactions = useTransactionsByDate({ date, accountId: selectedAccount.id })
@@ -119,46 +121,44 @@ export default function DashboardPage() {
             </Card>
           </div>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {doneTransactions.data && pendingTransactions.data && (
-              <>
-                <Overview data={[...doneTransactions.data, ...pendingTransactions.data]} />
+          {doneTransactions.data && pendingTransactions.data && (
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <Overview data={[...doneTransactions.data, ...pendingTransactions.data]} />
 
-                <CardMetrics data={[...doneTransactions.data, ...pendingTransactions.data]} />
-              </>
-            )}
-          </div>
+              <CardMetrics data={[...doneTransactions.data, ...pendingTransactions.data]} />
+            </div>
+          )}
 
-          <div className="mt-6 flex flex-col sm:grid gap-4 sm:grid-cols-2">
-            {doneTransactions.data && pendingTransactions.data && (
-              <>
-                <TransactionsReviewTable data={pendingTransactions.data} />
+          {doneTransactions.data && pendingTransactions.data && (
+            <Carousel className="w-full flex flex-col" opts={{ align: "start" }}>
+              <div className="flex items-center justify-end mt-4 mb-2">
+                <CarouselPrevious className="static p-0 border-none hover:bg-transparent translate-y-0" />
+                <CarouselNext className="static p-0 border-none hover:bg-transparent translate-y-0" />
+              </div>
 
-                <TopCategoriesTable data={[...doneTransactions.data, ...pendingTransactions.data]} />
-              </>
-            )}
-          </div>
+              <CarouselContent className="-ml-[20px] 2xl:-ml-[40px]">
+                <CarouselItem className="lg:basis-1/2 xl:basis-1/3 pl-[20px] 2xl:pl-[40px]">
+                  <TransactionsReviewTable data={pendingTransactions.data} />
+                </CarouselItem>
+                <CarouselItem className="lg:basis-1/2 xl:basis-1/3 pl-[20px] 2xl:pl-[40px]">
+                  <TopCategoriesTable data={[...doneTransactions.data, ...pendingTransactions.data]} />
+                </CarouselItem>
+                <CarouselItem className="lg:basis-1/2 xl:basis-1/3 pl-[20px] 2xl:pl-[40px]">
+                  <MonthByMonthTable data={[...doneTransactions.data, ...pendingTransactions.data]} />
+                </CarouselItem>
+                <CarouselItem className="lg:basis-1/2 xl:basis-1/3 pl-[20px] 2xl:pl-[40px]">
+                  <MonthlyIncomeProgress
+                    incomeTotal={doneTransactions.incomeCount}
+                    pendingIncomeTotal={pendingTransactions.incomeCount}
+                  />
+                </CarouselItem>
+              </CarouselContent>
+            </Carousel>
+          )}
         </TabsContent>
 
         <TabsContent value="consolidated" className="space-y-4">
-          <div className="mt-6 flex flex-col sm:grid gap-4 sm:grid-cols-2">
-            {doneTransactions.data && pendingTransactions.data && (
-              <>
-                <MonthByMonthTable data={[...doneTransactions.data, ...pendingTransactions.data]} />
-
-                <TopCategoriesTable data={[...doneTransactions.data, ...pendingTransactions.data]} />
-              </>
-            )}
-          </div>
-
-          {/* <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            <MonthlyIncomeProgress
-              incomeTotal={doneTransactions.incomeCount}
-              pendingIncomeTotal={pendingTransactions.incomeCount}
-            />
-
-            <div />
-          </div> */}
+          <div className="mt-6 flex flex-col sm:grid gap-4 sm:grid-cols-2">{/* TODO */}</div>
         </TabsContent>
       </Tabs>
     </div>

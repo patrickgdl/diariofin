@@ -12,7 +12,7 @@ const MonthlyIncomeProgress = ({
   const progressPercent = (incomeTotal / pendingIncomeTotal) * 100
 
   return (
-    <Card>
+    <Card className="h-full w-full">
       <CardHeader>
         <CardTitle>Renda Mensal</CardTitle>
         <CardDescription>Suas entradas recebidas versus a receber</CardDescription>

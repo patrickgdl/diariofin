@@ -54,7 +54,7 @@ const groupByMonthAndSum = (data: TransactionsByDateQuery) => {
 const CustomTooltip = ({ active, payload, label }: { active: boolean; payload: any[]; label: string }) => {
   if (active && payload?.length) {
     return (
-      <div className="bg-muted p-3 shadow">
+      <div className="bg-muted p-3">
         {payload.map((ele, index) => (
           <React.Fragment key={index}>
             <small key={index}>
@@ -69,7 +69,7 @@ const CustomTooltip = ({ active, payload, label }: { active: boolean; payload: a
   return null
 }
 
-export function Overview({ data }: { data: TransactionsByDateQuery }) {
+export default function Overview({ data }: { data: TransactionsByDateQuery }) {
   const groupedData = groupByMonthAndSum(data)
 
   return (

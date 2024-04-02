@@ -16,7 +16,7 @@ import OnboardingPage from "~/pages/onboarding"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resizable"
 import { Separator } from "~/ui/separator"
 import { cn } from "~/utils/cn"
-import { LINKS } from "~/utils/constants"
+import { LINKS, LOCAL_STORAGE_KEYS } from "~/utils/constants"
 
 import ErrorState from "./error-state"
 import Loader from "./loader"
@@ -26,13 +26,11 @@ import { UserNav } from "./user-nav"
 
 import useMediaQuery from "~/hooks/use-media-query"
 import { MobileNav } from "./mobile-nav"
-
-// const layout = JSON.parse(cookies.get("react-resizable-panels:layout") || "")
-// const collapsed = Boolean(cookies.get("react-resizable-panels:collapsed"))
+import { useLocalStorageQuery } from "~/hooks/use-local-storage"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  // const [isCollapsed, setIsCollapsed] = React.useState(collapsed || false)
-  const [isCollapsed, setIsCollapsed] = React.useState(false)
+  const [isCollapsed, setIsCollapsed] = useLocalStorageQuery<boolean>(LOCAL_STORAGE_KEYS.SIDEBAR_IS_COLLAPSED, false)
+  const [sizes, setSizes] = useLocalStorageQuery<number[]>(LOCAL_STORAGE_KEYS.SIDEBAR_SIZES, [13, 87])
 
   const { isMobile } = useMediaQuery()
   const { accounts, loading, isError } = useAccounts()
@@ -53,26 +51,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <ResizablePanelGroup
       direction="horizontal"
       className="h-screen items-stretch"
-      onLayout={(sizes: number[]) => {
-        document.cookie = `react-resizable-panels:layout=${JSON.stringify(sizes)}`
-      }}
+      onLayout={(sizes: number[]) => setSizes(sizes)}
     >
       {!isMobile && (
         <>
           <ResizablePanel
-            defaultSize={13}
+            defaultSize={sizes[0] || 13}
             minSize={13}
             maxSize={15}
             collapsible
             collapsedSize={5}
-            onCollapse={() => {
-              setIsCollapsed(true)
-              document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(true)}`
-            }}
-            onExpand={() => {
-              setIsCollapsed(false)
-              document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(false)}`
-            }}
+            onCollapse={() => setIsCollapsed(true)}
+            onExpand={() => setIsCollapsed(false)}
             className={cn(isCollapsed && "min-w-[50px] transition-all duration-300 ease-in-out hidden md:flex")}
           >
             <Nav links={LINKS} isCollapsed={isCollapsed} accounts={accounts} />
@@ -81,8 +71,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </>
       )}
 
-      {/* <ResizablePanel defaultSize={layout[1] || 85}> */}
-      <ResizablePanel defaultSize={85}>
+      <ResizablePanel defaultSize={sizes[1] || 87}>
         <div className="flex items-center px-4 md:px-12 py-2 h-[52px] justify-between md:justify-end space-x-4">
           <MobileNav links={LINKS} />
 

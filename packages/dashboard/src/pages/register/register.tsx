@@ -8,7 +8,7 @@ export default function RegisterPage() {
   return (
     <div className="h-screen grid w-full grid-cols-1 md:grid-cols-3">
       <div className="col-span-1 flex items-center justify-center md:col-span-2">
-        <div className="w-full max-w-md overflow-hidden border-y border-gray-200 sm:rounded-2xl sm:border sm:shadow-xl">
+        <div className="w-full max-w-md overflow-hidden border-y border-gray-200 border">
           <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 px-4 py-6 pt-8 text-center sm:px-16">
             <Link to="/">
               <Logo className="w-32" />
@@ -27,9 +27,9 @@ export default function RegisterPage() {
           <BlurImage
             alt="Dashboard illustration"
             src="/dashboard.png"
-            width={1735}
-            height={990}
-            className="h-full rounded-xl border border-gray-200 object-cover shadow-md"
+            width={2024}
+            height={1024}
+            className="h-full rounded-xl border border-gray-200 object-cover object-left-top shadow-md"
           />
         </Link>
       </div>
