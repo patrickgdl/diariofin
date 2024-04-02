@@ -70,7 +70,7 @@ export function TopCategoriesTable({ data }: { data: TransactionsByDateQuery }) 
   }, [] as TransactionsByCategoryGrouped[])
 
   return (
-    <Card>
+    <Card className="h-full w-full">
       <CardHeader>
         <CardTitle>Top Categorias</CardTitle>
         <CardDescription>Onde você mais gasta seu dinheiro?</CardDescription>

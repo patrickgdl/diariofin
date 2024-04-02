@@ -93,13 +93,13 @@ export const columns: ColumnDef<GroupForTable>[] = [
   },
 ]
 
-export function MonthByMonthTable({ data }: { data: TransactionsByDateQuery }) {
+export default function MonthByMonthTable({ data }: { data: TransactionsByDateQuery }) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
-  const groupedData = groupByMonthAndSum(data)
+  const groupedData = React.useMemo(() => groupByMonthAndSum(data), [data])
 
   const table = useReactTable({
     data: groupedData,
@@ -121,7 +121,7 @@ export function MonthByMonthTable({ data }: { data: TransactionsByDateQuery }) {
   })
 
   return (
-    <Card>
+    <Card className="h-full w-full">
       <CardHeader>
         <CardTitle>Consolidado Mês-a-Mês</CardTitle>
         <CardDescription>Como foi seus gastos nos últimos 12 meses?</CardDescription>

@@ -19,7 +19,7 @@ export default function Login() {
 
   return (
     <div className="w-screen h-screen flex items-center justify-center">
-      <div className="relative z-10 h-fit w-full max-w-md overflow-hidden border-y border-gray-200 sm:rounded-2xl sm:border sm:shadow-xl">
+      <div className="relative z-10 h-fit w-full max-w-md overflow-hidden border border-gray-200">
         <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-DEFAULT px-4 py-6 pt-8 text-center sm:px-16">
           <Link to="/">
             <Logo className="w-32" />

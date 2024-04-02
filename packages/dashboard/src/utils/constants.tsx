@@ -1,36 +1,40 @@
 import { ReactNode } from "react"
-import { ArrowRightLeft, CreditCardIcon, FileDown, LayoutDashboard, TagIcon } from "lucide-react"
+import { ArrowRightLeft, CreditCardIcon, FileDown, LayoutDashboard, LucideIcon, TagIcon } from "lucide-react"
 
-export const LINKS: { route: string; label: string; icon: ReactNode }[] = [
-  { label: "Dashboard", route: "/dashboard", icon: <LayoutDashboard size={16} /> },
+export type LinkProps = { route: string; label: string; icon: LucideIcon }
+
+export const LINKS: LinkProps[] = [
+  { label: "Dashboard", route: "/dashboard", icon: LayoutDashboard },
   {
     label: "Transações",
     route: "/transactions",
-    icon: <ArrowRightLeft size={16} />,
+    icon: ArrowRightLeft,
   },
   // {
   //   label: "Clientes",
   //   route: "/clients",
-  //   icon: <Factory size={16} />,
+  //   icon: Factory,
   // },
   {
     label: "Contas",
     route: "/accounts",
-    icon: <CreditCardIcon size={16} />,
+    icon: CreditCardIcon,
   },
   {
     label: "Categorias",
     route: "/categories",
-    icon: <TagIcon size={16} />,
+    icon: TagIcon,
   },
   // {
   //   label: "Relatórios",
   //   route: "/reports",
-  //   icon: <FileDown size={16} />,
+  //   icon: FileDown,
   // },
 ]
 
 export const LOCAL_STORAGE_KEYS = {
   ONBOARDING_ACCOUNTS: "onboarding-accounts",
   ONBOARDING_CATEGORIES: "onboarding-categories",
+  SIDEBAR_IS_COLLAPSED: "sidebar-is-collapsed",
+  SIDEBAR_SIZES: "sidebar-sizes",
 }
