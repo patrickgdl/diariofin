@@ -304,3 +304,90 @@ export const onboardingCategories = [
     color: "#cd93ff",
   },
 ]
+
+export const businessCategories = [
+  {
+    name: "Fornecedores",
+    icon: "🛍️",
+    group: "Compras & Suprimentos",
+    color: "#7F5AF0",
+  },
+  {
+    name: "Aluguel de Escritório",
+    icon: "🏢",
+    group: "Instalações",
+    color: "#10B981",
+  },
+  {
+    name: "Equipamentos de Escritório",
+    icon: "🖨️",
+    group: "Instalações",
+    color: "#10B981",
+  },
+  {
+    name: "Manutenção de Equipamentos",
+    icon: "🛠️",
+    group: "Instalações",
+    color: "#6B7280",
+  },
+  {
+    name: "Despesas com Funcionários",
+    icon: "👥",
+    group: "Recursos Humanos",
+    color: "#FBBF24",
+  },
+  {
+    name: "Marketing",
+    icon: "📈",
+    group: "Publicidade & Marketing",
+    color: "#3B82F6",
+  },
+  {
+    name: "Desenvolvimento de Software",
+    icon: "💻",
+    group: "Tecnologia",
+    color: "#4ADE80",
+  },
+  {
+    name: "Consultoria",
+    icon: "👨‍💼",
+    group: "Serviços Profissionais",
+    color: "#6366F1",
+  },
+  {
+    name: "Despesas Legais",
+    icon: "⚖️",
+    group: "Serviços Profissionais",
+    color: "#6366F1",
+  },
+  {
+    name: "Viagens de Negócios",
+    icon: "🛄",
+    group: "Despesas de Viagem",
+    color: "#7C3AED",
+  },
+  {
+    name: "Despesas de Representação",
+    icon: "👔",
+    group: "Relações Públicas",
+    color: "#F472B6",
+  },
+  {
+    name: "Seguro Empresarial",
+    icon: "🛡️",
+    group: "Finanças",
+    color: "#FBBF24",
+  },
+  {
+    name: "Desenvolvimento de Produto",
+    icon: "🔨",
+    group: "Produção",
+    color: "#4ADE80",
+  },
+  {
+    name: "Despesas de Conferência",
+    icon: "🎟️",
+    group: "Eventos",
+    color: "#3B82F6",
+  },
+]

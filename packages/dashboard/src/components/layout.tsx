@@ -27,6 +27,7 @@ import { UserNav } from "./user-nav"
 import useMediaQuery from "~/hooks/use-media-query"
 import { MobileNav } from "./mobile-nav"
 import { useLocalStorageQuery } from "~/hooks/use-local-storage"
+import { CommandMenu } from "./command-menu"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isCollapsed, setIsCollapsed] = useLocalStorageQuery<boolean>(LOCAL_STORAGE_KEYS.SIDEBAR_IS_COLLAPSED, false)
@@ -85,6 +86,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         <div className="h-[calc(100vh-52px)] overflow-auto space-y-6">
           <main className="h-full">{children}</main>
+
+          <CommandMenu />
         </div>
       </ResizablePanel>
     </ResizablePanelGroup>
