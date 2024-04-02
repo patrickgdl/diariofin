@@ -69,9 +69,7 @@ export default function TransactionsPage() {
 
         <Separator />
 
-        <div className="p-2">
-          <TransactionsTable columns={columns} data={data} groupedData={groupedData} onSelect={setSelected} />
-        </div>
+        <TransactionsTable columns={columns} data={data} groupedData={groupedData} onSelect={setSelected} />
       </ResizablePanel>
 
       <ResizableHandle withHandle />

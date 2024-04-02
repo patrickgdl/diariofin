@@ -15,19 +15,31 @@ interface DataTableToolbarProps<TData> {
 export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
 
+  const { accounts } = useAppContext()
   const { categories } = useCategories()
 
-  const { accounts } = useAppContext()
-
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-col gap-2">
+      <CalendarDateRangePicker onSelectDate={() => alert("Ainda não implementado")} />
+
       <div className="flex flex-1 items-center space-x-2">
         <Input
           placeholder="Filtrar descrição..."
           value={(table.getColumn("description")?.getFilterValue() as string) ?? ""}
           onChange={(event) => table.getColumn("description")?.setFilterValue(event.target.value)}
-          className="h-8 w-[150px] lg:w-[250px]"
+          className="h-8 w-[150px] lg:w-[260px]"
         />
+
+        {table.getColumn("is_done") && (
+          <DataTableFacetedFilter
+            column={table.getColumn("is_done")}
+            title="Status"
+            options={[
+              { id: "true", name: "Confirmado" },
+              { id: "false", name: "Pendente" },
+            ]}
+          />
+        )}
 
         {table.getColumn("account") && (
           <DataTableFacetedFilter
@@ -52,8 +64,6 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
           </Button>
         )}
       </div>
-
-      <CalendarDateRangePicker />
     </div>
   )
 }

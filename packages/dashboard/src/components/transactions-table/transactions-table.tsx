@@ -13,11 +13,10 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 import * as React from "react"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/ui/table"
+import { Table, TableBody, TableCell, TableRow } from "~/ui/table"
 
 import { DataTablePagination } from "./transactions-pagination"
 import { DataTableToolbar } from "./transactions-toolbar"
-import { cn } from "~/utils/cn"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -61,44 +60,46 @@ export function TransactionsTable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <div className="p-2">
+        <DataTableToolbar table={table} />
+      </div>
 
       {Object.entries(groupedData).length ? (
-        Object.entries(groupedData).map(([groupedDate, groupedRows]) => (
-          <React.Fragment key={groupedDate}>
-            <h2 className="ml-2 text-lg font-semibold">{groupedDate}</h2>
+        <Table>
+          <TableBody>
+            {Object.entries(groupedData).map(([groupedDate, groupedRows]) => (
+              <React.Fragment key={groupedDate}>
+                {table.getRowModel().rows?.length &&
+                table.getRowModel().rows.filter((row) => groupedRows.includes(row.original)).length > 0 ? (
+                  <>
+                    <TableRow className="bg-gray-50 border-b border-gray-200">
+                      <TableCell colSpan={columns.length}>
+                        <h2 className="ml-2 text-base font-semibold">{groupedDate}</h2>
+                      </TableCell>
+                    </TableRow>
 
-            <Table>
-              <TableBody>
-                {table.getRowModel().rows?.length ? (
-                  // filter rows that are only on grouped rows
-                  table
-                    .getRowModel()
-                    .rows.filter((row) => groupedRows.includes(row.original))
-                    .map((row) => (
-                      <TableRow
-                        key={row.id}
-                        data-state={row.getIsSelected() && "selected"}
-                        onClick={() => onSelect(row.original)}
-                      >
-                        {row.getVisibleCells().map((cell) => (
-                          <React.Fragment key={cell.id}>
-                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                          </React.Fragment>
-                        ))}
-                      </TableRow>
-                    ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={columns.length} className="h-24 text-center">
-                      Sem resultados.
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </React.Fragment>
-        ))
+                    {table
+                      .getRowModel()
+                      .rows.filter((row) => groupedRows.includes(row.original))
+                      .map((row) => (
+                        <TableRow
+                          key={row.id}
+                          data-state={row.getIsSelected() && "selected"}
+                          onClick={() => onSelect(row.original)}
+                        >
+                          {row.getVisibleCells().map((cell) => (
+                            <React.Fragment key={cell.id}>
+                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                            </React.Fragment>
+                          ))}
+                        </TableRow>
+                      ))}
+                  </>
+                ) : null}
+              </React.Fragment>
+            ))}
+          </TableBody>
+        </Table>
       ) : (
         <div className="rounded-md border h-24 flex justify-center items-center">Sem resultados.</div>
       )}
