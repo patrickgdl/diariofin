@@ -141,17 +141,17 @@ export default function DashboardPage() {
                 <CarouselNext className="static p-0 border-none hover:bg-transparent translate-y-0" />
               </div>
 
-              <CarouselContent className="-ml-[20px] 2xl:-ml-[40px]">
-                <CarouselItem className="lg:basis-1/2 xl:basis-1/3 pl-[20px] 2xl:pl-[40px]">
+              <CarouselContent className="-ml-4">
+                <CarouselItem className="lg:basis-1/2 xl:basis-1/3 pl-4">
                   <TransactionsReviewTable data={pendingTransactions.data} />
                 </CarouselItem>
-                <CarouselItem className="lg:basis-1/2 xl:basis-1/3 pl-[20px] 2xl:pl-[40px]">
+                <CarouselItem className="lg:basis-1/2 xl:basis-1/3 pl-4">
                   <TopCategoriesTable data={[...doneTransactions.data, ...pendingTransactions.data]} />
                 </CarouselItem>
-                <CarouselItem className="lg:basis-1/2 xl:basis-1/3 pl-[20px] 2xl:pl-[40px]">
+                <CarouselItem className="lg:basis-1/2 xl:basis-1/3 pl-4">
                   <MonthByMonthTable data={[...doneTransactions.data, ...pendingTransactions.data]} />
                 </CarouselItem>
-                <CarouselItem className="lg:basis-1/2 xl:basis-1/3 pl-[20px] 2xl:pl-[40px]">
+                <CarouselItem className="lg:basis-1/2 xl:basis-1/3 pl-4">
                   <MonthlyIncomeProgress
                     incomeTotal={doneTransactions.incomeCount}
                     pendingIncomeTotal={pendingTransactions.incomeCount}
