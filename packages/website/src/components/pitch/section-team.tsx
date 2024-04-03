@@ -50,8 +50,8 @@ export function SectionTeam() {
 
               <p className="text-[#878787] text-sm !mt-2">
                 Empreendedor. Dirige sua própria empresa há X anos oferecendo
-                seu serviço para uma série de outras empresas consolidas e
-                também em estágio inicial.
+                seu serviço para uma série de outras empresas consolidadas e
+                também ajudando alavancar outras em estágio inicial.
               </p>
             </Card>
           </div>
@@ -66,7 +66,7 @@ export function SectionTeam() {
           </div>
           <div className="ml-auto w-full space-y-8 items-center flex">
             <h2 className="text-[64px] font-medium text-center leading-tight">
-              “A velocidade que temos juntos é incomparável.”
+              “Frase de impacto kk”
             </h2>
           </div>
         </div>

@@ -15,11 +15,11 @@ const links = [
     path: "/pricing",
     name: "pricing",
   },
-  {
-    title: "Atualizações",
-    path: "/updates",
-    name: "updates",
-  },
+  // {
+  //   title: "Atualizações",
+  //   path: "/updates",
+  //   name: "updates",
+  // },
 ];
 
 const listVariant = {

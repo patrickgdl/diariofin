@@ -3,7 +3,7 @@ import Link from "next/link";
 import apps from "./apps.png";
 import app from "./app.png";
 import invoice from "./invoice.png";
-import ai from "./fluxozen-ai.png";
+import ai from "./fluxozen-ia.png";
 import { Card } from "./ui";
 
 export function SectionNext() {
@@ -25,7 +25,7 @@ export function SectionNext() {
             </Card>
 
             <a
-              href="https://fluxozen.com/engine"
+              href="https://fluxozen.com"
               target="_blank"
               rel="noreferrer"
               className="block"

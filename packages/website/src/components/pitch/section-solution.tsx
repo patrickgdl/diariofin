@@ -70,7 +70,7 @@ export function SectionSolution() {
               <h2 className="text-2xl">Intermediário</h2>
 
               <p className="text-[#878787] text-sm text-center">
-                FluxoZen serve como ponte entre você e seu contador, agilizando
+                FluxoZen serve como ponte entre você e suas finanças, agilizando
                 seus procedimentos de final de mês, reduzindo o trabalho manual,
                 e empacotando tudo facilmente para a análise financeira.
                 Priorizando a experiência do usuário em vez de construir um

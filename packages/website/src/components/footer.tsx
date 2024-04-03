@@ -38,9 +38,9 @@ export function Footer() {
                 <li className="text-[#707070] transition-colors hover:text-primary dark:text-[#878787]">
                   <Link href="/pricing">Preços</Link>
                 </li>
-                <li className="text-[#707070] transition-colors hover:text-primary dark:text-[#878787]">
+                {/* <li className="text-[#707070] transition-colors hover:text-primary dark:text-[#878787]">
                   <Link href="/updates">Atualizações</Link>
-                </li>
+                </li> */}
               </ul>
             </div>
 

@@ -2,8 +2,8 @@
 
 import { AdaptiveImage } from "@/components/adaptive-image";
 import { motion } from "framer-motion";
-import profitLossLight from "public/profit-loss-light.png";
-import profitLoss from "public/profit-loss.png";
+import cashFlowLight from "public/cash-flow-light.png";
+import cashFlow from "public/cash-flow.png";
 import { useState } from "react";
 
 export function SectionTwo() {
@@ -23,10 +23,10 @@ export function SectionTwo() {
           className="w-full"
         >
           <AdaptiveImage
-            lightSrc={profitLossLight}
-            darkSrc={profitLoss}
-            height={400}
-            width={789}
+            lightSrc={cashFlowLight}
+            darkSrc={cashFlow}
+            height={289}
+            width={500}
             className="-mb-[1px] object-contain"
             alt="Overview"
           />
