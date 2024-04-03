@@ -28,7 +28,7 @@ export const viewport = {
 
 export default function Layout({ children }: { children: ReactElement }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="pt-BR" suppressHydrationWarning>
       <head>
         <LogSnagProvider
           token={process.env.NEXT_PUBLIC_LOGSNAG_TOKEN!}
