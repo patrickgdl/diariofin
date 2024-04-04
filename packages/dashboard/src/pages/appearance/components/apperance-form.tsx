@@ -28,7 +28,7 @@ export function AppearanceForm() {
 
   function onSubmit(data: AppearanceFormValues) {
     toast({
-      title: "You submitted the following values:",
+      title: "Você alterou o tema do dashboard:",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>

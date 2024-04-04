@@ -1,33 +1,22 @@
-import {
-  ArrowUpRightIcon,
-  BarChartIcon,
-  CalendarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  Settings,
-  ShieldCloseIcon,
-  MenuIcon,
-  UsersIcon,
-} from "lucide-react"
 import * as React from "react"
+import { useLocalStorageQuery } from "~/hooks/use-local-storage"
+import useMediaQuery from "~/hooks/use-media-query"
 import useAccounts from "~/hooks/useAccountsQuery"
 import OnboardingPage from "~/pages/onboarding"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resizable"
 import { Separator } from "~/ui/separator"
+import { Toaster } from "~/ui/toaster"
 import { cn } from "~/utils/cn"
 import { LINKS, LOCAL_STORAGE_KEYS } from "~/utils/constants"
 
+import { CommandMenu } from "./command-menu"
 import ErrorState from "./error-state"
 import Loader from "./loader"
+import { MobileNav } from "./mobile-nav"
 import { Nav } from "./nav"
 import { ThemeToggle } from "./theme-toggle"
 import { UserNav } from "./user-nav"
-
-import useMediaQuery from "~/hooks/use-media-query"
-import { MobileNav } from "./mobile-nav"
-import { useLocalStorageQuery } from "~/hooks/use-local-storage"
-import { CommandMenu } from "./command-menu"
+import { CommandMenuButton } from "./command-menu/button"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isCollapsed, setIsCollapsed] = useLocalStorageQuery<boolean>(LOCAL_STORAGE_KEYS.SIDEBAR_IS_COLLAPSED, false)
@@ -49,47 +38,54 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <ResizablePanelGroup
-      direction="horizontal"
-      className="h-screen items-stretch"
-      onLayout={(sizes: number[]) => setSizes(sizes)}
-    >
-      {!isMobile && (
-        <>
-          <ResizablePanel
-            defaultSize={sizes[0] || 13}
-            minSize={13}
-            maxSize={15}
-            collapsible
-            collapsedSize={5}
-            onCollapse={() => setIsCollapsed(true)}
-            onExpand={() => setIsCollapsed(false)}
-            className={cn(isCollapsed && "min-w-[50px] transition-all duration-300 ease-in-out hidden md:flex")}
-          >
-            <Nav links={LINKS} isCollapsed={isCollapsed} accounts={accounts} />
-          </ResizablePanel>
-          <ResizableHandle withHandle />
-        </>
-      )}
+    <>
+      <ResizablePanelGroup
+        direction="horizontal"
+        className="h-screen items-stretch"
+        onLayout={(sizes: number[]) => setSizes(sizes)}
+      >
+        {!isMobile && (
+          <>
+            <ResizablePanel
+              defaultSize={sizes[0] || 13}
+              minSize={13}
+              maxSize={15}
+              collapsible
+              collapsedSize={5}
+              onCollapse={() => setIsCollapsed(true)}
+              onExpand={() => setIsCollapsed(false)}
+              className={cn(isCollapsed && "min-w-[50px] transition-all duration-300 ease-in-out hidden md:flex")}
+            >
+              <Nav links={LINKS} isCollapsed={isCollapsed} accounts={accounts} />
+            </ResizablePanel>
+            <ResizableHandle withHandle />
+          </>
+        )}
 
-      <ResizablePanel defaultSize={sizes[1] || 87}>
-        <div className="flex items-center px-4 md:px-12 py-2 h-[52px] justify-between md:justify-end space-x-4">
-          <MobileNav links={LINKS} />
+        <ResizablePanel defaultSize={sizes[1] || 87}>
+          <div className="flex items-center px-4 md:pr-12 py-2 h-[52px] justify-between space-x-4">
+            <div className="flex items-center space-x-4">
+              <MobileNav links={LINKS} />
+              <CommandMenuButton />
+            </div>
 
-          <div className="flex items-center py-2 h-[52px] space-x-4">
-            <ThemeToggle />
+            <div className="flex items-center py-2 h-[52px] space-x-4">
+              <ThemeToggle />
 
-            <UserNav />
+              <UserNav />
+            </div>
           </div>
-        </div>
-        <Separator />
+          <Separator />
 
-        <div className="h-[calc(100vh-52px)] overflow-auto space-y-6">
-          <main className="h-full">{children}</main>
+          <div className="h-[calc(100vh-52px)] overflow-auto space-y-6">
+            <main className="h-full">{children}</main>
 
-          <CommandMenu />
-        </div>
-      </ResizablePanel>
-    </ResizablePanelGroup>
+            <CommandMenu />
+          </div>
+        </ResizablePanel>
+      </ResizablePanelGroup>
+
+      <Toaster />
+    </>
   )
 }

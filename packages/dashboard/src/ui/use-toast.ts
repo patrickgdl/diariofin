@@ -10,6 +10,7 @@ type ToasterToast = ToastProps & {
   title?: React.ReactNode
   description?: React.ReactNode
   action?: ToastActionElement
+  footer?: React.ReactNode
 }
 
 const actionTypes = {

@@ -8,8 +8,8 @@ INSERT INTO auth.users (instance_id, id, aud, role, email, encrypted_password, e
 --
 -- Data for auth.identities; Schema: auth
 --
-INSERT INTO auth.identities (id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at) VALUES ('677fe9e0-b364-4a5d-b5e3-03be82e1f435', '677fe9e0-b364-4a5d-b5e3-03be82e1f435', '{"sub": "677fe9e0-b364-4a5d-b5e3-03be82e1f435", "email": "patrick@email.com"}', 'email', '2023-10-27 21:19:40.51147+00', '2023-10-27 21:19:40.511517+00', '2023-10-27 21:19:40.511517+00');
-INSERT INTO auth.identities (id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at) VALUES ('5c2c6e47-7caf-4a27-9318-a50346adaa4c', '5c2c6e47-7caf-4a27-9318-a50346adaa4c', '{"sub": "5c2c6e47-7caf-4a27-9318-a50346adaa4c", "email": "juliana@email.com"}', 'email', '2023-10-27 21:20:01.922858+00', '2023-10-27 21:20:01.922914+00', '2023-10-27 21:20:01.922914+00');
+INSERT INTO auth.identities (id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at, provider_id) VALUES ('677fe9e0-b364-4a5d-b5e3-03be82e1f435', '677fe9e0-b364-4a5d-b5e3-03be82e1f435', '{"sub": "677fe9e0-b364-4a5d-b5e3-03be82e1f435", "email": "patrick@email.com"}', 'email', '2023-10-27 21:19:40.51147+00', '2023-10-27 21:19:40.511517+00', '2023-10-27 21:19:40.511517+00', '677fe9e0-b364-4a5d-b5e3-03be82e1f435');
+INSERT INTO auth.identities (id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at, provider_id) VALUES ('5c2c6e47-7caf-4a27-9318-a50346adaa4c', '5c2c6e47-7caf-4a27-9318-a50346adaa4c', '{"sub": "5c2c6e47-7caf-4a27-9318-a50346adaa4c", "email": "juliana@email.com"}', 'email', '2023-10-27 21:20:01.922858+00', '2023-10-27 21:20:01.922914+00', '2023-10-27 21:20:01.922914+00', '5c2c6e47-7caf-4a27-9318-a50346adaa4c');
 
 
 -- Create public.account values

@@ -4,7 +4,9 @@ import * as React from "react"
 import { DateRange } from "react-day-picker"
 import { useParams } from "react-router-dom"
 import AccountSwitcher from "~/components/account-switcher"
+import CardMetrics from "~/components/card-metrics"
 import { CalendarDateRangePicker } from "~/components/date-range-picker"
+import Overview from "~/components/overview"
 import { defaultAccount } from "~/contexts/AppContext"
 import useAppContext from "~/hooks/useAppContext"
 import { Card, CardContent, CardHeader, CardTitle } from "~/ui/card"
@@ -13,13 +15,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 import formatCurrency from "~/utils/format-currency"
 
 import { TopCategoriesTable } from "../categories/components/top-categories-table"
-import CardMetrics from "./components/card-metrics"
+import { Insights } from "./components/insights"
 import MonthByMonthTable from "./components/month-by-month-table"
 import MonthlyIncomeProgress from "./components/monthly-income"
-import Overview from "./components/overview"
 import TransactionsReviewTable from "./components/transaction-review-table"
 import useTransactionsByDate from "./hooks/use-transactions-by-date"
-import { Insights } from "./components/insights"
 
 export default function DashboardPage() {
   const params = useParams()
@@ -53,6 +53,14 @@ export default function DashboardPage() {
           <CalendarDateRangePicker className="w-full" date={date} onSelectDate={setDate} />
 
           {accounts.length > 0 && <AccountSwitcher accounts={accounts} />}
+
+          {/* <ShareReport
+            type="Overview"
+            defaultValue={{
+              from: date.from?.toISOString() || "",
+              to: date.to?.toISOString() || "",
+            }}
+          /> */}
         </div>
       </div>
 
