@@ -86,7 +86,7 @@ export function AccountMainStep({ accounts, onAddAccount, onRemoveAccount }: Acc
             </Button>
           </DialogTrigger>
           <DialogContent>
-            <div className="mx-auto w-full max-w-sm space-y-6">
+            <div className="w-full space-y-6">
               <DialogHeader>
                 <DialogTitle className="text-sm">Nova Conta</DialogTitle>
               </DialogHeader>

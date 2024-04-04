@@ -100,13 +100,13 @@ export default function TransactionsFormPage() {
             <h3 className={cn("text-lg font-medium", isExpense ? "text-red-500" : "text-emerald-500")}>
               Conta a {isExpense ? "pagar" : "receber"}
             </h3>
-            <p className="text-sm text-muted-foreground">Insira aqui uma transação.</p>
+            <p className="text-sm text-muted-foreground">Insira aqui sua transação.</p>
           </div>
         </div>
         <Separator />
       </div>
 
-      <div className="flex flex-col mx-auto max-w-2xl">
+      <div className="flex flex-col mx-auto max-w-xl">
         {isExpense ? (
           <TransactionExpenseForm
             transactionToUpdate={transactionToUpdate}

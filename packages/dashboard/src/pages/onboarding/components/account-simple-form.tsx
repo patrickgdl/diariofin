@@ -1,6 +1,6 @@
 import { UseFormReturn } from "react-hook-form"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/ui/accordion"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "~/ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/ui/form"
 import { Input } from "~/ui/input"
 import { InputCurrency } from "~/ui/input-currency-alt"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/ui/select"
@@ -16,8 +16,8 @@ const AccountForm = ({ form, onSubmit }: AccountFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} id="account-form">
-        <div className="space-y-4 py-4">
-          <div className="flex items-center justify-between space-x-6">
+        <div className="space-y-4">
+          <div className="flex items-center space-x-4 w-full">
             <FormField
               name="name"
               control={form.control}
@@ -27,7 +27,7 @@ const AccountForm = ({ form, onSubmit }: AccountFormProps) => {
                   <FormControl>
                     <input
                       autoFocus
-                      className="flex h-9 rounded-md bg-background border-0 shadow-none font-semibold py-1 text-3xl w-56 transition-colors placeholder:text-gray-300 dark:placeholder:text-slate-500 placeholder:font-semibold focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                      className="flex h-9 rounded-md bg-background border-0 shadow-none font-semibold py-1 text-3xl w-full transition-colors placeholder:text-gray-300 dark:placeholder:text-slate-500 placeholder:font-semibold focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
                       placeholder="Meu Banco"
                       {...field}
                     />
@@ -41,7 +41,7 @@ const AccountForm = ({ form, onSubmit }: AccountFormProps) => {
               name="balance"
               control={form.control}
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="text-right">
                   <FormLabel>Saldo atual</FormLabel>
                   <FormControl>
                     <InputCurrency
@@ -50,6 +50,7 @@ const AccountForm = ({ form, onSubmit }: AccountFormProps) => {
                       defaultValue={field.value}
                       placeholder="R$ 00,00"
                       onCustomChange={field.onChange}
+                      className="text-right w-full"
                     />
                   </FormControl>
                   <FormMessage />
