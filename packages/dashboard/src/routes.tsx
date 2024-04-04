@@ -1,9 +1,11 @@
 import { createBrowserRouter, Navigate } from "react-router-dom"
 
+import AccountLayout from "./components/account-layout"
 import ProtectedRoute from "./components/protected-route"
 import AccountForm from "./pages/account-form"
 import Accounts from "./pages/accounts"
 import Appearance from "./pages/appearance"
+import Categories from "./pages/categories"
 import ClientForm from "./pages/client-form"
 import Clients from "./pages/clients"
 import Dashboard from "./pages/dashboard"
@@ -11,16 +13,16 @@ import Login from "./pages/login"
 import NotFound from "./pages/not-found"
 import Profile from "./pages/profile"
 import Register from "./pages/register"
+import Report from "./pages/report"
 import Reports from "./pages/reports"
 import Settings from "./pages/settings"
 import Transactions from "./pages/transactions"
 import TransactionsForm from "./pages/transactions-form"
-import Categories from "./pages/categories"
-import AccountLayout from "./components/account-layout"
 
 export const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
+  { path: "/reports/:id", element: <Report /> },
   {
     element: <ProtectedRoute />,
     children: [
