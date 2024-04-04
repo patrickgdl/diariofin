@@ -23,7 +23,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~
 import { cn } from "~/utils/cn"
 import formatCurrency from "~/utils/format-currency"
 
-import { TransactionsByDateQuery } from "../queries/get-transactions-by-date"
+import { TransactionsByDateQuery } from "~/queries/get-transactions-by-date"
 
 export const columns: ColumnDef<TransactionsByDateQuery[0]>[] = [
   // {

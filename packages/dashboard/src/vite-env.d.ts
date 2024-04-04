@@ -6,6 +6,9 @@ interface ImportMetaEnv {
   readonly VITE_SITE_URL: string
   readonly VITE_SUPABASE_URL: string
   readonly VITE_SUPABASE_KEY: string
+  readonly VITE_LOGSNAG_TOKEN: string
+  readonly VITE_LOGSNAG_PROJECT: string
+  readonly VITE_LOGSNAG_DISABLED: string
 }
 
 interface ImportMeta {

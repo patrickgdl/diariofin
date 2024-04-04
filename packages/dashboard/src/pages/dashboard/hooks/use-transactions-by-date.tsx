@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import useSupabase from "~/hooks/useSupabase"
 import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
-
-import { getTransactionByDate, TransactionByDateProps } from "../queries/get-transactions-by-date"
+import { TransactionByDateProps, getTransactionByDate } from "~/queries/get-transactions-by-date"
 
 function useTransactionsByDate({ date, accountId, isDone = false }: TransactionByDateProps) {
   const supabase = useSupabase()
