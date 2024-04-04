@@ -11,14 +11,12 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table"
-import { CarIcon, CoffeeIcon, HomeIcon, KeyIcon, ShoppingBagIcon, StarIcon } from "lucide-react"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/ui/table"
 import formatCurrency from "~/utils/format-currency"
 import { cn } from "~/utils/cn"
-import formatDate from "~/utils/format-date"
-import { TransactionsByDateQuery } from "../queries/get-transactions-by-date"
+import { TransactionsByDateQuery } from "~/queries/get-transactions-by-date"
 import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
 import { getMonth, parseISO } from "date-fns"
 

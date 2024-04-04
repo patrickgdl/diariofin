@@ -15,6 +15,7 @@
   "dependencies": {
     "@brazilian-utils/brazilian-utils": "^1.0.0-rc.12",
     "@hookform/resolvers": "^3.3.0",
+    "@logsnag/react": "^1.0.2",
     "@radix-ui/react-accessible-icon": "^1.0.3",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.4",
@@ -55,8 +56,9 @@
     "clsx": "^1.2.1",
     "cmdk": "^0.2.0",
     "date-fns": "^3.3.1",
-    "framer-motion": "^11.0.22",
+    "dub": "^0.10.0",
     "embla-carousel-react": "^8.0.0",
+    "framer-motion": "^11.0.22",
     "i18next": "^21.8.13",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
