@@ -59,7 +59,7 @@ export default function Report() {
           <p className="text-[#878787] text-sm">
             Feito por{" "}
             <a href={`${import.meta.env.VITE_SITE_URL}?utm_source=report`} className="text-black dark:text-white">
-              Fluxozen
+              FluxoZen
             </a>
           </p>
         </div>

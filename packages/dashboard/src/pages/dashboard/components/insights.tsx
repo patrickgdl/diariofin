@@ -31,7 +31,7 @@ export function InsightsWidget({ items }: { items: InsightsWidgetProps[] }) {
       <div className="relative h-10 w-full">
         <Input
           type="text"
-          placeholder="Faça uma pergunda para a IA da Fluxozen..."
+          placeholder="Faça uma pergunda para a IA da FluxoZen..."
           className="w-full h-11 rounded-lg cursor-pointer bg-background"
           onFocus={() => setOpen(MenuOption.AI)}
         />
