@@ -1,4 +1,4 @@
-export default function ClientsPage() {
+export default function ReportsPage() {
   return (
     <div className="flex flex-col">
       <div className="space-y-4 h-[calc(100vh-80px)] overflow-y-auto">
