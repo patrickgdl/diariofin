@@ -12,8 +12,9 @@ export function SectionProblem() {
           <Link href="/">FluxoZen</Link>
         </span>
       </div>
+
       <div className="flex flex-col h-[calc(100vh-60px)] justify-center container mx-auto">
-        <div className="flex flex-col md:grid md:grid-cols-3 gap-8 px-4 md:px-0 md:pt-0 h-[580px] md:h-auto">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-8 px-4 md:px-0 md:pt-0 h-full md:h-auto">
           <div className="space-y-8">
             <Card>
               <svg
@@ -27,7 +28,7 @@ export function SectionProblem() {
                   d="M0 67.333V.667l5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5v66.666l-5-5-5 5-5-5-5 5-5-5-5 5-5-5-5 5-5-5-5 5-5-5-5 5Zm10-16.666h40V44H10v6.667Zm0-13.334h40v-6.666H10v6.666ZM10 24h40v-6.667H10V24ZM6.667 57.667h46.666V10.333H6.667v47.334Z"
                 />
               </svg>
-              <h2 className="text-2xl">Desorganização</h2>
+              <h2 className="md:text-2xl text-xl">Desorganização</h2>
 
               <p className="text-[#878787] text-sm text-center">
                 Administrar uma empresa é difícil e um dos maiores desafios é a
@@ -39,11 +40,12 @@ export function SectionProblem() {
               </p>
             </Card>
             <div className="px-8">
-              <h2 className="text-6xl text-center leading-tight">
+              <h2 className="text-2xl md:text-6xl text-center leading-tight">
                 O mercado de ferramentas financeiras para PMEs é uma bagunça.
               </h2>
             </div>
           </div>
+
           <div>
             <Image
               src={receipt}
@@ -53,6 +55,7 @@ export function SectionProblem() {
               quality={100}
             />
           </div>
+
           <div className="ml-auto w-full space-y-8 pb-[100px] md:pb-0">
             <Card className="min-h-[315px]">
               <svg
@@ -82,7 +85,9 @@ export function SectionProblem() {
                 </g>
               </svg>
 
-              <h2 className="text-2xl">Fluxo de trabalho disperso</h2>
+              <h2 className="md:text-2xl text-xl">
+                Fluxo de trabalho disperso
+              </h2>
 
               <p className="text-[#878787] text-sm text-center">
                 Os serviços existentes muitas vezes agravam o problema por
@@ -122,7 +127,7 @@ export function SectionProblem() {
                 </g>
               </svg>
 
-              <h2 className="text-2xl">Tecnologia antiga</h2>
+              <h2 className="md:text-2xl text-xl">Tecnologia antiga</h2>
 
               <p className="text-[#878787] text-sm text-center">
                 Os serviços estão desatualizados e priorizam recursos adaptados

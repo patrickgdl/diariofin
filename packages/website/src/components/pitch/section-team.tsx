@@ -6,7 +6,7 @@ import { Card } from "./ui";
 
 export function SectionTeam() {
   return (
-    <div className="min-h-screen relative w-screen flex flex-col">
+    <div className="min-h-screen relative w-screen overflow-auto flex flex-col">
       <div className="flex justify-between text-lg p-4">
         <span>Quem nós somos</span>
         <span className="text-[#878787]">
@@ -14,8 +14,8 @@ export function SectionTeam() {
         </span>
       </div>
 
-      <div className="flex flex-col min-h-screen justify-center container mx-auto">
-        <div className="flex flex-col md:grid md:grid-cols-3 gap-8 px-4 md:px-0 md:pt-0 h-[580px] md:h-auto overflow-auto pb-[100px] md:pb-0">
+      <div className="flex flex-col h-[calc(100vh-60px)] justify-center container mx-auto">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-8 px-4 md:px-0 md:pt-0 h-full md:h-auto pb-[100px] md:pb-0">
           <div className="space-y-8">
             <Card className="items-start space-y-0">
               <Image
@@ -56,6 +56,7 @@ export function SectionTeam() {
               </p>
             </Card>
           </div>
+
           <div>
             {/* <Image
               src={founders}
@@ -65,7 +66,8 @@ export function SectionTeam() {
               quality={100}
             /> */}
           </div>
-          <div className="w-full space-y-8">
+
+          <div className="w-full space-y-8 pb-[100px] md:pb-0">
             <h2 className="text-xl md:text-[60px] font-medium text-center leading-tight">
               “Expertise em tecnologia, design e administração de empresas.”
             </h2>
