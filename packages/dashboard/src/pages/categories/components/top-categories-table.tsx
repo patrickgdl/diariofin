@@ -52,7 +52,7 @@ export function TopCategoriesTable({ data }: { data: TransactionsByDateQuery }) 
     } else {
       acc.push({
         id: categoryId,
-        name: curr.transaction_categories.name,
+        name: curr.transaction_categories.category_groups.name,
         color: curr.transaction_categories.category_groups.color,
         totalAmount: curr.amount,
         categories: [

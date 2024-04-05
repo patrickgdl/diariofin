@@ -53,8 +53,8 @@ export default function AccountSwitcher({ isCollapsed = false, accounts, classNa
 
       <PopoverContent className="w-[200px] p-0">
         <Command>
+          <CommandInput placeholder="Buscar conta..." />
           <CommandList>
-            <CommandInput placeholder="Buscar conta..." />
             <CommandEmpty>Sem contas cadastradas.</CommandEmpty>
 
             {accounts.map((account) => (

@@ -3,7 +3,7 @@ import { Check, ChevronsUpDown } from "lucide-react"
 
 import { cn } from "~/utils/cn"
 import { Button } from "~/ui/button"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "~/ui/command"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "~/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover"
 
 type GroupComboboxProps = {
@@ -30,37 +30,40 @@ export function GroupCombobox({ groups, onCreate, value, onValueChange }: GroupC
       </PopoverTrigger>
       <PopoverContent className="w-[220px] p-0">
         <Command>
-          <CommandInput placeholder="Buscar grupo..." onValueChange={setSearchValue} />
-          <CommandEmpty>
-            <div className="flex flex-col items-center justify-center space-y-2">
-              <span>{search} não encontrado.</span>
-              <Button
-                variant="outline"
-                className="w-[180px]"
-                onClick={() => {
-                  onCreate(search)
-                  setOpen(false)
-                }}
-              >
-                Criar {search}
-              </Button>
-            </div>
-          </CommandEmpty>
-          <CommandGroup>
-            {groups.map((group) => (
-              <CommandItem
-                key={group.value}
-                value={group.value}
-                onSelect={(currentValue) => {
-                  onValueChange(currentValue === value ? "" : currentValue)
-                  setOpen(false)
-                }}
-              >
-                <Check className={cn("mr-2 h-4 w-4", value === group.value ? "opacity-100" : "opacity-0")} />
-                {group.label}
-              </CommandItem>
-            ))}
-          </CommandGroup>
+          <CommandList>
+            <CommandInput placeholder="Buscar ou criar grupo..." onValueChange={setSearchValue} />
+            <CommandEmpty>
+              <div className="flex flex-col items-center justify-center space-y-2">
+                <span>{search} não encontrado.</span>
+                <Button
+                  variant="outline"
+                  className="w-[180px]"
+                  onClick={() => {
+                    onCreate(search)
+                    setOpen(false)
+                  }}
+                >
+                  Criar {search}
+                </Button>
+              </div>
+            </CommandEmpty>
+            <CommandGroup>
+              {groups.map((group) => (
+                <CommandItem
+                  key={group.value}
+                  value={group.value}
+                  keywords={[group.label]}
+                  onSelect={(currentValue) => {
+                    onValueChange(currentValue === value ? "" : currentValue)
+                    setOpen(false)
+                  }}
+                >
+                  <Check className={cn("mr-2 h-4 w-4", value === group.value ? "opacity-100" : "opacity-0")} />
+                  {group.label}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
         </Command>
       </PopoverContent>
     </Popover>

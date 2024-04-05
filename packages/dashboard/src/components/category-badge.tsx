@@ -10,7 +10,7 @@ export type CategoriesQuery = {
   category_groups: {
     id: string
     name: string
-    color: string
+    color?: string | null
   } | null
 }
 
@@ -22,11 +22,11 @@ const CategoryBadge = ({ category }: { category: CategoriesQuery | null }) => {
   return (
     <Badge
       className="px-1.5"
-      style={{ backgroundColor: hexToRgb(category.category_groups?.color || "#000000", "0.2") }}
+      style={{ backgroundColor: hexToRgb(category.category_groups?.color || "#3b82f6", "0.2") }}
     >
       <span className="mr-1">{category.icon}</span>
-      <span className="font-medium" style={{ color: category.category_groups?.color }}>
-        {category.name}
+      <span className="font-medium" style={{ color: category.category_groups?.color || "#3b82f6" }}>
+        {category.category_groups?.name}
       </span>
     </Badge>
   )
