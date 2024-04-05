@@ -5,7 +5,7 @@ import * as React from "react"
 import { TransactionsQuery } from "~/queries/get-transactions-by-account"
 import { TransactionCategories } from "~/types/transaction-categories"
 import { Button } from "~/ui/button"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "~/ui/command"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "~/ui/command"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "~/ui/dropdown-menu"
 import { Label } from "~/ui/label"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover"
@@ -104,22 +104,24 @@ export function TransactionDisplay({ transaction, categories, onDeactivate, onEd
               <PopoverContent className="w-[200px] p-0">
                 <Command>
                   <CommandInput placeholder="Buscar categoria" />
-                  <CommandEmpty>Nenhuma categoria.</CommandEmpty>
-                  <CommandGroup>
-                    {categories.map((category) => (
-                      <CommandItem
-                        key={category.id}
-                        value={category.id}
-                        onSelect={(currentValue) => {
-                          setValue(currentValue === value ? "" : currentValue)
-                          setOpen(false)
-                        }}
-                      >
-                        <Check className={cn("mr-2 h-4 w-4", value === category.id ? "opacity-100" : "opacity-0")} />
-                        {category.name}
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
+                  <CommandList>
+                    <CommandEmpty>Nenhuma categoria.</CommandEmpty>
+                    <CommandGroup>
+                      {categories.map((category) => (
+                        <CommandItem
+                          key={category.id}
+                          value={category.id}
+                          onSelect={(currentValue) => {
+                            setValue(currentValue === value ? "" : currentValue)
+                            setOpen(false)
+                          }}
+                        >
+                          <Check className={cn("mr-2 h-4 w-4", value === category.id ? "opacity-100" : "opacity-0")} />
+                          {category.name}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </CommandList>
                 </Command>
               </PopoverContent>
             </Popover>

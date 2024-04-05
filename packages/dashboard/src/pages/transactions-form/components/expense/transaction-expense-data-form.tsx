@@ -3,7 +3,6 @@ import useAppContext from "~/hooks/useAppContext"
 import { CategoryGroups } from "~/types/category-groups"
 import { Clients } from "~/types/clients"
 import { TransactionCategories } from "~/types/transaction-categories"
-import { Badge } from "~/ui/badge"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/ui/select"
 

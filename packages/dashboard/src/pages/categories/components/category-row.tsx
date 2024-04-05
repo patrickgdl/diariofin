@@ -30,8 +30,8 @@ export function CategoryRow({ row, total, onSelect, defaultOpen }: CategoryRowPr
               <ChevronRightIcon className="group-data-[state=open]:rotate-90 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
             </TableCell>
             <TableCell className="w-[5%]">
-              <Badge className="px-1.5" style={{ backgroundColor: hexToRgb(row.color || "#000000", "0.2") }}>
-                <span className="font-medium" style={{ color: row.color }}>
+              <Badge className="px-1.5" style={{ backgroundColor: hexToRgb(row.color || "#3b82f6", "0.2") }}>
+                <span className="font-medium" style={{ color: row.color || "#3b82f6" }}>
                   {row.categories.length}
                 </span>
               </Badge>

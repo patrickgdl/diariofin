@@ -20,35 +20,41 @@ export function CategoriesForm({ onFinish }: { onFinish: () => void }) {
   const updateCategoryGroup = useUpdateCategoryGroup()
   const { data } = useCategoryGroups({ userId: user?.id! })
 
-  const [groupId, setGroupId] = React.useState<string>()
   const [name, setName] = React.useState<string>()
   const [emoji, setEmoji] = React.useState<string>()
+  const [group, setGroup] = React.useState<{ id: string; isNew: boolean }>()
   const [background, setBackground] = React.useState(SOLID_COLORS[0])
 
   const handleSubmit = async () => {
     if (!user?.id) return
 
-    if (groupId && name && emoji && background) {
+    if (group?.id && name && emoji) {
       await newCategory.mutateAsync({
         name,
         icon: emoji,
         user_id: user?.id!,
-        group_id: groupId,
+        group_id: group.id,
       })
 
-      toast({ title: "Categorias criadas com sucesso" })
+      toast({ title: "Categoria criada com sucesso" })
 
-      // update color only
-      await updateCategoryGroup.mutateAsync({
-        id: groupId!,
-        group: {
-          color: background,
-        },
-      })
+      if (group.isNew) {
+        // update color only
+        await updateCategoryGroup.mutateAsync({
+          id: group.id!,
+          group: {
+            color: background,
+          },
+        })
+      }
 
       onFinish()
-    } else {
-      toast({ title: "Campos não preenchidos", variant: "destructive" })
+    } else if (!name) {
+      toast({ title: "Nome da categoria não preenchido", variant: "destructive" })
+    } else if (!emoji) {
+      toast({ title: "Escolha um ícone/emoji", variant: "destructive" })
+    } else if (!group?.id) {
+      toast({ title: "Escolha um grupo para vincular a categoria", variant: "destructive" })
     }
   }
 
@@ -62,7 +68,7 @@ export function CategoriesForm({ onFinish }: { onFinish: () => void }) {
       })
 
       if (response) {
-        setGroupId(response.id)
+        setGroup({ id: response.id, isNew: true })
         toast({ title: `${response.name} criado com sucesso` })
       }
     }
@@ -76,7 +82,7 @@ export function CategoriesForm({ onFinish }: { onFinish: () => void }) {
         <input
           autoFocus
           placeholder="Nome da Categoria"
-          style={{ width: `${name?.length || 16}ch` }}
+          style={{ width: `${name?.length ? name.length + 1 : 16}ch` }}
           onChange={(e) => setName((e.target as HTMLInputElement).value)}
           className="flex h-9 rounded-md bg-background font-semibold py-1 text-xl transition-colors placeholder:text-gray-300 dark:placeholder:text-slate-500 placeholder:font-semibold focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
         />
@@ -84,24 +90,20 @@ export function CategoriesForm({ onFinish }: { onFinish: () => void }) {
         <fieldset className="flex flex-col justify-center items-center space-y-3 !mt-6">
           <legend className="font-semibold tracking-tight text-sm">Grupo da nova categoria</legend>
 
-          <GroupCombobox
-            value={groupId}
-            onValueChange={setGroupId}
-            onCreate={createNewCategoryGroup}
-            groups={data?.map(({ id, name }) => ({ label: name, value: id }))}
-          />
+          {data && data.length > 0 && (
+            <GroupCombobox
+              value={group?.id}
+              onCreate={createNewCategoryGroup}
+              onValueChange={(id) => setGroup({ id, isNew: false })}
+              groups={data?.map(({ id, name }) => ({ label: name, value: id }))}
+            />
+          )}
 
-          <ColorPicker color={background} setColor={setBackground} />
+          {group?.isNew && <ColorPicker color={background} setColor={setBackground} />}
         </fieldset>
       </div>
 
-      <Button
-        style={{
-          backgroundColor: background,
-        }}
-        className="w-full"
-        onClick={handleSubmit}
-      >
+      <Button className="w-full" onClick={handleSubmit}>
         Salvar
       </Button>
     </div>

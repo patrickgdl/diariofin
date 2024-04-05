@@ -19,7 +19,7 @@ export function Toaster() {
                         <>
                           {props.variant === "ai" && <SparklesIcon size={18} className="text-[#0064D9]" />}
                           {props?.variant === "success" && <CheckIcon size={18} />}
-                          {props?.variant === "error" && <XIcon size={18} className="text-[#FF3638]" />}
+                          {props?.variant === "destructive" && <XIcon size={18} className="text-white" />}
                           {props?.variant === "progress" && <Loader2 size={18} className="h-4 w-4 animate-spin" />}
                         </>
                       ) : (
