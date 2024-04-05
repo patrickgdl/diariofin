@@ -9,6 +9,7 @@
     "supa:migrate": "supabase db diff --use-migra",
     "supa:stop": "supabase stop",
     "supa:start": "supabase start",
+    "supa:push": "supabase db push",
     "supa:types": "supabase gen types typescript --local > ./src/types/database.types.ts",
     "supa:reset": "supabase db reset --debug && supa:types"
   },
