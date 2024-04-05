@@ -4,7 +4,7 @@ import { CategoryGroups } from "~/types/category-groups"
 
 import useSupabase from "./useSupabase"
 
-export function useNewGroupsMutation() {
+export function useNewCategoryGroups() {
   const supabase = useSupabase()
   const queryClient = useQueryClient()
 

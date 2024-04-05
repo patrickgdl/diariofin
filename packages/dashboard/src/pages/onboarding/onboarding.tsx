@@ -1,12 +1,11 @@
 import { CaretLeftIcon } from "@radix-ui/react-icons"
 import * as React from "react"
-import { useNavigate } from "react-router-dom"
 import { useAuthUser } from "~/contexts/SessionContext"
 import { useLocalStorageQuery } from "~/hooks/use-local-storage"
 import useAppContext from "~/hooks/useAppContext"
 import { useNewAccountsMutation } from "~/hooks/useNewAccountsMutation"
-import { useNewCategoriesMutation } from "~/hooks/useNewCategoriesMutation"
-import { useNewGroupsMutation } from "~/hooks/useNewGroupsMutation"
+import { useNewCategories } from "~/hooks/use-new-categories"
+import { useNewCategoryGroups } from "~/hooks/use-new-category-groups"
 import { CategoryGroups } from "~/types/category-groups"
 import { TransactionCategories } from "~/types/transaction-categories"
 import { Button } from "~/ui/button"
@@ -35,14 +34,13 @@ function BackButton() {
 }
 
 export default function OnboardingPage() {
-  const navigate = useNavigate()
   const { setAccounts } = useAppContext()
   const { id: user_id } = useAuthUser() || {}
   const [selectedCategories, setSelectedCategories] = React.useState<CategoryOnboarding[]>([])
 
+  const newCategories = useNewCategories()
   const newAccounts = useNewAccountsMutation()
-  const newCategoryGroups = useNewGroupsMutation()
-  const newCategories = useNewCategoriesMutation()
+  const newCategoryGroups = useNewCategoryGroups()
 
   const [onboardingAccounts, setOnboardingAccounts] = useLocalStorageQuery<AccountWithoutId[]>(
     LOCAL_STORAGE_KEYS.ONBOARDING_ACCOUNTS,

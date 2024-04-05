@@ -4,7 +4,7 @@ import { newCategories } from "~/queries/new-categories"
 
 import useSupabase from "./useSupabase"
 
-export function useNewCategoriesMutation() {
+export function useNewCategories() {
   const client = useSupabase()
   const queryClient = useQueryClient()
 
