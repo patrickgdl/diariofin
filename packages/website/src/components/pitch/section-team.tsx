@@ -65,8 +65,8 @@ export function SectionTeam() {
             /> */}
           </div>
           <div className="ml-auto w-full space-y-8 items-center flex">
-            <h2 className="text-[64px] font-medium text-center leading-tight">
-              “Frase de impacto kk”
+            <h2 className="text-[60px] font-medium text-center leading-tight">
+              “Expertise em tecnologia, design e administração de empresas.”
             </h2>
           </div>
         </div>

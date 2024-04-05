@@ -2,8 +2,6 @@
 
 import { AdaptiveImage } from "@/components/adaptive-image";
 import { motion } from "framer-motion";
-import exportingLight from "public/exporting-light.png";
-import exporting from "public/exporting.png";
 import aiLight from "public/ai-light.png";
 import ai from "public/ai.png";
 import { useState } from "react";

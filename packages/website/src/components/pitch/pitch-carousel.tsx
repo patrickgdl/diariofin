@@ -11,31 +11,14 @@ import { SectionTeam } from "@/components/pitch/section-team";
 import { SectionVision } from "@/components/pitch/section-vision";
 import {
   Carousel,
-  type CarouselApi,
   CarouselContent,
   CarouselItem,
 } from "../../ui/components/carousel";
-import { useEffect, useState } from "react";
 import { CarouselToolbar } from "./carousel-toolbar";
 
 export function PitchCarusel() {
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    setCurrent(api.selectedScrollSnap() + 1);
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1);
-    });
-  }, [api]);
-
   return (
-    <Carousel className="w-full min-h-full relative" setApi={setApi}>
+    <Carousel className="w-full min-h-full relative">
       <CarouselContent>
         <CarouselItem>
           <SectionStart />
@@ -47,7 +30,7 @@ export function PitchCarusel() {
           <SectionSolution />
         </CarouselItem>
         <CarouselItem>
-          <SectionDemo playVideo={current === 4} />
+          <SectionDemo />
         </CarouselItem>
         <CarouselItem>
           <SectionTeam />
@@ -65,7 +48,6 @@ export function PitchCarusel() {
           <SectionBook />
         </CarouselItem>
       </CarouselContent>
-
       <CarouselToolbar />
     </Carousel>
   );

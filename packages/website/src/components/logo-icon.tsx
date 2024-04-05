@@ -55,7 +55,7 @@ export function LogoIcon() {
         viewBox="0 0 30 30"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="hidden md:block"
+        className="hidden md:block h-7 w-7"
       >
         <path
           fillRule="evenodd"

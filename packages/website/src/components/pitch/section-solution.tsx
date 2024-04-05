@@ -77,8 +77,8 @@ export function SectionSolution() {
                 sistema contábil, garantimos que nossa plataforma permaneça
                 fácil de usar e totalmente focado no que os empreendedores
                 precisam. Esta abordagem permite-nos escalar rapidamente sem a
-                necessidade de navegar internamente leis tributárias e alterar
-                os fluxos de trabalho atuais dos contadores.
+                necessidade de navegar internamente em leis tributárias e
+                alterar os fluxos de trabalho atuais dos contadores.
               </p>
             </Card>
           </div>
@@ -121,15 +121,15 @@ export function SectionSolution() {
               <h2 className="text-2xl">Fácil de usar e com IA</h2>
 
               <p className="text-[#878787] text-sm text-center">
-                Estamos nos concentrando em construir a plataforma com nossa
-                comunidade para garantir que seja o mais fácil de usar possível
-                e cubra todos os recursos necessários para ajudar o maior número
+                Estamos nos concentrando em construir a plataforma com nossos
+                clientes para garantir que seja o mais fácil de usar possível e
+                cubra todos os recursos necessários para ajudar o maior número
                 possível de proprietários de empresas. Todos nós testemunhamos a
                 ascensão da IA e já integramos vários aspectos de IA em nossa
-                plataforma. Por exemplo, implementamos como automação de
-                categorias e envolvimento com suas finanças por meio do FluxoZen
-                AI, permitindo que os usuários solicitem quaisquer insights que
-                possam precisar.
+                plataforma. Por exemplo, implementamos a automação de categorias
+                e o envolvimento com suas finanças por meio do FluxoZen IA,
+                permitindo que os usuários solicitem quaisquer insights sobre
+                seu negócio.
               </p>
             </Card>
           </div>
