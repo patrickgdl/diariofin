@@ -20,6 +20,8 @@ export default function CategoriesDashboard() {
   const [selectedCategory, setSelectedCategory] = React.useState<TransactionsByCategoryGrouped["categories"][0] | null>(
     null
   )
+  const [openNew, setOpenNew] = React.useState<boolean>(false)
+
   const { data, isLoading, isError } = useTransactionsByTypeQuery(TRANSACTION_TYPE.EXPENSE)
 
   const pendingTotal = data
@@ -85,7 +87,7 @@ export default function CategoriesDashboard() {
           <h1 className="text-lg font-medium">Categorias</h1>
 
           <div className="ml-auto space-x-1 flex items-center">
-            <Dialog>
+            <Dialog open={openNew} onOpenChange={() => setOpenNew(!openNew)}>
               <DialogTrigger asChild>
                 <Button variant="ghost">
                   <PlusIcon className="mr-2 h-4 w-4" />
@@ -98,9 +100,7 @@ export default function CategoriesDashboard() {
                     <DialogTitle className="text-sm">Nova categoria</DialogTitle>
                   </DialogHeader>
 
-                  <CategoriesForm />
-
-                  <Button className="w-full">Salvar</Button>
+                  <CategoriesForm onFinish={() => setOpenNew(false)} />
                 </div>
               </DialogContent>
             </Dialog>

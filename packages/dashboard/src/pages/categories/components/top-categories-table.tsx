@@ -1,14 +1,14 @@
-import { TransactionsByDateQuery } from "~/pages/dashboard/queries/get-transactions-by-date"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
 
 import { CategoryRow } from "./category-row"
 import { Table, TableBody } from "~/ui/table"
 import { useNavigate } from "react-router-dom"
+import { TransactionsByDateQuery } from "~/queries/get-transactions-by-date"
 
 export type TransactionsByCategoryGrouped = {
   id: string
   name: string
-  color: string
+  color?: string | null
   totalAmount: number
   categories: {
     transaction_categories: {
@@ -18,7 +18,7 @@ export type TransactionsByCategoryGrouped = {
       category_groups: {
         id: string
         name: string
-        color: string
+        color?: string | null
       } | null
     }
     transactionId: string
