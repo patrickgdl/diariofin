@@ -5,7 +5,7 @@ import { Card } from "./ui";
 
 export function SectionProblem() {
   return (
-    <div className="min-h-screen relative w-screen">
+    <div className="min-h-screen relative w-screen overflow-auto">
       <div className="absolute left-4 right-4 md:left-8 md:right-8 top-4 flex justify-between text-lg">
         <span>Problema atual</span>
         <span className="text-[#878787]">
@@ -13,7 +13,7 @@ export function SectionProblem() {
         </span>
       </div>
       <div className="flex flex-col h-screen justify-center container mx-auto">
-        <div className="grid md:grid-cols-3 gap-8 px-4 md:px-0 md:pt-0 h-[580px] md:h-auto pb-[100px] md:pb-0">
+        <div className="grid md:grid-cols-3 gap-8 px-4 md:px-0 md:pt-0 h-[580px] md:h-auto">
           <div className="space-y-8">
             <Card>
               <svg
@@ -53,7 +53,7 @@ export function SectionProblem() {
               quality={100}
             />
           </div>
-          <div className="ml-auto w-full space-y-8">
+          <div className="ml-auto w-full space-y-8 pb-[100px] md:pb-0">
             <Card className="min-h-[315px]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
