@@ -5,15 +5,15 @@ import { Card } from "./ui";
 
 export function SectionProblem() {
   return (
-    <div className="min-h-screen relative w-screen overflow-auto">
-      <div className="absolute left-4 right-4 md:left-8 md:right-8 top-4 flex justify-between text-lg">
+    <div className="min-h-screen relative w-screen overflow-auto flex flex-col">
+      <div className="flex justify-between text-lg p-4">
         <span>Problema atual</span>
         <span className="text-[#878787]">
           <Link href="/">FluxoZen</Link>
         </span>
       </div>
-      <div className="flex flex-col h-screen justify-center container mx-auto">
-        <div className="grid md:grid-cols-3 gap-8 px-4 md:px-0 md:pt-0 h-[580px] md:h-auto">
+      <div className="flex flex-col h-[calc(100vh-60px)] justify-center container mx-auto">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-8 px-4 md:px-0 md:pt-0 h-[580px] md:h-auto">
           <div className="space-y-8">
             <Card>
               <svg

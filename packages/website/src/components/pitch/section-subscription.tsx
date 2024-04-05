@@ -3,13 +3,14 @@ import { Card } from "./ui";
 
 export function SectionSubscription() {
   return (
-    <div className="min-h-screen relative w-screen">
-      <div className="absolute left-4 right-4 md:left-8 md:right-8 top-4 flex justify-between text-lg">
+    <div className="min-h-screen relative w-screen flex flex-col">
+      <div className="flex justify-between text-lg p-4">
         <span>Como faremos dinheiro</span>
         <span className="text-[#878787]">
           <Link href="/">FluxoZen</Link>
         </span>
       </div>
+
       <div className="flex flex-col min-h-screen justify-center container mx-auto">
         <div className="px-4 md:px-0 md:pt-0 h-[580px] md:h-auto overflow-auto pb-[100px] md:pb-0">
           <div className="mb-4">
