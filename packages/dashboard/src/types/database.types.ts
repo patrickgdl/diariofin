@@ -134,19 +134,19 @@ export type Database = {
       }
       category_groups: {
         Row: {
-          color: string
+          color: string | null
           id: string
           name: string
           user_id: string | null
         }
         Insert: {
-          color: string
+          color?: string | null
           id?: string
           name: string
           user_id?: string | null
         }
         Update: {
-          color?: string
+          color?: string | null
           id?: string
           name?: string
           user_id?: string | null

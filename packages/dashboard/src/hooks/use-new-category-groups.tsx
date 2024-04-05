@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { newCategoryGroups } from "~/queries/new-groups"
+import { newCategoryGroups } from "~/queries/new-category-groups"
 import { CategoryGroups } from "~/types/category-groups"
 
 import useSupabase from "./useSupabase"
