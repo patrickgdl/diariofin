@@ -5,8 +5,8 @@ import { Card } from "./ui";
 
 export function SectionSolution() {
   return (
-    <div className="min-h-screen relative w-screen">
-      <div className="absolute left-4 right-4 md:left-8 md:right-8 top-4 flex justify-between text-lg">
+    <div className="min-h-screen relative w-screen flex flex-col">
+      <div className="flex justify-between text-lg p-4">
         <span>Nossa solução</span>
         <span className="text-[#878787]">
           <Link href="/">FluxoZen</Link>
