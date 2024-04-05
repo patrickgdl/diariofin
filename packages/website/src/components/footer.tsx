@@ -4,7 +4,6 @@ import { LogoLarge } from "@/components/logo-large";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SocialLinks } from "./social-links";
-import { StatusWidget } from "./status-widget";
 
 export function Footer() {
   const pathname = usePathname();
@@ -47,9 +46,9 @@ export function Footer() {
             <div>
               <span>Recursos</span>
               <ul>
-                <li className="text-[#707070] transition-colors hover:text-primary dark:text-[#878787]">
+                {/* <li className="text-[#707070] transition-colors hover:text-primary dark:text-[#878787]">
                   <Link href="/support">Suporte</Link>
-                </li>
+                </li> */}
                 <li className="text-[#707070] transition-colors hover:text-primary dark:text-[#878787]">
                   <Link href="/policy">Política de Privacidade</Link>
                 </li>
@@ -68,9 +67,9 @@ export function Footer() {
               <div className="flex items-center">
                 <SocialLinks />
               </div>
-              <div className="md:mr-0 mr-auto">
+              {/* <div className="md:mr-0 mr-auto">
                 <StatusWidget />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

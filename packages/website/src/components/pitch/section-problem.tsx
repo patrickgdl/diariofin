@@ -34,8 +34,8 @@ export function SectionProblem() {
                 organização. De arquivos dispersos a documentos perdidos, essa
                 falta de estrutura prejudica a produtividade e desperdiça tempo.
                 Além disso, esta desorganização muitas vezes cria problemas para
-                o seu contador, levando a atrasos e erros nos relatórios
-                financeiros.
+                o seu financeiro, levando a atrasos e erros em relatórios e
+                planilhas.
               </p>
             </Card>
             <div className="px-8">

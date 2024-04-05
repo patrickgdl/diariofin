@@ -19,11 +19,11 @@ export default function Page() {
 
           <div className="flex items-center flex-col text-center relative">
             <h3 className="md:text-[344px] text-[244px] leading-[244px] font-medium md:leading-[344px]">
-              30
+              XX
             </h3>
 
             <p className="font-medium text-xl mt-4">
-              Solicite um plano de adoção antecipada de RS 30/mês
+              Solicite um plano de adoção antecipada de R$ TBD/mês
             </p>
 
             <span className="mt-2 text-[#878787]">
