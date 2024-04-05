@@ -5,15 +5,16 @@ import { Card } from "./ui";
 
 export function SectionSolution() {
   return (
-    <div className="min-h-screen relative w-screen flex flex-col">
+    <div className="min-h-screen relative w-screen overflow-auto flex flex-col">
       <div className="flex justify-between text-lg p-4">
         <span>Nossa solução</span>
         <span className="text-[#878787]">
           <Link href="/">FluxoZen</Link>
         </span>
       </div>
-      <div className="flex flex-col min-h-screen justify-center container mx-auto">
-        <div className="grid md:grid-cols-3 gap-8 px-4 md:px-0 md:pt-0 h-[580px] md:h-auto overflow-auto pb-[100px] md:pb-0">
+
+      <div className="flex flex-col h-[calc(100vh-60px)] justify-center container mx-auto">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-8 px-4 md:px-0 md:pt-0 h-full md:h-auto pb-[100px] md:pb-0">
           <div className="space-y-8">
             <Card>
               <svg
@@ -82,11 +83,12 @@ export function SectionSolution() {
               </p>
             </Card>
           </div>
+
           <div className="space-y-8">
             <div className="px-8">
-              <h2 className="text-[42px] text-center leading-[58px]">
+              <h2 className="text-2xl md:text-4xl text-center">
                 Oferecemos insights de negócios e automatizamos tarefas
-                tediosas, liberando os usuários se concentrem no que amam.
+                tediosas, liberando os usuários à se concentrem no que amam.
               </h2>
             </div>
 
@@ -134,7 +136,7 @@ export function SectionSolution() {
             </Card>
           </div>
 
-          <div className="ml-auto w-full">
+          <div className="ml-auto w-full pb-[100px] md:pb-0">
             <Image
               src={overview}
               alt="Overview"
