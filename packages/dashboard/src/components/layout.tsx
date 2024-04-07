@@ -1,4 +1,6 @@
+import { useLogSnag } from "@logsnag/react"
 import * as React from "react"
+import { useAuthUser } from "~/contexts/SessionContext"
 import { useLocalStorageQuery } from "~/hooks/use-local-storage"
 import useMediaQuery from "~/hooks/use-media-query"
 import useAccounts from "~/hooks/useAccountsQuery"
@@ -10,20 +12,39 @@ import { cn } from "~/utils/cn"
 import { LINKS, LOCAL_STORAGE_KEYS } from "~/utils/constants"
 
 import { CommandMenu } from "./command-menu"
+import { CommandMenuButton } from "./command-menu/button"
 import ErrorState from "./error-state"
 import Loader from "./loader"
 import { MobileNav } from "./mobile-nav"
 import { Nav } from "./nav"
 import { ThemeToggle } from "./theme-toggle"
 import { UserNav } from "./user-nav"
-import { CommandMenuButton } from "./command-menu/button"
+import { useUser } from "~/contexts/UserContext"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isCollapsed, setIsCollapsed] = useLocalStorageQuery<boolean>(LOCAL_STORAGE_KEYS.SIDEBAR_IS_COLLAPSED, false)
   const [sizes, setSizes] = useLocalStorageQuery<number[]>(LOCAL_STORAGE_KEYS.SIDEBAR_SIZES, [13, 87])
 
+  const logsnag = useLogSnag()
+  const { user, authUser } = useUser()
   const { isMobile } = useMediaQuery()
   const { accounts, loading, isError } = useAccounts()
+
+  if (authUser?.email) {
+    logsnag.setUserId(authUser.email)
+
+    if (user) {
+      logsnag.identify({
+        properties: {
+          name: user.name!,
+          email: authUser.email,
+          id: user.id,
+          // subscription_id: user.stripe_subscription_id,
+          // plan: "premium",
+        },
+      })
+    }
+  }
 
   if (loading) {
     return <Loader />

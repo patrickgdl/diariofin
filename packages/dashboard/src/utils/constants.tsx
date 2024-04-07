@@ -4,7 +4,7 @@ import { ArrowRightLeft, CreditCardIcon, FileDown, LayoutDashboard, LucideIcon, 
 export type LinkProps = { route: string; label: string; icon: LucideIcon }
 
 export const LINKS: LinkProps[] = [
-  { label: "Dashboard", route: "/dashboard", icon: LayoutDashboard },
+  { label: "Dashboard", route: "/overview", icon: LayoutDashboard },
   {
     label: "Transações",
     route: "/transactions",

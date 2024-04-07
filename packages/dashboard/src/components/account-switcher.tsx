@@ -62,7 +62,7 @@ export default function AccountSwitcher({ isCollapsed = false, accounts, classNa
                 <CommandItem
                   key={account.id}
                   onSelect={() => {
-                    navigate(`/dashboard/${account.id}`)
+                    navigate(`/overview/${account.id}`)
                     setOpen(false)
                   }}
                   className="text-sm"

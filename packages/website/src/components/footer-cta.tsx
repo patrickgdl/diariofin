@@ -34,7 +34,7 @@ export function FooterCTA() {
             </Button>
           </Link>
 
-          <a href="https://app.fluxozen.com">
+          <a href={process.env.NEXT_PUBLIC_APP_URL}>
             <Button className="h-12 px-5">Acesso antecipado</Button>
           </a>
         </div>

@@ -1,7 +1,9 @@
+import { useLogSnag } from "@logsnag/react"
 import { Loader2 } from "lucide-react"
 import { FormEvent, useState } from "react"
 import { Link } from "react-router-dom"
 import Google from "~/components/icons/google"
+import { LogEvents } from "~/events/events"
 import useMediaQuery from "~/hooks/use-media-query"
 import useSupabase from "~/hooks/useSupabase"
 import { Button } from "~/ui/button"
@@ -9,6 +11,7 @@ import { Input } from "~/ui/input"
 import { toast } from "~/ui/use-toast"
 
 export default function LoginForm() {
+  const logsnag = useLogSnag()
   const supabase = useSupabase()
 
   const [email, setEmail] = useState("")
@@ -28,7 +31,7 @@ export default function LoginForm() {
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${import.meta.env.VITE_APP_URL}/dashboard`,
+        emailRedirectTo: `${import.meta.env.VITE_APP_URL}/overview`,
       },
     })
 
@@ -36,6 +39,12 @@ export default function LoginForm() {
       toast({ title: error.message || "Ocorreu um erro ao enviar o link de login.", variant: "destructive" })
     } else {
       toast({ title: "Cheque seu e-mail com o link de login." })
+      logsnag.track({
+        event: LogEvents.SentMagicLink.name,
+        icon: LogEvents.SentMagicLink.icon,
+        user_id: email,
+        channel: LogEvents.SentMagicLink.channel,
+      })
     }
 
     setLoading(false)
@@ -47,13 +56,21 @@ export default function LoginForm() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${import.meta.env.VITE_APP_URL}/dashboard`,
+        redirectTo: `${import.meta.env.VITE_APP_URL}/overview`,
       },
     })
 
     if (error) {
       toast({ title: error.message || "Ocorreu um erro ao autenticar com o Google.", variant: "destructive" })
+      return
     }
+
+    logsnag.track({
+      event: LogEvents.SignedInGoogle.name,
+      icon: LogEvents.SignedInGoogle.icon,
+      user_id: email,
+      channel: LogEvents.SignedInGoogle.channel,
+    })
   }
 
   return (

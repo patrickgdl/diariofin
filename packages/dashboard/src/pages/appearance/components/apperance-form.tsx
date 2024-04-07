@@ -1,8 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useLogSnag } from "@logsnag/react"
 import { ChevronDownIcon } from "@radix-ui/react-icons"
 import { useTheme } from "next-themes"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { LogEvents } from "~/events/events"
 
 import { Button, buttonVariants } from "~/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "~/ui/form"
@@ -20,6 +22,7 @@ const appearanceFormSchema = z.object({
 type AppearanceFormValues = z.infer<typeof appearanceFormSchema>
 
 export function AppearanceForm() {
+  const logsnag = useLogSnag()
   const { setTheme } = useTheme()
 
   const form = useForm<AppearanceFormValues>({
@@ -34,6 +37,12 @@ export function AppearanceForm() {
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
+    })
+
+    logsnag.track({
+      event: LogEvents.ThemeChange.name,
+      icon: LogEvents.ThemeChange.icon,
+      channel: LogEvents.ThemeChange.channel,
     })
   }
 

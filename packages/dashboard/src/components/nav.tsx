@@ -100,7 +100,7 @@ export function Nav({ links, isCollapsed, accounts }: NavProps) {
               <div className="flex flex-col gap-3 py-4">
                 {accounts.map((account) => (
                   <NavLink
-                    to={`/dashboard/${account.id}`}
+                    to={`/overview/${account.id}`}
                     key={account.id}
                     className="flex items-center justify-between py-1"
                   >
