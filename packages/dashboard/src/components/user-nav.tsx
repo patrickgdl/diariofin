@@ -1,5 +1,7 @@
+import { useLogSnag } from "@logsnag/react"
 import { Link } from "react-router-dom"
 import { useUser } from "~/contexts/UserContext"
+import { LogEvents } from "~/events/events"
 import useSupabase from "~/hooks/useSupabase"
 import { Avatar, AvatarFallback, AvatarImage } from "~/ui/avatar"
 import { Button } from "~/ui/button"
@@ -15,10 +17,22 @@ import {
 import { getAcronym } from "~/utils/get-acronym"
 
 export function UserNav() {
+  const logsnag = useLogSnag()
   const supabase = useSupabase()
   const { user, isLoading } = useUser()
 
   if (!user || isLoading) return <div className="h-8 w-8 rounded-full bg-gray-200" />
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+
+    logsnag.track({
+      event: LogEvents.SignOut.name,
+      icon: LogEvents.SignOut.icon,
+      channel: LogEvents.SignOut.channel,
+    })
+    logsnag.clearUserId()
+  }
 
   return (
     <DropdownMenu>
@@ -53,7 +67,7 @@ export function UserNav() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => supabase.auth.signOut()}>Sair</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogout}>Sair</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

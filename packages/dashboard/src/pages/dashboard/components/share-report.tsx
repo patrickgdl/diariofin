@@ -101,25 +101,10 @@ export function ShareReport({ defaultValue, type }: { defaultValue: { from: stri
         logsnag.track({
           event: LogEvents.OverviewReport.name,
           icon: LogEvents.OverviewReport.icon,
-          user_id: user?.email ?? "",
           channel: LogEvents.OverviewReport.channel,
         })
       }
     }
-
-    const { id } = toast({
-      title: "Relatório publicado!",
-      description: "Seu relatório está pronto para ser compartilhado.",
-      footer: (
-        <div className="mt-4 space-x-2 flex w-full">
-          <CopyInput value={"https://reports.reports.com/reports/" ?? ""} className="border-[#2C2C2C] w-full" />
-
-          <Link to={"https://reports.reports.com/reports/" ?? ""} onClick={() => dismiss(id)}>
-            <Button>Visualizar</Button>
-          </Link>
-        </div>
-      ),
-    })
   }
 
   function onSubmit(data: z.infer<typeof FormSchema>) {

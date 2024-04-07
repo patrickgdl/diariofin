@@ -20,6 +20,8 @@ import { AppearanceMainStep } from "./steps/appearance-step"
 import { TransactionTypesMainStep, TransactionTypesSecondaryStep } from "./steps/transaction-types-step"
 
 import type { AccountWithoutId } from "./steps/account-step"
+import { useLogSnag } from "@logsnag/react"
+import { LogEvents } from "~/events/events"
 function BackButton() {
   const { isDisabledStep, prevStep } = useStepper()
 
@@ -34,8 +36,9 @@ function BackButton() {
 }
 
 export default function OnboardingPage() {
+  const logsnag = useLogSnag()
   const { setAccounts } = useAppContext()
-  const { id: user_id } = useAuthUser() || {}
+  const { id: user_id, email } = useAuthUser() || {}
   const [selectedCategories, setSelectedCategories] = React.useState<CategoryOnboarding[]>([])
 
   const newCategories = useNewCategories()
@@ -123,6 +126,12 @@ export default function OnboardingPage() {
       }
 
       toast({ title: "Categorias criadas com sucesso" })
+
+      logsnag.track({
+        event: LogEvents.OnboardingCategoryCreated.name,
+        icon: LogEvents.OnboardingCategoryCreated.icon,
+        channel: LogEvents.OnboardingCategoryCreated.channel,
+      })
     } else {
       await newCategories.mutateAsync([
         {
@@ -134,6 +143,12 @@ export default function OnboardingPage() {
       ])
 
       toast({ title: 'Categoria "Outros" criada com sucesso' })
+
+      logsnag.track({
+        event: LogEvents.OnboardingCategoryDefaultCreated.name,
+        icon: LogEvents.OnboardingCategoryDefaultCreated.icon,
+        channel: LogEvents.OnboardingCategoryDefaultCreated.channel,
+      })
     }
 
     if (onboardingAccounts?.length > 0) {
@@ -144,6 +159,12 @@ export default function OnboardingPage() {
         setAccounts(response)
         toast({ title: "Contas criadas com sucesso" })
         localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_ACCOUNTS)
+
+        logsnag.track({
+          event: LogEvents.OnboardingAccountCreated.name,
+          icon: LogEvents.OnboardingAccountCreated.icon,
+          channel: LogEvents.OnboardingAccountCreated.channel,
+        })
       }
     }
   }

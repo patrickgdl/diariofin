@@ -41,7 +41,7 @@ export default function Page() {
                   </Button>
                 </Link>
 
-                <a href="https://app.fluxozen">
+                <a href={process.env.NEXT_PUBLIC_APP_URL}>
                   <Button className="h-12 px-5">Acesso antecipado</Button>
                 </a>
               </div>

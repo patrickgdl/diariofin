@@ -3,11 +3,11 @@
         "panelsList": {
             "customize": "Personalizar",
             "elements": "Elementos",
-            "images": "Imagenes",
+            "images": "Imagens",
             "templates": "Templates",
-            "uploads": "Cargas",
+            "uploads": "Upload",
             "text": "Texto",
-            "graphics": "Graficos"
+            "graphics": "Gráficos"
         }
     }
 }

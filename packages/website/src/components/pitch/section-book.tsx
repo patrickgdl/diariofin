@@ -7,7 +7,7 @@ export function SectionBook() {
     <div className="min-h-screen relative w-screen">
       <div className="absolute left-4 right-4 md:left-8 md:right-8 top-4 flex justify-between text-lg">
         <span>Agende uma reunião</span>
-        <Link href="https://app.fluxozen.com">
+        <Link href={process.env.NEXT_PUBLIC_APP_URL!}>
           <Button variant="outline">Criar conta</Button>
         </Link>
       </div>

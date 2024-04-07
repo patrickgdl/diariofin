@@ -108,7 +108,7 @@ export function Header() {
         </button>
 
         <a
-          href="https://app.fluxozen.com"
+          href={process.env.NEXT_PUBLIC_APP_URL}
           className="hidden md:inline-flex h-8 items-center justify-center rounded-md text-sm font-medium transition-colors px-3 py-2 bg-primary text-primary-foreground hover:bg-primary/90"
         >
           Entrar
@@ -176,7 +176,7 @@ export function Header() {
               >
                 <Link
                   className="text-xl text-primary"
-                  href="https://app.fluxozen.com"
+                  href={process.env.NEXT_PUBLIC_APP_URL!}
                 >
                   Entrar
                 </Link>

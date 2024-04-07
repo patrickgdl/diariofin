@@ -14,7 +14,7 @@ export default function Login() {
   if (isLoadingUser) return <Loader />
 
   if (session) {
-    return <Navigate to={role === "admin" ? "/admin" : "/dashboard"} />
+    return <Navigate to={role === "admin" ? "/admin" : "/overview"} />
   }
 
   return (

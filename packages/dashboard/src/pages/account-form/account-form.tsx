@@ -49,7 +49,7 @@ const AccountForm = () => {
           onSuccess: (response) => {
             if (response) {
               setAccounts([...accounts, ...response])
-              navigate(`/dashboard/${response[0].id}`)
+              navigate(`/overview/${response[0].id}`)
             }
           },
         }

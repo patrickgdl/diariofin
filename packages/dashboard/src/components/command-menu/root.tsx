@@ -1,12 +1,12 @@
+import { ArrowRightIcon, MessageCircleQuestion } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 import { MenuOption, useCommandStore } from "~/store/command"
 import { CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "~/ui/command"
-import { ArrowLeftIcon, ArrowRightIcon, BellIcon, MessageCircleQuestion } from "lucide-react"
-import { useNavigate } from "react-router-dom"
 
 const navigation = [
   {
     name: "Dashboard",
-    path: "/dashboard",
+    path: "/overview",
   },
   {
     name: "Transações",

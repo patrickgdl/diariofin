@@ -69,7 +69,7 @@ enabled = true
 # in emails.
 site_url = "http://localhost:5173"
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
-additional_redirect_urls = ["https://localhost:5173/dashboard"]
+additional_redirect_urls = ["https://localhost:5173/overview"]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600
 # If disabled, the refresh token will never expire.
@@ -121,7 +121,7 @@ client_id = "1000355389776-65nese8u2v1dc3f7t8iqvjhg6im10j6r.apps.googleuserconte
 # DO NOT commit your OAuth provider secret to git. Use environment variable substitution instead:
 secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
 # Overrides the default auth redirectUrl.
-# redirect_uri = "http://localhost:5173/auth/v1/authorize?provider=google&redirect_to=http://localhost:5173/dashboard"
+# redirect_uri = "http://localhost:5173/auth/v1/authorize?provider=google&redirect_to=http://localhost:5173/overview"
 redirect_uri = "http://localhost:54321/auth/v1/callback"
 
 [analytics]
