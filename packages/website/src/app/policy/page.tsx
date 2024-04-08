@@ -530,8 +530,8 @@ export default function Page() {
             entre em contato conosco:
           </p>
           <ul>
-            <li>Por e-mail: contact@fluxozen.com</li>{" "}
-            <li>Visitando esta página em nosso site: fluxozen.com</li>
+            <li>Por e-mail: contact@fluxozen.app</li>{" "}
+            <li>Visitando esta página em nosso site: fluxozen.app</li>
           </ul>
         </div>
       </div>
