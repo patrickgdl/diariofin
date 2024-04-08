@@ -13,7 +13,7 @@ import type { ReactElement } from "react";
 import { Provider } from "./provider";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://fluxozen.com"),
+  metadataBase: new URL("https://fluxozen.app"),
   title: "FluxoZen | Seu negócio de maneira mais inteligente",
   description:
     "O FluxoZen fornece uma visão melhor do seu negócio e automatiza as tarefas chatas, permitindo que você se concentre no que você gosta de fazer.",

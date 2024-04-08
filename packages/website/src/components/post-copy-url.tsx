@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export function PostCopyURL({ slug }) {
   const [isCopied, setCopied] = useState(false);
-  const url = `https://fluxozen.com${slug}`;
+  const url = `https://fluxozen.app${slug}`;
 
   const handleClipboard = async () => {
     try {
@@ -42,7 +42,7 @@ export function PostCopyURL({ slug }) {
         <Icons.Check />
       </motion.div>
 
-      <span className="text-xs">Copy link</span>
+      <span className="text-xs">Copiar link</span>
     </button>
   );
 }
