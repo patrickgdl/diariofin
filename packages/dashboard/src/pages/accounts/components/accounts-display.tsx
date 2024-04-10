@@ -142,7 +142,7 @@ export function AccountsDisplay({ account, onDeactivate, onEdit }: AccountsDispl
         {incomeQuery.isLoading ? (
           <div className="p-8 text-center text-muted-foreground">Carregando transações...</div>
         ) : (
-          <div className="h-[500px] md:h-full overflow-auto md:overflow-hidden p-4">
+          <div className="h-[400px] md:h-full overflow-auto md:overflow-hidden p-4">
             <TransactionsTableRaw columns={columns} data={data} groupedData={groupedData} />
           </div>
         )}
