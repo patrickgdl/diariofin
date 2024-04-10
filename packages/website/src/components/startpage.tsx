@@ -4,7 +4,6 @@ import { SectionFour } from "@/components/section-four";
 import { SectionOne } from "@/components/section-one";
 import { SectionSeven } from "@/components/section-seven";
 import { SectionTwo } from "@/components/section-two";
-import { Testimonials } from "@/components/testimonials";
 
 export function StartPage() {
   return (
@@ -15,7 +14,7 @@ export function StartPage() {
       <SectionTwo />
       <SectionFour />
       <SectionSeven />
-      <Testimonials />
+      {/* <Testimonials /> */}
     </>
   );
 }
