@@ -19,13 +19,13 @@ type TransactionDataFormProps = {
   clientsOrSuppliers: Clients[]
 }
 
-const TransactionDataForm = ({ form, categories, clientsOrSuppliers }: TransactionDataFormProps) => {
+const TransactionExpenseDataForm = ({ form, categories, clientsOrSuppliers }: TransactionDataFormProps) => {
   const { accounts } = useAppContext()
 
   return (
     <div className="space-y-4 py-2 pb-4">
-      <div className="flex w-full space-x-1">
-        <div className="w-2/4">
+      <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row w-full space-x-1">
+        <div className="w-full md:w-2/4">
           <FormField
             control={form.control}
             name="category_id"
@@ -59,7 +59,7 @@ const TransactionDataForm = ({ form, categories, clientsOrSuppliers }: Transacti
           />
         </div>
 
-        <div className="w-2/4">
+        <div className="w-full md:w-2/4">
           <FormField
             control={form.control}
             name="account_id"
@@ -123,4 +123,4 @@ const TransactionDataForm = ({ form, categories, clientsOrSuppliers }: Transacti
   )
 }
 
-export default TransactionDataForm
+export default TransactionExpenseDataForm

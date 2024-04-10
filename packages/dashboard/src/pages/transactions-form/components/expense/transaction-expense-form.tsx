@@ -15,13 +15,11 @@ import { InputCurrency } from "~/ui/input-currency-alt"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover"
 import { Switch } from "~/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
-import { ToggleGroup, ToggleGroupItem } from "~/ui/toggle-group"
 import { cn } from "~/utils/cn"
 import formatDate from "~/utils/format-date"
 
 import formSchema, { TransactionExpenseFormType } from "./transactions-expense-form-schema"
-import TransactionDataForm from "./transaction-expense-data-form"
-import TransactionRecurrenceForm from "../transaction-recurrence-form"
+import TransactionExpenseDataForm from "./transaction-expense-data-form"
 import { Textarea } from "~/ui/textarea"
 
 type TransactionExpenseFormProps = {
@@ -45,13 +43,6 @@ const TransactionExpenseForm = ({ onSubmit, transactionToUpdate }: TransactionEx
     },
   })
 
-  const handlePresetDate = (value: string) => {
-    if (value) {
-      const addedDays = addDays(new Date(), parseInt(value))
-      form.setValue("date", addedDays, { shouldValidate: true })
-    }
-  }
-
   React.useEffect(() => {
     if (transactionToUpdate) {
       form.reset({
@@ -65,9 +56,9 @@ const TransactionExpenseForm = ({ onSubmit, transactionToUpdate }: TransactionEx
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} id="transaction-form">
-        <div className="space-y-8 py-2 pb-4">
-          <div className="flex space-x-1 items-center w-full">
-            <div className="w-2/4">
+        <div className="space-y-8 md:py-4">
+          <div className="flex flex-col-reverse md:flex-row space-x-1 items-center w-full">
+            <div className="w-full md:w-2/4">
               <FormField
                 control={form.control}
                 name="date"
@@ -100,19 +91,19 @@ const TransactionExpenseForm = ({ onSubmit, transactionToUpdate }: TransactionEx
               />
             </div>
 
-            <div className="w-2/4">
+            <div className="w-full mb-4 md:mb-0 md:w-2/4">
               <FormField
                 name="amount"
                 control={form.control}
                 render={({ field }) => (
-                  <FormItem className="text-right">
+                  <FormItem className="md:text-right">
                     <FormLabel htmlFor="input-amount">Valor do pagamento</FormLabel>
                     <FormControl>
                       <InputCurrency
                         id="input-amount"
                         name="input-amount"
                         placeholder="R$ 00,00"
-                        className="text-right w-full"
+                        className="md:text-right w-full"
                         defaultValue={field.value}
                         onCustomChange={field.onChange}
                         autoFocus
@@ -125,8 +116,8 @@ const TransactionExpenseForm = ({ onSubmit, transactionToUpdate }: TransactionEx
             </div>
           </div>
 
-          <div className="flex space-x-3 items-center w-full">
-            <div className="w-3/4">
+          <div className="flex flex-col-reverse md:flex-row md:space-x-3 items-center w-full">
+            <div className="w-full md:w-3/4">
               <FormField
                 name="description"
                 control={form.control}
@@ -142,12 +133,12 @@ const TransactionExpenseForm = ({ onSubmit, transactionToUpdate }: TransactionEx
               />
             </div>
 
-            <div className="w-1/4">
+            <div className="w-full mb-4 md:mb-0 md:w-1/4">
               <FormField
                 control={form.control}
                 name="is_done"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col space-y-4 items-end">
+                  <FormItem className="flex items-center space-x-2 md:space-x-0 md:flex-col md:space-y-4 md:items-end">
                     <FormLabel>Já foi pago?</FormLabel>
                     <FormControl>
                       <Switch checked={field.value} onCheckedChange={field.onChange} />
@@ -162,14 +153,10 @@ const TransactionExpenseForm = ({ onSubmit, transactionToUpdate }: TransactionEx
             <TabsList>
               <TabsTrigger value="data">Dados do Lançamento</TabsTrigger>
               <TabsTrigger value="notes">Anotações</TabsTrigger>
-
-              <TabsTrigger disabled value="recurrence">
-                Recorrência (em breve)
-              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="data">
-              <TransactionDataForm form={form} categories={categories} clientsOrSuppliers={clientsOrSuppliers} />
+              <TransactionExpenseDataForm form={form} categories={categories} clientsOrSuppliers={clientsOrSuppliers} />
             </TabsContent>
 
             <TabsContent value="notes">
@@ -186,10 +173,6 @@ const TransactionExpenseForm = ({ onSubmit, transactionToUpdate }: TransactionEx
                   </FormItem>
                 )}
               />
-            </TabsContent>
-
-            <TabsContent value="recurrence">
-              <TransactionRecurrenceForm form={form} />
             </TabsContent>
           </Tabs>
         </div>

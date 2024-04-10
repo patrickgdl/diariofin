@@ -3,17 +3,17 @@ import Loader from "~/components/loader"
 import { TransactionsTableRaw } from "~/components/transactions-table/transactions-table-raw"
 import useTransactionsByCategoryQuery from "~/hooks/useTransactionsByCategory"
 import { columns } from "~/pages/accounts/components/transactions-columns"
-import { Avatar, AvatarFallback, AvatarImage } from "~/ui/avatar"
+import { Avatar, AvatarFallback } from "~/ui/avatar"
 import { Separator } from "~/ui/separator"
 import formatCurrency from "~/utils/format-currency"
 
 import { TransactionsByCategoryGrouped } from "./top-categories-table"
 
-export interface CategoriesDisplayProps {
+export interface CategoryDisplayProps {
   category: TransactionsByCategoryGrouped["categories"][0] | null
 }
 
-export function CategoriesDisplay({ category }: CategoriesDisplayProps) {
+export function CategoryDisplay({ category }: CategoryDisplayProps) {
   const { data, groupedData, ...transactionsQuery } = useTransactionsByCategoryQuery(
     category?.transaction_categories?.id || ""
   )
@@ -45,11 +45,11 @@ export function CategoriesDisplay({ category }: CategoriesDisplayProps) {
             {/* Right section with text */}
             {category.transaction_categories.name && (
               <div className="flex flex-col items-end">
-                <div className="text-m -mb-2 font-medium">Gastos até agora</div>
+                <div className="text-m -mb-2 font-medium">Gastos</div>
                 <div className="mt-2 flex items-baseline">
                   <span className="text-sm font-semibold">{formatCurrency(category.amount)}</span>
                 </div>
-                <div className="mt-1 text-sm text-gray-500">{formatCurrency(0)} á confirmar</div>
+                <div className="mt-1 text-sm hidden md:flex text-gray-500">{formatCurrency(0)} á confirmar</div>
               </div>
             )}
           </div>

@@ -22,7 +22,7 @@ const AccountLayout = ({ children }: { children: React.ReactNode }) => {
         <Separator />
       </div>
 
-      <div className="flex flex-col mx-auto max-w-2xl">{children}</div>
+      <div className="flex flex-col px-4 md:px-0 mx-auto max-w-2xl">{children}</div>
     </div>
   )
 }

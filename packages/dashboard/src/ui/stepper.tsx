@@ -145,7 +145,7 @@ export const Stepper = React.forwardRef<HTMLDivElement, StepperProps & React.HTM
         <div ref={ref} className={cn("space-y-4", className)} {...props}>
           <div
             className={cn(
-              "flex flex-1 gap-2 text-center p-5 w-[50%] mx-auto",
+              "flex flex-1 gap-2 text-center p-5 md:w-[50%] mx-auto",
               orientation === "vertical" ? "flex-col" : "flex-row"
             )}
           >

@@ -17,7 +17,7 @@ const AccountForm = ({ form, onSubmit }: AccountFormProps) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} id="account-form">
         <div className="space-y-4">
-          <div className="flex items-center space-x-4 w-full">
+          <div className="flex items-center space-x-1 md:space-x-4 w-full">
             <FormField
               name="name"
               control={form.control}
@@ -27,7 +27,7 @@ const AccountForm = ({ form, onSubmit }: AccountFormProps) => {
                   <FormControl>
                     <input
                       autoFocus
-                      className="flex h-9 rounded-md bg-background border-0 shadow-none font-semibold py-1 text-3xl w-full transition-colors placeholder:text-gray-300 dark:placeholder:text-slate-500 placeholder:font-semibold focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                      className="flex h-9 rounded-md bg-background border-0 shadow-none font-semibold py-1 text-2xl md:text-3xl w-full transition-colors placeholder:text-gray-300 dark:placeholder:text-slate-500 placeholder:font-semibold focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
                       placeholder="Meu Banco"
                       {...field}
                     />
@@ -50,7 +50,7 @@ const AccountForm = ({ form, onSubmit }: AccountFormProps) => {
                       defaultValue={field.value}
                       placeholder="R$ 00,00"
                       onCustomChange={field.onChange}
-                      className="text-right w-full"
+                      className="text-right w-full text-2xl md:text-3xl"
                     />
                   </FormControl>
                   <FormMessage />

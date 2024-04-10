@@ -17,7 +17,7 @@ import { LOCAL_STORAGE_KEYS } from "~/utils/constants"
 import { CategoryOnboarding, OTHER_CATEGORY_ID } from "./constants"
 import { AccountMainStep, AccountSecondaryStep } from "./steps/account-step"
 import { AppearanceMainStep } from "./steps/appearance-step"
-import { TransactionTypesMainStep, TransactionTypesSecondaryStep } from "./steps/transaction-types-step"
+import { CategoriesMainStep, CategoriesSecondaryStep } from "./steps/categories-step"
 
 import type { AccountWithoutId } from "./steps/account-step"
 import { useLogSnag } from "@logsnag/react"
@@ -38,7 +38,7 @@ function BackButton() {
 export default function OnboardingPage() {
   const logsnag = useLogSnag()
   const { setAccounts } = useAppContext()
-  const { id: user_id, email } = useAuthUser() || {}
+  const { id: user_id } = useAuthUser() || {}
   const [selectedCategories, setSelectedCategories] = React.useState<CategoryOnboarding[]>([])
 
   const newCategories = useNewCategories()
@@ -185,10 +185,8 @@ export default function OnboardingPage() {
     {
       id: 1,
       label: "Tipos de Transação",
-      content: (
-        <TransactionTypesMainStep selectedCategories={selectedCategories} onSelectCategory={handleSelectCategory} />
-      ),
-      secondary: <TransactionTypesSecondaryStep />,
+      content: <CategoriesMainStep selectedCategories={selectedCategories} onSelectCategory={handleSelectCategory} />,
+      secondary: <CategoriesSecondaryStep />,
     },
     { id: 2, label: "Aparência", content: <AppearanceMainStep onFinalize={handleFinalize} /> },
   ]
@@ -209,7 +207,9 @@ export default function OnboardingPage() {
                     {step.content}
                   </div>
 
-                  <div className="h-full flex-col bg-muted p-10 lg:flex dark:border-r">{step.secondary}</div>
+                  <div className="h-full flex-col bg-muted p-10 lg:flex dark:border-r hidden md:flex">
+                    {step.secondary}
+                  </div>
                 </div>
               </div>
             </StepperItem>

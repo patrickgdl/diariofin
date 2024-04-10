@@ -3,8 +3,7 @@ import { Line, LineChart, ResponsiveContainer, Tooltip as RechartsTooltip } from
 import { TransactionsTableRaw } from "~/components/transactions-table/transactions-table-raw"
 import useTransactionsByAccountQuery from "~/hooks/useTransactionsByAccountQuery"
 import { Account } from "~/types/account"
-import { Avatar, AvatarFallback, AvatarImage } from "~/ui/avatar"
-import { Badge } from "~/ui/badge"
+import { Avatar, AvatarFallback } from "~/ui/avatar"
 import { Button } from "~/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "~/ui/dropdown-menu"
 import { Separator } from "~/ui/separator"
@@ -87,7 +86,7 @@ export function AccountsDisplay({ account, onDeactivate, onEdit }: AccountsDispl
           {/* Left section with avatar and text */}
           <div className="flex items-center gap-4">
             <Avatar>
-              <AvatarImage src="/path-to-your-avatar-image.png" alt={account.name} />
+              {/* <AvatarImage src="/path-to-your-avatar-image.png" alt={account.name} /> */}
               <AvatarFallback delayMs={600}>
                 {account.name
                   .split(" ")

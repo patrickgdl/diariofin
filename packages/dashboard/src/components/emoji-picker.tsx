@@ -2,6 +2,7 @@ import * as PopoverPrimitive from "@radix-ui/react-popover"
 import ReactEmojiPicker, { Categories as EmojiCategories, Theme } from "emoji-picker-react"
 import { LaughIcon } from "lucide-react"
 import { useTheme } from "next-themes"
+import useMediaQuery from "~/hooks/use-media-query"
 import { Button } from "~/ui/button"
 import { Tooltip, TooltipTrigger, TooltipContent } from "~/ui/tooltip"
 
@@ -12,6 +13,7 @@ type EmojiPickerProps = {
 
 export function EmojiPicker({ emoji, setEmoji }: EmojiPickerProps) {
   const { resolvedTheme } = useTheme()
+  const { isDesktop } = useMediaQuery()
 
   return (
     <PopoverPrimitive.Root>
@@ -25,7 +27,7 @@ export function EmojiPicker({ emoji, setEmoji }: EmojiPickerProps) {
           <TooltipContent>Escolha um Emoji</TooltipContent>
         </Tooltip>
       </PopoverPrimitive.Trigger>
-      <PopoverPrimitive.Content side="right" className="z-[51]">
+      <PopoverPrimitive.Content side={isDesktop ? "right" : "bottom"} className="z-[51]">
         <ReactEmojiPicker
           searchDisabled
           skinTonesDisabled

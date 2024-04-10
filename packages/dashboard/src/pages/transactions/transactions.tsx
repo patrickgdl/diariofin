@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import ErrorState from "~/components/error-state"
 import Loader from "~/components/loader"
 import { TransactionsTable } from "~/components/transactions-table/transactions-table"
+import useMediaQuery from "~/hooks/use-media-query"
 import useCategories from "~/hooks/useCategoriesQuery"
 import useTransactionsQuery from "~/hooks/useTransactionsQuery"
 import { Button } from "~/ui/button"
@@ -13,14 +14,17 @@ import { Separator } from "~/ui/separator"
 
 import { columns } from "./components/columns"
 import { TransactionDisplay } from "./components/transaction-display"
+import { TransactionsQuery } from "~/queries/get-transactions-by-account"
+import { Drawer, DrawerContent } from "~/ui/drawer"
 
 export default function TransactionsPage() {
   const navigate = useNavigate()
+  const { isDesktop } = useMediaQuery()
 
   const { categories } = useCategories()
   const { data, groupedData, ...transactionsQuery } = useTransactionsQuery()
 
-  const [selected, setSelected] = React.useState(data[0] || null)
+  const [selected, setSelected] = React.useState<TransactionsQuery[0] | null>(null)
 
   if (transactionsQuery.isLoading || transactionsQuery.isFetching) {
     return <Loader />
@@ -30,15 +34,25 @@ export default function TransactionsPage() {
     return <ErrorState />
   }
 
+  const handleSelect = (selected: TransactionsQuery[0]) => {
+    setSelected(selected)
+  }
+
   return (
     <ResizablePanelGroup direction="horizontal" className="h-screen items-stretch">
-      <ResizablePanel minSize={30} defaultSize={60} className="!overflow-y-auto">
+      <ResizablePanel
+        order={1}
+        minSize={30}
+        id="transactions"
+        className="!overflow-y-auto"
+        defaultSize={isDesktop ? 60 : 100}
+      >
         <div className="flex h-[52px] items-center px-4 py-2">
-          <h1 className="text-lg font-medium">Todas as Transações</h1>
+          <h1 className="text-lg font-medium">Transações</h1>
 
           <div className="ml-auto space-x-1 flex items-center">
             <Popover>
-              <PopoverTrigger>
+              <PopoverTrigger asChild>
                 <Button variant="ghost">
                   <PlusCircleIcon className="mr-2 h-4 w-4" />
                   Nova transação
@@ -69,23 +83,40 @@ export default function TransactionsPage() {
 
         <Separator />
 
-        <TransactionsTable columns={columns} data={data} groupedData={groupedData} onSelect={setSelected} />
+        <TransactionsTable columns={columns} data={data} groupedData={groupedData} onSelect={handleSelect} />
       </ResizablePanel>
 
-      <ResizableHandle withHandle />
+      {isDesktop ? (
+        <>
+          <ResizableHandle withHandle />
 
-      <ResizablePanel defaultSize={40}>
-        {selected ? (
-          <TransactionDisplay
-            categories={categories}
-            transaction={selected}
-            onDeactivate={console.log}
-            onEdit={(acc) => navigate(`/accounts/${acc.id}`)}
-          />
-        ) : (
-          <div className="p-8 text-center text-muted-foreground">Sem transação selecionada</div>
-        )}
-      </ResizablePanel>
+          <ResizablePanel id="transaction-display" order={2} defaultSize={40}>
+            {selected ? (
+              <TransactionDisplay
+                categories={categories}
+                transaction={selected}
+                onDeactivate={console.log}
+                onEdit={(acc) => navigate(`/accounts/${acc.id}`)}
+              />
+            ) : (
+              <div className="p-8 text-center text-muted-foreground">Sem transação selecionada</div>
+            )}
+          </ResizablePanel>
+        </>
+      ) : (
+        <Drawer open={Boolean(selected)} onClose={() => setSelected(null)}>
+          <DrawerContent>
+            {selected && (
+              <TransactionDisplay
+                categories={categories}
+                transaction={selected}
+                onDeactivate={console.log}
+                onEdit={(acc) => navigate(`/accounts/${acc.id}`)}
+              />
+            )}
+          </DrawerContent>
+        </Drawer>
+      )}
     </ResizablePanelGroup>
   )
 }

@@ -16,6 +16,8 @@ import accountFormSchema, { AccountFormType } from "../components/account-form-s
 import AccountForm from "../components/account-simple-form"
 import { useStepper } from "~/ui/stepper"
 import { toast } from "~/ui/use-toast"
+import useMediaQuery from "~/hooks/use-media-query"
+import AccountDialogForm from "../components/account-dialog-form"
 
 export type AccountWithoutId = Omit<Account, "id">
 
@@ -28,8 +30,6 @@ type AccountStepProps = {
 export function AccountMainStep({ accounts, onAddAccount, onRemoveAccount }: AccountStepProps) {
   const { nextStep } = useStepper()
   const { id: user_id } = useAuthUser() || {}
-
-  const [open, setOpen] = React.useState(false)
 
   const form = useForm<AccountFormType>({
     resolver: zodResolver(accountFormSchema),
@@ -45,9 +45,7 @@ export function AccountMainStep({ accounts, onAddAccount, onRemoveAccount }: Acc
   const handleSubmit = async (values: AccountFormType) => {
     if (!user_id) return
 
-    setOpen(false)
     form.reset()
-
     onAddAccount({ ...values, active: true, user_id })
   }
 
@@ -79,26 +77,9 @@ export function AccountMainStep({ accounts, onAddAccount, onRemoveAccount }: Acc
           <p className="text-sm text-muted-foreground">Não vendemos ou compartilhamos seus dados</p>
         </div>
 
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button className="w-full">
-              <PlusIcon className="h-4 w-4 mr-2" /> Adicionar Conta
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <div className="w-full space-y-6">
-              <DialogHeader>
-                <DialogTitle className="text-sm">Nova Conta</DialogTitle>
-              </DialogHeader>
-
-              <AccountForm onSubmit={handleSubmit} form={form} />
-
-              <Button className="w-full" type="submit" form="account-form">
-                Salvar
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
+        <AccountDialogForm>
+          <AccountForm onSubmit={handleSubmit} form={form} />
+        </AccountDialogForm>
 
         {accounts?.length > 0 &&
           accounts.map((account) => (

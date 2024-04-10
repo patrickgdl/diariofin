@@ -76,7 +76,7 @@
     "react-hotkeys-hook": "^4.5.0",
     "react-i18next": "^11.18.0",
     "react-input-mask": "^2.0.4",
-    "react-resizable-panels": "^1.0.7",
+    "react-resizable-panels": "^2.0.16",
     "react-router-dom": "^6.3.0",
     "recharts": "^2.6.2",
     "resize-observer-polyfill": "^1.5.1",

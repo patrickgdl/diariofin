@@ -106,7 +106,7 @@ export default function TransactionsFormPage() {
         <Separator />
       </div>
 
-      <div className="flex flex-col mx-auto max-w-xl">
+      <div className="flex flex-col p-4 md:p-0 mx-auto max-w-xl">
         {isExpense ? (
           <TransactionExpenseForm
             transactionToUpdate={transactionToUpdate}
@@ -122,7 +122,7 @@ export default function TransactionsFormPage() {
           <Button variant="outline" onClick={() => navigate(-1)}>
             Voltar
           </Button>
-          <Button type="submit" form="transaction-form" className={isExpense ? "bg-red-500" : "bg-emerald-500"}>
+          <Button type="submit" form="transaction-form">
             {isAddMode ? "Salvar" : "Atualizar"}
           </Button>
         </div>
