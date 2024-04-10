@@ -1,16 +1,19 @@
+import "../ui/globals.css";
+import "@/styles/globals.css";
+
 import { Footer } from "@/components/footer";
 import { FooterCTA } from "@/components/footer-cta";
 import { Header } from "@/components/header";
-import "@/styles/globals.css";
-import { LogSnagProvider } from "../events/client";
-import "../ui/globals.css";
-import { cn } from "../ui/utils";
 import { Analytics } from "@vercel/analytics/react";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
+
+import { LogSnagProvider } from "../events/client";
+import { cn } from "../ui/utils";
+import { Provider } from "./provider";
+
 import type { Metadata } from "next";
 import type { ReactElement } from "react";
-import { Provider } from "./provider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fluxozen.app"),
@@ -33,8 +36,10 @@ export default function Layout({ children }: { children: ReactElement }) {
         <LogSnagProvider
           token={process.env.NEXT_PUBLIC_LOGSNAG_TOKEN!}
           project={process.env.NEXT_PUBLIC_LOGSNAG_PROJECT!}
-          disableTracking={Boolean(process.env.NEXT_PUBLIC_LOGSNAG_DISABLED!)}
+          // disableTracking={Boolean(process.env.NEXT_PUBLIC_LOGSNAG_DISABLED!)}
         />
+
+        <link rel="canonical" href="https://fluxozen.app" />
       </head>
       <body
         className={cn(

@@ -3,7 +3,7 @@ import { Account } from "~/types/account"
 
 export const defaultAccount: Account = {
   id: "all",
-  name: "Contas",
+  name: "Todas",
   active: true,
   user_id: "",
   account_number: null,

@@ -34,7 +34,7 @@ export default function DashboardPage() {
   const doneTransactions = useTransactionsByDate({ date, accountId: selectedAccount.id, isDone: true })
 
   React.useEffect(() => {
-    if (params?.accountId) {
+    if (params?.accountId && params.accountId !== "all") {
       const selected = accounts.find((account) => account.id === params.accountId)
       if (selected) {
         setSelectedAccount(selected)
@@ -52,7 +52,7 @@ export default function DashboardPage() {
         <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-2">
           <CalendarDateRangePicker className="w-full" date={date} onSelectDate={setDate} />
 
-          {accounts.length > 0 && <AccountSwitcher accounts={accounts} />}
+          {accounts.length > 0 && <AccountSwitcher accounts={[defaultAccount, ...accounts]} />}
 
           {/* <ShareReport
             type="Overview"
