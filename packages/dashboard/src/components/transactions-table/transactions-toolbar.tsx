@@ -22,7 +22,7 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
     <div className="flex flex-col gap-2">
       <CalendarDateRangePicker onSelectDate={() => alert("Ainda não implementado")} />
 
-      <div className="flex flex-1 items-center space-x-2">
+      <div className="flex flex-1 flex-col md:flex-row md:items-center space-y-1 md:space-y-0 md:space-x-2">
         <Input
           placeholder="Filtrar descrição..."
           value={(table.getColumn("description")?.getFilterValue() as string) ?? ""}

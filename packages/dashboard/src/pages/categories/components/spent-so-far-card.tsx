@@ -1,5 +1,4 @@
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts"
-import { TransactionsQuery } from "~/queries/get-transactions-by-account"
 import { TransactionsByTypeQuery } from "~/queries/get-transactions-by-type"
 import { Card, CardContent } from "~/ui/card"
 import formatCurrency from "~/utils/format-currency"
@@ -33,38 +32,36 @@ export function SpentSoFarCard({ data, doneTotal, pendingTotal }: SpentSoFarCard
   }, {} as Record<string, GroupForChart>)
 
   return (
-    <div className="">
-      <Card>
-        <CardContent className="flex justify-between h-[225px] p-4 relative">
-          <div className="absolute top-4 left-4">
-            <div className="text-2xl font-bold">{formatCurrency(doneTotal)}</div>
-            <p className="text-xs text-muted-foreground">Gastos até agora</p>
-          </div>
+    <Card>
+      <CardContent className="h-[280px] md:h-[225px] p-4 relative">
+        <div className="absolute top-4 left-4">
+          <div className="text-2xl font-bold">{formatCurrency(doneTotal)}</div>
+          <p className="text-xs text-muted-foreground">Gastos até agora</p>
+        </div>
 
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={Object.values(formattedData)}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={80}
-                dataKey="value"
-                paddingAngle={5}
-              >
-                {Object.values(formattedData).map((entry, index) => {
-                  return <Cell key={`cell-${index}`} fill={entry.color} />
-                })}
-              </Pie>
-            </PieChart>
-          </ResponsiveContainer>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={Object.values(formattedData)}
+              cx="50%"
+              cy="50%"
+              innerRadius={60}
+              outerRadius={80}
+              dataKey="value"
+              paddingAngle={5}
+            >
+              {Object.values(formattedData).map((entry, index) => {
+                return <Cell key={`cell-${index}`} fill={entry.color} />
+              })}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
 
-          <div className="flex flex-col items-end absolute top-4 right-4">
-            <div className="text-2xl font-bold">{formatCurrency(pendingTotal)}</div>
-            <p className="text-xs text-muted-foreground">Á confirmar</p>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+        <div className="flex flex-col items-end absolute top-4 right-4">
+          <div className="text-2xl font-bold">{formatCurrency(pendingTotal)}</div>
+          <p className="text-xs text-muted-foreground">Á confirmar</p>
+        </div>
+      </CardContent>
+    </Card>
   )
 }

@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const logsnag = useLogSnag()
   const { user, authUser } = useUser()
-  const { isMobile } = useMediaQuery()
+  const { isDesktop } = useMediaQuery()
   const { accounts, loading, isError } = useAccounts()
 
   if (authUser?.email) {
@@ -65,17 +65,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         className="h-screen items-stretch"
         onLayout={(sizes: number[]) => setSizes(sizes)}
       >
-        {!isMobile && (
+        {isDesktop && (
           <>
             <ResizablePanel
-              defaultSize={sizes[0] || 13}
               minSize={13}
               maxSize={15}
               collapsible
-              collapsedSize={5}
-              onCollapse={() => setIsCollapsed(true)}
+              id="sidebar"
+              order={1}
+              collapsedSize={7}
+              defaultSize={isDesktop ? sizes[0] : 15}
               onExpand={() => setIsCollapsed(false)}
-              className={cn(isCollapsed && "min-w-[50px] transition-all duration-300 ease-in-out hidden md:flex")}
+              onCollapse={() => setIsCollapsed(true)}
+              className={cn(isCollapsed && "transition-all duration-300 ease-in-out hidden md:flex")}
             >
               <Nav links={LINKS} isCollapsed={isCollapsed} accounts={accounts} />
             </ResizablePanel>
@@ -83,7 +85,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </>
         )}
 
-        <ResizablePanel defaultSize={sizes[1] || 87}>
+        <ResizablePanel defaultSize={isDesktop ? sizes[1] : 100} id="content" order={2}>
           <div className="flex items-center px-4 md:pr-12 py-2 h-[52px] justify-between space-x-4">
             <div className="flex items-center space-x-4">
               <MobileNav links={LINKS} />

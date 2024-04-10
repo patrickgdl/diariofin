@@ -46,8 +46,6 @@ const InnerCounter = ({ currency, pad, value, locale }: Props) => {
     })
     .join("")
 
-  console.log(renderValue)
-
   return (
     <div className="counter font-mono">
       <fieldset>

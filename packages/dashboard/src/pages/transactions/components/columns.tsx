@@ -42,7 +42,7 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
     cell: ({ row }) => {
       return (
         <TableCell className="w-1/5">
-          <div className="flex w-[150px] items-center">
+          <div className="flex md:w-[150px] items-center">
             {/* @ts-ignore */}
             {row.original.transactions_instance?.is_done ? (
               <CheckCircledIcon className="mr-2 h-4 w-4 text-muted-foreground" />
@@ -50,7 +50,9 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
               <CircleIcon className="mr-2 h-4 w-4 text-muted-foreground" />
             )}
             {/* @ts-ignore */}
-            <span>{row.original.transactions_instance?.is_done ? "Confirmado" : "Pendente"}</span>
+            <span className="hidden md:block">
+              {row.original.transactions_instance?.is_done ? "Confirmado" : "Pendente"}
+            </span>
           </div>
         </TableCell>
       )
@@ -92,7 +94,7 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
             <AvatarFallback>{getAcronym(row.original.account?.name || "")}</AvatarFallback>
           </Avatar>
 
-          <span>{row.original.account?.name}</span>
+          <span className="min-w-[100px]">{row.original.account?.name}</span>
         </div>
       </TableCell>
     ),

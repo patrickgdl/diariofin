@@ -10,12 +10,12 @@ import formatCurrency from "~/utils/format-currency"
 
 import { CategoryOnboarding, businessCategories } from "../constants"
 
-type TransactionTypesProps = {
+type CategoriesProps = {
   selectedCategories: CategoryOnboarding[]
   onSelectCategory: (category: CategoryOnboarding) => void
 }
 
-export function TransactionTypesMainStep({ onSelectCategory, selectedCategories }: TransactionTypesProps) {
+export function CategoriesMainStep({ onSelectCategory, selectedCategories }: CategoriesProps) {
   const { nextStep } = useStepper()
   const groupedByGroup = groupBy(businessCategories, "group")
 
@@ -34,9 +34,9 @@ export function TransactionTypesMainStep({ onSelectCategory, selectedCategories 
     <div className="space-y-8">
       <div className="space-y-2">
         <div className="space-y-2">
-          <h1 className="text-2xl font-semibold tracking-tight">Tipos de Transação</h1>
-          <p className="text-sm text-muted-foreground">Aqui estão algumas sugestões de tipos de transações.</p>
-          <p className="text-sm font-semibold">Selecione as quê considerar relevante.</p>
+          <h1 className="text-2xl font-semibold tracking-tight">Categorias de Transação</h1>
+          <p className="text-sm text-muted-foreground">Aqui estão algumas sugestões de categorias.</p>
+          <p className="text-sm font-semibold">Selecione as quê considerar relevante pro seu negócio.</p>
         </div>
 
         <div className="overflow-y-auto space-y-6 px-2 py-8 h-[calc(100vh-450px)]">
@@ -74,12 +74,12 @@ export function TransactionTypesMainStep({ onSelectCategory, selectedCategories 
   )
 }
 
-export function TransactionTypesSecondaryStep() {
+export function CategoriesSecondaryStep() {
   return (
     <div className="space-y-12">
       <div className="space-y-4">
         <div className="space-y-2">
-          <h1 className="text-2xl font-semibold tracking-tight">Tipos de Transação</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Categorias de Transação</h1>
           <p className="text-sm text-muted-foreground">
             Nem toda transação significa a mesma coisa. Nós usamos dois tipos diferentes para classifica-las.
           </p>

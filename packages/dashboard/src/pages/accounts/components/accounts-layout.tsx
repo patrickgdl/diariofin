@@ -2,8 +2,10 @@ import { PlusCircledIcon } from "@radix-ui/react-icons"
 import { Search } from "lucide-react"
 import * as React from "react"
 import { useNavigate } from "react-router-dom"
+import useMediaQuery from "~/hooks/use-media-query"
 import { Account } from "~/types/account"
 import { Button } from "~/ui/button"
+import { Drawer, DrawerContent } from "~/ui/drawer"
 import { Input } from "~/ui/input"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "~/ui/resizable"
 import { Separator } from "~/ui/separator"
@@ -20,11 +22,12 @@ interface AccountsDashboardProps {
 
 export function AccountsDashboard({ accounts, onDeactivate }: AccountsDashboardProps) {
   const navigate = useNavigate()
-  const [selected, setSelected] = React.useState(accounts[0])
+  const { isDesktop } = useMediaQuery()
+  const [selected, setSelected] = React.useState<Account | null>(null)
 
   return (
     <ResizablePanelGroup direction="horizontal" className="h-full max-h-[1200px] items-stretch">
-      <ResizablePanel defaultSize={50} minSize={30}>
+      <ResizablePanel order={1} id="accounts" defaultSize={isDesktop ? 50 : 100} minSize={30}>
         <Tabs defaultValue="all">
           <div className="flex h-[52px] items-center px-4 py-2">
             <h1 className="text-lg font-medium">Contas</h1>
@@ -71,19 +74,34 @@ export function AccountsDashboard({ accounts, onDeactivate }: AccountsDashboardP
         </Tabs>
       </ResizablePanel>
 
-      <ResizableHandle withHandle />
-
-      <ResizablePanel defaultSize={50}>
-        {selected ? (
-          <AccountsDisplay
-            account={selected}
-            onDeactivate={onDeactivate}
-            onEdit={(acc) => navigate(`/accounts/${acc.id}`)}
-          />
-        ) : (
-          <div className="p-8 text-center text-muted-foreground">Sem conta selecionada</div>
-        )}
-      </ResizablePanel>
+      {isDesktop ? (
+        <>
+          <ResizableHandle withHandle />
+          <ResizablePanel order={2} id="account-display" defaultSize={50}>
+            {selected ? (
+              <AccountsDisplay
+                account={selected}
+                onDeactivate={onDeactivate}
+                onEdit={(acc) => navigate(`/accounts/${acc.id}`)}
+              />
+            ) : (
+              <div className="p-8 text-center text-muted-foreground">Sem conta selecionada</div>
+            )}
+          </ResizablePanel>
+        </>
+      ) : (
+        <Drawer open={Boolean(selected)} onClose={() => setSelected(null)}>
+          <DrawerContent>
+            {selected && (
+              <AccountsDisplay
+                account={selected}
+                onDeactivate={onDeactivate}
+                onEdit={(acc) => navigate(`/accounts/${acc.id}`)}
+              />
+            )}
+          </DrawerContent>
+        </Drawer>
+      )}
     </ResizablePanelGroup>
   )
 }
