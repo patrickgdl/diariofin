@@ -30,21 +30,23 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const { isDesktop } = useMediaQuery()
   const { accounts, loading, isError } = useAccounts()
 
-  if (authUser?.email) {
-    logsnag.setUserId(authUser.email)
+  React.useEffect(() => {
+    if (authUser?.email) {
+      logsnag.setUserId(authUser.email)
 
-    if (user) {
-      logsnag.identify({
-        properties: {
-          name: user.name!,
-          email: authUser.email,
-          id: user.id,
-          // subscription_id: user.stripe_subscription_id,
-          // plan: "premium",
-        },
-      })
+      if (user) {
+        logsnag.identify({
+          properties: {
+            name: user.name!,
+            email: authUser.email,
+            id: user.id,
+            // subscription_id: user.stripe_subscription_id,
+            // plan: "premium",
+          },
+        })
+      }
     }
-  }
+  }, [authUser?.email])
 
   if (loading) {
     return <Loader />
