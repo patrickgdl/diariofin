@@ -1,26 +1,22 @@
 import { getMonth, parseISO } from "date-fns"
-import * as React from "react"
-import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
-import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
-import formatCurrency from "~/utils/format-currency"
-
-import { TransactionsByDateQuery } from "~/queries/get-transactions-by-date"
+import { BarChart3Icon, LineChartIcon } from "lucide-react"
 import { TransactionsByDateAndUserId } from "~/pages/report/queries/get-transactions-by-date"
+import { TransactionsByDateQuery } from "~/queries/get-transactions-by-date"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/ui/tabs"
 
-type GroupForChart = { pendingIncome: number; doneIncome: number; pendingExpense: number; doneExpense: number }
+import BarMetrics from "./bar-metrics"
+import LineMetrics from "./line-metrics"
 
 const groupByMonthAndSum = (data: TransactionsByDateQuery | TransactionsByDateAndUserId) => {
   const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
-  const grouped: Record<string, GroupForChart> = {}
+  const grouped: Record<string, { pending: number; done: number }> = {}
 
   // Initialize totals for all months to zero for both "pending" and "done"
   months.forEach((month) => {
     grouped[month] = {
-      pendingIncome: 0,
-      doneIncome: 0,
-      pendingExpense: 0,
-      doneExpense: 0,
+      pending: 0,
+      done: 0,
     }
   })
 
@@ -28,69 +24,53 @@ const groupByMonthAndSum = (data: TransactionsByDateQuery | TransactionsByDateAn
     const monthIndex = getMonth(parseISO(item.date))
     const month = months[monthIndex]
     if (item.transactions_instance?.is_done) {
-      if (item.transaction_types?.id === TRANSACTION_TYPE.INCOME) {
-        grouped[month].doneIncome += item.amount
-      } else {
-        grouped[month].doneExpense += Math.abs(item.amount)
-      }
+      grouped[month].done += item.amount
     } else {
-      if (item.transaction_types?.id === TRANSACTION_TYPE.INCOME) {
-        grouped[month].pendingIncome += item.amount
-      } else {
-        grouped[month].pendingExpense += Math.abs(item.amount)
-      }
+      grouped[month].pending += item.amount
     }
   })
 
   return months.map((month) => ({
     name: month,
-    pendingIncome: grouped[month].pendingIncome,
-    doneIncome: grouped[month].doneIncome,
-    pendingExpense: grouped[month].pendingExpense,
-    doneExpense: grouped[month].doneExpense,
+    pending: grouped[month].pending,
+    done: grouped[month].done,
   }))
 }
 
-const CustomTooltip = ({ active, payload, label }: { active: boolean; payload: any[]; label: string }) => {
-  if (active && payload?.length) {
-    return (
-      <div className="bg-muted p-3">
-        {payload.map((ele, index) => (
-          <React.Fragment key={index}>
-            <small key={index}>
-              <span style={{ color: ele.color }}>{ele.name}</span> : {formatCurrency(ele.value)}
-            </small>
-            <br />
-          </React.Fragment>
-        ))}
-      </div>
-    )
-  }
-  return null
+type OverviewProps = {
+  data: TransactionsByDateQuery | TransactionsByDateAndUserId
+  title: string
+  description: string
 }
 
-export default function Overview({ data }: { data: TransactionsByDateQuery | TransactionsByDateAndUserId }) {
+export default function Overview({ data, title, description }: OverviewProps) {
   const groupedData = groupByMonthAndSum(data)
 
   return (
-    <Card>
+    <Card className="relative">
       <CardHeader>
-        <CardTitle>Fluxo de Caixa</CardTitle>
-        <CardDescription>Seu fluxo de caixa de transações concluídas e pendentes.</CardDescription>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent className="pl-2">
-        <ResponsiveContainer width="100%" height={350}>
-          <BarChart width={500} height={300} data={groupedData}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip content={<CustomTooltip active={false} payload={[]} label={""} />} />
-            {/* <Legend /> */}
-            <Bar dataKey="doneIncome" name="Entradas Concluídas" fill="#10b981" stackId="a" minPointSize={1} />
-            <Bar dataKey="pendingIncome" name="Entradas Pendentes" fill="#8884d8" stackId="a" minPointSize={1} />
-            <Bar dataKey="doneExpense" name="Gastos Concluídos" fill="#10b981" stackId="b" minPointSize={1} />
-            <Bar dataKey="pendingExpense" name="Gastos Pendentes" fill="#8884d8" stackId="b" minPointSize={1} />
-          </BarChart>
-        </ResponsiveContainer>
+        <Tabs defaultValue="bar" className="space-y-4">
+          <TabsList className="absolute top-4 right-4">
+            <TabsTrigger value="bar">
+              <BarChart3Icon className="h-4 w-4" />
+            </TabsTrigger>
+            <TabsTrigger value="line">
+              <LineChartIcon className="h-4 w-4" />
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="bar" className="space-y-4">
+            <BarMetrics data={groupedData} title={title} />
+          </TabsContent>
+
+          <TabsContent value="line" className="space-y-4">
+            <LineMetrics data={groupedData} title={title} />
+          </TabsContent>
+        </Tabs>
       </CardContent>
     </Card>
   )

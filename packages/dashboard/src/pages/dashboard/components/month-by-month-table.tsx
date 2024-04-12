@@ -122,7 +122,7 @@ export default function MonthByMonthTable({ data }: { data: TransactionsByDateQu
     <Card className="h-full w-full">
       <CardHeader>
         <CardTitle>Consolidado Mês-a-Mês</CardTitle>
-        <CardDescription>Como foi seus gastos nos últimos 12 meses?</CardDescription>
+        <CardDescription>Como foi suas transações nos últimos 12 meses?</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="rounded-md border">
