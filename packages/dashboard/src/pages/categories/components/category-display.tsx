@@ -45,7 +45,7 @@ export function CategoryDisplay({ category }: CategoryDisplayProps) {
             {/* Right section with text */}
             {category.transaction_categories.name && (
               <div className="flex flex-col items-end">
-                <div className="text-m -mb-2 font-medium">Gastos</div>
+                <div className="text-m -mb-2 font-medium">Despesas</div>
                 <div className="mt-2 flex items-baseline">
                   <span className="text-sm font-semibold">{formatCurrency(category.amount)}</span>
                 </div>

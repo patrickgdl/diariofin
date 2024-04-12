@@ -36,7 +36,7 @@ export function SpentSoFarCard({ data, doneTotal, pendingTotal }: SpentSoFarCard
       <CardContent className="h-[280px] md:h-[225px] p-4 relative">
         <div className="absolute top-4 left-4">
           <div className="text-2xl font-bold">{formatCurrency(doneTotal)}</div>
-          <p className="text-xs text-muted-foreground">Gastos até agora</p>
+          <p className="text-xs text-muted-foreground">Despesas até agora</p>
         </div>
 
         <ResponsiveContainer width="100%" height="100%">

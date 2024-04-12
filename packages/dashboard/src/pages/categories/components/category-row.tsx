@@ -45,8 +45,8 @@ export function CategoryRow({ row, total, onSelect, defaultOpen }: CategoryRowPr
                   <Progress value={Math.abs(row.totalAmount / total) * 100} className="w-full" />
                 </TooltipTrigger>
                 <TooltipContent>
-                  Essa categoria equivale a {formatPercentage(Math.abs(row.totalAmount / total) * 100)} do seu gasto
-                  total.
+                  Essa categoria equivale a {formatPercentage(Math.abs(row.totalAmount / total) * 100)} das suas
+                  despesas totais.
                 </TooltipContent>
               </Tooltip>
             </TableCell>

@@ -18,14 +18,14 @@ import formatCurrency from "~/utils/format-currency"
 const data = [
   {
     id: "1",
-    category: "Total Gasto por Ano",
+    category: "Total de Despesa por Ano",
     "2022": 570, // Total spent in 2022
     "2023": 600, // Total spent in 2023
     "2024": 620, // Total spent in 2024
   },
   {
     id: "2",
-    category: "Média de Gasto por Mês",
+    category: "Média de Despesa por Mês",
     "2022": 570 / 12,
     "2023": 600 / 12,
     "2024": 620 / 12,

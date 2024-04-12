@@ -3,7 +3,7 @@ import useSupabase from "~/hooks/useSupabase"
 import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
 import { TransactionByDateProps, getTransactionByDate } from "~/queries/get-transactions-by-date"
 
-function useTransactionsByDate({ date, accountId, isDone = false }: TransactionByDateProps) {
+export default function useTransactionsByDate({ date, accountId, isDone = false }: TransactionByDateProps) {
   const supabase = useSupabase()
 
   const { data, ...rest } = useQuery({
@@ -32,7 +32,5 @@ function useTransactionsByDate({ date, accountId, isDone = false }: TransactionB
       ?.filter((d) => d.type_id === TRANSACTION_TYPE.INCOME)
       ?.reduce((acc, transaction) => acc + transaction.amount, 0) || 0
 
-  return { totalCount, expenseCount, incomeCount, data, ...rest }
+  return { totalCount, expenseCount, incomeCount, data: data || [], ...rest }
 }
-
-export default useTransactionsByDate

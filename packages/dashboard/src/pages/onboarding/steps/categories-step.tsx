@@ -36,7 +36,9 @@ export function CategoriesMainStep({ onSelectCategory, selectedCategories }: Cat
         <div className="space-y-2">
           <h1 className="text-2xl font-semibold tracking-tight">Categorias de Transação</h1>
           <p className="text-sm text-muted-foreground">Aqui estão algumas sugestões de categorias.</p>
-          <p className="text-sm font-semibold">Selecione as quê considerar relevante pro seu negócio.</p>
+          <p className="text-sm font-semibold">
+            Selecione as quê considerar relevante pro seu negócio. Você poderá criar novas categorias depois.
+          </p>
         </div>
 
         <div className="overflow-y-auto space-y-6 px-2 py-8 h-[calc(100vh-450px)]">
@@ -100,7 +102,7 @@ export function CategoriesSecondaryStep() {
               <h1 className="text-xl font-semibold tracking-tight">Transações de Saída</h1>
               <p className="text-sm text-muted-foreground">Dinheiro gasto é considerado uma transação de saída</p>
               <p className="text-sm text-muted-foreground">
-                Essas transações são organizadas em categorias, então é fácil de acompanhar seus gastos
+                Essas transações são organizadas em categorias, então é fácil de acompanhar suas despesas
               </p>
             </div>
           </TabsContent>
@@ -111,9 +113,6 @@ export function CategoriesSecondaryStep() {
                 <h1 className="text-xl font-semibold tracking-tight">Transações de Entrada</h1>
                 <p className="text-sm text-muted-foreground">
                   Dinheiro que você ganha é considerado transação de entrada.
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  Essas transações tem sua seção dedicada e não são inclusas nos seus gastos.
                 </p>
               </div>
 

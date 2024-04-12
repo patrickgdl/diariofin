@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom"
-import CardMetrics from "~/components/card-metrics"
+import LineMetrics from "~/components/line-metrics"
 import Loader from "~/components/loader"
 import Overview from "~/components/overview"
 import { Button } from "~/ui/button"
@@ -25,6 +25,9 @@ export default function Report() {
     return <Loader />
   }
 
+  const expenseTransactions = metricsData.filter((transaction) => transaction.amount < 0)
+  const incomeTransactions = metricsData.filter((transaction) => transaction.amount > 0)
+
   return (
     <div className="h-screen flex flex-col pl-4 pr-4">
       <div className="flex items-center md:justify-center w-full py-6 border-b-[1px]">
@@ -47,9 +50,8 @@ export default function Report() {
             </div>
           </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            <Overview data={metricsData} />
-
-            <CardMetrics data={metricsData} />
+            <Overview data={expenseTransactions} title="Despesas" description="Suas despesas anuais" />
+            <Overview data={incomeTransactions} title="Receitas" description="Suas receitas anuais" />
           </div>
         </div>
       </div>
