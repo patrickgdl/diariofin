@@ -1,8 +1,3 @@
-import { CaretSortIcon, CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons"
-import * as React from "react"
-import { useNavigate } from "react-router-dom"
-import useAppContext from "~/hooks/useAppContext"
-import { Account } from "~/types/account"
 import { Avatar, AvatarFallback, AvatarImage } from "@fluxozen/ui/avatar"
 import { Button } from "@fluxozen/ui/button"
 import {
@@ -16,6 +11,11 @@ import {
 } from "@fluxozen/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@fluxozen/ui/popover"
 import { cn } from "@fluxozen/ui/utils"
+import { CaretSortIcon, CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons"
+import * as React from "react"
+import { useNavigate } from "react-router-dom"
+import useAppContext from "~/hooks/useAppContext"
+import { Account } from "~/types/account"
 import { getAcronym } from "~/utils/get-acronym"
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<typeof PopoverTrigger> & {
