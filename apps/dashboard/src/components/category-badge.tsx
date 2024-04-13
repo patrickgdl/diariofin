@@ -1,5 +1,3 @@
-import { QueryData } from "@supabase/supabase-js"
-import { getCategoriesAndGroups } from "~/queries/get-categories-and-groups"
 import { Badge } from "@fluxozen/ui/badge"
 import { hexToRgb } from "~/utils/hexToRgb"
 

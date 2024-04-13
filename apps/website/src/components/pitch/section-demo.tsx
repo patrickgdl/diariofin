@@ -1,7 +1,5 @@
 "use client";
 
-import { Button } from "@fluxozen/ui/button";
-import { Icons } from "@fluxozen/ui/icons";
 import Link from "next/link";
 
 export function SectionDemo() {

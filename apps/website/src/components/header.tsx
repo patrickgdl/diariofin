@@ -1,12 +1,12 @@
 "use client";
 
+import { NavigationMenu } from "@fluxozen/ui/navigation-menu";
+import { cn } from "@fluxozen/ui/utils";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-import { NavigationMenu } from "@fluxozen/ui/navigation-menu";
-import { cn } from "@fluxozen/ui/utils";
 import { LogoIcon } from "./logo-icon";
 
 const links = [

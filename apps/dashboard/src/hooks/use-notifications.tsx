@@ -1,5 +1,3 @@
-// import { createClient } from "~/supabase/client";
-// import { getUserQuery } from "~/supabase/queries";
 // import { HeadlessService } from "@novu/headless";
 // import { useCallback, useEffect, useRef, useState } from "react";
 
