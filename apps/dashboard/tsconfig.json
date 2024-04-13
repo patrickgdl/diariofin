@@ -1,0 +1,11 @@
+{
+  "extends": "@fluxozen/tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "moduleResolution": "bundler"
+  },
+  "include": ["src"]
+}
