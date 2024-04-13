@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Next.js",
   "extends": "@fluxozen/tsconfig/base.json",
   "compilerOptions": {
     "baseUrl": ".",
@@ -10,9 +12,18 @@
         "name": "next"
       }
     ],
-    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
-    "moduleResolution": "node"
+    "allowJs": true,
+    "declaration": false,
+    "declarationMap": false,
+    "incremental": true,
+    "jsx": "preserve",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "strict": false,
+    "target": "es5"
   },
-  "include": [".", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "build", "dist", ".next", ".expo"]
+  "include": ["src", "next-env.d.ts", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

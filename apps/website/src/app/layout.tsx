@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import "@fluxozen/ui/globals.css";
 
+import { inter, satoshi } from "@/styles/fonts";
 import { Footer } from "@/components/footer";
 import { FooterCTA } from "@/components/footer-cta";
 import { Header } from "@/components/header";
@@ -31,7 +32,11 @@ export const viewport = {
 
 export default function Layout({ children }: { children: ReactElement }) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html
+      lang="pt-BR"
+      suppressHydrationWarning
+      className={cn(satoshi.variable, inter.variable)}
+    >
       <head>
         <LogSnagProvider
           token={process.env.NEXT_PUBLIC_LOGSNAG_TOKEN!}

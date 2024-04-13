@@ -1,7 +1,6 @@
 "use client";
 
 import { useCarousel } from "@fluxozen/ui/carousel";
-import { Icons } from "@fluxozen/ui/icons";
 import {
   Tooltip,
   TooltipContent,
@@ -11,6 +10,7 @@ import {
 import { cn } from "@fluxozen/ui/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useHotkeys } from "react-hotkeys-hook";
+import { MdEditCalendar, MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 export function CarouselToolbar() {
   const api = useCarousel();
@@ -27,7 +27,7 @@ export function CarouselToolbar() {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <button type="button" onClick={() => api.scrollTo(100)}>
-                    <Icons.Calendar size={18} />
+                    <MdEditCalendar size={18} />
                   </button>
                 </TooltipTrigger>
                 <TooltipContent
@@ -48,7 +48,7 @@ export function CarouselToolbar() {
                         api.scrollPrev();
                       }}
                     >
-                      <Icons.ChevronLeft className="h-6 w-6" />
+                      <MdChevronLeft className="h-6 w-6" />
                     </button>
                   </TooltipTrigger>
                   <TooltipContent
@@ -68,7 +68,7 @@ export function CarouselToolbar() {
                         api.scrollNext();
                       }}
                     >
-                      <Icons.ChevronRight className="h-6 w-6" />
+                      <MdChevronRight className="h-6 w-6" />
                     </button>
                   </TooltipTrigger>
                   <TooltipContent

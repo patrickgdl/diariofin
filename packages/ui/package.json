@@ -29,7 +29,6 @@
     "./dropdown-menu": "./src/components/dropdown-menu.tsx",
     "./form": "./src/components/form.tsx",
     "./hover-card": "./src/components/hover-card.tsx",
-    "./icons": "./src/components/icons.tsx",
     "./input": "./src/components/input.tsx",
     "./input-currency-alt": "./src/components/input-currency-alt.tsx",
     "./input-currency": "./src/components/input-currency.tsx",

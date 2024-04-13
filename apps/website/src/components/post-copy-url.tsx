@@ -1,8 +1,8 @@
 "use client";
 
-import { Icons } from "@fluxozen/ui/icons";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { MdOutlineContentCopy } from "react-icons/md";
 
 export function PostCopyURL({ slug }) {
   const [isCopied, setCopied] = useState(false);
@@ -31,7 +31,7 @@ export function PostCopyURL({ slug }) {
         initial={{ opacity: 1, scale: 1 }}
         animate={{ opacity: isCopied ? 0 : 1, scale: isCopied ? 0 : 1 }}
       >
-        <Icons.Copy />
+        <MdOutlineContentCopy />
       </motion.div>
 
       <motion.div
@@ -39,7 +39,17 @@ export function PostCopyURL({ slug }) {
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: isCopied ? 1 : 0, scale: isCopied ? 1 : 0 }}
       >
-        <Icons.Check />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={16}
+          height={17}
+          fill="none"
+        >
+          <path
+            fill="currentColor"
+            d="m14 5.167-8 8L2.333 9.5l.94-.94L6 11.28l7.06-7.053.94.94Z"
+          />
+        </svg>
       </motion.div>
 
       <span className="text-xs">Copiar link</span>

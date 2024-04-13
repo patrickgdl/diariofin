@@ -22,7 +22,7 @@ export function SectionStart() {
             />
           </svg>
         </div>
-        <h1 className="text-[85px] bottom-[250px] left-2 md:text-[426px] absolute md:right-0 md:bottom-8">
+        <h1 className="text-[85px] bottom-[250px] left-2 md:text-[350px] absolute md:right-0 md:bottom-8">
           FluxoZen
         </h1>
       </div>
