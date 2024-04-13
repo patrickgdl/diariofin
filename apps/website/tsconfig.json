@@ -1,0 +1,18 @@
+{
+  "extends": "@fluxozen/tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+    "moduleResolution": "node"
+  },
+  "include": [".", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "build", "dist", ".next", ".expo"]
+}
