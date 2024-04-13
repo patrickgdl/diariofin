@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "React Library",
+  "extends": "@fluxozen/tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "lib": ["ES2015", "DOM"],
+    "module": "ESNext",
+    "target": "ES6",
+    "jsx": "react-jsx",
+    "noEmit": true
+  },
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"]
+}

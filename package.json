@@ -1,29 +1,22 @@
 {
-  "workspaces": [
-    "packages/dashboard",
-    "packages/website"
-  ],
   "name": "fluxozen",
-  "description": "FluxoZen's packages",
   "private": true,
-  "version": "0.0.1",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev:all": "concurrently \"npm run dev:dashboard\" \"npm run dev:website\"",
-    "dev:dashboard": "npm run dev -w @fluxozen/dashboard",
-    "dev:website": "npm run dev -w @fluxozen/website",
-    "build:all": "concurrently \"npm run build:dashboard\" \"npm run build:website\"",
-    "build:dashboard": "npm run build -w @fluxozen/dashboard",
-    "build:website": "npm run build -w @fluxozen/website"
+    "build": "turbo build",
+    "clean": "git clean -xdf node_modules",
+    "dev": "turbo dev --parallel",
+    "start:dashboard": "turbo start --filter=@fluxozen/dashboard",
+    "start:website": "turbo start --filter=@fluxozen/website",
+    "dev:dashboard": "turbo dev --filter=@fluxozen/dashboard",
+    "dev:website": "turbo dev --filter=@fluxozen/website ",
+    "build:dashboard": "turbo build --filter=@fluxozen/dashboard",
+    "build:website": "turbo build --filter=@fluxozen/website"
   },
   "dependencies": {
-    "tailwind-merge": "^1.12.0",
-    "tailwindcss-animate": "^1.0.5"
-  },
-  "devDependencies": {
-    "@types/node": "^20.12.2",
-    "@types/react": "^18.2.73",
-    "@types/react-dom": "^18.2.23",
-    "concurrently": "^8.2.0",
-    "tailwindcss": "^3.3.3"
+    "turbo": "^1.13.2"
   }
 }
