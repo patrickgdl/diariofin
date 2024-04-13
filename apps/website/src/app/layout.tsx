@@ -1,15 +1,15 @@
-import "@fluxozen/ui/globals.css";
 import "@/styles/globals.css";
+import "@fluxozen/ui/globals.css";
 
 import { Footer } from "@/components/footer";
 import { FooterCTA } from "@/components/footer-cta";
 import { Header } from "@/components/header";
+import { cn } from "@fluxozen/ui/utils";
 import { Analytics } from "@vercel/analytics/react";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
 import { LogSnagProvider } from "../events/client";
-import { cn } from "@fluxozen/ui/utils";
 import { Provider } from "./provider";
 
 import type { Metadata } from "next";
