@@ -3,8 +3,11 @@ import * as ProgressPrimitive from "@radix-ui/react-progress";
 
 import { cn } from "../utils";
 
-// @ts-ignore
-const getColorForPercentage = (value) => {
+const getColorForPercentage = (value: number | null | undefined) => {
+  if (value === null || value === undefined) {
+    return "bg-secondary"; // Default color
+  }
+
   if (value > 100) {
     return "bg-red-500"; // Red for over 100%
   } else if (value > 80) {
