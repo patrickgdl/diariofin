@@ -51,24 +51,6 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6 p-4 md:p-6">
-      <div className="flex flex-col md:flex-row md:items-center space-y-4 justify-between">
-        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-
-        <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-2">
-          <CalendarDateRangePicker className="w-full" date={date} onSelectDate={setDate} />
-
-          {accounts.length > 0 && <AccountSwitcher accounts={[defaultAccount, ...accounts]} />}
-
-          {/* <ShareReport
-            type="Overview"
-            defaultValue={{
-              from: date.from?.toISOString() || "",
-              to: date.to?.toISOString() || "",
-            }}
-          /> */}
-        </div>
-      </div>
-
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -77,6 +59,19 @@ export default function DashboardPage() {
 
         {doneTransactions.data && pendingTransactions.data && (
           <TabsContent value="overview" className="space-y-4">
+            <div className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 justify-between">
+              <CalendarDateRangePicker className="w-full" date={date} onSelectDate={setDate} />
+
+              {accounts.length > 0 && <AccountSwitcher accounts={[defaultAccount, ...accounts]} />}
+              {/* <ShareReport
+            type="Overview"
+            defaultValue={{
+              from: date.from?.toISOString() || "",
+              to: date.to?.toISOString() || "",
+            }}
+          /> */}
+            </div>
+
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
               <Widget title="Saldo atual" value={doneTransactions.totalCount + pendingTransactions.totalCount}>
                 <DollarSignIcon className="mr-2 h-4 w-4" />

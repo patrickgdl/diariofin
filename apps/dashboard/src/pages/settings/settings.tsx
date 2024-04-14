@@ -17,9 +17,11 @@ const sidebarNavItems = [
 export default function SettingsLayout() {
   return (
     <div className="pb-16">
-      <div className="space-y-0.5 p-2 py-4">
-        <h2 className="text-2xl font-bold tracking-tight">Configurações</h2>
-        <p className="text-muted-foreground">Gerencie as configurações da sua conta e defina suas preferências.</p>
+      <div className="space-y-0.5 px-4 py-2">
+        <h2 className="text-lg font-bold tracking-tight">Configurações</h2>
+        <p className="text-sm text-muted-foreground">
+          Gerencie as configurações da sua conta e defina suas preferências.
+        </p>
       </div>
 
       <Separator className="mb-4" />
