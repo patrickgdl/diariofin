@@ -100,6 +100,7 @@
     "input-otp": "^1.2.2",
     "jsonfile": "^6.1.0",
     "lucide-react": "^0.359.0",
+    "pushmodal": "^1.0.3",
     "react-currency-input-field": "^3.6.11",
     "react-day-picker": "^8.10.0",
     "react-icons": "^5.0.1",

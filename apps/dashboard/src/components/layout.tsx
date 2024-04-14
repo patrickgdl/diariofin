@@ -20,6 +20,7 @@ import { Nav } from "./nav"
 import { ThemeToggle } from "./theme-toggle"
 import { UserNav } from "./user-nav"
 import { useUser } from "~/contexts/UserContext"
+import { ModalProvider } from "~/modals"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isCollapsed, setIsCollapsed] = useLocalStorageQuery<boolean>(LOCAL_STORAGE_KEYS.SIDEBAR_IS_COLLAPSED, false)
@@ -111,6 +112,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </ResizablePanelGroup>
 
       <Toaster />
+      <ModalProvider />
     </>
   )
 }
