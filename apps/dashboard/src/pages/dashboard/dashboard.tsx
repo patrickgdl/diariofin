@@ -1,3 +1,5 @@
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@fluxozen/ui/carousel"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@fluxozen/ui/tabs"
 import { endOfYear, startOfYear } from "date-fns"
 import { ArrowDownFromLine, ArrowUpFromLine, CalendarClockIcon, DollarSignIcon, HourglassIcon } from "lucide-react"
 import * as React from "react"
@@ -7,22 +9,22 @@ import { CalendarDateRangePicker } from "~/components/date-range-picker"
 import Overview from "~/components/overview"
 import { defaultAccount } from "~/contexts/AppContext"
 import useAppContext from "~/hooks/useAppContext"
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@fluxozen/ui/carousel"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@fluxozen/ui/tabs"
 
 import { TopCategoriesTable } from "../categories/components/top-categories-table"
 import { Insights } from "./components/insights"
 import MonthByMonthTable from "./components/month-by-month-table"
 import MonthlyIncomeProgress from "./components/monthly-income"
 import TransactionsReviewTable from "./components/transaction-review-table"
-import useTransactionsByDate from "./hooks/use-transactions-by-date"
 import Widget from "./components/widget"
+import useTransactionsByDate from "./hooks/use-transactions-by-date"
+
+import type { DateRangeCalendar } from "@fluxozen/ui/calendar"
 
 export default function DashboardPage() {
   const params = useParams()
   const { accounts, selectedAccount, setSelectedAccount } = useAppContext()
 
-  const [date, setDate] = React.useState<DateRange>({
+  const [date, setDate] = React.useState<DateRangeCalendar>({
     from: startOfYear(new Date()),
     to: endOfYear(new Date()),
   })
@@ -64,12 +66,12 @@ export default function DashboardPage() {
 
               {accounts.length > 0 && <AccountSwitcher accounts={[defaultAccount, ...accounts]} />}
               {/* <ShareReport
-            type="Overview"
-            defaultValue={{
-              from: date.from?.toISOString() || "",
-              to: date.to?.toISOString() || "",
-            }}
-          /> */}
+                type="Overview"
+                defaultValue={{
+                  from: date.from?.toISOString() || "",
+                  to: date.to?.toISOString() || "",
+                }}
+              /> */}
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">

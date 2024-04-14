@@ -1,6 +1,5 @@
 import { CalendarIcon } from "@radix-ui/react-icons"
 import format from "~/utils/format-date"
-import * as React from "react"
 import { Button } from "@fluxozen/ui/button"
 import { Calendar, DateRangeCalendar } from "@fluxozen/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@fluxozen/ui/popover"
