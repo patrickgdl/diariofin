@@ -59,9 +59,7 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
     },
     filterFn: (row, id, value) => {
       return (
-        // @ts-ignore
         (value[0] === "true" && row.original.transactions_instance?.is_done) ||
-        // @ts-ignore
         (value[0] === "false" && !row.original.transactions_instance?.is_done)
       )
     },
@@ -119,8 +117,7 @@ export const columns: ColumnDef<TransactionsQuery[0]>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      // @ts-ignore
-      return row.original.transactions_instance.is_cancelled || row.original.transactions_instance.is_refunded ? (
+      return row.original.transactions_instance?.is_cancelled || row.original.transactions_instance?.is_refunded ? (
         <TableCell />
       ) : (
         <TableCell>

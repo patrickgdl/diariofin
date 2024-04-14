@@ -1,10 +1,8 @@
-import { ChevronRight } from "lucide-react"
-import { Account } from "~/types/account"
 import { Avatar, AvatarFallback, AvatarImage } from "@fluxozen/ui/avatar"
-import { Badge } from "@fluxozen/ui/badge"
 import { Card, CardTitle } from "@fluxozen/ui/card"
 import { ScrollArea } from "@fluxozen/ui/scroll-area"
-import formatCurrency from "~/utils/format-currency"
+import { ChevronRight } from "lucide-react"
+import { Account } from "~/types/account"
 import { getAcronym } from "~/utils/get-acronym"
 
 interface AccountsListProps {
@@ -13,16 +11,6 @@ interface AccountsListProps {
 }
 
 export function AccountsList({ items, onSelect }: AccountsListProps) {
-  // Group items by category
-  // const groupedItems = items.reduce((acc, item) => {
-  //   if (!acc[item.name]) {
-  //     acc[item.name] = []
-  //   }
-  //   // @ts-ignore
-  //   acc[item.category].push(item)
-  //   return acc
-  // }, {} as Record<string, any[]>)
-
   return (
     <ScrollArea className="h-screen">
       <div className="flex flex-col gap-4 p-4 pt-0">

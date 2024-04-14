@@ -38,7 +38,6 @@ const groupByMonthAndSum = (data: TransactionsByDateQuery) => {
   data.forEach((item) => {
     const monthIndex = getMonth(parseISO(item.date))
     const month = months[monthIndex]
-    // @ts-ignore
     if (item.transaction_types?.id === TRANSACTION_TYPE.INCOME) {
       grouped[month].incoming += item.amount
     } else {

@@ -1,17 +1,18 @@
+import { Button } from "@fluxozen/ui/button"
+import { ColorPicker, SOLID_COLORS } from "@fluxozen/ui/color-picker"
+import { useToast } from "@fluxozen/ui/use-toast"
 import * as React from "react"
 import { EmojiPicker } from "~/components/emoji-picker"
 import { GroupCombobox } from "~/components/group-combobox"
 import { useAuthUser } from "~/contexts/SessionContext"
 import { useNewCategoryGroup } from "~/hooks/use-new-category-group"
-import { Button } from "@fluxozen/ui/button"
-import { ColorPicker, SOLID_COLORS } from "@fluxozen/ui/color-picker"
-import { useToast } from "@fluxozen/ui/use-toast"
+import { popModal } from "~/modals"
 
 import useCategoryGroups from "../hooks/use-category-groups"
 import { useNewCategory } from "../hooks/use-new-category"
 import { useUpdateCategoryGroup } from "../hooks/use-update-category-group"
 
-export function CategoriesForm({ onFinish }: { onFinish: () => void }) {
+export function CategoriesForm() {
   const user = useAuthUser()
   const { toast } = useToast()
 
@@ -48,7 +49,7 @@ export function CategoriesForm({ onFinish }: { onFinish: () => void }) {
         })
       }
 
-      onFinish()
+      popModal("DialogCategory")
     } else if (!name) {
       toast({ title: "Nome da categoria não preenchido", variant: "destructive" })
     } else if (!emoji) {
