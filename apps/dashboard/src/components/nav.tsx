@@ -70,7 +70,7 @@ export function Nav({ links, isCollapsed, accounts }: NavProps) {
 
   return (
     <div data-collapsed="false" className="group h-screen flex-1 hidden md:flex flex-col px-4">
-      <div className="flex items-center flex-shrink-0 mx-auto py-5">
+      <div className="flex items-center bg-gradient-to-b flex-shrink-0 mx-auto py-5">
         <Logo className="w-32" />
       </div>
 
@@ -81,7 +81,7 @@ export function Nav({ links, isCollapsed, accounts }: NavProps) {
               key={index}
               to={link.route}
               className={({ isActive }) =>
-                cn(buttonVariants({ variant: isActive ? "default" : "ghost", size: "sm" }), "justify-between")
+                cn(buttonVariants({ variant: isActive ? "glow" : "ghost", size: "sm" }), "justify-between")
               }
             >
               <span className="flex items-center gap-2">

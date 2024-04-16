@@ -31,7 +31,7 @@ export function MobileNav({ links }: MobileNavProps) {
                   to={link.route}
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
-                    cn(buttonVariants({ variant: isActive ? "default" : "ghost", size: "sm" }), "justify-between")
+                    cn(buttonVariants({ variant: isActive ? "glow" : "ghost", size: "sm" }), "justify-between")
                   }
                 >
                   <span className="flex items-center gap-2">
