@@ -76,7 +76,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               collapsible
               id="sidebar"
               order={1}
-              collapsedSize={7}
+              collapsedSize={5}
               defaultSize={isDesktop ? sizes[0] : 15}
               onExpand={() => setIsCollapsed(false)}
               onCollapse={() => setIsCollapsed(true)}

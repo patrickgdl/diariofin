@@ -8,8 +8,8 @@ export default function RegisterPage() {
   return (
     <div className="h-screen grid w-full grid-cols-1 md:grid-cols-3">
       <div className="col-span-1 flex items-center justify-center md:col-span-2">
-        <div className="w-full max-w-md overflow-hidden border-y border-gray-200 border">
-          <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 px-4 py-6 pt-8 text-center sm:px-16">
+        <div className="w-full max-w-md overflow-hidden">
+          <div className="flex flex-col items-center justify-center space-y-3 px-4 py-6 pt-8 text-center sm:px-16">
             <Link to="/">
               <Logo className="w-32" />
             </Link>

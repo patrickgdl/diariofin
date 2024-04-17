@@ -35,7 +35,7 @@ export function MobileNav({ links }: MobileNavProps) {
                   }
                 >
                   <span className="flex items-center gap-2">
-                    <link.icon size={16} />
+                    {link.icon}
                     {link.label}
                   </span>
                 </NavLink>

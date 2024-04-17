@@ -118,7 +118,7 @@ export default function LoginForm() {
 
       <p className="text-center text-sm text-gray-500">
         Não tem uma conta?{" "}
-        <Link to="/register" className="font-semibold text-gray-500 transition-colors hover:text-black">
+        <Link to="/register" className="font-semibold text-gray-500 transition-colors hover:text-gray-600">
           Cadastre-se
         </Link>
       </p>
