@@ -1,5 +1,4 @@
 import { Table, TableBody } from "@fluxozen/ui/table"
-import { useNavigate } from "react-router-dom"
 import { TransactionsByTypeQuery } from "~/queries/get-transactions-by-type"
 
 import { CategoryRow } from "./category-row"
@@ -29,11 +28,10 @@ export type TransactionGroupedByCategory = {
 type CategoryRowProps = {
   data: TransactionsByTypeQuery
   total: number
+  onSelect: (category: TransactionGroupedByCategory["categories"][0]) => void
 }
 
-export function CategoriesTable({ data, total }: CategoryRowProps) {
-  const navigate = useNavigate()
-
+export function CategoriesTable({ data, total, onSelect }: CategoryRowProps) {
   const groupedData = data
     .reduce((acc, curr) => {
       if (!curr.transaction_categories?.category_groups) {
@@ -78,12 +76,7 @@ export function CategoriesTable({ data, total }: CategoryRowProps) {
         <Table>
           <TableBody>
             {groupedData.map((row) => (
-              <CategoryRow
-                row={row}
-                key={row.id}
-                total={total}
-                onSelect={(c) => navigate(`/transactions/${c.transactionId}`)}
-              />
+              <CategoryRow row={row} key={row.id} total={total} onSelect={onSelect} />
             ))}
           </TableBody>
         </Table>

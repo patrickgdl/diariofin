@@ -1,16 +1,16 @@
+import { Avatar, AvatarFallback } from "@fluxozen/ui/avatar"
+import { Separator } from "@fluxozen/ui/separator"
 import ErrorState from "~/components/error-state"
 import Loader from "~/components/loader"
 import { TransactionsTableRaw } from "~/components/transactions-table/transactions-table-raw"
 import useTransactionsByCategoryQuery from "~/hooks/useTransactionsByCategory"
 import { columns } from "~/pages/accounts/components/transactions-columns"
-import { Avatar, AvatarFallback } from "@fluxozen/ui/avatar"
-import { Separator } from "@fluxozen/ui/separator"
 import formatCurrency from "~/utils/format-currency"
 
-import { TransactionsByCategoryGrouped } from "./top-categories-table"
+import { TransactionGroupedByCategory } from "./categories-table"
 
 export interface CategoryDisplayProps {
-  category: TransactionsByCategoryGrouped["categories"][0] | null
+  category: TransactionGroupedByCategory["categories"][0] | null
 }
 
 export function CategoryDisplay({ category }: CategoryDisplayProps) {

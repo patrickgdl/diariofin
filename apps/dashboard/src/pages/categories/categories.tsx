@@ -65,7 +65,7 @@ export default function CategoriesDashboard() {
           <SpentSoFarCard data={data} doneTotal={doneTotal} pendingTotal={pendingTotal} />
 
           <div className="py-8">
-            <CategoriesTable data={data} total={total} />
+            <CategoriesTable data={data} total={total} onSelect={setSelected} />
           </div>
         </div>
       </ResizablePanel>

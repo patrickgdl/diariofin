@@ -1,22 +1,22 @@
 import { Badge } from "@fluxozen/ui/badge"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@fluxozen/ui/collapsible"
 import { Progress } from "@fluxozen/ui/progress"
 import { TableCell, TableRow } from "@fluxozen/ui/table"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@fluxozen/ui/tooltip"
+import { ChevronRightIcon } from "lucide-react"
+import * as React from "react"
 import formatCurrency from "~/utils/format-currency"
 import { formatPercentage } from "~/utils/format-percentage"
 import { hexToRgb } from "~/utils/hexToRgb"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@fluxozen/ui/collapsible"
 
-import { TransactionsByCategoryGrouped } from "./top-categories-table"
-import * as React from "react"
 import { CategoriesRowExpanded } from "./categories-row-expanded"
-import { ChevronRightIcon } from "lucide-react"
+import { TransactionGroupedByCategory } from "./categories-table"
 
 type CategoryRowProps = {
   total: number
-  row: TransactionsByCategoryGrouped
+  row: TransactionGroupedByCategory
   defaultOpen?: boolean
-  onSelect: (category: TransactionsByCategoryGrouped["categories"][0]) => void
+  onSelect: (category: TransactionGroupedByCategory["categories"][0]) => void
 }
 
 export function CategoryRow({ row, total, onSelect, defaultOpen }: CategoryRowProps) {

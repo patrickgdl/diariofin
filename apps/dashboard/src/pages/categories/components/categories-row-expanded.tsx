@@ -1,12 +1,12 @@
+import { Progress } from "@fluxozen/ui/progress"
 import { TableCell, TableRow } from "@fluxozen/ui/table"
 import formatCurrency from "~/utils/format-currency"
 
-import { TransactionsByCategoryGrouped } from "./top-categories-table"
-import { Progress } from "@fluxozen/ui/progress"
+import { TransactionGroupedByCategory } from "./categories-table"
 
 type CategoriesRowExpandedProps = {
-  categories: TransactionsByCategoryGrouped["categories"][0][]
-  onSelect: (category: TransactionsByCategoryGrouped["categories"][0]) => void
+  categories: TransactionGroupedByCategory["categories"][0][]
+  onSelect: (category: TransactionGroupedByCategory["categories"][0]) => void
 }
 
 export function CategoriesRowExpanded({ categories, onSelect }: CategoriesRowExpandedProps) {
