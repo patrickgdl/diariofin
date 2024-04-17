@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Políticas | FluxoZen",
+  title: "Políticas | Fluxozen",
 };
 
 export default function Page() {
@@ -18,8 +18,8 @@ export default function Page() {
           </p>
 
           <p className="leading-7 mt-8">
-            A FluxoZen Labs AB ("nós", "nos" ou "nosso") opera o aplicativo
-            FluxoZen (doravante referido como "Serviço").
+            A Fluxozen Labs AB ("nós", "nos" ou "nosso") opera o aplicativo
+            Fluxozen (doravante referido como "Serviço").
           </p>
 
           <p className="leading-7 mt-8">
@@ -44,7 +44,7 @@ export default function Page() {
                 <strong>Serviço</strong>
               </p>
               <p className="leading-7 mt-8">
-                Serviço é o aplicativo FluxoZen operado pela FluxoZen Labs AB
+                Serviço é o aplicativo Fluxozen operado pela Fluxozen Labs AB
               </p>
             </li>
             <li>
@@ -200,7 +200,7 @@ export default function Page() {
 
           <h2>Uso de Dados</h2>
           <p className="leading-7 mt-8">
-            A FluxoZen Labs AB utiliza os dados coletados para diversos fins:
+            A Fluxozen Labs AB utiliza os dados coletados para diversos fins:
           </p>
           <ul>
             <li>Para fornecer e manter nosso Serviço</li>
@@ -230,12 +230,12 @@ export default function Page() {
           </h2>
           <p className="leading-7 mt-8">
             Se você estiver no Espaço Econômico Europeu (EEE), a base legal da
-            FluxoZen Labs AB para a coleta e uso das informações pessoais
+            Fluxozen Labs AB para a coleta e uso das informações pessoais
             descritas nesta Política de Privacidade depende dos Dados Pessoais
             que coletamos e do contexto específico em que os coletamos.
           </p>
           <p className="leading-7 mt-8">
-            A FluxoZen Labs AB pode processar seus Dados Pessoais porque:
+            A Fluxozen Labs AB pode processar seus Dados Pessoais porque:
           </p>
           <ul>
             <li>Precisamos executar um contrato com você</li>
@@ -250,7 +250,7 @@ export default function Page() {
 
           <h2>Retenção de Dados</h2>
           <p className="leading-7 mt-8">
-            A FluxoZen Labs AB reterá seus Dados Pessoais apenas pelo tempo
+            A Fluxozen Labs AB reterá seus Dados Pessoais apenas pelo tempo
             necessário para os fins estabelecidos nesta Política de Privacidade.
             Retornaremos e usaremos seus Dados Pessoais na medida do necessário
             para cumprir nossas obrigações legais (por exemplo, se formos
@@ -258,7 +258,7 @@ export default function Page() {
             resolver disputas e fazer cumprir nossos acordos e políticas legais.
           </p>
           <p className="leading-7 mt-8">
-            A FluxoZen Labs AB também reterá Dados de Uso para fins de análise
+            A Fluxozen Labs AB também reterá Dados de Uso para fins de análise
             interna. Os Dados de Uso geralmente são retidos por um período de
             tempo menor, exceto quando esses dados são usados para fortalecer a
             segurança ou melhorar a funcionalidade do nosso Serviço, ou somos
@@ -283,7 +283,7 @@ export default function Page() {
             transferência.
           </p>
           <p className="leading-7 mt-8">
-            A FluxoZen Labs AB tomará todas as medidas razoavelmente necessárias
+            A Fluxozen Labs AB tomará todas as medidas razoavelmente necessárias
             para garantir que seus dados sejam tratados com segurança e de
             acordo com esta Política de Privacidade e nenhuma transferência de
             seus Dados Pessoais ocorrerá para uma organização ou país a menos
@@ -294,7 +294,7 @@ export default function Page() {
           <h2>Divulgação de Dados</h2>
           <h3>Transação Comercial</h3>
           <p className="leading-7 mt-8">
-            Se a FluxoZen Labs AB estiver envolvida em uma fusão, aquisição ou
+            Se a Fluxozen Labs AB estiver envolvida em uma fusão, aquisição ou
             venda de ativos, seus Dados Pessoais podem ser transferidos.
             Forneceremos aviso antes de seus Dados Pessoais serem transferidos e
             se tornarem sujeitos a uma Política de Privacidade diferente.
@@ -302,7 +302,7 @@ export default function Page() {
 
           <h3>Divulgação para Cumprimento da Lei</h3>
           <p className="leading-7 mt-8">
-            Em determinadas circunstâncias, a FluxoZen Labs AB pode ser obrigada
+            Em determinadas circunstâncias, a Fluxozen Labs AB pode ser obrigada
             a divulgar seus Dados Pessoais se exigido por lei ou em resposta a
             solicitações válidas por autoridades públicas (por exemplo, um
             tribunal ou uma agência governamental).
@@ -310,13 +310,13 @@ export default function Page() {
 
           <h3>Requisitos Legais</h3>
           <p className="leading-7 mt-8">
-            A FluxoZen Labs AB pode divulgar seus Dados Pessoais de boa fé
+            A Fluxozen Labs AB pode divulgar seus Dados Pessoais de boa fé
             acreditar que tal ação é necessária para:
           </p>
           <ul>
             <li>Para cumprir uma obrigação legal</li>
             <li>
-              Para proteger e defender os direitos ou propriedade da FluxoZen
+              Para proteger e defender os direitos ou propriedade da Fluxozen
               Labs AB
             </li>
             <li>
@@ -359,7 +359,7 @@ export default function Page() {
           </h2>
           <p className="leading-7 mt-8">
             Se você é residente no Espaço Econômico Europeu (EEE), você tem
-            certos direitos de proteção de dados. A FluxoZen Labs AB visa tomar
+            certos direitos de proteção de dados. A Fluxozen Labs AB visa tomar
             medidas razoáveis para permitir que você corrija, altere, exclua ou
             limite o uso de seus Dados Pessoais.
           </p>
@@ -417,7 +417,7 @@ export default function Page() {
               <p className="leading-7 mt-8">
                 <strong>O direito de retirar o consentimento.</strong> Você
                 também tem o direito de retirar seu consentimento a qualquer
-                momento em que a FluxoZen Labs AB confiou no seu consentimento
+                momento em que a Fluxozen Labs AB confiou no seu consentimento
                 para processar suas informações pessoais.
               </p>
             </li>

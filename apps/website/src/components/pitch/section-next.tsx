@@ -14,7 +14,7 @@ export function SectionNext() {
         <div className="flex justify-between text-lg p-4">
           <span>O que vem a seguir</span>
           <span className="text-[#878787]">
-            <Link href="/">FluxoZen</Link>
+            <Link href="/">Fluxozen</Link>
           </span>
         </div>
 
@@ -22,9 +22,9 @@ export function SectionNext() {
           <div className="grid md:grid-cols-2 gap-8 px-4 md:px-0 md:pt-0 overflow-auto pb-[100px] md:pb-0">
             <div className="space-y-8">
               <Card>
-                <CardTitle>FluxoZen AI</CardTitle>
+                <CardTitle>Fluxozen AI</CardTitle>
                 <CardContent>
-                  <Image src={ai} width={362} alt="FluxoZen AI" quality={100} />
+                  <Image src={ai} width={362} alt="Fluxozen AI" quality={100} />
                 </CardContent>
               </Card>
 

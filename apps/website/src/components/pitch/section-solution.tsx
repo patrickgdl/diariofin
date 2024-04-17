@@ -9,7 +9,7 @@ export function SectionSolution() {
       <div className="flex justify-between text-lg p-4">
         <span>Nossa solução</span>
         <span className="text-[#878787]">
-          <Link href="/">FluxoZen</Link>
+          <Link href="/">Fluxozen</Link>
         </span>
       </div>
 
@@ -71,7 +71,7 @@ export function SectionSolution() {
               <h2 className="text-2xl">Intermediário</h2>
 
               <p className="text-[#878787] text-sm text-center">
-                FluxoZen serve como ponte entre você e suas finanças, agilizando
+                Fluxozen serve como ponte entre você e suas finanças, agilizando
                 seus procedimentos de final de mês, reduzindo o trabalho manual,
                 e empacotando tudo facilmente para a análise financeira.
                 Priorizando a experiência do usuário em vez de construir um
@@ -129,7 +129,7 @@ export function SectionSolution() {
                 possível de proprietários de empresas. Todos nós testemunhamos a
                 ascensão da IA e já integramos vários aspectos de IA em nossa
                 plataforma. Por exemplo, implementamos a automação de categorias
-                e o envolvimento com suas finanças por meio do FluxoZen IA,
+                e o envolvimento com suas finanças por meio do Fluxozen IA,
                 permitindo que os usuários solicitem quaisquer insights sobre
                 seu negócio.
               </p>

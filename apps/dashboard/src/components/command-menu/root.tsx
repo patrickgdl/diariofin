@@ -53,7 +53,7 @@ export function CommandRoot() {
             </svg>
 
             <div className="flex items-center justify-between w-full">
-              <span>Pergunte a IA da FluxoZen...</span>
+              <span>Pergunte a IA da Fluxozen...</span>
 
               <span
                 className="relative rounded-lg overflow-hidden border dark:p-[1px] dark:border-none"

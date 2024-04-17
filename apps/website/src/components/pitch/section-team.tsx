@@ -10,7 +10,7 @@ export function SectionTeam() {
       <div className="flex justify-between text-lg p-4">
         <span>Quem nós somos</span>
         <span className="text-[#878787]">
-          <Link href="/">FluxoZen</Link>
+          <Link href="/">Fluxozen</Link>
         </span>
       </div>
 

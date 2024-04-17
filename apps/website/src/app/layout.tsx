@@ -18,9 +18,9 @@ import type { ReactElement } from "react";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fluxozen.app"),
-  title: "FluxoZen | Seu negócio de maneira mais inteligente",
+  title: "Fluxozen | Seu negócio de maneira mais inteligente",
   description:
-    "O FluxoZen fornece uma visão melhor do seu negócio e automatiza as tarefas chatas, permitindo que você se concentre no que você gosta de fazer.",
+    "O Fluxozen fornece uma visão melhor do seu negócio e automatiza as tarefas chatas, permitindo que você se concentre no que você gosta de fazer.",
 };
 
 export const viewport = {

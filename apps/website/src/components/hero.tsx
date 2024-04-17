@@ -30,7 +30,7 @@ export function Hero() {
       </h1>
 
       <p className="mt-4 md:mt-6 text-[#707070] max-w-[600px]">
-        FluxoZen fornece uma visão melhor do seu negócio e automatiza as tarefas
+        Fluxozen fornece uma visão melhor do seu negócio e automatiza as tarefas
         chatas, permitindo que você se concentre no que você gosta de fazer.
       </p>
 

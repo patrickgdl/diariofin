@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Termos e Condições | FluxoZen",
+  title: "Termos e Condições | Fluxozen",
 };
 
 export default function Page() {
@@ -19,13 +19,13 @@ export default function Page() {
 
           <p className="leading-7 mt-8">
             Estes Termos e Condições ("Termos", "Termos e Condições") regem sua
-            relação com o aplicativo FluxoZen (o "Serviço") operado pela
-            FluxoZen Labs AB ("nós", "nos" ou "nosso").
+            relação com o aplicativo Fluxozen (o "Serviço") operado pela
+            Fluxozen Labs AB ("nós", "nos" ou "nosso").
           </p>
 
           <p className="leading-7 mt-8">
             Por favor, leia estes Termos e Condições cuidadosamente antes de
-            usar nosso aplicativo FluxoZen (o "Serviço").
+            usar nosso aplicativo Fluxozen (o "Serviço").
           </p>
 
           <p className="leading-7 mt-8">
@@ -52,25 +52,25 @@ export default function Page() {
           <p className="leading-7 mt-8">
             Ao final de cada Ciclo de Faturamento, sua Assinatura será renovada
             automaticamente nas exatas mesmas condições, a menos que você a
-            cancele ou a FluxoZen Labs AB a cancele. Você pode cancelar a
+            cancele ou a Fluxozen Labs AB a cancele. Você pode cancelar a
             renovação de sua Assinatura seja através da página de gerenciamento
             de conta online ou entrando em contato com a equipe de suporte ao
-            cliente da FluxoZen Labs AB.
+            cliente da Fluxozen Labs AB.
           </p>
 
           <p className="leading-7 mt-8">
             Um método de pagamento válido, incluindo cartão de crédito, é
             necessário para processar o pagamento de sua Assinatura. Você deve
-            fornecer à FluxoZen Labs AB informações de faturamento precisas e
+            fornecer à Fluxozen Labs AB informações de faturamento precisas e
             completas, incluindo nome completo, endereço, estado, código postal,
             número de telefone e informações de método de pagamento válido. Ao
             enviar tais informações de pagamento, você autoriza automaticamente
-            a FluxoZen Labs AB a cobrar todas as taxas de assinatura incorridas
+            a Fluxozen Labs AB a cobrar todas as taxas de assinatura incorridas
             através de sua conta para quaisquer instrumentos de pagamento.
           </p>
 
           <p className="leading-7 mt-8">
-            Caso a cobrança automática falhe por qualquer motivo, a FluxoZen
+            Caso a cobrança automática falhe por qualquer motivo, a Fluxozen
             Labs AB emitirá uma fatura eletrônica indicando que você deve
             proceder manualmente, dentro de um prazo específico, com o pagamento
             integral correspondente ao período de faturamento conforme indicado
@@ -80,14 +80,14 @@ export default function Page() {
           <h2>Alterações de Taxas</h2>
 
           <p className="leading-7 mt-8">
-            A FluxoZen Labs AB, a seu exclusivo critério e a qualquer momento,
+            A Fluxozen Labs AB, a seu exclusivo critério e a qualquer momento,
             pode modificar as taxas de assinatura para as Assinaturas. Qualquer
             alteração nas taxas de assinatura entrará em vigor ao final do Ciclo
             de Faturamento então vigente.
           </p>
 
           <p className="leading-7 mt-8">
-            A FluxoZen Labs AB fornecerá a você um aviso prévio razoável de
+            A Fluxozen Labs AB fornecerá a você um aviso prévio razoável de
             qualquer alteração nas taxas de assinatura para lhe dar a
             oportunidade de rescindir sua Assinatura antes que tal alteração
             entre em vigor.
@@ -104,7 +104,7 @@ export default function Page() {
           <p className="leading-7 mt-8">
             Determinados pedidos de reembolso para Assinaturas podem ser
             considerados pela Acre Labs AB caso a caso e concedidos a critério
-            exclusivo da FluxoZen Labs AB.
+            exclusivo da Fluxozen Labs AB.
           </p>
 
           <h2>Conteúdo</h2>
@@ -197,23 +197,23 @@ export default function Page() {
           <p className="leading-7 mt-8">
             O Serviço e seu conteúdo original (excluindo o Conteúdo fornecido
             pelos usuários), recursos e funcionalidades são e permanecerão como
-            propriedade exclusiva da FluxoZen Labs AB e seus licenciantes. O
+            propriedade exclusiva da Fluxozen Labs AB e seus licenciantes. O
             Serviço é protegido por direitos autorais, marcas registradas e
             outras leis tanto da Suécia quanto de países estrangeiros. Nossas
             marcas registradas e trade dress não podem ser usadas em conexão com
             qualquer produto ou serviço sem o consentimento prévio por escrito
-            da FluxoZen Labs AB.
+            da Fluxozen Labs AB.
           </p>
 
           <h2>Links para Outros Sites da Web</h2>
 
           <p className="leading-7 mt-8">
             Nosso Serviço pode conter links para sites ou serviços de terceiros
-            que não são de propriedade ou controlados pela FluxoZen Labs AB.
+            que não são de propriedade ou controlados pela Fluxozen Labs AB.
           </p>
 
           <p className="leading-7 mt-8">
-            A FluxoZen Labs AB não tem controle sobre e não assume
+            A Fluxozen Labs AB não tem controle sobre e não assume
             responsabilidade pelo conteúdo, políticas de privacidade ou práticas
             de quaisquer sites ou serviços de terceiros. Você reconhece ainda e
             concorda que a Acre Labs Ab não será responsável ou
@@ -246,7 +246,7 @@ export default function Page() {
           <h2>Limitação de Responsabilidade</h2>
 
           <p className="leading-7 mt-8">
-            Em nenhum caso a FluxoZen Labs AB, nem seus diretores, funcionários,
+            Em nenhum caso a Fluxozen Labs AB, nem seus diretores, funcionários,
             parceiros, agentes, fornecedores ou afiliados, serão responsáveis
             por quaisquer danos indiretos, incidentais, especiais,
             consequenciais ou punitivos, incluindo, sem limitação, perda de
@@ -274,7 +274,7 @@ export default function Page() {
           </p>
 
           <p className="leading-7 mt-8">
-            A FluxoZen Labs AB, suas subsidiárias, afiliadas e licenciantes não
+            A Fluxozen Labs AB, suas subsidiárias, afiliadas e licenciantes não
             garantem que a) o Serviço funcionará ininterruptamente, seguro ou
             disponível em qualquer momento ou local; b) quaisquer erros ou
             defeitos serão corrigidos; c) o Serviço está livre de vírus ou

@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Preços | FluxoZen",
+  title: "Preços | Fluxozen",
 };
 
 export default function Page() {

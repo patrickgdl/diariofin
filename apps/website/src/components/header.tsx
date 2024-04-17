@@ -123,7 +123,7 @@ export function Header() {
         >
           <div className="mt-4 flex justify-between p-3 relative">
             <button type="button" onClick={handleToggleMenu}>
-              <span className="sr-only">FluxoZen Logo</span>
+              <span className="sr-only">Fluxozen Logo</span>
               <LogoIcon />
             </button>
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Suporte | FluxoZen",
+  title: "Suporte | Fluxozen",
 };
 
 export default function Page() {

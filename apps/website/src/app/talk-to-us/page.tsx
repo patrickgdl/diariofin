@@ -2,7 +2,7 @@ import { CalEmbed } from "@/components/cal-embed";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Fale conosco | FluxoZen",
+  title: "Fale conosco | Fluxozen",
 };
 
 export default function Page() {

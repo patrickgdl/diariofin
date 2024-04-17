@@ -7,7 +7,7 @@ export function SectionSubscription() {
       <div className="flex justify-between text-lg p-4">
         <span>Como faremos dinheiro</span>
         <span className="text-[#878787]">
-          <Link href="/">FluxoZen</Link>
+          <Link href="/">Fluxozen</Link>
         </span>
       </div>
 
