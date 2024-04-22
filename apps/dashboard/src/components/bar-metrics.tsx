@@ -34,8 +34,8 @@ export default function BarMetrics({ data, title }: LineMetricsProps) {
       <BarChart data={data}>
         <CartesianGrid vertical={false} stroke="hsl(var(--muted))" />
 
-        <XAxis dataKey="name" />
-        <YAxis />
+        <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+        <YAxis tick={{ fontSize: 12 }} />
         <Tooltip content={<CustomTooltip active={false} payload={[]} label={""} />} />
         <Bar dataKey="done" name={title} stackId="a" fill="hsl(var(--secondary-foreground))" />
         <Bar dataKey="pending" name={`${title} Pendentes`} stackId="b" fill="hsl(var(--muted-foreground))" />

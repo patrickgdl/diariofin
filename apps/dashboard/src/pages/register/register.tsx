@@ -23,13 +23,13 @@ export default function RegisterPage() {
       </div>
 
       <div className="hidden h-full flex-col justify-center space-y-12 overflow-hidden border-l border-gray-200 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur md:flex">
-        <Link to="/" target="_blank" className="ml-12 h-1/2 w-[150%] rounded-xl border border-gray-200 p-4 shadow-xl">
+        <Link to="/" target="_blank" className="ml-12 h-1/2 w-[150%] rounded-lg border border-gray-200 p-4 shadow-xl">
           <BlurImage
             alt="Dashboard illustration"
             src="/dashboard.png"
             width={2024}
             height={1024}
-            className="h-full rounded-xl border border-gray-200 object-cover object-left-top shadow-md"
+            className="h-full rounded-lg border border-gray-200 object-cover object-left-top shadow-md"
           />
         </Link>
       </div>
