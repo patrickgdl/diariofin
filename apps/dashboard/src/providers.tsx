@@ -2,7 +2,7 @@ import "./translations"
 
 import { TooltipProvider } from "@fluxozen/ui/tooltip"
 import { toast } from "@fluxozen/ui/use-toast"
-import { LogSnagProvider } from "@logsnag/react"
+import { LogSnagProvider, useLogSnag } from "@logsnag/react"
 import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import i18next from "i18next"
@@ -27,6 +27,12 @@ const queryClient = new QueryClient({
 })
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
+  const logsnag = useLogSnag()
+
+  React.useEffect(() => {
+    logsnag.setDebug(import.meta.env.VITE_LOGSNAG_DISABLED! === "true" ? true : false)
+  }, [])
+
   return (
     <LogSnagProvider
       token={import.meta.env.VITE_LOGSNAG_TOKEN!}

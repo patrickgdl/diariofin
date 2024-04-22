@@ -22,20 +22,20 @@ export const LINKS: LinkProps[] = [
           fill="currentColor"
         ></path>
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M7 12.25C7.41421 12.25 7.75 12.5858 7.75 13L7.75 17C7.75 17.4142 7.41421 17.75 7 17.75C6.58579 17.75 6.25 17.4142 6.25 17L6.25 13C6.25 12.5858 6.58579 12.25 7 12.25Z"
           fill="currentColor"
         ></path>
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M12 6.25C12.4142 6.25 12.75 6.58579 12.75 7L12.75 17C12.75 17.4142 12.4142 17.75 12 17.75C11.5858 17.75 11.25 17.4142 11.25 17L11.25 7C11.25 6.58579 11.5858 6.25 12 6.25Z"
           fill="currentColor"
         ></path>
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M17 10.25C17.4142 10.25 17.75 10.5858 17.75 11L17.75 17C17.75 17.4142 17.4142 17.75 17 17.75C16.5858 17.75 16.25 17.4142 16.25 17L16.25 11C16.25 10.5858 16.5858 10.25 17 10.25Z"
           fill="currentColor"
         ></path>
@@ -93,14 +93,14 @@ export const LINKS: LinkProps[] = [
           fill="currentColor"
         ></path>
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M10.25 16C10.25 15.5858 10.5858 15.25 11 15.25H12.5C12.9142 15.25 13.25 15.5858 13.25 16C13.25 16.4142 12.9142 16.75 12.5 16.75H11C10.5858 16.75 10.25 16.4142 10.25 16Z"
           fill="currentColor"
         ></path>
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M14.75 16C14.75 15.5858 15.0858 15.25 15.5 15.25L19 15.25C19.4142 15.25 19.75 15.5858 19.75 16C19.75 16.4142 19.4142 16.75 19 16.75L15.5 16.75C15.0858 16.75 14.75 16.4142 14.75 16Z"
           fill="currentColor"
         ></path>
@@ -126,8 +126,8 @@ export const LINKS: LinkProps[] = [
         ></path>
         <circle cx="1.5" cy="1.5" r="1.5" transform="matrix(1 0 0 -1 16 8)" fill="currentColor"></circle>
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M6.29289 13.2929C6.68342 12.9024 7.31658 12.9024 7.70711 13.2929L10.7071 16.2929C11.0976 16.6834 11.0976 17.3166 10.7071 17.7071C10.3166 18.0976 9.68342 18.0976 9.29289 17.7071L6.29289 14.7071C5.90237 14.3166 5.90237 13.6834 6.29289 13.2929Z"
           fill="currentColor"
         ></path>
