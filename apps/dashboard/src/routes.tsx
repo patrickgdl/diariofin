@@ -15,6 +15,7 @@ import Profile from "./pages/profile"
 import Register from "./pages/register"
 import Report from "./pages/report"
 import Reports from "./pages/reports"
+import Tracker from "./pages/tracker"
 import Settings from "./pages/settings"
 import Transactions from "./pages/transactions"
 import TransactionsForm from "./pages/transactions-form"
@@ -42,6 +43,7 @@ export const router = createBrowserRouter([
           },
         ],
       },
+      { path: "/tracker", element: <Tracker /> },
       {
         path: "/transactions",
         children: [
