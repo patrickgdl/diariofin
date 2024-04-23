@@ -1,5 +1,5 @@
 import { XCircle } from "lucide-react"
-import { Button } from "@fluxozen/ui/button"
+import { Button } from "@diariofin/ui/button"
 
 function ErrorState() {
   return (

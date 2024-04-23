@@ -1,5 +1,5 @@
 {
-  "name": "@fluxozen/dashboard",
+  "name": "@diariofin/dashboard",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -15,7 +15,7 @@
     "supa:reset": "supabase db reset --debug && supa:types"
   },
   "dependencies": {
-    "@fluxozen/ui": "*",
+    "@diariofin/ui": "*",
     "@brazilian-utils/brazilian-utils": "^1.0.0-rc.12",
     "@hookform/resolvers": "^3.3.0",
     "@logsnag/react": "^1.0.2",
@@ -46,7 +46,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
-    "@fluxozen/tsconfig": "*",
+    "@diariofin/tsconfig": "*",
     "@faker-js/faker": "^8.2.0",
     "@playwright/test": "^1.39.0",
     "@tanstack/react-query-devtools": "^5.21.4",

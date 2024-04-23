@@ -1,9 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@fluxozen/ui/form"
-import { Input } from "@fluxozen/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@fluxozen/ui/select"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@diariofin/ui/form"
+import { Input } from "@diariofin/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@diariofin/ui/select"
 
 const formSchema = z.object({
   account_number: z

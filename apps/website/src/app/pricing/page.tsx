@@ -1,11 +1,11 @@
 import { BlurryCircle } from "@/components/blurry-circle";
 import { Testimonials } from "@/components/testimonials";
-import { Button } from "@fluxozen/ui/button";
+import { Button } from "@diariofin/ui/button";
 import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Preços | Fluxozen",
+  title: "Preços | Diariofin",
 };
 
 export default function Page() {

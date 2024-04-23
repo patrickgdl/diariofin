@@ -1,7 +1,7 @@
 "use client";
 
 import { fetchStatus } from "@/actions/fetch-status";
-import { cn } from "@fluxozen/ui/utils";
+import { cn } from "@diariofin/ui/utils";
 import { useEffect, useState } from "react";
 
 export function StatusWidget() {
@@ -70,7 +70,7 @@ export function StatusWidget() {
   return (
     <a
       className="flex justify-between space-x-2 items-center w-full border border-border rounded-md px-3 py-1"
-      href="https://fluxozen.openstatus.dev"
+      href="https://diariofin.openstatus.dev"
       target="_blank"
       rel="noreferrer"
     >

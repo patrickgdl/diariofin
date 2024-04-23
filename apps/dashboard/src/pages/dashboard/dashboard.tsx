@@ -1,5 +1,5 @@
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@fluxozen/ui/carousel"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@fluxozen/ui/tabs"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@diariofin/ui/carousel"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@diariofin/ui/tabs"
 import { endOfYear, startOfYear } from "date-fns"
 import { ArrowDownFromLine, ArrowUpFromLine, CalendarClockIcon, DollarSignIcon, HourglassIcon } from "lucide-react"
 import * as React from "react"
@@ -18,7 +18,7 @@ import TransactionsReviewTable from "./components/transaction-review-table"
 import Widget from "./components/widget"
 import useTransactionsByDate from "./hooks/use-transactions-by-date"
 
-import type { DateRangeCalendar } from "@fluxozen/ui/calendar"
+import type { DateRangeCalendar } from "@diariofin/ui/calendar"
 
 export default function DashboardPage() {
   const params = useParams()

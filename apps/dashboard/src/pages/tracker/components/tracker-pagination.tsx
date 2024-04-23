@@ -1,4 +1,4 @@
-import { Button } from "@fluxozen/ui/button"
+import { Button } from "@diariofin/ui/button"
 import { addMonths, format, formatISO, startOfMonth, subMonths } from "date-fns"
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
 import formatDate from "~/utils/format-date"

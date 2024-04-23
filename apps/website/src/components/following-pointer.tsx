@@ -4,7 +4,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import { cn } from "@fluxozen/ui/utils";
+import { cn } from "@diariofin/ui/utils";
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 
 export const FollowerPointerCard = ({

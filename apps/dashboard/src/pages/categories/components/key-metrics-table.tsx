@@ -12,7 +12,7 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@fluxozen/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@diariofin/ui/table"
 import formatCurrency from "~/utils/format-currency"
 
 const data = [

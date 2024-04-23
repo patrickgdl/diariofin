@@ -1,6 +1,6 @@
-# Fluxozen's Dashboard
+# Diariofin's Dashboard
 
-This is the dashboard for Fluxozen's website.
+This is the dashboard for Diariofin's website.
 
 ## Running locally
 

@@ -6,7 +6,7 @@ import { MdOutlineContentCopy } from "react-icons/md";
 
 export function PostCopyURL({ slug }) {
   const [isCopied, setCopied] = useState(false);
-  const url = `https://fluxozen.app${slug}`;
+  const url = `https://diariofin.com${slug}`;
 
   const handleClipboard = async () => {
     try {

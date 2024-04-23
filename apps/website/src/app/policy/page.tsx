@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Políticas | Fluxozen",
+  title: "Políticas | Diariofin",
 };
 
 export default function Page() {
@@ -18,8 +18,8 @@ export default function Page() {
           </p>
 
           <p className="leading-7 mt-8">
-            A Fluxozen Labs AB ("nós", "nos" ou "nosso") opera o aplicativo
-            Fluxozen (doravante referido como "Serviço").
+            A Diariofin Labs AB ("nós", "nos" ou "nosso") opera o aplicativo
+            Diariofin (doravante referido como "Serviço").
           </p>
 
           <p className="leading-7 mt-8">
@@ -44,7 +44,7 @@ export default function Page() {
                 <strong>Serviço</strong>
               </p>
               <p className="leading-7 mt-8">
-                Serviço é o aplicativo Fluxozen operado pela Fluxozen Labs AB
+                Serviço é o aplicativo Diariofin operado pela Diariofin Labs AB
               </p>
             </li>
             <li>
@@ -200,7 +200,7 @@ export default function Page() {
 
           <h2>Uso de Dados</h2>
           <p className="leading-7 mt-8">
-            A Fluxozen Labs AB utiliza os dados coletados para diversos fins:
+            A Diariofin Labs AB utiliza os dados coletados para diversos fins:
           </p>
           <ul>
             <li>Para fornecer e manter nosso Serviço</li>
@@ -230,12 +230,12 @@ export default function Page() {
           </h2>
           <p className="leading-7 mt-8">
             Se você estiver no Espaço Econômico Europeu (EEE), a base legal da
-            Fluxozen Labs AB para a coleta e uso das informações pessoais
+            Diariofin Labs AB para a coleta e uso das informações pessoais
             descritas nesta Política de Privacidade depende dos Dados Pessoais
             que coletamos e do contexto específico em que os coletamos.
           </p>
           <p className="leading-7 mt-8">
-            A Fluxozen Labs AB pode processar seus Dados Pessoais porque:
+            A Diariofin Labs AB pode processar seus Dados Pessoais porque:
           </p>
           <ul>
             <li>Precisamos executar um contrato com você</li>
@@ -250,7 +250,7 @@ export default function Page() {
 
           <h2>Retenção de Dados</h2>
           <p className="leading-7 mt-8">
-            A Fluxozen Labs AB reterá seus Dados Pessoais apenas pelo tempo
+            A Diariofin Labs AB reterá seus Dados Pessoais apenas pelo tempo
             necessário para os fins estabelecidos nesta Política de Privacidade.
             Retornaremos e usaremos seus Dados Pessoais na medida do necessário
             para cumprir nossas obrigações legais (por exemplo, se formos
@@ -258,7 +258,7 @@ export default function Page() {
             resolver disputas e fazer cumprir nossos acordos e políticas legais.
           </p>
           <p className="leading-7 mt-8">
-            A Fluxozen Labs AB também reterá Dados de Uso para fins de análise
+            A Diariofin Labs AB também reterá Dados de Uso para fins de análise
             interna. Os Dados de Uso geralmente são retidos por um período de
             tempo menor, exceto quando esses dados são usados para fortalecer a
             segurança ou melhorar a funcionalidade do nosso Serviço, ou somos
@@ -283,18 +283,18 @@ export default function Page() {
             transferência.
           </p>
           <p className="leading-7 mt-8">
-            A Fluxozen Labs AB tomará todas as medidas razoavelmente necessárias
-            para garantir que seus dados sejam tratados com segurança e de
-            acordo com esta Política de Privacidade e nenhuma transferência de
-            seus Dados Pessoais ocorrerá para uma organização ou país a menos
-            que haja controles adequados em vigor, incluindo a segurança de seus
-            dados e outras informações pessoais.
+            A Diariofin Labs AB tomará todas as medidas razoavelmente
+            necessárias para garantir que seus dados sejam tratados com
+            segurança e de acordo com esta Política de Privacidade e nenhuma
+            transferência de seus Dados Pessoais ocorrerá para uma organização
+            ou país a menos que haja controles adequados em vigor, incluindo a
+            segurança de seus dados e outras informações pessoais.
           </p>
 
           <h2>Divulgação de Dados</h2>
           <h3>Transação Comercial</h3>
           <p className="leading-7 mt-8">
-            Se a Fluxozen Labs AB estiver envolvida em uma fusão, aquisição ou
+            Se a Diariofin Labs AB estiver envolvida em uma fusão, aquisição ou
             venda de ativos, seus Dados Pessoais podem ser transferidos.
             Forneceremos aviso antes de seus Dados Pessoais serem transferidos e
             se tornarem sujeitos a uma Política de Privacidade diferente.
@@ -302,21 +302,21 @@ export default function Page() {
 
           <h3>Divulgação para Cumprimento da Lei</h3>
           <p className="leading-7 mt-8">
-            Em determinadas circunstâncias, a Fluxozen Labs AB pode ser obrigada
-            a divulgar seus Dados Pessoais se exigido por lei ou em resposta a
-            solicitações válidas por autoridades públicas (por exemplo, um
-            tribunal ou uma agência governamental).
+            Em determinadas circunstâncias, a Diariofin Labs AB pode ser
+            obrigada a divulgar seus Dados Pessoais se exigido por lei ou em
+            resposta a solicitações válidas por autoridades públicas (por
+            exemplo, um tribunal ou uma agência governamental).
           </p>
 
           <h3>Requisitos Legais</h3>
           <p className="leading-7 mt-8">
-            A Fluxozen Labs AB pode divulgar seus Dados Pessoais de boa fé
+            A Diariofin Labs AB pode divulgar seus Dados Pessoais de boa fé
             acreditar que tal ação é necessária para:
           </p>
           <ul>
             <li>Para cumprir uma obrigação legal</li>
             <li>
-              Para proteger e defender os direitos ou propriedade da Fluxozen
+              Para proteger e defender os direitos ou propriedade da Diariofin
               Labs AB
             </li>
             <li>
@@ -359,7 +359,7 @@ export default function Page() {
           </h2>
           <p className="leading-7 mt-8">
             Se você é residente no Espaço Econômico Europeu (EEE), você tem
-            certos direitos de proteção de dados. A Fluxozen Labs AB visa tomar
+            certos direitos de proteção de dados. A Diariofin Labs AB visa tomar
             medidas razoáveis para permitir que você corrija, altere, exclua ou
             limite o uso de seus Dados Pessoais.
           </p>
@@ -417,7 +417,7 @@ export default function Page() {
               <p className="leading-7 mt-8">
                 <strong>O direito de retirar o consentimento.</strong> Você
                 também tem o direito de retirar seu consentimento a qualquer
-                momento em que a Fluxozen Labs AB confiou no seu consentimento
+                momento em que a Diariofin Labs AB confiou no seu consentimento
                 para processar suas informações pessoais.
               </p>
             </li>
@@ -530,8 +530,8 @@ export default function Page() {
             entre em contato conosco:
           </p>
           <ul>
-            <li>Por e-mail: contact@fluxozen.app</li>{" "}
-            <li>Visitando esta página em nosso site: fluxozen.app</li>
+            <li>Por e-mail: contact@diariofin.com</li>{" "}
+            <li>Visitando esta página em nosso site: diariofin.com</li>
           </ul>
         </div>
       </div>

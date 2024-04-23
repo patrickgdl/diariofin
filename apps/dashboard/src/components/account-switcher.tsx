@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@fluxozen/ui/avatar"
-import { Button } from "@fluxozen/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@diariofin/ui/avatar"
+import { Button } from "@diariofin/ui/button"
 import {
   Command,
   CommandEmpty,
@@ -8,9 +8,9 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@fluxozen/ui/command"
-import { Popover, PopoverContent, PopoverTrigger } from "@fluxozen/ui/popover"
-import { cn } from "@fluxozen/ui/utils"
+} from "@diariofin/ui/command"
+import { Popover, PopoverContent, PopoverTrigger } from "@diariofin/ui/popover"
+import { cn } from "@diariofin/ui/utils"
 import { CaretSortIcon, CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons"
 import * as React from "react"
 import { useNavigate } from "react-router-dom"

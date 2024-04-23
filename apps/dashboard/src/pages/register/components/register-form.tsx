@@ -5,8 +5,8 @@ import Google from "~/components/icons/google"
 import { useSessionContext } from "~/contexts/SessionContext"
 import { LogEvents } from "~/events/events"
 import useSupabase from "~/hooks/useSupabase"
-import { Button } from "@fluxozen/ui/button"
-import { toast } from "@fluxozen/ui/use-toast"
+import { Button } from "@diariofin/ui/button"
+import { toast } from "@diariofin/ui/use-toast"
 
 export default function RegisterForm() {
   const logsnag = useLogSnag()

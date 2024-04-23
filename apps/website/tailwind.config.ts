@@ -1,4 +1,4 @@
-import baseConfig from "@fluxozen/ui/tailwind.config";
+import baseConfig from "@diariofin/ui/tailwind.config";
 import type { Config } from "tailwindcss";
 
 export default {

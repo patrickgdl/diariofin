@@ -1,4 +1,4 @@
-import { DialogContent, DialogHeader, DialogTitle } from "@fluxozen/ui/dialog"
+import { DialogContent, DialogHeader, DialogTitle } from "@diariofin/ui/dialog"
 import { CategoriesForm } from "~/pages/categories/components/categories-form"
 
 export default function DialogCategory() {

@@ -1,9 +1,9 @@
 import { UseFormReturn } from "react-hook-form"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@fluxozen/ui/accordion"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@fluxozen/ui/form"
-import { Input } from "@fluxozen/ui/input"
-import { InputCurrency } from "@fluxozen/ui/input-currency-alt"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@fluxozen/ui/select"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@diariofin/ui/accordion"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@diariofin/ui/form"
+import { Input } from "@diariofin/ui/input"
+import { InputCurrency } from "@diariofin/ui/input-currency-alt"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@diariofin/ui/select"
 
 import { AccountFormType } from "./account-form-schema"
 

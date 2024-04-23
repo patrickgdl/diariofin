@@ -1,9 +1,9 @@
 import { ArrowUpRightIcon } from "lucide-react"
 import { NavLink } from "react-router-dom"
 import { Account } from "~/types/account"
-import { buttonVariants } from "@fluxozen/ui/button"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@fluxozen/ui/tooltip"
-import { cn } from "@fluxozen/ui/utils"
+import { buttonVariants } from "@diariofin/ui/button"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@diariofin/ui/tooltip"
+import { cn } from "@diariofin/ui/utils"
 
 import Logo from "./logo"
 import LogoMark from "./logo-mark"
@@ -20,7 +20,7 @@ export function Nav({ links, isCollapsed, accounts }: NavProps) {
     return (
       <div data-collapsed="true" className="group h-screen flex-1 hidden md:flex flex-col py-4 px-4">
         <div className="flex items-center flex-shrink-0 mx-auto">
-          <LogoMark />
+          <LogoMark className="h-6 w-6" />
         </div>
 
         <nav className="flex-1 flex-col flex gap-6 px-2 py-8">

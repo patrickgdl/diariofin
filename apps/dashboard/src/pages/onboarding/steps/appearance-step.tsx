@@ -1,5 +1,5 @@
 import { AppearanceForm } from "~/pages/appearance/components/apperance-form"
-import { Button } from "@fluxozen/ui/button"
+import { Button } from "@diariofin/ui/button"
 
 export function AppearanceMainStep({ onFinalize }: { onFinalize: () => void }) {
   return (

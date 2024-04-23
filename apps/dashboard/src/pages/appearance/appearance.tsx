@@ -1,4 +1,4 @@
-import { SelectSeparator } from "@fluxozen/ui/select"
+import { SelectSeparator } from "@diariofin/ui/select"
 
 import { AppearanceForm } from "./components/apperance-form"
 

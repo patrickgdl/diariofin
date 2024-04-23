@@ -1,4 +1,4 @@
-import { Table, TableBody } from "@fluxozen/ui/table"
+import { Table, TableBody } from "@diariofin/ui/table"
 import { TransactionsByTypeQuery } from "~/queries/get-transactions-by-type"
 
 import { CategoryRow } from "./category-row"

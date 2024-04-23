@@ -13,10 +13,10 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@fluxozen/ui/alert-dialog"
-import { Button } from "@fluxozen/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@fluxozen/ui/dropdown-menu"
-import { toast } from "@fluxozen/ui/use-toast"
+} from "@diariofin/ui/alert-dialog"
+import { Button } from "@diariofin/ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@diariofin/ui/dropdown-menu"
+import { toast } from "@diariofin/ui/use-toast"
 
 import { REFUND_CATEGORY_ID, TRANSACTION_TYPE } from "../constants"
 import { useNewTransactionInstanceMutation } from "~/hooks/useNewTransactionInstanceMutation"

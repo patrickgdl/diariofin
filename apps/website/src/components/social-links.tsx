@@ -5,7 +5,7 @@ export function SocialLinks() {
   return (
     <ul className="flex space-x-4 items-center md:ml-5">
       <li>
-        <a href="https://go.fluxozen.app/twitter">
+        <a href="https://go.diariofin.com/twitter">
           <span className="sr-only">Twitter</span>
           <FaXTwitter
             size={22}
@@ -14,7 +14,7 @@ export function SocialLinks() {
         </a>
       </li>
       <li>
-        <a href="https://go.fluxozen.app/discord">
+        <a href="https://go.diariofin.com/discord">
           <span className="sr-only">Discord</span>
           <FaDiscord size={24} className="fill-[#707070] dark:fill-[#878787]" />
         </a>

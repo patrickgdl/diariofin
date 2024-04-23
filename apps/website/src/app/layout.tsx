@@ -1,11 +1,11 @@
 import "@/styles/globals.css";
-import "@fluxozen/ui/globals.css";
+import "@diariofin/ui/globals.css";
 
 import { inter, satoshi } from "@/styles/fonts";
 import { Footer } from "@/components/footer";
 import { FooterCTA } from "@/components/footer-cta";
 import { Header } from "@/components/header";
-import { cn } from "@fluxozen/ui/utils";
+import { cn } from "@diariofin/ui/utils";
 import { Analytics } from "@vercel/analytics/react";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
@@ -17,10 +17,10 @@ import type { Metadata } from "next";
 import type { ReactElement } from "react";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://fluxozen.app"),
-  title: "Fluxozen | Seu negócio de maneira mais inteligente",
+  metadataBase: new URL("https://diariofin.com"),
+  title: "Diariofin | Seu negócio de maneira mais inteligente",
   description:
-    "O Fluxozen fornece uma visão melhor do seu negócio e automatiza as tarefas chatas, permitindo que você se concentre no que você gosta de fazer.",
+    "O Diariofin fornece uma visão melhor do seu negócio e automatiza as tarefas chatas, permitindo que você se concentre no que você gosta de fazer.",
 };
 
 export const viewport = {
@@ -44,7 +44,7 @@ export default function Layout({ children }: { children: ReactElement }) {
           // disableTracking={Boolean(process.env.NEXT_PUBLIC_LOGSNAG_DISABLED!)}
         />
 
-        <link rel="canonical" href="https://fluxozen.app" />
+        <link rel="canonical" href="https://diariofin.com" />
       </head>
       <body
         className={cn(

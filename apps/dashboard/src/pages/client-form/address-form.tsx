@@ -1,7 +1,7 @@
 import { UseFormReturn } from "react-hook-form"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@fluxozen/ui/form"
-import { Input } from "@fluxozen/ui/input"
-import { InputMask } from "@fluxozen/ui/input-mask"
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@diariofin/ui/form"
+import { Input } from "@diariofin/ui/input"
+import { InputMask } from "@diariofin/ui/input-mask"
 
 import { ClientFormType } from "./schema/client-form-schema"
 

@@ -1,7 +1,7 @@
 import { ArrowRightIcon, MessageCircleQuestion } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { MenuOption, useCommandStore } from "~/store/command"
-import { CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@fluxozen/ui/command"
+import { CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@diariofin/ui/command"
 
 const navigation = [
   {
@@ -53,7 +53,7 @@ export function CommandRoot() {
             </svg>
 
             <div className="flex items-center justify-between w-full">
-              <span>Pergunte a IA da Fluxozen...</span>
+              <span>Pergunte a IA da Diariofin...</span>
 
               <span
                 className="relative rounded-lg overflow-hidden border dark:p-[1px] dark:border-none"

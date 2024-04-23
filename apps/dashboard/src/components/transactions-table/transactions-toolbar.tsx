@@ -3,8 +3,8 @@ import { Table } from "@tanstack/react-table"
 import { CalendarDateRangePicker } from "~/components/date-range-picker"
 import useAppContext from "~/hooks/useAppContext"
 import useCategories from "~/hooks/useCategoriesQuery"
-import { Button } from "@fluxozen/ui/button"
-import { Input } from "@fluxozen/ui/input"
+import { Button } from "@diariofin/ui/button"
+import { Input } from "@diariofin/ui/input"
 
 import { DataTableFacetedFilter } from "./transactions-faceted-filter"
 

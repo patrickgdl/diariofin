@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@fluxozen/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@diariofin/ui/card"
 import formatCurrency from "~/utils/format-currency"
 
 type WidgetProps = {

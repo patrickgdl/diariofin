@@ -1,1 +1,1 @@
-module.exports = require("@fluxozen/ui/postcss");
+module.exports = require("@diariofin/ui/postcss");

@@ -1,5 +1,5 @@
-import { Skeleton } from "@fluxozen/ui/skeleton"
-import { Table, TableBody, TableCell, TableRow } from "@fluxozen/ui/table"
+import { Skeleton } from "@diariofin/ui/skeleton"
+import { Table, TableBody, TableCell, TableRow } from "@diariofin/ui/table"
 
 const data = [...Array(10)].map((_, i) => ({ id: i.toString() }))
 

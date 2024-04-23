@@ -1,5 +1,5 @@
 {
-  "name": "@fluxozen/ui",
+  "name": "@diariofin/ui",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -111,7 +111,7 @@
     "vaul": "^0.9.0"
   },
   "devDependencies": {
-    "@fluxozen/tsconfig": "*",
+    "@diariofin/tsconfig": "*",
     "@types/react-input-mask": "^3.0.4",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",

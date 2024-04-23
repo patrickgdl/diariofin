@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 export default {
   reactStrictMode: true,
-  transpilePackages: ["@fluxozen/ui"],
+  transpilePackages: ["@diariofin/ui"],
   eslint: {
     ignoreDuringBuilds: true,
   },

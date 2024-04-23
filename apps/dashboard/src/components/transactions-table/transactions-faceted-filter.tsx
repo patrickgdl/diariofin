@@ -1,7 +1,7 @@
 import { CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons"
 import { Column } from "@tanstack/react-table"
-import { Badge } from "@fluxozen/ui/badge"
-import { Button } from "@fluxozen/ui/button"
+import { Badge } from "@diariofin/ui/badge"
+import { Button } from "@diariofin/ui/button"
 import {
   Command,
   CommandEmpty,
@@ -10,10 +10,10 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@fluxozen/ui/command"
-import { Popover, PopoverContent, PopoverTrigger } from "@fluxozen/ui/popover"
-import { Separator } from "@fluxozen/ui/separator"
-import { cn } from "@fluxozen/ui/utils"
+} from "@diariofin/ui/command"
+import { Popover, PopoverContent, PopoverTrigger } from "@diariofin/ui/popover"
+import { Separator } from "@diariofin/ui/separator"
+import { cn } from "@diariofin/ui/utils"
 
 interface DataTableFacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>

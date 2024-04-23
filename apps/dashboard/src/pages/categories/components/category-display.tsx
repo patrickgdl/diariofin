@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback } from "@fluxozen/ui/avatar"
-import { Separator } from "@fluxozen/ui/separator"
+import { Avatar, AvatarFallback } from "@diariofin/ui/avatar"
+import { Separator } from "@diariofin/ui/separator"
 import ErrorState from "~/components/error-state"
 import Loader from "~/components/loader"
 import { TransactionsTableRaw } from "~/components/transactions-table/transactions-table-raw"

@@ -1,6 +1,6 @@
 import { SearchIcon } from "lucide-react"
 import { useCommandStore } from "~/store/command"
-import { Button } from "@fluxozen/ui/button"
+import { Button } from "@diariofin/ui/button"
 
 export function CommandMenuButton() {
   const { setOpen } = useCommandStore()

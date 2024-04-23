@@ -1,4 +1,4 @@
-import { cn } from "@fluxozen/ui/utils";
+import { cn } from "@diariofin/ui/utils";
 
 export function Card({
   children,

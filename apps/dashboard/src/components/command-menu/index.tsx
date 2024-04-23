@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { useHotkeys } from "react-hotkeys-hook"
 import { MenuOption, useCommandStore } from "~/store/command"
-import { CommandDialog } from "@fluxozen/ui/command"
+import { CommandDialog } from "@diariofin/ui/command"
 
 import { CommandAI } from "./ai"
 import { CommandFeedback } from "./feedback"

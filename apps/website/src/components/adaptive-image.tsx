@@ -1,4 +1,4 @@
-import { cn } from "@fluxozen/ui/utils";
+import { cn } from "@diariofin/ui/utils";
 import Image from "next/image";
 import type ImageProps from "next/image";
 

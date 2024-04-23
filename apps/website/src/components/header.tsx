@@ -1,7 +1,7 @@
 "use client";
 
-import { NavigationMenu } from "@fluxozen/ui/navigation-menu";
-import { cn } from "@fluxozen/ui/utils";
+import { NavigationMenu } from "@diariofin/ui/navigation-menu";
+import { cn } from "@diariofin/ui/utils";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -123,7 +123,7 @@ export function Header() {
         >
           <div className="mt-4 flex justify-between p-3 relative">
             <button type="button" onClick={handleToggleMenu}>
-              <span className="sr-only">Fluxozen Logo</span>
+              <span className="sr-only">Diariofin Logo</span>
               <LogoIcon />
             </button>
 

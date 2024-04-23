@@ -1,7 +1,7 @@
 import "./translations"
 
-import { TooltipProvider } from "@fluxozen/ui/tooltip"
-import { toast } from "@fluxozen/ui/use-toast"
+import { TooltipProvider } from "@diariofin/ui/tooltip"
+import { toast } from "@diariofin/ui/use-toast"
 import { LogSnagProvider, useLogSnag } from "@logsnag/react"
 import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"

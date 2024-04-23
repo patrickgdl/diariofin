@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@fluxozen/ui/utils";
+import { cn } from "@diariofin/ui/utils";
 import { motion, stagger, useAnimate } from "framer-motion";
 
 export const TextGenerateEffect = ({

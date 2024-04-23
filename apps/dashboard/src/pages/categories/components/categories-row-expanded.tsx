@@ -1,5 +1,5 @@
-import { Progress } from "@fluxozen/ui/progress"
-import { TableCell, TableRow } from "@fluxozen/ui/table"
+import { Progress } from "@diariofin/ui/progress"
+import { TableCell, TableRow } from "@diariofin/ui/table"
 import formatCurrency from "~/utils/format-currency"
 
 import { TransactionGroupedByCategory } from "./categories-table"

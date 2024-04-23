@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@fluxozen/ui/button";
+import { Button } from "@diariofin/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -17,7 +17,7 @@ export function FooterCTA() {
         Livre de estresse
       </span>
       <p className="text-[#878787] mt-6">
-        Fluxozen fornece uma visão melhor do seu negócio e
+        Diariofin fornece uma visão melhor do seu negócio e
         <br />
         automatiza as tarefas chatas, permitindo que você se concentre no que
         você gosta de fazer.

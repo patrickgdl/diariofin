@@ -2,8 +2,8 @@ import { useUser } from "~/contexts/UserContext"
 import { useUpdateUserMutation } from "~/hooks/useUpdateUserMutation"
 
 import { ProfileForm, ProfileFormValues } from "./components/profile-form"
-import { Separator } from "@fluxozen/ui/separator"
-import { toast } from "@fluxozen/ui/use-toast"
+import { Separator } from "@diariofin/ui/separator"
+import { toast } from "@diariofin/ui/use-toast"
 
 export default function SettingsProfilePage() {
   const { user } = useUser()

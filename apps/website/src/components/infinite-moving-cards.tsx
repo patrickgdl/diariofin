@@ -2,7 +2,7 @@
 
 "use client";
 
-import { cn } from "@fluxozen/ui/utils";
+import { cn } from "@diariofin/ui/utils";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
@@ -37,7 +37,7 @@ export const InfiniteMovingCards = ({
       scrollerContent.forEach((item) => {
         const duplicatedItem = item.cloneNode(true);
         if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
+          scrollerRef.current.comendChild(duplicatedItem);
         }
       });
 

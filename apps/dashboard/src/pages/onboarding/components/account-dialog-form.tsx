@@ -1,8 +1,8 @@
 import { PlusIcon } from "lucide-react"
 import * as React from "react"
 import useMediaQuery from "~/hooks/use-media-query"
-import { Button } from "@fluxozen/ui/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@fluxozen/ui/dialog"
+import { Button } from "@diariofin/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@diariofin/ui/dialog"
 import {
   Drawer,
   DrawerClose,
@@ -11,10 +11,10 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@fluxozen/ui/drawer"
-import { Input } from "@fluxozen/ui/input"
-import { Label } from "@fluxozen/ui/label"
-import { cn } from "@fluxozen/ui/utils"
+} from "@diariofin/ui/drawer"
+import { Input } from "@diariofin/ui/input"
+import { Label } from "@diariofin/ui/label"
+import { cn } from "@diariofin/ui/utils"
 
 export default function AccountDialogForm({ children }: { children: React.ReactNode }) {
   const { isDesktop } = useMediaQuery()

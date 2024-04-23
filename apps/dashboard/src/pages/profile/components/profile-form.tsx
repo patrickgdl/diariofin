@@ -1,9 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { Button } from "@fluxozen/ui/button"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@fluxozen/ui/form"
-import { Input } from "@fluxozen/ui/input"
+import { Button } from "@diariofin/ui/button"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@diariofin/ui/form"
+import { Input } from "@diariofin/ui/input"
 
 const profileFormSchema = z.object({
   name: z

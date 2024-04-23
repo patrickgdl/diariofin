@@ -8,7 +8,7 @@ export function SectionDemo() {
       <div className="absolute left-4 right-4 md:left-8 md:right-8 top-4 flex justify-between text-lg">
         <span>Version 0.1 (Private beta)</span>
         <span className="text-[#878787]">
-          <Link href="/">Fluxozen</Link>
+          <Link href="/">Diariofin</Link>
         </span>
       </div>
       <div className="flex flex-col min-h-screen justify-center container mx-auto">

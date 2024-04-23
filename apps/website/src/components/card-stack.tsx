@@ -6,7 +6,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@fluxozen/ui/tooltip";
+} from "@diariofin/ui/tooltip";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 

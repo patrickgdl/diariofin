@@ -9,7 +9,7 @@ export function SectionSolution() {
       <div className="flex justify-between text-lg p-4">
         <span>Nossa solução</span>
         <span className="text-[#878787]">
-          <Link href="/">Fluxozen</Link>
+          <Link href="/">Diariofin</Link>
         </span>
       </div>
 
@@ -71,15 +71,16 @@ export function SectionSolution() {
               <h2 className="text-2xl">Intermediário</h2>
 
               <p className="text-[#878787] text-sm text-center">
-                Fluxozen serve como ponte entre você e suas finanças, agilizando
-                seus procedimentos de final de mês, reduzindo o trabalho manual,
-                e empacotando tudo facilmente para a análise financeira.
-                Priorizando a experiência do usuário em vez de construir um
-                sistema contábil, garantimos que nossa plataforma permaneça
-                fácil de usar e totalmente focado no que os empreendedores
-                precisam. Esta abordagem permite-nos escalar rapidamente sem a
-                necessidade de navegar internamente em leis tributárias e
-                alterar os fluxos de trabalho atuais dos contadores.
+                Diariofin serve como ponte entre você e suas finanças,
+                agilizando seus procedimentos de final de mês, reduzindo o
+                trabalho manual, e empacotando tudo facilmente para a análise
+                financeira. Priorizando a experiência do usuário em vez de
+                construir um sistema contábil, garantimos que nossa plataforma
+                permaneça fácil de usar e totalmente focado no que os
+                empreendedores precisam. Esta abordagem permite-nos escalar
+                rapidamente sem a necessidade de navegar internamente em leis
+                tributárias e alterar os fluxos de trabalho atuais dos
+                contadores.
               </p>
             </Card>
           </div>
@@ -129,7 +130,7 @@ export function SectionSolution() {
                 possível de proprietários de empresas. Todos nós testemunhamos a
                 ascensão da IA e já integramos vários aspectos de IA em nossa
                 plataforma. Por exemplo, implementamos a automação de categorias
-                e o envolvimento com suas finanças por meio do Fluxozen IA,
+                e o envolvimento com suas finanças por meio do Diariofin IA,
                 permitindo que os usuários solicitem quaisquer insights sobre
                 seu negócio.
               </p>

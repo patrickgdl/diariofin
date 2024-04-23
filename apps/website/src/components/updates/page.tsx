@@ -13,7 +13,7 @@ export const revalidate = 0;
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Atualizações | Fluxozen",
+  title: "Atualizações | Diariofin",
 };
 
 const renderer = new NotionRenderer();

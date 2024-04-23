@@ -1,7 +1,7 @@
 import ErrorState from "~/components/error-state"
 import Loader from "~/components/loader"
 import useClientsByType from "~/hooks/useClientsByTypeQuery"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@fluxozen/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@diariofin/ui/tabs"
 
 import { ClientsTable } from "./components/clients-table"
 import { SuppliersTable } from "./components/suppliers-table"

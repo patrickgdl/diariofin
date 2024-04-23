@@ -1,5 +1,5 @@
 import "./styles.css"
-import "@fluxozen/ui/globals.css"
+import "@diariofin/ui/globals.css"
 
 import ReactDOM from "react-dom/client"
 import { RouterProvider } from "react-router-dom"

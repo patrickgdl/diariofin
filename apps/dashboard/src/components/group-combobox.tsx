@@ -1,10 +1,10 @@
 import * as React from "react"
 import { Check, ChevronsUpDown } from "lucide-react"
 
-import { cn } from "@fluxozen/ui/utils"
-import { Button } from "@fluxozen/ui/button"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@fluxozen/ui/command"
-import { Popover, PopoverContent, PopoverTrigger } from "@fluxozen/ui/popover"
+import { cn } from "@diariofin/ui/utils"
+import { Button } from "@diariofin/ui/button"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@diariofin/ui/command"
+import { Popover, PopoverContent, PopoverTrigger } from "@diariofin/ui/popover"
 
 type GroupComboboxProps = {
   groups: {

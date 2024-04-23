@@ -1,10 +1,10 @@
 import * as React from "react"
 import { UseFormReturn } from "react-hook-form"
 import useRecurringTypes from "~/hooks/useRecurringTypesQuery"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@fluxozen/ui/form"
-import { Input } from "@fluxozen/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@fluxozen/ui/select"
-import { Switch } from "@fluxozen/ui/switch"
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@diariofin/ui/form"
+import { Input } from "@diariofin/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@diariofin/ui/select"
+import { Switch } from "@diariofin/ui/switch"
 
 import { TransactionFormType } from "../schema/transactions-form-schema"
 

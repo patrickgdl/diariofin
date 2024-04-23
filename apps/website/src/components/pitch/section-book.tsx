@@ -1,5 +1,5 @@
 import { CalEmbed } from "@/components/cal-embed";
-import { Button } from "@fluxozen/ui/button";
+import { Button } from "@diariofin/ui/button";
 import Link from "next/link";
 
 export function SectionBook() {
@@ -13,7 +13,7 @@ export function SectionBook() {
       </div>
       <div className="flex flex-col min-h-screen justify-center container">
         <div className="h-[400px] md:h-[600px] px-4 md:px-0">
-          <CalEmbed calLink="patrickgdl/fluxozen" theme="dark" />
+          <CalEmbed calLink="patrickgdl/diariofin" theme="dark" />
         </div>
       </div>
     </div>

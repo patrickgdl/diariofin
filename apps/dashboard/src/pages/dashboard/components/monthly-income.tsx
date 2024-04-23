@@ -1,5 +1,5 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@fluxozen/ui/card"
-import { Progress } from "@fluxozen/ui/progress"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@diariofin/ui/card"
+import { Progress } from "@diariofin/ui/progress"
 import formatCurrency from "~/utils/format-currency"
 
 const MonthlyIncomeProgress = ({

@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 import { useUser } from "~/contexts/UserContext"
 import { LogEvents } from "~/events/events"
 import useSupabase from "~/hooks/useSupabase"
-import { Avatar, AvatarFallback, AvatarImage } from "@fluxozen/ui/avatar"
-import { Button } from "@fluxozen/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@diariofin/ui/avatar"
+import { Button } from "@diariofin/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +13,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@fluxozen/ui/dropdown-menu"
+} from "@diariofin/ui/dropdown-menu"
 import { getAcronym } from "~/utils/get-acronym"
 
 export function UserNav() {

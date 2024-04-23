@@ -8,10 +8,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@fluxozen/ui/alert-dialog"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@fluxozen/ui/dropdown-menu"
-import { TableCell, TableRow } from "@fluxozen/ui/table"
-import { cn } from "@fluxozen/ui/utils"
+} from "@diariofin/ui/alert-dialog"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@diariofin/ui/dropdown-menu"
+import { TableCell, TableRow } from "@diariofin/ui/table"
+import { cn } from "@diariofin/ui/utils"
 import { MoreHorizontalIcon } from "lucide-react"
 import { secondsToHoursAndMinutes } from "~/utils/format-date"
 

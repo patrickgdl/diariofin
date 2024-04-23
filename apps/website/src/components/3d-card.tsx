@@ -2,7 +2,7 @@
 
 "use client";
 
-import { cn } from "@fluxozen/ui/utils";
+import { cn } from "@diariofin/ui/utils";
 
 import React, {
   createContext,

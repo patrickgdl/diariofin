@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@fluxozen/ui/avatar"
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@fluxozen/ui/hover-card"
-import { cn } from "@fluxozen/ui/utils"
+import { Avatar, AvatarFallback, AvatarImage } from "@diariofin/ui/avatar"
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@diariofin/ui/hover-card"
+import { cn } from "@diariofin/ui/utils"
 import { isSameDay } from "date-fns"
 import formatDate, { secondsToHoursAndMinutes } from "~/utils/format-date"
 

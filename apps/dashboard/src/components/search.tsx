@@ -1,4 +1,4 @@
-import { Input } from "@fluxozen/ui/input"
+import { Input } from "@diariofin/ui/input"
 
 export function Search() {
   return (

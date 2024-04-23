@@ -3,8 +3,8 @@ import ReactEmojiPicker, { Categories as EmojiCategories, Theme } from "emoji-pi
 import { LaughIcon } from "lucide-react"
 import { useTheme } from "next-themes"
 import useMediaQuery from "~/hooks/use-media-query"
-import { Button } from "@fluxozen/ui/button"
-import { Tooltip, TooltipTrigger, TooltipContent } from "@fluxozen/ui/tooltip"
+import { Button } from "@diariofin/ui/button"
+import { Tooltip, TooltipTrigger, TooltipContent } from "@diariofin/ui/tooltip"
 
 type EmojiPickerProps = {
   emoji?: string

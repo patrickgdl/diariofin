@@ -1,8 +1,8 @@
 import { UseFormReturn } from "react-hook-form"
 import useAppContext from "~/hooks/useAppContext"
 import { Clients } from "~/types/clients"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@fluxozen/ui/form"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@fluxozen/ui/select"
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@diariofin/ui/form"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@diariofin/ui/select"
 
 import { TransactionIncomeFormType } from "./transaction-income-form-schema"
 

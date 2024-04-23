@@ -33,7 +33,7 @@ const data = [
   },
   {
     name: "<Project-Name>",
-    description: "Fluxozen",
+    description: "Diariofin",
   },
 ];
 

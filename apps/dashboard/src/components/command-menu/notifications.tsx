@@ -1,7 +1,7 @@
 import { BackButton } from "~/components/command-menu/back-button"
 import { useCommandStore } from "~/store/command"
-import { CommandItem, CommandList } from "@fluxozen/ui/command"
-import { Skeleton } from "@fluxozen/ui/skeleton"
+import { CommandItem, CommandList } from "@diariofin/ui/command"
+import { Skeleton } from "@diariofin/ui/skeleton"
 import { useNavigate } from "react-router-dom"
 
 export function CommandNotifications() {

@@ -1,5 +1,5 @@
-import { Button } from "@fluxozen/ui/button"
-import { TableHead, TableHeader, TableRow } from "@fluxozen/ui/table"
+import { Button } from "@diariofin/ui/button"
+import { TableHead, TableHeader, TableRow } from "@diariofin/ui/table"
 
 export function TrackerTableHeader() {
   return (

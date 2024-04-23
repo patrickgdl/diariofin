@@ -13,8 +13,8 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 import * as React from "react"
-import { Table, TableBody, TableCell, TableRow } from "@fluxozen/ui/table"
-import { cn } from "@fluxozen/ui/utils"
+import { Table, TableBody, TableCell, TableRow } from "@diariofin/ui/table"
+import { cn } from "@diariofin/ui/utils"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]

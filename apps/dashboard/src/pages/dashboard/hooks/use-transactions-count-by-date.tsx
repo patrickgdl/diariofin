@@ -3,7 +3,7 @@ import useSupabase from "~/hooks/useSupabase"
 
 import { getTransactionCountByDate } from "../queries/get-transactions-count-by-date"
 
-import type { DateRangeCalendar } from "@fluxozen/ui/calendar"
+import type { DateRangeCalendar } from "@diariofin/ui/calendar"
 
 function useTransactionsCountByDate(date: DateRangeCalendar) {
   const supabase = useSupabase()

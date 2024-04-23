@@ -1,13 +1,13 @@
 "use client";
 
-import { useCarousel } from "@fluxozen/ui/carousel";
+import { useCarousel } from "@diariofin/ui/carousel";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@fluxozen/ui/tooltip";
-import { cn } from "@fluxozen/ui/utils";
+} from "@diariofin/ui/tooltip";
+import { cn } from "@diariofin/ui/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useHotkeys } from "react-hotkeys-hook";
 import { MdEditCalendar, MdChevronLeft, MdChevronRight } from "react-icons/md";

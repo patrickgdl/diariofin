@@ -1,9 +1,9 @@
 import LogoMark from "~/components/logo-mark"
 import { MenuOption, useCommandStore } from "~/store/command"
 import { shuffle } from "~/utils/shuffle"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@fluxozen/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@diariofin/ui/card"
 
-import { Input } from "@fluxozen/ui/input"
+import { Input } from "@diariofin/ui/input"
 
 type InsightsWidgetProps = {
   id: string
@@ -31,7 +31,7 @@ export function InsightsWidget({ items }: { items: InsightsWidgetProps[] }) {
       <div className="relative h-10 w-full">
         <Input
           type="text"
-          placeholder="Faça uma pergunda para a IA da Fluxozen..."
+          placeholder="Faça uma pergunda para a IA da Diariofin..."
           className="w-full h-11 rounded-lg cursor-pointer bg-background"
           onFocus={() => setOpen(MenuOption.AI)}
         />

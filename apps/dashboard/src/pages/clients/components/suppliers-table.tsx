@@ -14,8 +14,8 @@ import {
 import * as React from "react"
 import { useNavigate } from "react-router-dom"
 import { Clients } from "~/types/clients"
-import { Button } from "@fluxozen/ui/button"
-import { Checkbox } from "@fluxozen/ui/checkbox"
+import { Button } from "@diariofin/ui/button"
+import { Checkbox } from "@diariofin/ui/checkbox"
 
 import {
   DropdownMenu,
@@ -25,9 +25,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@fluxozen/ui/dropdown-menu"
-import { Input } from "@fluxozen/ui/input"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@fluxozen/ui/table"
+} from "@diariofin/ui/dropdown-menu"
+import { Input } from "@diariofin/ui/input"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@diariofin/ui/table"
 
 const columnHelper = createColumnHelper<Clients>()
 

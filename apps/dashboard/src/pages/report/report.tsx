@@ -2,7 +2,7 @@ import { Link, Navigate, useParams } from "react-router-dom"
 import LineMetrics from "~/components/line-metrics"
 import Loader from "~/components/loader"
 import Overview from "~/components/overview"
-import { Button } from "@fluxozen/ui/button"
+import { Button } from "@diariofin/ui/button"
 import formatDate from "~/utils/format-date"
 
 import useReportById from "./hooks/use-report-by-id"
@@ -61,7 +61,7 @@ export default function Report() {
           <p className="text-[#878787] text-sm">
             Feito por{" "}
             <a href={`${import.meta.env.VITE_SITE_URL}?utm_source=report`} className="text-black dark:text-white">
-              Fluxozen
+              Diariofin
             </a>
           </p>
         </div>

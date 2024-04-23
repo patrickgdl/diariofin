@@ -1,6 +1,6 @@
 import { BackButton } from "~/components/command-menu/back-button"
-import { Button } from "@fluxozen/ui/button"
-import { Textarea } from "@fluxozen/ui/textarea"
+import { Button } from "@diariofin/ui/button"
+import { Textarea } from "@diariofin/ui/textarea"
 import { Loader2 } from "lucide-react"
 import { useState } from "react"
 

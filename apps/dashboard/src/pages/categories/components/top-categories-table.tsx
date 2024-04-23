@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@fluxozen/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@diariofin/ui/card"
 import { TransactionsByTypeQuery } from "~/queries/get-transactions-by-type"
 
 import { CategoriesTable } from "./categories-table"

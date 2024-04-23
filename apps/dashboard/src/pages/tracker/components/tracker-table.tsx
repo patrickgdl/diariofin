@@ -1,4 +1,4 @@
-import { Table, TableBody } from "@fluxozen/ui/table"
+import { Table, TableBody } from "@diariofin/ui/table"
 import { TrackerTableRow } from "./tracker-table-row"
 import { TrackerTableHeader } from "./tracker-table-header"
 

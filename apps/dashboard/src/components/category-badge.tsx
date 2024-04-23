@@ -1,4 +1,4 @@
-import { Badge } from "@fluxozen/ui/badge"
+import { Badge } from "@diariofin/ui/badge"
 import { hexToRgb } from "~/utils/hexToRgb"
 
 export type CategoriesQuery = {

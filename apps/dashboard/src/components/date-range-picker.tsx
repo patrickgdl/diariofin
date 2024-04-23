@@ -1,9 +1,9 @@
 import { CalendarIcon } from "@radix-ui/react-icons"
 import format from "~/utils/format-date"
-import { Button } from "@fluxozen/ui/button"
-import { Calendar, DateRangeCalendar } from "@fluxozen/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@fluxozen/ui/popover"
-import { cn } from "@fluxozen/ui/utils"
+import { Button } from "@diariofin/ui/button"
+import { Calendar, DateRangeCalendar } from "@diariofin/ui/calendar"
+import { Popover, PopoverContent, PopoverTrigger } from "@diariofin/ui/popover"
+import { cn } from "@diariofin/ui/utils"
 
 type CalendarDateRangePickerProps = {
   date?: DateRangeCalendar

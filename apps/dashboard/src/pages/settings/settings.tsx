@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import { Separator } from "@fluxozen/ui/separator"
+import { Separator } from "@diariofin/ui/separator"
 
 import { SidebarNav } from "./components/sidebar-nav"
 

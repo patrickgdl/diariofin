@@ -10,9 +10,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@fluxozen/ui/alert-dialog"
-import { Button } from "@fluxozen/ui/button"
-import { ButtonLoading } from "@fluxozen/ui/button-loading"
+} from "@diariofin/ui/alert-dialog"
+import { Button } from "@diariofin/ui/button"
+import { ButtonLoading } from "@diariofin/ui/button-loading"
 
 import { AccountsDashboard } from "./components/accounts-layout"
 

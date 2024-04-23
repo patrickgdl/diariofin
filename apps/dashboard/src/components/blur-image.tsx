@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { cn } from "@fluxozen/ui/utils"
+import { cn } from "@diariofin/ui/utils"
 
 export function BlurImage(props: any) {
   const [loading, setLoading] = useState(true)

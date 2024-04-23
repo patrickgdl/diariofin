@@ -1,6 +1,6 @@
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts"
 import { TransactionsByTypeQuery } from "~/queries/get-transactions-by-type"
-import { Card, CardContent } from "@fluxozen/ui/card"
+import { Card, CardContent } from "@diariofin/ui/card"
 import formatCurrency from "~/utils/format-currency"
 
 type GroupForChart = { id: string; name: string; value: number; color: string }

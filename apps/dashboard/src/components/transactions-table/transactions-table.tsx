@@ -13,7 +13,7 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 import * as React from "react"
-import { Table, TableBody, TableCell, TableRow } from "@fluxozen/ui/table"
+import { Table, TableBody, TableCell, TableRow } from "@diariofin/ui/table"
 
 import { DataTablePagination } from "./transactions-pagination"
 import { DataTableToolbar } from "./transactions-toolbar"

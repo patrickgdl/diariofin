@@ -25,7 +25,7 @@ export async function generateMetadata({
   const post = await fetchPageBySlug(slug);
 
   return {
-    title: `Fluxozen | ${post.properties.Title.title.at(0)?.plain_text}`,
+    title: `Diariofin | ${post.properties.Title.title.at(0)?.plain_text}`,
   };
 }
 

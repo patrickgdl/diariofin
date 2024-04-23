@@ -18,7 +18,7 @@ export function Footer() {
         <div className="flex justify-between items-center border-border border-b-[1px] pb-10 md:pb-16 mb-12">
           <Link href="/" className="scale-50 -ml-[52px] md:ml-0 md:scale-100">
             <LogoLarge />
-            <span className="sr-only">Fluxozen</span>
+            <span className="sr-only">Diariofin</span>
           </Link>
 
           <span className="font-normal md:text-2xl text-right">

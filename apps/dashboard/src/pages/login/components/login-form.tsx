@@ -6,9 +6,9 @@ import Google from "~/components/icons/google"
 import { LogEvents } from "~/events/events"
 import useMediaQuery from "~/hooks/use-media-query"
 import useSupabase from "~/hooks/useSupabase"
-import { Button } from "@fluxozen/ui/button"
-import { Input } from "@fluxozen/ui/input"
-import { toast } from "@fluxozen/ui/use-toast"
+import { Button } from "@diariofin/ui/button"
+import { Input } from "@diariofin/ui/input"
+import { toast } from "@diariofin/ui/use-toast"
 
 export default function LoginForm() {
   const logsnag = useLogSnag()

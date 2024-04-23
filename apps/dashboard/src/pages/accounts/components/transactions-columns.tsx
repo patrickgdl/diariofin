@@ -2,7 +2,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import CategoryBadge from "~/components/category-badge"
 import { DataTableRowActions } from "~/pages/transactions/components/transactions-row-actions"
 import { TransactionsQuery } from "~/queries/get-transactions"
-import { cn } from "@fluxozen/ui/utils"
+import { cn } from "@diariofin/ui/utils"
 import formatCurrency from "~/utils/format-currency"
 
 export const columns: ColumnDef<TransactionsQuery[0]>[] = [

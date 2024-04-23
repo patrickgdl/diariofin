@@ -1,8 +1,8 @@
 import { UseFormReturn } from "react-hook-form"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@fluxozen/ui/form"
-import { Input } from "@fluxozen/ui/input"
-import { InputMask } from "@fluxozen/ui/input-mask"
-import { RadioGroup, RadioGroupItem } from "@fluxozen/ui/radio-group"
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@diariofin/ui/form"
+import { Input } from "@diariofin/ui/input"
+import { InputMask } from "@diariofin/ui/input-mask"
+import { RadioGroup, RadioGroupItem } from "@diariofin/ui/radio-group"
 import { cpfCnpjMask } from "~/utils/cpf-cnpj-mask"
 import { phoneMask } from "~/utils/phone-mask"
 

@@ -1,4 +1,4 @@
-import { Button } from "@fluxozen/ui/button";
+import { Button } from "@diariofin/ui/button";
 import Link from "next/link";
 
 export function Hero() {
@@ -30,8 +30,9 @@ export function Hero() {
       </h1>
 
       <p className="mt-4 md:mt-6 text-[#707070] max-w-[600px]">
-        Fluxozen fornece uma visão melhor do seu negócio e automatiza as tarefas
-        chatas, permitindo que você se concentre no que você gosta de fazer.
+        Diariofin fornece uma visão melhor do seu negócio e automatiza as
+        tarefas chatas, permitindo que você se concentre no que você gosta de
+        fazer.
       </p>
 
       <div className="mt-8">

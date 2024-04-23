@@ -1,5 +1,5 @@
-import { Button } from "@fluxozen/ui/button"
-import { Separator } from "@fluxozen/ui/separator"
+import { Button } from "@diariofin/ui/button"
+import { Separator } from "@diariofin/ui/separator"
 import { ChevronLeftIcon } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 

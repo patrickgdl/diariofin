@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom"
-import { buttonVariants } from "@fluxozen/ui/button"
-import { cn } from "@fluxozen/ui/utils"
+import { buttonVariants } from "@diariofin/ui/button"
+import { cn } from "@diariofin/ui/utils"
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {

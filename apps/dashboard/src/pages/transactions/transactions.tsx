@@ -7,15 +7,15 @@ import { TransactionsTable } from "~/components/transactions-table/transactions-
 import useMediaQuery from "~/hooks/use-media-query"
 import useCategories from "~/hooks/useCategoriesQuery"
 import useTransactionsQuery from "~/hooks/useTransactionsQuery"
-import { Button } from "@fluxozen/ui/button"
-import { Popover, PopoverContent, PopoverTrigger } from "@fluxozen/ui/popover"
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@fluxozen/ui/resizable"
-import { Separator } from "@fluxozen/ui/separator"
+import { Button } from "@diariofin/ui/button"
+import { Popover, PopoverContent, PopoverTrigger } from "@diariofin/ui/popover"
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@diariofin/ui/resizable"
+import { Separator } from "@diariofin/ui/separator"
 
 import { columns } from "./components/columns"
 import { TransactionDisplay } from "./components/transaction-display"
 import { TransactionsQuery } from "~/queries/get-transactions-by-account"
-import { Drawer, DrawerContent } from "@fluxozen/ui/drawer"
+import { Drawer, DrawerContent } from "@diariofin/ui/drawer"
 
 export default function TransactionsPage() {
   const navigate = useNavigate()

@@ -9,7 +9,7 @@ export function SectionProblem() {
       <div className="flex justify-between text-lg p-4">
         <span>Problema atual</span>
         <span className="text-[#878787]">
-          <Link href="/">Fluxozen</Link>
+          <Link href="/">Diariofin</Link>
         </span>
       </div>
 

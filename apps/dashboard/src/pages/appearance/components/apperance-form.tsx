@@ -6,11 +6,11 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { LogEvents } from "~/events/events"
 
-import { Button, buttonVariants } from "@fluxozen/ui/button"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@fluxozen/ui/form"
-import { RadioGroup, RadioGroupItem } from "@fluxozen/ui/radio-group"
-import { toast } from "@fluxozen/ui/use-toast"
-import { cn } from "@fluxozen/ui/utils"
+import { Button, buttonVariants } from "@diariofin/ui/button"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@diariofin/ui/form"
+import { RadioGroup, RadioGroupItem } from "@diariofin/ui/radio-group"
+import { toast } from "@diariofin/ui/use-toast"
+import { cn } from "@diariofin/ui/utils"
 
 const appearanceFormSchema = z.object({
   font: z.enum(["inter", "manrope", "system"], {

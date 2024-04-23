@@ -1,4 +1,4 @@
-import { cn } from "@fluxozen/ui/utils"
+import { cn } from "@diariofin/ui/utils"
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { CheckIcon, CopyIcon } from "lucide-react"

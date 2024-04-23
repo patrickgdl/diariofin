@@ -1,10 +1,10 @@
-import { CardContent, CardTitle } from "@fluxozen/ui/card";
+import { CardContent, CardTitle } from "@diariofin/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 
 import app from "./app.png";
 import apps from "./apps.png";
-import ai from "./fluxozen-ia.png";
+import ai from "./diariofin-ia.png";
 import { Card } from "./ui";
 
 export function SectionNext() {
@@ -14,7 +14,7 @@ export function SectionNext() {
         <div className="flex justify-between text-lg p-4">
           <span>O que vem a seguir</span>
           <span className="text-[#878787]">
-            <Link href="/">Fluxozen</Link>
+            <Link href="/">Diariofin</Link>
           </span>
         </div>
 
@@ -22,9 +22,14 @@ export function SectionNext() {
           <div className="grid md:grid-cols-2 gap-8 px-4 md:px-0 md:pt-0 overflow-auto pb-[100px] md:pb-0">
             <div className="space-y-8">
               <Card>
-                <CardTitle>Fluxozen AI</CardTitle>
+                <CardTitle>Diariofin AI</CardTitle>
                 <CardContent>
-                  <Image src={ai} width={362} alt="Fluxozen AI" quality={100} />
+                  <Image
+                    src={ai}
+                    width={362}
+                    alt="Diariofin AI"
+                    quality={100}
+                  />
                 </CardContent>
               </Card>
 

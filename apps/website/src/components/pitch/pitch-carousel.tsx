@@ -9,7 +9,11 @@ import { SectionStart } from "@/components/pitch/section-start";
 import { SectionSubscription } from "@/components/pitch/section-subscription";
 import { SectionTeam } from "@/components/pitch/section-team";
 import { SectionVision } from "@/components/pitch/section-vision";
-import { Carousel, CarouselContent, CarouselItem } from "@fluxozen/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@diariofin/ui/carousel";
 import { CarouselToolbar } from "./carousel-toolbar";
 
 export function PitchCarusel() {

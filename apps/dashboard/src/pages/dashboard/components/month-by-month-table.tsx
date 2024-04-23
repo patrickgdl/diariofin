@@ -12,10 +12,10 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@fluxozen/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@fluxozen/ui/table"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@diariofin/ui/card"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@diariofin/ui/table"
 import formatCurrency from "~/utils/format-currency"
-import { cn } from "@fluxozen/ui/utils"
+import { cn } from "@diariofin/ui/utils"
 import { TransactionsByDateQuery } from "~/queries/get-transactions-by-date"
 import { TRANSACTION_TYPE } from "~/pages/transactions/constants"
 import { getMonth, parseISO } from "date-fns"

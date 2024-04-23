@@ -1,9 +1,9 @@
 import { MenuIcon } from "lucide-react"
 import React from "react"
 import { NavLink } from "react-router-dom"
-import { Button, buttonVariants } from "@fluxozen/ui/button"
-import { Drawer, DrawerContent } from "@fluxozen/ui/drawer"
-import { cn } from "@fluxozen/ui/utils"
+import { Button, buttonVariants } from "@diariofin/ui/button"
+import { Drawer, DrawerContent } from "@diariofin/ui/drawer"
+import { cn } from "@diariofin/ui/utils"
 import { LinkProps } from "~/utils/constants"
 
 import Logo from "./logo"
