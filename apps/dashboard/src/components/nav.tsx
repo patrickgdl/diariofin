@@ -91,7 +91,7 @@ export function Nav({ links, isCollapsed, accounts }: NavProps) {
 
   return (
     <div data-collapsed="false" className="group h-screen flex-1 hidden md:flex flex-col px-4">
-      <div className="flex items-center bg-gradient-to-b flex-shrink-0 mx-auto py-5">
+      <div className="flex flex-shrink-0 py-5 px-3">
         <Logo className="w-32" />
       </div>
 
