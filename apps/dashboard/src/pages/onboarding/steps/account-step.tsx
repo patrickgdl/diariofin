@@ -74,7 +74,7 @@ export function AccountMainStep({ accounts, onAddAccount, onRemoveAccount }: Acc
           <p className="text-sm text-muted-foreground">
             Coloque os dados das suas contas bancárias para acompanhar suas evoluções.
           </p>
-          <p className="text-sm text-muted-foreground">Não vendemos ou compartilhamos seus dados</p>
+          <p className="text-xs text-muted-foreground">Não vendemos ou compartilhamos seus dados</p>
         </div>
 
         <AccountDialogForm>

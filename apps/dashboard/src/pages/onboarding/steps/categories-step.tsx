@@ -36,7 +36,7 @@ export function CategoriesMainStep({ onSelectCategory, selectedCategories }: Cat
         <div className="space-y-2">
           <h1 className="text-2xl font-semibold tracking-tight">Categorias de Transação</h1>
           <p className="text-sm text-muted-foreground">Aqui estão algumas sugestões de categorias.</p>
-          <p className="text-sm font-semibold">
+          <p className="text-sm text-muted-foreground">
             Selecione as quê considerar relevante pro seu negócio. Você poderá criar novas categorias depois.
           </p>
         </div>

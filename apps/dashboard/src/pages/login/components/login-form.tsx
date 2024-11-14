@@ -53,17 +53,16 @@ export default function LoginForm() {
   const handleGoogleLogin = async () => {
     setClickedGoogle(true)
 
-    const { error } = await supabase.auth.signInWithOAuth({
+    const redirectTo = new URL("/api/auth/callback", window.location.origin)
+
+    redirectTo.searchParams.append("provider", "google")
+
+    await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${import.meta.env.VITE_APP_URL}/overview`,
+        redirectTo: redirectTo.toString(),
       },
     })
-
-    if (error) {
-      toast({ title: error.message || "Ocorreu um erro ao autenticar com o Google.", variant: "destructive" })
-      return
-    }
 
     logsnag.track({
       event: LogEvents.SignedInGoogle.name,
